@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider, Navigate } from "react-router-dom";
 import NotFound from "./pages/NotFound";
 import RootLayout from "./pages/RootLayout";
 import SignupForm from "./pages/SignupForm";
@@ -10,6 +10,7 @@ import UpdateProfile from "./pages/UpdateProfile";
 import About from "./pages/About";
 import Game from "./pages/Game";
 import LeaderboardPage from "./pages/LeaderboardPage";
+import PrivateRoutes from "./pages/Privateroutes";
 
 import loginService from "./services/login";
 import axios from "axios";
@@ -95,19 +96,36 @@ function App() {
         }
     };
 
+    // Create a higher-order component (HOC) for protecting routes
+    function ProtectedRoute({ element, ...rest }) {
+        // Replace this with your actual authentication check
+        const isAuthenticated = /* Your authentication check logic */ false;
+
+        if (!isAuthenticated) {
+            // Redirect unauthenticated users to the login page
+            return <Navigate to="/login" />;
+        }
+
+        // Render the protected route if the user is authenticated
+        return <Route {...rest} element={element} />;
+    }
+
     const router = createBrowserRouter(
         createRoutesFromElements(
             <>
                 <Route path="/" element={<RootLayout notification={notification} setNotification={setNotification} user={user} showFooter={showFooter} showStartTimer={showStartTimer} setSeconds={setSeconds} seconds={seconds} />}>
-                    <Route index element={<PlayPage setGame={setGame} />} />
+                    <Route element={<PrivateRoutes />}>
+                        <Route index element={<PlayPage setGame={setGame} />} />
+                        <Route element={<LeaderboardPage />} path="leaderboard" />
+                        <Route path="game" element={<Game game={game} setShowFooter={setShowFooter} setShowStartTimer={setShowStartTimer} seconds={seconds} setSeconds={setSeconds} />}></Route>
+                        <Route path="about" element={<About />}></Route>
+                        <Route path="verification-successful" element={<VerificationSuccessful />}></Route>
+                        <Route path="verification-nothing" element={<VerificationNothing />}></Route>
+                        <Route path="update-profile" element={<UpdateProfile user={user} setUser={setUser} setNotification={setNotification} />}></Route>
+                    </Route>
+
                     <Route path="login" element={<Login setNotification={setNotification} setUserToken={setUserToken} />}></Route>
-                    <Route path="game" element={<Game game={game} setShowFooter={setShowFooter} setShowStartTimer={setShowStartTimer} seconds={seconds} setSeconds={setSeconds} />}></Route>
-                    <Route path="leaderboard" element={<LeaderboardPage />}></Route>
-                    <Route path="about" element={<About />}></Route>
                     <Route path="signup" element={<SignupForm setNotification={setNotification} />}></Route>
-                    <Route path="verification-successful" element={<VerificationSuccessful />}></Route>
-                    <Route path="verification-nothing" element={<VerificationNothing />}></Route>
-                    <Route path="update-profile" element={<UpdateProfile user={user} setUser={setUser} setNotification={setNotification} />}></Route>
                     <Route path="getjwt" element={<GetJwt />} />
                     <Route path="*" element={<NotFound />} />
                 </Route>
