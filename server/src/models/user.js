@@ -42,6 +42,48 @@ const userSchema = new mongoose.Schema({
     lastVisited: { type: Date, default: new Date() },
     isVerified: Boolean,
     verificationToken: String,
+    friends: [
+        {
+            friendId: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "User",
+            },
+            status: {
+                type: String, // 'pending', 'accepted', 'rejected', etc.
+                default: "pending",
+            },
+            blocked: {
+                type: Boolean,
+                default: false,
+            },
+        },
+    ],
+    friendLists: [
+        {
+            listName: String,
+            friends: [
+                {
+                    friendId: {
+                        type: mongoose.Schema.Types.ObjectId,
+                        ref: "User",
+                    },
+                },
+            ],
+        },
+    ],
+    notifications: [
+        {
+            type: String, // e.g., 'friend_request', 'message', 'block', etc.
+            fromUser: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "User",
+            },
+            status: {
+                type: String, // 'read', 'unread', etc.
+                default: "unread",
+            },
+        },
+    ],
 });
 
 userSchema.set("toJSON", {
