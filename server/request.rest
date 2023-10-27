@@ -247,3 +247,33 @@ content-type: application/json
 {
     "filePath": "uploads/image-1697105229252-520621196.jpg"
 }
+
+### 
+POST http://localhost:3001/api/friend-requests
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1M2E0YWZkODVhZjFhYmE2ODY1YjY0YSIsImlhdCI6MTY5ODQxMDE5NSwiZXhwIjoxNjk4NDk2NTk1fQ.6H3nmepbAIggqVKojzfFqZ2nJqUR6FLJK0Aqwz9jwX8
+content-type: application/json
+
+{
+    "fromUserId": "653a4afd85af1aba6865b64a",
+    "toUserId": "653a4b0a85af1aba6865b64f"
+}
+
+
+# ###
+# 653a4afd85af1aba6865b64a pius
+# 653a4b0a85af1aba6865b64f rens
+# 653a4b2385af1aba6865b653 renelyn
+
+###
+GET  http://localhost:3001/api/users
+
+###
+POST http://localhost:3001/api/login-local/
+content-type: application/json
+
+{
+    "email": "jace@gmail.com",
+    "password": "12345678"
+}
+
+###

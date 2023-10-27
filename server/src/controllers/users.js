@@ -108,7 +108,12 @@ usersRouter.post(
 
 usersRouter.get("/api/users", async (request, response, next) => {
     try {
-        const users = await User.find({}).populate("anecdotes");
+        const users = await User.find({});
+        // const users = await User.find({}).select("email").populate({
+        //     path: "friends.friendId",
+        //     // select: "friends.status",
+        // });
+
         response.json(users);
     } catch (error) {
         next(error);
@@ -145,6 +150,83 @@ usersRouter.put("/api/users/:id", (request, response, next) => {
             response.json(updatedUser);
         })
         .catch((error) => next(error));
+});
+
+// Create a friend request
+usersRouter.post("/api/friend-requests", userExtractor, async (req, res, next) => {
+    try {
+        const { fromUserId, toUserId } = req.body;
+        console.log(fromUserId);
+        console.log(toUserId);
+        // Check if the users exist
+        const fromUser = await User.findById(fromUserId);
+        const toUser = await User.findById(toUserId);
+        console.log(fromUser);
+        console.log("toUser:");
+        console.log(toUser);
+        console.log("success1");
+        if (!fromUser || !toUser) {
+            return res.status(404).json({ message: "User not found" });
+        }
+        console.log("success2");
+        // Check if the friend request already exists
+        if (toUser.friendRequests.some((friend) => friend.friendId.toString() === fromUserId)) {
+            return res.status(400).json({ message: "Friend request already sent" });
+        }
+
+        console.log("success3");
+        // Send a user's id to a users friendRequest array
+        toUser.friendRequests.push({ friendId: fromUserId });
+        console.log("success4");
+        await toUser.save();
+
+        console.log("success5");
+        res.status(201).json({ message: "Friend request sent" });
+    } catch (error) {
+        next(error);
+    }
+});
+
+// Accept a friend request
+usersRouter.put("/api/friend-requests/:id/accept", async (req, res, next) => {
+    try {
+        const requestId = req.params.id;
+
+        const fromUser = await User.findOne({ "friends._id": requestId });
+        const requestIndex = fromUser.friends.findIndex((friend) => friend._id.toString() === requestId);
+
+        if (requestIndex === -1) {
+            return res.status(404).json({ message: "Friend request not found" });
+        }
+
+        fromUser.friends[requestIndex].status = "accepted";
+        await fromUser.save();
+
+        res.status(200).json({ message: "Friend request accepted" });
+    } catch (error) {
+        next(error);
+    }
+});
+
+// Reject a friend request
+usersRouter.put("/api/friend-requests/:id/reject", async (req, res, next) => {
+    try {
+        const requestId = req.params.id;
+
+        const fromUser = await User.findOne({ "friends._id": requestId });
+        const requestIndex = fromUser.friends.findIndex((friend) => friend._id.toString() === requestId);
+
+        if (requestIndex === -1) {
+            return res.status(404).json({ message: "Friend request not found" });
+        }
+
+        fromUser.friends[requestIndex].status = "rejected";
+        await fromUser.save();
+
+        res.status(200).json({ message: "Friend request rejected" });
+    } catch (error) {
+        next(error);
+    }
 });
 
 module.exports = usersRouter;

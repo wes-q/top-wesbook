@@ -11,9 +11,9 @@ import About from "./pages/About";
 import Game from "./pages/Game";
 import LeaderboardPage from "./pages/LeaderboardPage";
 import PrivateRoutes from "./pages/Privateroutes";
+import Users from "./pages/Users";
 
 import loginService from "./services/login";
-import axios from "axios";
 import PlayPage from "./pages/PlayPage";
 import GetJwt from "./pages/GetJwt";
 
@@ -65,8 +65,10 @@ function App() {
 
     //change function name to auto relogin
     const getUserLocal = async () => {
+        console.log("GETUSER LOCAL");
         const loggedUserToken = window.localStorage.getItem("loggedUserToken");
         if (loggedUserToken) {
+            console.log("THERE IS LOGGED USER TOKEN");
             try {
                 const headerConfig = {
                     headers: {
@@ -84,6 +86,7 @@ function App() {
                 console.log("Automatic relogin: No user session found.");
                 // Make sure backed always responds with jwt expired for expired tokens
                 if (error.response.data.error === "jwt expired") {
+                    console.log("CATCH JWT EXPIRED ");
                     // Handle the removal of the expired token in the browsers local storage
                     window.localStorage.removeItem("loggedUserToken");
                     setNotification({ message: "Session expired for security purposes, please login again.", type: "warning" });
@@ -117,6 +120,7 @@ function App() {
                     <Route element={<PrivateRoutes />}>
                         <Route index element={<PlayPage setGame={setGame} />} />
                         <Route element={<LeaderboardPage />} path="leaderboard" />
+                        <Route path="users" element={<Users user={user} />}></Route>
                         <Route path="game" element={<Game game={game} setShowFooter={setShowFooter} setShowStartTimer={setShowStartTimer} seconds={seconds} setSeconds={setSeconds} />}></Route>
                         <Route path="about" element={<About />}></Route>
                         <Route path="verification-successful" element={<VerificationSuccessful />}></Route>
