@@ -255,4 +255,23 @@ usersRouter.put("/api/friend-requests/:id/reject", userExtractor, async (req, re
     }
 });
 
+usersRouter.get("/api/users/eligible-friends", userExtractor, async (req, res, next) => {
+    try {
+        const eligibleUsers = await User.find({
+            _id: { $ne: req.user._id }, // Exclude the current user
+            "friendRequests.friendId": { $ne: req.user._id }, // Exclude users with a pending friend request from the current user
+            "friendRejects.friendId": { $ne: req.user._id }, // Exclude users who rejected a friend request from the current user
+            "friends.friendId": { $ne: req.user._id }, // Exclude users who are already friends with the current user
+        });
+
+        // eligibleUsers will contain an array of users who meet the criteria
+        console.log("eligibleUsers");
+        console.log(eligibleUsers);
+        res.json(eligibleUsers);
+    } catch (err) {
+        console.error(err);
+        // Handle the error here
+    }
+});
+
 module.exports = usersRouter;

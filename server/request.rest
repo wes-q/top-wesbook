@@ -255,7 +255,7 @@ content-type: application/json
 
 {
     "fromUserId": "653a4afd85af1aba6865b64a",
-    "toUserId": "653a4b0a85af1aba6865b64f"
+    "toUserId": "653b8caaac0a2c39713d78ad"
 }
 
 
@@ -263,6 +263,7 @@ content-type: application/json
 # 653a4afd85af1aba6865b64a pius
 # 653a4b0a85af1aba6865b64f rens
 # 653a4b2385af1aba6865b653 renelyn
+# 653b8caaac0a2c39713d78ad jace
 
 ###
 GET  http://localhost:3001/api/users
@@ -277,9 +278,19 @@ content-type: application/json
 }
 
 ###
-PUT http://localhost:3001/api/friend-requests/653a4afd85af1aba6865b64a/reject
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1M2E0YjBhODVhZjFhYmE2ODY1YjY0ZiIsImlhdCI6MTY5ODQxMTk3MywiZXhwIjoxNjk4NDk4MzczfQ.8qTgd83AK-R00IwXEzaooQLbkc930CqYAXyai-FTWk8
+PUT http://localhost:3001/api/friend-requests/653a4afd85af1aba6865b64a/accept
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1M2I4Y2FhYWMwYTJjMzk3MTNkNzhhZCIsImlhdCI6MTY5ODQxODMwMCwiZXhwIjoxNjk4NTA0NzAwfQ.CwErYQ2zXIaT1B50Zcuu1e3aFSyVaMBIrQBjmYcR_L0
+
+###
+GET http://localhost:3001/api/users/eligible-friends
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1M2E0YWZkODVhZjFhYmE2ODY1YjY0YSIsImlhdCI6MTY5ODQxMDE5NSwiZXhwIjoxNjk4NDk2NTk1fQ.6H3nmepbAIggqVKojzfFqZ2nJqUR6FLJK0Aqwz9jwX8
 
 ###
 Pius
 eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1M2E0YWZkODVhZjFhYmE2ODY1YjY0YSIsImlhdCI6MTY5ODQxMDE5NSwiZXhwIjoxNjk4NDk2NTk1fQ.6H3nmepbAIggqVKojzfFqZ2nJqUR6FLJK0Aqwz9jwX8
+Anoyo
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1M2E0YjBhODVhZjFhYmE2ODY1YjY0ZiIsImlhdCI6MTY5ODQxMTk3MywiZXhwIjoxNjk4NDk4MzczfQ.8qTgd83AK-R00IwXEzaooQLbkc930CqYAXyai-FTWk8
+Renelyn
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1M2E0YjIzODVhZjFhYmE2ODY1YjY1MyIsImlhdCI6MTY5ODQxODEzMiwiZXhwIjoxNjk4NTA0NTMyfQ.wDFrBZBhpuvm6Y_iYUcH_w0N1N61v0jkmTa7TgvrxOk
+Jace
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1M2I4Y2FhYWMwYTJjMzk3MTNkNzhhZCIsImlhdCI6MTY5ODQxODMwMCwiZXhwIjoxNjk4NTA0NzAwfQ.CwErYQ2zXIaT1B50Zcuu1e3aFSyVaMBIrQBjmYcR_L0
