@@ -276,10 +276,8 @@ content-type: application/json
     "password": "12345678"
 }
 
-
-
 ###
-PUT http://localhost:3001/api/friend-requests/653a4afd85af1aba6865b64a/accept
+PUT http://localhost:3001/api/friend-requests/653a4afd85af1aba6865b64a/reject
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1M2E0YjBhODVhZjFhYmE2ODY1YjY0ZiIsImlhdCI6MTY5ODQxMTk3MywiZXhwIjoxNjk4NDk4MzczfQ.8qTgd83AK-R00IwXEzaooQLbkc930CqYAXyai-FTWk8
 
 ###

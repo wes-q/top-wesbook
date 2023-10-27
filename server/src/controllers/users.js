@@ -199,7 +199,7 @@ usersRouter.put("/api/friend-requests/:id/accept", userExtractor, async (req, re
 
         // Check if the current user / recipient has a friend request with the given senders id
         if (friendRequestRecipient.friendRequests.some((friend) => friend.friendId.toString() === friendRequestSenderId)) {
-            console.log("Yes there is!");
+            // console.log("Yes there is!");
 
             // Add the requestor's ID to the friends array of both the requestor and the requestee to signify a confirmed friend
             friendRequestSender.friends.push({ friendId: friendRequestRecipientId });
@@ -215,7 +215,6 @@ usersRouter.put("/api/friend-requests/:id/accept", userExtractor, async (req, re
                 )
                 .exec();
             console.log(JSON.stringify(res));
-            res.json(res);
         }
         // res.status(200).json({ message: "Friend request accepted" });
     } catch (error) {
@@ -224,21 +223,33 @@ usersRouter.put("/api/friend-requests/:id/accept", userExtractor, async (req, re
 });
 
 // Reject a friend request
-usersRouter.put("/api/friend-requests/:id/reject", async (req, res, next) => {
+usersRouter.put("/api/friend-requests/:id/reject", userExtractor, async (req, res, next) => {
+    const friendRequestSenderId = req.params.id;
+    const friendRequestRecipient = req.user;
+    const friendRequestRecipientId = req.user._id;
+
     try {
-        const requestId = req.params.id;
+        // console.log(`friendRequestSenderId: ${friendRequestSenderId}`);
+        const friendRequestSender = await User.findById(friendRequestSenderId);
 
-        const fromUser = await User.findOne({ "friends._id": requestId });
-        const requestIndex = fromUser.friends.findIndex((friend) => friend._id.toString() === requestId);
+        // Check if the current user / recipient has a friend request with the given senders id
+        if (friendRequestRecipient.friendRequests.some((friend) => friend.friendId.toString() === friendRequestSenderId)) {
+            // console.log("Yes there is!");
 
-        if (requestIndex === -1) {
-            return res.status(404).json({ message: "Friend request not found" });
+            // Add the sender's ID to the rejected array of only the recipient
+            friendRequestRecipient.friendRejects.push({ friendId: friendRequestSenderId });
+            await friendRequestRecipient.save();
+
+            // Remove the friend request from the recipient's friendRequests array
+            const res = await friendRequestRecipient
+                .updateOne(
+                    { $pull: { friendRequests: { friendId: friendRequestSenderId } } },
+                    { runValidators: true } // This option will trigger validation
+                )
+                .exec();
+            console.log(JSON.stringify(res));
         }
-
-        fromUser.friends[requestIndex].status = "rejected";
-        await fromUser.save();
-
-        res.status(200).json({ message: "Friend request rejected" });
+        // res.status(200).json({ message: "Friend request accepted" });
     } catch (error) {
         next(error);
     }
