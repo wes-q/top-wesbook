@@ -60,7 +60,7 @@ const userExtractor = async (request, response, next) => {
         request.token = authorization.replace("Bearer ", "");
     }
 
-    console.log(`USEREXTRACTOR ${request.token}`);
+    // console.log(`USEREXTRACTOR ${request.token}`);
     try {
         const decodedToken = jwt.verify(request.token, process.env.SECRET);
         // console.log(decodedToken);

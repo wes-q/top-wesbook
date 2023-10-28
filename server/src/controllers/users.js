@@ -180,17 +180,18 @@ usersRouter.post("/api/friend-requests", userExtractor, async (req, res, next) =
 
 // Accept a friend request
 usersRouter.put("/api/friend-requests/:id/accept", userExtractor, async (req, res, next) => {
+    console.log("API ACCEPT");
     const friendRequestSenderId = req.params.id;
     const friendRequestRecipient = req.user;
     const friendRequestRecipientId = req.user._id;
 
     try {
-        // console.log(`friendRequestSenderId: ${friendRequestSenderId}`);
+        console.log(`friendRequestSenderId: ${friendRequestSenderId}`);
         const friendRequestSender = await User.findById(friendRequestSenderId);
 
         // Check if the current user / recipient has a friend request with the given senders id
         if (friendRequestRecipient.friendRequests.some((friend) => friend.friendId.toString() === friendRequestSenderId)) {
-            // console.log("Yes there is!");
+            console.log("Yes there is!");
 
             // Add the requestor's ID to the friends array of both the requestor and the requestee to signify a confirmed friend
             friendRequestSender.friends.push({ friendId: friendRequestRecipientId });
@@ -205,9 +206,9 @@ usersRouter.put("/api/friend-requests/:id/accept", userExtractor, async (req, re
                     { runValidators: true } // This option will trigger validation
                 )
                 .exec();
-            console.log(JSON.stringify(res));
+            // console.log(JSON.stringify(res));
         }
-        // res.status(200).json({ message: "Friend request accepted" });
+        res.status(200).json({ message: `User ${friendRequestRecipientId} has accepted friend request from ${friendRequestSenderId}` });
     } catch (error) {
         next(error);
     }

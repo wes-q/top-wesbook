@@ -69,23 +69,17 @@ const Users = ({ user }) => {
     };
 
     const handleAcceptFriend = async (toUserId) => {
-        console.log(`TOUSERID ${toUserId}`);
+        console.log(`ACCEPT FRIEND TOUSERID ${toUserId}`);
 
         const loggedUserToken = window.localStorage.getItem("loggedUserToken");
         if (loggedUserToken) {
-            const headerConfig = {
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${loggedUserToken}`,
-                },
+            const headers = {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${loggedUserToken}`,
             };
-
-            const userObject = {
-                toUserId: toUserId,
-            };
-
+            const data = {};
             try {
-                const result = await axios.post("/api/friend-requests", userObject, headerConfig);
+                const result = await axios.put(`/api/friend-requests/${toUserId}/accept`, data, { headers });
                 console.log(result.data);
                 fetchData();
             } catch (error) {
