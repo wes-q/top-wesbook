@@ -6,6 +6,7 @@ const Users = ({ user }) => {
     const [friends, setFriends] = useState([]);
     const [eligibleFriends, setEligibleFriends] = useState([]);
     const [pendingFriends, setPendingFriends] = useState([]);
+    const [incomingFriends, setIncomingFriends] = useState([]);
 
     useEffect(() => {
         fetchData();
@@ -31,6 +32,9 @@ const Users = ({ user }) => {
 
                 const friends = await axios.get("/api/users/friends", headerConfig);
                 setFriends(friends.data);
+
+                const incomingFriends = await axios.get("/api/users/incoming-friends", headerConfig);
+                setIncomingFriends(incomingFriends.data);
             } catch (error) {
                 console.log(error);
             }
@@ -39,6 +43,32 @@ const Users = ({ user }) => {
     };
 
     const handleAddFriend = async (toUserId) => {
+        console.log(`TOUSERID ${toUserId}`);
+
+        const loggedUserToken = window.localStorage.getItem("loggedUserToken");
+        if (loggedUserToken) {
+            const headerConfig = {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${loggedUserToken}`,
+                },
+            };
+
+            const userObject = {
+                toUserId: toUserId,
+            };
+
+            try {
+                const result = await axios.post("/api/friend-requests", userObject, headerConfig);
+                console.log(result.data);
+                fetchData();
+            } catch (error) {
+                console.log(error);
+            }
+        }
+    };
+
+    const handleAcceptFriend = async (toUserId) => {
         console.log(`TOUSERID ${toUserId}`);
 
         const loggedUserToken = window.localStorage.getItem("loggedUserToken");
@@ -113,6 +143,40 @@ const Users = ({ user }) => {
                                         </div>
                                         <span className="italic text-xs">Pending</span>
                                         {/* {user.status ? <p>Status: Pending</p> : isRejected ? <p>Status: Rejected</p> : <p>Status: No Requests</p>} */}
+                                    </div>
+                                </li>
+                            ))}
+                        </ul>
+                    ) : (
+                        <p>No users found.</p>
+                    )}
+                </div>
+            </div>
+
+            <div className="bg-gray-500 border border-black p-2 rounded-md w-72 mb-6">
+                <div className="text-lg">Incoming friend requests:</div>
+                <div>
+                    {incomingFriends.length > 0 ? (
+                        <ul className="flex flex-col w-full text-sm">
+                            {incomingFriends.map((user) => (
+                                <li key={user.id}>
+                                    <div className="flex justify-between items-center">
+                                        <div className="flex gap-2 items-center">
+                                            <img className="rounded-full w-8" src={user.profilePhoto || noProfilePhoto} alt="profile photo" />
+                                            <span className="relative flex h-3 w-3">
+                                                <span className="animate-ping-slow ease-out absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
+                                                <span className="relative rounded-full h-3 w-3 bg-green-500"></span>
+                                            </span>
+                                            <span>{user.displayName || user.firstName}</span>
+                                        </div>
+                                        <div>
+                                            <button className="bg-gray-200 text-black hover:bg-gray-300 px-2 py-1 rounded-md border border-black transition-colors" onClick={() => handleAcceptFriend(user.id)}>
+                                                Accept
+                                            </button>
+                                            <button className="bg-gray-200 text-black hover:bg-gray-300 px-2 py-1 rounded-md border border-black transition-colors" onClick={() => handleRejectFriend(user.id)}>
+                                                Reject
+                                            </button>
+                                        </div>
                                     </div>
                                 </li>
                             ))}

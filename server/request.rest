@@ -315,3 +315,5 @@ GET http://localhost:3001/api/users/pending-friends
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1M2E0YWZkODVhZjFhYmE2ODY1YjY0YSIsImlhdCI6MTY5ODQxMDE5NSwiZXhwIjoxNjk4NDk2NTk1fQ.6H3nmepbAIggqVKojzfFqZ2nJqUR6FLJK0Aqwz9jwX8
 
 ###
+GET http://localhost:3001/api/users/incoming-friends
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1M2E0YjBhODVhZjFhYmE2ODY1YjY0ZiIsImlhdCI6MTY5ODQxMTk3MywiZXhwIjoxNjk4NDk4MzczfQ.8qTgd83AK-R00IwXEzaooQLbkc930CqYAXyai-FTWk8
