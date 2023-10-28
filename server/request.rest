@@ -259,6 +259,16 @@ content-type: application/json
 }
 
 
+###
+POST http://localhost:3001/api/friend-requests
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1M2I4Y2FhYWMwYTJjMzk3MTNkNzhhZCIsImlhdCI6MTY5ODQxODMwMCwiZXhwIjoxNjk4NTA0NzAwfQ.CwErYQ2zXIaT1B50Zcuu1e3aFSyVaMBIrQBjmYcR_L0
+content-type: application/json
+
+{
+    "toUserId": "653b8d0eac0a2c39713d78af"
+}
+
+
 # ###
 # 653a4afd85af1aba6865b64a pius
 # 653a4b0a85af1aba6865b64f rens
@@ -277,13 +287,14 @@ content-type: application/json
     "password": "12345678"
 }
 
+
 ###
 PUT http://localhost:3001/api/friend-requests/653a4afd85af1aba6865b64a/accept
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1M2I4Y2FhYWMwYTJjMzk3MTNkNzhhZCIsImlhdCI6MTY5ODQxODMwMCwiZXhwIjoxNjk4NTA0NzAwfQ.CwErYQ2zXIaT1B50Zcuu1e3aFSyVaMBIrQBjmYcR_L0
 
 ###
 GET http://localhost:3001/api/users/eligible-friends
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1M2E0YWZkODVhZjFhYmE2ODY1YjY0YSIsImlhdCI6MTY5ODQxODU1MCwiZXhwIjoxNjk4NTA0OTUwfQ.AbWWn9CKKatzS-aeioyCaR5p059E-VBNdReH_pVGfvw
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1M2I4Y2FhYWMwYTJjMzk3MTNkNzhhZCIsImlhdCI6MTY5ODQxODMwMCwiZXhwIjoxNjk4NTA0NzAwfQ.CwErYQ2zXIaT1B50Zcuu1e3aFSyVaMBIrQBjmYcR_L0
 
 ###
 Pius
@@ -299,6 +310,8 @@ eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1M2I4Y2FhYWMwYTJjMzk3MTNkNzhhZCI
 GET http://localhost:3001/api/users/friends
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1M2E0YWZkODVhZjFhYmE2ODY1YjY0YSIsImlhdCI6MTY5ODQxODU1MCwiZXhwIjoxNjk4NTA0OTUwfQ.AbWWn9CKKatzS-aeioyCaR5p059E-VBNdReH_pVGfvw
 
-####
+###
 GET http://localhost:3001/api/users/pending-friends
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1M2E0YWZkODVhZjFhYmE2ODY1YjY0YSIsImlhdCI6MTY5ODQxODU1MCwiZXhwIjoxNjk4NTA0OTUwfQ.AbWWn9CKKatzS-aeioyCaR5p059E-VBNdReH_pVGfvw
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1M2E0YWZkODVhZjFhYmE2ODY1YjY0YSIsImlhdCI6MTY5ODQxMDE5NSwiZXhwIjoxNjk4NDk2NTk1fQ.6H3nmepbAIggqVKojzfFqZ2nJqUR6FLJK0Aqwz9jwX8
+
+###
