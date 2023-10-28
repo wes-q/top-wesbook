@@ -306,4 +306,13 @@ usersRouter.get("/api/users/friends", userExtractor, async (req, res, next) => {
     }
 });
 
+usersRouter.get("/api/users/pending-friends", userExtractor, async (req, res, next) => {
+    try {
+        const pendingFriends = await User.find().where("friendRequests.friendId").equals(req.user.id);
+        res.status(200).json(pendingFriends);
+    } catch (error) {
+        next(error);
+    }
+});
+
 module.exports = usersRouter;
