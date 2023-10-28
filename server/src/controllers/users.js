@@ -267,8 +267,10 @@ usersRouter.get("/api/users/eligible-friends", userExtractor, async (req, res, n
         // eligibleUsers will contain an array of users who meet the criteria
         console.log("eligibleUsers");
         console.log(eligibleUsers);
-        res.json(eligibleUsers);
+        res.status(200).json(eligibleUsers);
+        console.log("SUCCESS");
     } catch (err) {
+        console.log("FAIL");
         console.error(err);
         // Handle the error here
     }

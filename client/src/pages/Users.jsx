@@ -40,11 +40,16 @@ const Users = ({ user }) => {
                 {users.length > 0 ? (
                     <ul className="flex flex-col w-72">
                         {users.map((user) => (
-                            <li key={user.id} className="flex justify-between">
+                            <li key={user.id} className="flex items-center justify-between">
                                 <div className="flex gap-2 items-center">
                                     <img className="rounded-full w-8" src={user.profilePhoto || noProfilePhoto} alt="profile photo" />
                                     <span>{user.displayName || user.firstName}</span>
                                 </div>
+                                <span class="relative flex h-3 w-3">
+                                    <span class="animate-ping-slow ease-out absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
+                                    <span class="relative rounded-full h-3 w-3 bg-green-500"></span>
+                                </span>
+                                <button className="bg-gray-500 hover:bg-gray-800 px-2 py-1 rounded-md border border-black transition-colors">Add Friend</button>
                             </li>
                         ))}
                     </ul>
