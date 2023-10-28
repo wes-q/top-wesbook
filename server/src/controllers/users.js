@@ -276,4 +276,34 @@ usersRouter.get("/api/users/eligible-friends", userExtractor, async (req, res, n
     }
 });
 
+// usersRouter.get("/api/users/friends", userExtractor, async (req, res, next) => {
+//     const friendIds = req.user.friends.map((friend) => {
+//         return {
+//             friendId: friend.friendId,
+//         };
+//     });
+//     res.status(200).json(friendIds);
+// });
+
+usersRouter.get("/api/users/friends", userExtractor, async (req, res, next) => {
+    try {
+        // Use the User model to create a Mongoose query for populating the 'friends' field
+        const userWithPopulatedFriends = await User.findById(req.user._id).populate("friends.friendId").exec();
+
+        // Extract the populated friend data
+        const populatedFriends = userWithPopulatedFriends.friends.map((friend) => {
+            const { friendId } = friend;
+            // Add any other fields you want to extract from the populated friend object
+            const { id, displayName, firstName, profilePhoto, email } = friendId;
+            // return { friendId, displayName, firstName, profilePhoto, email };
+            return { id, displayName, firstName, profilePhoto, email };
+        });
+
+        res.status(200).json(populatedFriends);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+});
+
 module.exports = usersRouter;
