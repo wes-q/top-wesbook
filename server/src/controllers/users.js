@@ -260,10 +260,8 @@ usersRouter.get("/api/users/eligible-friends", userExtractor, async (req, res, n
         console.log("eligibleUsers");
         console.log(eligibleUsers);
         res.status(200).json(eligibleUsers);
-        console.log("SUCCESS");
-    } catch (err) {
-        console.log("FAIL");
-        console.error(err);
+    } catch (error) {
+        next(error);
         // Handle the error here
     }
 });
@@ -295,8 +293,7 @@ usersRouter.get("/api/users/friends", userExtractor, async (req, res, next) => {
 
         res.status(200).json(populatedFriends);
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: "Internal server error" });
+        next(error);
     }
 });
 
@@ -318,14 +315,17 @@ usersRouter.get("/api/users/incoming-friends", userExtractor, async (req, res, n
 
         res.status(200).json(populatedFriends);
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: "Internal server error" });
+        next(error);
     }
 });
 
 usersRouter.get("/api/users/pending-friends", userExtractor, async (req, res, next) => {
     try {
-        const pendingFriends = await User.find().where("friendRequests.friendId").equals(req.user.id);
+        const pendingFriends = await User.find({
+            "friendRequests.friendId": req.user.id,
+            "friends.friendId": { $ne: req.user.id },
+        }).exec();
+
         res.status(200).json(pendingFriends);
     } catch (error) {
         next(error);
