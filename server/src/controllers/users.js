@@ -72,7 +72,6 @@ usersRouter.post("/api/profile", upload.single("image"), async (req, res) => {
 
 usersRouter.post(
     "/api/users",
-
     body("email").escape().notEmpty().withMessage("Email is required").isEmail().withMessage("Please provide a valid email"),
     body("displayName").escape().trim().notEmpty().withMessage("Display name is required"),
     body("password").escape().notEmpty().withMessage("Password is required").isLength({ min: 8 }).withMessage("Password length minimum of 8 characters"),
@@ -155,32 +154,24 @@ usersRouter.put("/api/users/:id", (request, response, next) => {
 // Create a friend request
 usersRouter.post("/api/friend-requests", userExtractor, async (req, res, next) => {
     try {
-        const { fromUserId, toUserId } = req.body;
-        console.log(fromUserId);
-        console.log(toUserId);
-        // Check if the users exist
+        const { toUserId } = req.body;
+        const fromUserId = req.user.id;
         const fromUser = await User.findById(fromUserId);
         const toUser = await User.findById(toUserId);
-        console.log(fromUser);
-        console.log("toUser:");
-        console.log(toUser);
-        console.log("success1");
+
+        // Check if the users exist
         if (!fromUser || !toUser) {
             return res.status(404).json({ message: "User not found" });
         }
-        console.log("success2");
         // Check if the friend request already exists
         if (toUser.friendRequests.some((friend) => friend.friendId.toString() === fromUserId)) {
             return res.status(400).json({ message: "Friend request already sent" });
         }
 
-        console.log("success3");
         // Send a user's id to a users friendRequest array
         toUser.friendRequests.push({ friendId: fromUserId });
-        console.log("success4");
         await toUser.save();
 
-        console.log("success5");
         res.status(201).json({ message: "Friend request sent" });
     } catch (error) {
         next(error);

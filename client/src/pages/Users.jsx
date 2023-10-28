@@ -12,16 +12,17 @@ const Users = ({ user }) => {
     }, [user]);
 
     const fetchData = async () => {
-        if (user && user.id) {
-            const loggedUserToken = window.localStorage.getItem("loggedUserToken");
-            if (loggedUserToken) {
-                const headerConfig = {
-                    headers: {
-                        "Content-Type": "application/json",
-                        Authorization: `Bearer ${loggedUserToken}`,
-                    },
-                };
+        // if (user && user.id) {
+        const loggedUserToken = window.localStorage.getItem("loggedUserToken");
+        if (loggedUserToken) {
+            const headerConfig = {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${loggedUserToken}`,
+                },
+            };
 
+            try {
                 const eligibleFriends = await axios.get("/api/users/eligible-friends", headerConfig);
                 setEligibleFriends(eligibleFriends.data);
 
@@ -30,13 +31,37 @@ const Users = ({ user }) => {
 
                 const friends = await axios.get("/api/users/friends", headerConfig);
                 setFriends(friends.data);
+            } catch (error) {
+                console.log(error);
             }
         }
+        // }
     };
 
-    const handleAddFriend = async () => {
-        const result = await axios.post("/api/friend-requests");
-        console.log(result.data);
+    const handleAddFriend = async (toUserId) => {
+        console.log(`TOUSERID ${toUserId}`);
+
+        const loggedUserToken = window.localStorage.getItem("loggedUserToken");
+        if (loggedUserToken) {
+            const headerConfig = {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${loggedUserToken}`,
+                },
+            };
+
+            const userObject = {
+                toUserId: toUserId,
+            };
+
+            try {
+                const result = await axios.post("/api/friend-requests", userObject, headerConfig);
+                console.log(result.data);
+                fetchData();
+            } catch (error) {
+                console.log(error);
+            }
+        }
     };
 
     return (
@@ -51,13 +76,13 @@ const Users = ({ user }) => {
                                     <div className="flex justify-between items-center">
                                         <div className="flex gap-2 items-center">
                                             <img className="rounded-full w-8" src={user.profilePhoto || noProfilePhoto} alt="profile photo" />
-                                            <span class="relative flex h-3 w-3">
-                                                <span class="animate-ping-slow ease-out absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
-                                                <span class="relative rounded-full h-3 w-3 bg-green-500"></span>
+                                            <span className="relative flex h-3 w-3">
+                                                <span className="animate-ping-slow ease-out absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
+                                                <span className="relative rounded-full h-3 w-3 bg-green-500"></span>
                                             </span>
                                             <span>{user.displayName || user.firstName}</span>
                                         </div>
-                                        <button className="bg-gray-200 text-black hover:bg-gray-300 px-2 py-1 rounded-md border border-black transition-colors" onClick={handleAddFriend}>
+                                        <button className="bg-gray-200 text-black hover:bg-gray-300 px-2 py-1 rounded-md border border-black transition-colors" onClick={() => handleAddFriend(user.id)}>
                                             Add Friend
                                         </button>
                                     </div>
@@ -80,11 +105,11 @@ const Users = ({ user }) => {
                                     <div className="flex justify-between items-center">
                                         <div className="flex gap-2 items-center">
                                             <img className="rounded-full w-8" src={user.profilePhoto || noProfilePhoto} alt="profile photo" />
-                                            <span>{user.displayName || user.firstName}</span>
-                                            <span class="relative flex h-3 w-3">
-                                                <span class="animate-ping-slow ease-out absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
-                                                <span class="relative rounded-full h-3 w-3 bg-green-500"></span>
+                                            <span className="relative flex h-3 w-3">
+                                                <span className="animate-ping-slow ease-out absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
+                                                <span className="relative rounded-full h-3 w-3 bg-green-500"></span>
                                             </span>
+                                            <span>{user.displayName || user.firstName}</span>
                                         </div>
                                         <span className="italic text-xs">Pending</span>
                                         {/* {user.status ? <p>Status: Pending</p> : isRejected ? <p>Status: Rejected</p> : <p>Status: No Requests</p>} */}
@@ -132,9 +157,9 @@ const Users = ({ user }) => {
                                 <li key={user.id}>
                                     <div className="flex gap-2 items-center">
                                         <img className="rounded-full w-8" src={user.profilePhoto || noProfilePhoto} alt="profile photo" />
-                                        <span class="relative flex h-3 w-3">
-                                            <span class="animate-ping-slow ease-out absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
-                                            <span class="relative rounded-full h-3 w-3 bg-green-500"></span>
+                                        <span className="relative flex h-3 w-3">
+                                            <span className="animate-ping-slow ease-out absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
+                                            <span className="relative rounded-full h-3 w-3 bg-green-500"></span>
                                         </span>
                                         <span>{user.displayName || user.firstName}</span>
                                     </div>
