@@ -12,6 +12,7 @@ import Game from "./pages/Game";
 import LeaderboardPage from "./pages/LeaderboardPage";
 import PrivateRoutes from "./pages/Privateroutes";
 import Users from "./pages/Users";
+import Posts from "./pages/Posts";
 
 import loginService from "./services/login";
 import PlayPage from "./pages/PlayPage";
@@ -120,16 +121,17 @@ function App() {
                     <Route element={<PrivateRoutes />}>
                         <Route index element={<PlayPage setGame={setGame} />} />
                         <Route element={<LeaderboardPage />} path="leaderboard" />
-                        <Route path="users" element={<Users user={user} />}></Route>
-                        <Route path="game" element={<Game game={game} setShowFooter={setShowFooter} setShowStartTimer={setShowStartTimer} seconds={seconds} setSeconds={setSeconds} />}></Route>
-                        <Route path="about" element={<About />}></Route>
-                        <Route path="verification-successful" element={<VerificationSuccessful />}></Route>
-                        <Route path="verification-nothing" element={<VerificationNothing />}></Route>
-                        <Route path="update-profile" element={<UpdateProfile user={user} setUser={setUser} setNotification={setNotification} />}></Route>
+                        <Route path="users" element={<Users user={user} />} />
+                        <Route path="posts" element={<Posts />} />
+                        <Route path="game" element={<Game game={game} setShowFooter={setShowFooter} setShowStartTimer={setShowStartTimer} seconds={seconds} setSeconds={setSeconds} />} />
+                        <Route path="about" element={<About />} />
+                        <Route path="verification-successful" element={<VerificationSuccessful />} />
+                        <Route path="verification-nothing" element={<VerificationNothing />} />
+                        <Route path="update-profile" element={<UpdateProfile user={user} setUser={setUser} setNotification={setNotification} />} />
                     </Route>
 
-                    <Route path="login" element={<Login setNotification={setNotification} setUserToken={setUserToken} />}></Route>
-                    <Route path="signup" element={<SignupForm setNotification={setNotification} />}></Route>
+                    <Route path="login" element={<Login setNotification={setNotification} setUserToken={setUserToken} />} />
+                    <Route path="signup" element={<SignupForm setNotification={setNotification} />} />
                     <Route path="getjwt" element={<GetJwt />} />
                     <Route path="*" element={<NotFound />} />
                 </Route>

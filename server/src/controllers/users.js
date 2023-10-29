@@ -323,7 +323,7 @@ usersRouter.get("/api/users/pending-friends", userExtractor, async (req, res, ne
     try {
         const pendingFriends = await User.find({
             "friendRequests.friendId": req.user.id,
-            "friends.friendId": { $ne: req.user.id },
+            "friends.friendId": { $ne: req.user.id }, // exclude if already friend
         }).exec();
 
         res.status(200).json(pendingFriends);

@@ -69,8 +69,6 @@ const Users = ({ user }) => {
     };
 
     const handleAcceptFriend = async (toUserId) => {
-        console.log(`ACCEPT FRIEND TOUSERID ${toUserId}`);
-
         const loggedUserToken = window.localStorage.getItem("loggedUserToken");
         if (loggedUserToken) {
             const headers = {
@@ -120,7 +118,7 @@ const Users = ({ user }) => {
             </div>
 
             <div className="bg-gray-500 border border-black p-2 rounded-md w-72 mb-6">
-                <div className="text-lg">Friend requests:</div>
+                <div className="text-lg">Outgoing friend requests:</div>
                 <div>
                     {pendingFriends.length > 0 ? (
                         <ul className="flex flex-col w-full text-sm">

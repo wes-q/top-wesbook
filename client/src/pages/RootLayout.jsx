@@ -29,14 +29,17 @@ export default function RootLayout({ notification, type, user, setNotification, 
                         </a>
                         {showStartTimer && <Timer className="h-auto max-h-10" setSeconds={setSeconds} seconds={seconds}></Timer>}
                         <div className="hidden sm:block">
+                            <NavLink className="text-cyan-400 bg-gray-800 rounded-md px-4 py-1 whitespace-nowrap font-nunito" to="/posts">
+                                Posts
+                            </NavLink>
+                            <NavLink className="text-cyan-400 bg-gray-800 rounded-md px-4 py-1 whitespace-nowrap font-nunito" to="/users">
+                                Users
+                            </NavLink>
                             <NavLink className="text-cyan-400 bg-gray-800 rounded-md px-4 py-1 font-nunito" to="/">
                                 Play
                             </NavLink>
                             <NavLink className="text-cyan-400 bg-gray-800 rounded-md px-4 py-1 whitespace-nowrap font-nunito" to="/leaderboard">
                                 Leaderboard
-                            </NavLink>
-                            <NavLink className="text-cyan-400 bg-gray-800 rounded-md px-4 py-1 whitespace-nowrap font-nunito" to="/users">
-                                Users
                             </NavLink>
                             {/* <NavLink className="text-cyan-400 bg-gray-800 hover:underline rounded-md px-4 py-1 uppercase" to="/about">
                                 about

@@ -13,8 +13,8 @@ const Footer = () => (
         </div>
         <div className="flex items-center text-[8px] sm:text-base group">
             <GithubLogo className="w-4 h-4 sm:w-8 sm:h-8 mr-2 fill-current cursor-pointer group-hover:rotate-[360deg] transition-transform duration-700 ease-in-out"></GithubLogo>
-            <a className="text-cyan-400 underline" href="https://github.com/iamwesofph/top-photo-tagging-app" target="_blank">
-                https://github.com/iamwesofph/top-photo-tagging-app
+            <a className="text-cyan-400 underline" href="https://github.com/iamwesofph/top-wesbook" target="_blank">
+                https://github.com/iamwesofph/top-wesbook
             </a>
         </div>
     </div>
