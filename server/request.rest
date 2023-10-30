@@ -317,3 +317,12 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1M2E0YWZkO
 ###
 GET http://localhost:3001/api/users/incoming-friends
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1M2E0YjBhODVhZjFhYmE2ODY1YjY0ZiIsImlhdCI6MTY5ODQxMTk3MywiZXhwIjoxNjk4NDk4MzczfQ.8qTgd83AK-R00IwXEzaooQLbkc930CqYAXyai-FTWk8
+
+###
+POST http://localhost:3001/api/posts
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1M2E0YWZkODVhZjFhYmE2ODY1YjY0YSIsImlhdCI6MTY5ODY2MDcyMywiZXhwIjoxNjk4NzQ3MTIzfQ.SjtDo_edCx31yj_svTPo1oLXFmCZYrqnVtXl-iRlm9c
+content-type: application/json
+
+{
+    "content": "Test content posted"
+}

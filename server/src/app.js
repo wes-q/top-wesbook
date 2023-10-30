@@ -12,6 +12,7 @@ const authRouter = require("./controllers/auth");
 const emailRouter = require("./controllers/email");
 const characterLocationsRouter = require("./controllers/characterLocations");
 const scoresRouter = require("./controllers/scores");
+const postsRouter = require("./controllers/posts");
 
 const middleware = require("./utils/middleware");
 const winstonLogger = require("./utils/winstonLogger");
@@ -104,6 +105,7 @@ app.use("/", loginRouter);
 app.use("/", emailRouter);
 app.use("/", characterLocationsRouter);
 app.use("/", scoresRouter);
+app.use("/", postsRouter);
 
 // Catch-all route to handle client side routing
 app.use("/*", (req, res) => {
