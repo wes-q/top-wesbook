@@ -66,10 +66,8 @@ function App() {
 
     //change function name to auto relogin
     const getUserLocal = async () => {
-        console.log("GETUSER LOCAL");
         const loggedUserToken = window.localStorage.getItem("loggedUserToken");
         if (loggedUserToken) {
-            console.log("THERE IS LOGGED USER TOKEN");
             try {
                 const headerConfig = {
                     headers: {
