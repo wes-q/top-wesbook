@@ -120,7 +120,7 @@ function App() {
                         <Route index element={<PlayPage setGame={setGame} />} />
                         <Route element={<LeaderboardPage />} path="leaderboard" />
                         <Route path="users" element={<Users user={user} />} />
-                        <Route path="posts" element={<Posts />} />
+                        <Route path="posts" element={<Posts user={user} />} />
                         <Route path="game" element={<Game game={game} setShowFooter={setShowFooter} setShowStartTimer={setShowStartTimer} seconds={seconds} setSeconds={setSeconds} />} />
                         <Route path="about" element={<About />} />
                         <Route path="verification-successful" element={<VerificationSuccessful />} />

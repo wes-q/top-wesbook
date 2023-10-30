@@ -3,7 +3,7 @@ import PlusIcon from "../icons/plus.svg?react";
 import PlusCircle from "../icons/pluscircle.svg?react";
 import Modal from "./ModalNewPost";
 
-const Posts = () => {
+const Posts = ({ user }) => {
     const [showNewPost, setShowNewPost] = useState(false);
 
     const handleNewPost = () => {
@@ -13,7 +13,7 @@ const Posts = () => {
 
     return (
         <>
-            {showNewPost && <Modal setShowNewPost={setShowNewPost} />}
+            {showNewPost && <Modal setShowNewPost={setShowNewPost} user={user} />}
 
             <div className="flex flex-col p-6 text-black text-sm">
                 <div className="flex items-center mx-auto w-80 h-16 border ring-1 mb-4 rounded-sm bg-slate-200 p-2 hover:cursor-pointer hover:bg-cyan-400 transition-colors" onClick={handleNewPost}>
