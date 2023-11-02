@@ -1,7 +1,6 @@
 import { useState } from "react";
 import X from "../icons/x.svg?react";
 import PhotoIcon from "../icons/add-photo.svg?react";
-import axios from "axios";
 import postsService from "../services/posts";
 
 const ModalNewPost = ({ setShowNewPost, user, getAllPosts }) => {

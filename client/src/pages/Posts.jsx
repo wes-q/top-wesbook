@@ -7,6 +7,7 @@ import Comment from "../icons/comment.svg?react";
 import postsService from "../services/posts";
 import sortByDate from "../helpers/helper";
 import { format, parseISO } from "date-fns";
+import axios from "axios";
 
 const Posts = ({ user }) => {
     const [showNewPost, setShowNewPost] = useState(false);
@@ -48,10 +49,11 @@ const Posts = ({ user }) => {
                 Authorization: `Bearer ${loggedUserToken}`,
             };
 
+            const url = `/api/posts/${postId}/likes`;
             const object = {};
 
             try {
-                await postsService.update(postId, object, { headers });
+                await axios.patch(url, object, { headers });
                 getAllPosts();
             } catch (error) {
                 console.log(error);

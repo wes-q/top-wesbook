@@ -39,29 +39,27 @@ postsRouter.get("/api/posts", middleware.userExtractor, async (request, response
     }
 });
 
-postsRouter.get("/api/check/:postId", middleware.userExtractor, async (req, res, next) => {
-    const postId = req.params.postId; // Extract the post ID from the route parameter
+postsRouter.patch("/api/posts/:postId/likes", middleware.userExtractor, async (request, response, next) => {
     try {
-        const post = await Post.findById(postId).exec();
-
-        const isLikedByCurrentUser = post.likes.some((like) => like.user.toString() === req.user.id);
-
-        res.json({ post, isLikedByCurrentUser });
-    } catch (error) {
-        // Handle the error
-        next(error);
-    }
-});
-
-postsRouter.put("/api/posts/:id", middleware.userExtractor, async (request, response, next) => {
-    try {
-        const postToUpdate = await Post.findById(request.params.id);
+        const postToUpdate = await Post.findById(request.params.postId);
 
         if (postToUpdate.likes.some((post) => post.user.toString() === request.user.id)) {
             return response.status(400).json({ message: "Post liked already" });
         }
 
         postToUpdate.likes.push({ user: request.user.id, likeType: "like" });
+        const updatedPost = await postToUpdate.save();
+        response.json(updatedPost);
+    } catch (error) {
+        next(error);
+    }
+});
+
+postsRouter.patch("/api/posts/:postId/comments", middleware.userExtractor, async (request, response, next) => {
+    try {
+        const postToUpdate = await Post.findById(request.params.postId);
+
+        postToUpdate.comments.push({ text: request.body.text, postedBy: request.user.id });
         const updatedPost = await postToUpdate.save();
         response.json(updatedPost);
     } catch (error) {
