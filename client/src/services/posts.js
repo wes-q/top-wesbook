@@ -19,14 +19,14 @@ const create = async (newObject, headerConfig) => {
     }
 };
 
-// const update = async (id, newObject, customHeaders) => {
-//     try {
-//         const response = await axios.put(`${baseUrl}/${id}`, newObject, { headers: customHeaders });
-//         return response.data;
-//     } catch (error) {
-//         throw error;
-//     }
-// };
+const update = async (id, newObject, headerConfig) => {
+    try {
+        const response = await axios.put(`${baseUrl}/${id}`, newObject, headerConfig);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+};
 
 // const remove = async (id) => {
 //     try {
@@ -40,6 +40,6 @@ const create = async (newObject, headerConfig) => {
 export default {
     getAll,
     create,
-    // update,
+    update,
     // remove,
 };
