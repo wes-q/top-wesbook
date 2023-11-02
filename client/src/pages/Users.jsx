@@ -97,7 +97,7 @@ const Users = ({ user }) => {
                                 <li key={user.id}>
                                     <div className="flex justify-between items-center">
                                         <div className="flex gap-2 items-center">
-                                            <img className="rounded-full w-8" src={user.profilePhoto || noProfilePhoto} alt="profile photo" />
+                                            <img className="rounded-full w-8" src={user.profilePhoto || noProfilePhoto} alt="profile photo" referrerPolicy="no-referrer" />
                                             <span className="relative flex h-3 w-3">
                                                 <span className="animate-ping-slow ease-out absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
                                                 <span className="relative rounded-full h-3 w-3 bg-green-500"></span>
@@ -126,7 +126,7 @@ const Users = ({ user }) => {
                                 <li key={user.id}>
                                     <div className="flex justify-between items-center">
                                         <div className="flex gap-2 items-center">
-                                            <img className="rounded-full w-8" src={user.profilePhoto || noProfilePhoto} alt="profile photo" />
+                                            <img className="rounded-full w-8" src={user.profilePhoto || noProfilePhoto} alt="profile photo" referrerPolicy="no-referrer" />
                                             <span className="relative flex h-3 w-3">
                                                 <span className="animate-ping-slow ease-out absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
                                                 <span className="relative rounded-full h-3 w-3 bg-green-500"></span>
@@ -154,7 +154,7 @@ const Users = ({ user }) => {
                                 <li key={user.id}>
                                     <div className="flex justify-between items-center">
                                         <div className="flex gap-2 items-center">
-                                            <img className="rounded-full w-8" src={user.profilePhoto || noProfilePhoto} alt="profile photo" />
+                                            <img className="rounded-full w-8" src={user.profilePhoto || noProfilePhoto} alt="profile photo" referrerPolicy="no-referrer" />
                                             <span className="relative flex h-3 w-3">
                                                 <span className="animate-ping-slow ease-out absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
                                                 <span className="relative rounded-full h-3 w-3 bg-green-500"></span>
@@ -187,7 +187,7 @@ const Users = ({ user }) => {
                             {users.map((user) => (
                                 <li key={user.id} className="flex items-center gap-4">
                                     <div className="flex gap-2 items-center">
-                                        <img className="rounded-full w-8" src={user.profilePhoto || noProfilePhoto} alt="profile photo" />
+                                        <img className="rounded-full w-8" src={user.profilePhoto || noProfilePhoto} alt="profile photo" referrerPolicy="no-referrer" />
                                         <span>{user.displayName || user.firstName}</span>
                                     </div>
                                     <span class="relative flex h-3 w-3">
@@ -212,7 +212,7 @@ const Users = ({ user }) => {
                             {friends.map((user) => (
                                 <li key={user.id}>
                                     <div className="flex gap-2 items-center">
-                                        <img className="rounded-full w-8" src={user.profilePhoto || noProfilePhoto} alt="profile photo" />
+                                        <img className="rounded-full w-8" src={user.profilePhoto || noProfilePhoto} alt="profile photo" referrerPolicy="no-referrer" />
                                         <span className="relative flex h-3 w-3">
                                             <span className="animate-ping-slow ease-out absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
                                             <span className="relative rounded-full h-3 w-3 bg-green-500"></span>
