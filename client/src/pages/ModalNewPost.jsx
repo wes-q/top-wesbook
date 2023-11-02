@@ -4,7 +4,7 @@ import PhotoIcon from "../icons/add-photo.svg?react";
 import axios from "axios";
 import postsService from "../services/posts";
 
-const ModalNewPost = ({ setShowNewPost, user }) => {
+const ModalNewPost = ({ setShowNewPost, user, getAllPosts }) => {
     const [postText, setPostText] = useState(""); // State to track the text in the textarea
     const [postBackgroundColor, setPostBackgroundColor] = useState("bg-gray-500 text-white hover:cursor-not-allowed"); // State to manage the background color
 
@@ -36,8 +36,14 @@ const ModalNewPost = ({ setShowNewPost, user }) => {
                     Authorization: `Bearer ${loggedUserToken}`,
                 },
             };
-            const newPost = await postsService.create(object, headerConfig);
-            console.log(newPost);
+            try {
+                const newPost = await postsService.create(object, headerConfig);
+                // console.log(newPost);
+                setShowNewPost(false);
+                getAllPosts();
+            } catch (error) {
+                console.log(error);
+            }
         }
     };
 

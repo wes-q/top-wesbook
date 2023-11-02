@@ -5,6 +5,7 @@ import DotDotDot from "../icons/dotdotdot.svg?react";
 import Like from "../icons/like.svg?react";
 import Comment from "../icons/comment.svg?react";
 import postsService from "../services/posts";
+import sortByDate from "../helpers/helper";
 
 const Posts = ({ user }) => {
     const [showNewPost, setShowNewPost] = useState(false);
@@ -16,7 +17,18 @@ const Posts = ({ user }) => {
 
     const getAllPosts = async () => {
         const data = await postsService.getAll();
-        console.log(data);
+
+        // const sortByDate = (data) => data.sort(({ createdAt: a }, { createdAt: b }) => (a < b ? -1 : a > b ? 1 : 0));
+
+        // // Convert createdAt strings to Date objects
+        // data.forEach((post) => {
+        //     post.createdAt = new Date(post.createdAt);
+        // });
+
+        // data.sort((a, b) => b.createdAt - a.createdAt);
+        // data.sort((a, b) => a.content.localeCompare(b.content));
+
+        console.log(sortByDate(data));
         setPosts(data);
     };
 
@@ -27,7 +39,7 @@ const Posts = ({ user }) => {
 
     return (
         <>
-            {showNewPost && <ModalNewPost setShowNewPost={setShowNewPost} user={user} />}
+            {showNewPost && <ModalNewPost setShowNewPost={setShowNewPost} user={user} getAllPosts={getAllPosts} />}
 
             <div className="flex flex-col p-6 text-black text-sm">
                 <div className="flex items-center mx-auto w-80 h-16 border ring-1 mb-4 rounded-sm bg-slate-200 p-2 hover:cursor-pointer hover:bg-cyan-400 transition-colors" onClick={handleNewPost}>
