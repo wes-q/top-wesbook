@@ -320,9 +320,28 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1M2E0YjBhO
 
 ###
 POST http://localhost:3001/api/posts
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1M2E0YWZkODVhZjFhYmE2ODY1YjY0YSIsImlhdCI6MTY5ODY2MDcyMywiZXhwIjoxNjk4NzQ3MTIzfQ.SjtDo_edCx31yj_svTPo1oLXFmCZYrqnVtXl-iRlm9c
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1M2E0YjBhODVhZjFhYmE2ODY1YjY0ZiIsImlhdCI6MTY5ODg4NTE2NSwiZXhwIjoxNjk4OTcxNTY1fQ.MaAlFceC1emev-i0O-CzJSnA6t0tcIsDtkdCjNySh0o
 content-type: application/json
 
 {
-    "content": "Test content posted"
+    "content": "Goodluck!"
 }
+
+###
+GET http://localhost:3001/api/posts
+
+###
+PUT http://localhost:3001/api/posts/653f973804f0969ddf7f1718
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1M2E0YWZkODVhZjFhYmE2ODY1YjY0YSIsImlhdCI6MTY5ODkwMjkzMCwiZXhwIjoxNjk4OTg5MzMwfQ.0z1J6gs0a3V0cQSQydtBynRYGaMatpImFgg1ZN8B3zE
+
+
+//anoyo
+//eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1M2E0YjBhODVhZjFhYmE2ODY1YjY0ZiIsImlhdCI6MTY5ODg4NTE2NSwiZXhwIjoxNjk4OTcxNTY1fQ.MaAlFceC1emev-i0O-CzJSnA6t0tcIsDtkdCjNySh0o
+//pius
+//eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1M2E0YWZkODVhZjFhYmE2ODY1YjY0YSIsImlhdCI6MTY5ODkwMjkzMCwiZXhwIjoxNjk4OTg5MzMwfQ.0z1J6gs0a3V0cQSQydtBynRYGaMatpImFgg1ZN8B3zE
+//renelynwill
+//eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1M2E0YjIzODVhZjFhYmE2ODY1YjY1MyIsImlhdCI6MTY5ODkxMDcwNiwiZXhwIjoxNjk4OTk3MTA2fQ.CMNk6-8NGyHNAr1LZTpoEJENxE-hw6pn_2_tMBz6pZo
+
+###
+GET http://localhost:3001/api/check/653f973804f0969ddf7f1718
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1M2E0YjIzODVhZjFhYmE2ODY1YjY1MyIsImlhdCI6MTY5ODkxMDcwNiwiZXhwIjoxNjk4OTk3MTA2fQ.CMNk6-8NGyHNAr1LZTpoEJENxE-hw6pn_2_tMBz6pZo

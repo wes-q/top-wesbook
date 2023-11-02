@@ -20,11 +20,35 @@ postsRouter.post("/api/posts", middleware.userExtractor, async (request, respons
     }
 });
 
-postsRouter.get("/api/posts", async (request, response, next) => {
+postsRouter.get("/api/posts", middleware.userExtractor, async (request, response, next) => {
+    console.log(request.user.id);
+
     try {
         const posts = await Post.find({}).populate({ path: "author", select: "firstName displayName profilePhoto" });
-        response.json(posts);
+
+        const postsWithIsLiked = posts.map((post) => {
+            const isLikedByCurrentUser = post.likes.some((like) => like.user.toString() === request.user.id);
+            return {
+                ...post.toJSON(),
+                isLikedByCurrentUser,
+            };
+        });
+        response.json(postsWithIsLiked);
     } catch (error) {
+        next(error);
+    }
+});
+
+postsRouter.get("/api/check/:postId", middleware.userExtractor, async (req, res, next) => {
+    const postId = req.params.postId; // Extract the post ID from the route parameter
+    try {
+        const post = await Post.findById(postId).exec();
+
+        const isLikedByCurrentUser = post.likes.some((like) => like.user.toString() === req.user.id);
+
+        res.json({ post, isLikedByCurrentUser });
+    } catch (error) {
+        // Handle the error
         next(error);
     }
 });

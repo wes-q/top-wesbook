@@ -91,12 +91,6 @@ const userSchema = new mongoose.Schema({
     // ],
 });
 
-userSchema.virtual("requestedFriends", {
-    ref: "User",
-    localField: "_id",
-    foreignField: "friendRequests.user",
-});
-
 userSchema.set("toJSON", {
     transform: (document, returnedObject) => {
         returnedObject.id = returnedObject._id.toString();

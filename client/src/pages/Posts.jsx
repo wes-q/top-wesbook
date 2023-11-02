@@ -17,20 +17,22 @@ const Posts = ({ user }) => {
     }, []);
 
     const getAllPosts = async () => {
-        const data = await postsService.getAll();
+        const loggedUserToken = window.localStorage.getItem("loggedUserToken");
+        let headers;
+        if (loggedUserToken) {
+            headers = {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${loggedUserToken}`,
+            };
+        }
 
-        // const sortByDate = (data) => data.sort(({ createdAt: a }, { createdAt: b }) => (a < b ? -1 : a > b ? 1 : 0));
-
-        // // Convert createdAt strings to Date objects
-        // data.forEach((post) => {
-        //     post.createdAt = new Date(post.createdAt);
-        // });
-
-        // data.sort((a, b) => b.createdAt - a.createdAt);
-        // data.sort((a, b) => a.content.localeCompare(b.content));
-
-        console.log(sortByDate(data));
-        setPosts(data);
+        try {
+            const data = await postsService.getAll({ headers });
+            console.log(sortByDate(data));
+            setPosts(data);
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     const handleNewPost = () => {
@@ -50,6 +52,7 @@ const Posts = ({ user }) => {
 
             try {
                 await postsService.update(postId, object, { headers });
+                getAllPosts();
             } catch (error) {
                 console.log(error);
             }
@@ -94,8 +97,17 @@ const Posts = ({ user }) => {
 
                             <div className="flex justify-around">
                                 <div className="flex items-center justify-center cursor-pointer w-full hover:bg-slate-300 rounded-md py-1" onClick={() => handleLike(post.id)}>
-                                    <Like className="w-4 mr-2"></Like>
-                                    <span>Like</span>
+                                    {post.isLikedByCurrentUser ? (
+                                        <>
+                                            <Like className="w-4 mr-2 fill-cyan-500"></Like>
+                                            <span className="text-cyan-500">Like</span>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <Like className="w-4 mr-2"></Like>
+                                            <span>Like</span>
+                                        </>
+                                    )}
                                 </div>
                                 <div className="flex items-center justify-center cursor-pointer w-full hover:bg-slate-300 rounded-md py-1">
                                     <Comment className="w-4 mr-2"></Comment>
