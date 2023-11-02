@@ -1,6 +1,8 @@
 import { useState } from "react";
 import X from "../icons/x.svg?react";
 import PhotoIcon from "../icons/add-photo.svg?react";
+import axios from "axios";
+import postsService from "../services/posts";
 
 const ModalNewPost = ({ setShowNewPost, user }) => {
     const [postText, setPostText] = useState(""); // State to track the text in the textarea
@@ -18,6 +20,24 @@ const ModalNewPost = ({ setShowNewPost, user }) => {
             setPostBackgroundColor("bg-primary text-black ring-1"); // Change to your desired background color
         } else {
             setPostBackgroundColor("bg-gray-500 text-white hover:cursor-not-allowed"); // Restore the default background color
+        }
+    };
+
+    const handlePost = async () => {
+        const object = {
+            content: postText,
+        };
+
+        const loggedUserToken = window.localStorage.getItem("loggedUserToken");
+        if (loggedUserToken) {
+            const headerConfig = {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${loggedUserToken}`,
+                },
+            };
+            const newPost = await postsService.create(object, headerConfig);
+            console.log(newPost);
         }
     };
 
@@ -46,7 +66,9 @@ const ModalNewPost = ({ setShowNewPost, user }) => {
                             <PhotoIcon className="group-hover:fill-gray-500 mr-2"></PhotoIcon>
                             <span className="group-hover:text-gray-500">Add image</span>
                         </div>
-                        <button className={`px-4 py-1 w-1/2 ${postBackgroundColor} bg-gray-500 rounded-sm`}>Post</button>
+                        <button className={`px-4 py-1 w-1/2 ${postBackgroundColor} bg-gray-500 rounded-sm`} onClick={handlePost}>
+                            Post
+                        </button>
                     </div>
                 </div>
             </div>
