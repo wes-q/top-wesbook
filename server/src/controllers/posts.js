@@ -29,4 +29,20 @@ postsRouter.get("/api/posts", async (request, response, next) => {
     }
 });
 
+postsRouter.put("/api/posts/:id", middleware.userExtractor, async (request, response, next) => {
+    try {
+        const postToUpdate = await Post.findById(request.params.id);
+
+        if (postToUpdate.likes.some((post) => post.user.toString() === request.user.id)) {
+            return response.status(400).json({ message: "Post liked already" });
+        }
+
+        postToUpdate.likes.push({ user: request.user.id, likeType: "like" });
+        const updatedPost = await postToUpdate.save();
+        response.json(updatedPost);
+    } catch (error) {
+        next(error);
+    }
+});
+
 module.exports = postsRouter;

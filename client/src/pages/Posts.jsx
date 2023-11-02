@@ -38,6 +38,24 @@ const Posts = ({ user }) => {
         setShowNewPost(true);
     };
 
+    const handleLike = async (postId) => {
+        const loggedUserToken = window.localStorage.getItem("loggedUserToken");
+        if (loggedUserToken) {
+            const headers = {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${loggedUserToken}`,
+            };
+
+            const object = {};
+
+            try {
+                await postsService.update(postId, object, { headers });
+            } catch (error) {
+                console.log(error);
+            }
+        }
+    };
+
     return (
         <>
             {showNewPost && <ModalNewPost setShowNewPost={setShowNewPost} user={user} getAllPosts={getAllPosts} />}
@@ -75,11 +93,11 @@ const Posts = ({ user }) => {
                             <hr className="w-full border-t border-gray-300 mb-4" />
 
                             <div className="flex justify-around">
-                                <div className="flex items-center cursor-pointer">
+                                <div className="flex items-center justify-center cursor-pointer w-full hover:bg-slate-300 rounded-md py-1" onClick={() => handleLike(post.id)}>
                                     <Like className="w-4 mr-2"></Like>
                                     <span>Like</span>
                                 </div>
-                                <div className="flex items-center cursor-pointer">
+                                <div className="flex items-center justify-center cursor-pointer w-full hover:bg-slate-300 rounded-md py-1">
                                     <Comment className="w-4 mr-2"></Comment>
                                     <span>Comment</span>
                                 </div>
