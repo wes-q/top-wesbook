@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import noProfilePhoto from "../icons/noprofile.jpg";
 import PlusCircle from "../icons/pluscircle.svg?react";
 import ModalNewPost from "./ModalNewPost";
 import DotDotDot from "../icons/dotdotdot.svg?react";
@@ -8,6 +9,7 @@ import postsService from "../services/posts";
 import sortByDate from "../helpers/helper";
 import { format, parseISO } from "date-fns";
 import UserCommentBox from "./UserCommentBox";
+import Comments from "./Comments";
 import axios from "axios";
 
 const Posts = ({ user }) => {
@@ -138,6 +140,8 @@ const Posts = ({ user }) => {
                             {/* <div className="outline-none bg-slate-300 rounded-2xl pl-4 pr-3 py-1"> */}
                             {/* </div> */}
                             <UserCommentBox user={user} />
+                            <hr className="mb-2" />
+                            <Comments post={post}></Comments>
                         </div>
                     );
                 })}

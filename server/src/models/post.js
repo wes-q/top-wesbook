@@ -43,6 +43,19 @@ postSchema.set("toJSON", {
         returnedObject.id = returnedObject._id.toString();
         delete returnedObject._id;
         delete returnedObject.__v;
+
+        if (returnedObject.likes) {
+            returnedObject.likes.forEach((like) => {
+                if (!like.id && like._id) like.id = like._id.toString();
+                delete like._id;
+            });
+        }
+        if (returnedObject.comments) {
+            returnedObject.comments.forEach((comment) => {
+                if (!comment.id && comment._id) comment.id = comment._id.toString();
+                delete comment._id;
+            });
+        }
     },
 });
 

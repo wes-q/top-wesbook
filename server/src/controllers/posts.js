@@ -24,7 +24,11 @@ postsRouter.get("/api/posts", middleware.userExtractor, async (request, response
     console.log(request.user.id);
 
     try {
-        const posts = await Post.find({}).populate({ path: "author", select: "firstName displayName profilePhoto" });
+        // const posts = await Post.find({}).populate({ path: "author", select: "firstName displayName profilePhoto" });
+        // const posts = await Post.find({}).populate({ path: "comments.postedBy", select: "firstName displayName profilePhoto" });
+        // const posts = await Post.find({ content: "Is it working?" }).populate("comments.postedBy").exec();
+        // const posts = await Post.find({}).populate({ path: "likes.user", select: "firstName displayName profilePhoto" });
+        const posts = await Post.find({}).populate({ path: "author", select: "firstName displayName profilePhoto" }).populate({ path: "comments.postedBy", select: "firstName displayName profilePhoto" });
 
         const postsWithIsLiked = posts.map((post) => {
             const isLikedByCurrentUser = post.likes.some((like) => like.user.toString() === request.user.id);
@@ -34,6 +38,7 @@ postsRouter.get("/api/posts", middleware.userExtractor, async (request, response
             };
         });
         response.json(postsWithIsLiked);
+        // response.json(posts);
     } catch (error) {
         next(error);
     }

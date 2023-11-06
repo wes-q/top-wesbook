@@ -93,13 +93,16 @@ const userSchema = new mongoose.Schema({
 
 userSchema.set("toJSON", {
     transform: (document, returnedObject) => {
-        returnedObject.id = returnedObject._id.toString();
-        delete returnedObject._id;
-        delete returnedObject.__v;
-        // the passwordHash should not be revealed
-        delete returnedObject.passwordHash;
-        // the verification token should not be revealed
-        delete returnedObject.verificationToken;
+        // returnedObject.id = returnedObject._id.toString();
+        if (returnedObject) {
+            returnedObject.id = returnedObject._id ? returnedObject._id.toString() : null;
+            delete returnedObject._id;
+            delete returnedObject.__v;
+            // the passwordHash should not be revealed
+            delete returnedObject.passwordHash;
+            // the verification token should not be revealed
+            delete returnedObject.verificationToken;
+        }
 
         if (returnedObject.friendRequests) {
             returnedObject.friendRequests.forEach((friendReq) => {
