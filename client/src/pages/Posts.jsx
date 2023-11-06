@@ -7,6 +7,7 @@ import Comment from "../icons/comment.svg?react";
 import postsService from "../services/posts";
 import sortByDate from "../helpers/helper";
 import { format, parseISO } from "date-fns";
+import UserCommentBox from "./UserCommentBox";
 import axios from "axios";
 
 const Posts = ({ user }) => {
@@ -61,12 +62,17 @@ const Posts = ({ user }) => {
         }
     };
 
+    const handleComment = () => {
+        setIsCommentClicked(true);
+        //Set focus to comment
+    };
+
     return (
         <>
             {showNewPost && <ModalNewPost setShowNewPost={setShowNewPost} user={user} getAllPosts={getAllPosts} />}
 
             <div className="flex flex-col p-6 text-black text-sm">
-                <div className="flex items-center mx-auto w-80 h-16 border ring-1 mb-4 rounded-sm bg-slate-200 p-2 hover:cursor-pointer hover:bg-cyan-400 transition-colors" onClick={handleNewPost}>
+                <div className="flex items-center mx-auto w-80 h-16 border ring-1 mb-4 rounded-md bg-slate-200 p-2 hover:cursor-pointer hover:bg-cyan-400 transition-colors" onClick={handleNewPost}>
                     <PlusCircle className="h-10 w-10 mr-2" />
                     <div className="flex flex-col">
                         <span className="font-bold">Create new post</span>
@@ -79,7 +85,7 @@ const Posts = ({ user }) => {
                     const formattedDate = format(jsDate, "MMM dd, yyyy");
 
                     return (
-                        <div key={index} className="flex flex-col mx-auto w-80 border ring-1 mb-4 rounded-sm bg-slate-200 p-2">
+                        <div key={index} className="flex flex-col mx-auto w-80 border ring-1 mb-4 rounded-md bg-slate-200 p-2">
                             <div className="flex items-center justify-between mb-2">
                                 <div className="flex">
                                     <img className="rounded-full h-10 w-10 mr-2 object-cover border border-white ring-1" src={post.author.profilePhoto || noProfilePhoto} alt="profile photo" referrerPolicy="no-referrer" />
@@ -94,7 +100,7 @@ const Posts = ({ user }) => {
                             </div>
 
                             <hr className="w-full border-t border-gray-300 mb-4" />
-                            <span>{post.content}</span>
+                            <span className="mb-4">{post.content}</span>
                             <hr className="w-full border-t border-gray-300 mb-4" />
 
                             <div className="flex justify-around">
@@ -111,11 +117,27 @@ const Posts = ({ user }) => {
                                         </>
                                     )}
                                 </div>
-                                <div className="flex items-center justify-center cursor-pointer w-full hover:bg-slate-300 rounded-md py-1">
+                                <div className="flex items-center justify-center cursor-pointer w-full hover:bg-slate-300 rounded-md py-1" onClick={handleComment}>
                                     <Comment className="w-4 mr-2"></Comment>
                                     <span>Comment</span>
                                 </div>
                             </div>
+
+                            <hr className="w-full border-t border-gray-300 mb-4" />
+
+                            {/* <div className="flex justify-between items-center bg-slate-300 rounded-2xl">
+                                <textarea className="w-full bg-slate-300 outline-none resize-none rounded-2xl pl-4 pr-3 py-1 overflow-hidden" placeholder="Write a public comment..." cols="30" rows="2" spellCheck="false"></textarea>
+                                <Send className="w-6 mr-2 fill-cyan-500"></Send>
+                            </div> */}
+
+                            {/* <div className="flex justify-between items-center bg-slate-300 rounded-2xl">
+                                <textarea className="w-full bg-slate-300 outline-none resize-none rounded-2xl pl-4 pr-3 py-1 overflow-hidden" placeholder="Write a public comment..." cols="30" rows="2" spellCheck="false"></textarea>
+                                <Send className="w-6 mr-2 fill-cyan-500"></Send>
+                            </div> */}
+                            {/* style="user-select: text; white-space: pre-wrap; word-break: break-word;" */}
+                            {/* <div className="outline-none bg-slate-300 rounded-2xl pl-4 pr-3 py-1"> */}
+                            {/* </div> */}
+                            <UserCommentBox user={user} />
                         </div>
                     );
                 })}
