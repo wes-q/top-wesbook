@@ -35,7 +35,7 @@ const UserCommentBox = ({ user }) => {
     }, [isCommentClicked]);
 
     return (
-        <div className="flex">
+        <div className="flex text-xs">
             <img className="rounded-full w-8 h-8 mr-2 object-cover border border-white ring-1" src={user.profilePhoto || noProfilePhoto} alt="profile photo" referrerPolicy="no-referrer" />
             {isCommentClicked ? (
                 <div className="flex flex-col grow max-w-[260px] outline-none bg-slate-300 rounded-2xl pl-4 pr-3 py-1" spellCheck="false">
