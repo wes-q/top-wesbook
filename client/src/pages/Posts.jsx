@@ -140,7 +140,7 @@ const Posts = ({ user }) => {
                             {/* <div className="outline-none bg-slate-300 rounded-2xl pl-4 pr-3 py-1"> */}
                             {/* </div> */}
                             <Comments post={post}></Comments>
-                            <UserCommentBox user={user} />
+                            <UserCommentBox user={user} getAllPosts={getAllPosts} postId={post.id} />
                         </div>
                     );
                 })}
