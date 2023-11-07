@@ -1,5 +1,6 @@
 const postsRouter = require("express").Router();
 const Post = require("../models/post");
+const User = require("../models/user");
 const middleware = require("../utils/middleware");
 
 postsRouter.post("/api/posts", middleware.userExtractor, async (request, response, next) => {
@@ -21,15 +22,8 @@ postsRouter.post("/api/posts", middleware.userExtractor, async (request, respons
 });
 
 postsRouter.get("/api/posts", middleware.userExtractor, async (request, response, next) => {
-    console.log(request.user.id);
-
     try {
-        // const posts = await Post.find({}).populate({ path: "author", select: "firstName displayName profilePhoto" });
-        // const posts = await Post.find({}).populate({ path: "comments.postedBy", select: "firstName displayName profilePhoto" });
-        // const posts = await Post.find({ content: "Is it working?" }).populate("comments.postedBy").exec();
-        // const posts = await Post.find({}).populate({ path: "likes.user", select: "firstName displayName profilePhoto" });
         const posts = await Post.find({}).populate({ path: "author", select: "firstName displayName profilePhoto" }).populate({ path: "comments.postedBy", select: "firstName displayName profilePhoto" });
-
         const postsWithIsLiked = posts.map((post) => {
             const isLikedByCurrentUser = post.likes.some((like) => like.user.toString() === request.user.id);
             return {
@@ -38,10 +32,25 @@ postsRouter.get("/api/posts", middleware.userExtractor, async (request, response
             };
         });
         response.json(postsWithIsLiked);
-        // response.json(posts);
     } catch (error) {
         next(error);
     }
+});
+
+postsRouter.get("/api/posts-of-friends", middleware.userExtractor, async (request, response, next) => {
+    const user = await User.findById(request.user.id).select("friends.friendId");
+    const friendIds = user.friends.map((friend) => friend.friendId);
+    const postsOfFriends = await Post.find().where("author").in(friendIds).populate({ path: "author", select: "firstName displayName profilePhoto" }).populate({ path: "comments.postedBy", select: "firstName displayName profilePhoto" });
+
+    const postsWithIsLiked = postsOfFriends.map((post) => {
+        const isLikedByCurrentUser = post.likes.some((like) => like.user.toString() === request.user.id);
+        return {
+            ...post.toJSON(),
+            isLikedByCurrentUser,
+        };
+    });
+
+    response.json(postsWithIsLiked);
 });
 
 postsRouter.patch("/api/posts/:postId/likes", middleware.userExtractor, async (request, response, next) => {

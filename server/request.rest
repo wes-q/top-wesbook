@@ -308,7 +308,7 @@ eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1M2I4Y2FhYWMwYTJjMzk3MTNkNzhhZCI
 
 ####
 GET http://localhost:3001/api/users/friends
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1M2E0YWZkODVhZjFhYmE2ODY1YjY0YSIsImlhdCI6MTY5ODQxODU1MCwiZXhwIjoxNjk4NTA0OTUwfQ.AbWWn9CKKatzS-aeioyCaR5p059E-VBNdReH_pVGfvw
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1M2E0YWZkODVhZjFhYmE2ODY1YjY0YSIsImlhdCI6MTY5OTIyNDc0NiwiZXhwIjoxNjk5NDgzOTQ2fQ.EOyux8qRDvxHyrnZEL45sY-HrqsRcGmRSxCSQar5yMs
 
 ###
 GET http://localhost:3001/api/users/pending-friends
@@ -321,6 +321,10 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1M2E0YjBhO
 ###
 GET http://localhost:3001/api/posts
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1M2E0YWZkODVhZjFhYmE2ODY1YjY0YSIsImlhdCI6MTY5OTIyNDc0NiwiZXhwIjoxNjk5NDgzOTQ2fQ.EOyux8qRDvxHyrnZEL45sY-HrqsRcGmRSxCSQar5yMs
+
+###
+GET http://localhost:3001/api/posts-of-friends
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1M2E0YjIzODVhZjFhYmE2ODY1YjY1MyIsImlhdCI6MTY5OTM1NTUwNSwiZXhwIjoxNjk5NjE0NzA1fQ.7KcrbXGIk4XI2vJEHUy0iDip-IhuOJoCy2a8F15fb7M
 
 ###
 POST http://localhost:3001/api/posts

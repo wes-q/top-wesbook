@@ -110,6 +110,13 @@ userSchema.set("toJSON", {
                 delete friendReq._id;
             });
         }
+
+        if (returnedObject.friends) {
+            returnedObject.friends.forEach((friend) => {
+                if (!friend.id && friend._id) friend.id = friend._id.toString();
+                delete friend._id;
+            });
+        }
     },
 });
 

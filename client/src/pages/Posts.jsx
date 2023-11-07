@@ -31,8 +31,13 @@ const Posts = ({ user }) => {
             };
         }
 
+        const url = "/api/posts-of-friends";
+        const object = {};
+
         try {
-            const data = await postsService.getAll({ headers });
+            // const data = await postsService.getAll({ headers }); // Get all posts
+
+            const { data } = await axios.get(url, { headers }); // Get all posts of friends
             console.log(sortByDate(data));
             setPosts(data);
         } catch (error) {
@@ -41,7 +46,6 @@ const Posts = ({ user }) => {
     };
 
     const handleNewPost = () => {
-        //Call Modal
         setShowNewPost(true);
     };
 
