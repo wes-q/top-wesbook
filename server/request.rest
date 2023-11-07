@@ -320,7 +320,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1M2E0YjBhO
 
 ###
 GET http://localhost:3001/api/posts
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1M2E0YjBhODVhZjFhYmE2ODY1YjY0ZiIsImlhdCI6MTY5ODg4NTE2NSwiZXhwIjoxNjk4OTcxNTY1fQ.MaAlFceC1emev-i0O-CzJSnA6t0tcIsDtkdCjNySh0o
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1M2E0YWZkODVhZjFhYmE2ODY1YjY0YSIsImlhdCI6MTY5OTIyNDc0NiwiZXhwIjoxNjk5NDgzOTQ2fQ.EOyux8qRDvxHyrnZEL45sY-HrqsRcGmRSxCSQar5yMs
 
 ###
 POST http://localhost:3001/api/posts
@@ -337,11 +337,11 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1M2E0YjIzO
 
 ###
 PATCH http://localhost:3001/api/posts/6542fb3a5d8ae90b8502b163/comments
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1M2E0YjIzODVhZjFhYmE2ODY1YjY1MyIsImlhdCI6MTY5ODkxMDcwNiwiZXhwIjoxNjk4OTk3MTA2fQ.CMNk6-8NGyHNAr1LZTpoEJENxE-hw6pn_2_tMBz6pZo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1M2E0YWZkODVhZjFhYmE2ODY1YjY0YSIsImlhdCI6MTY5OTIyNDc0NiwiZXhwIjoxNjk5NDgzOTQ2fQ.EOyux8qRDvxHyrnZEL45sY-HrqsRcGmRSxCSQar5yMs
 content-type: application/json
 
 {
-    "text": "2nd Comment!"
+    "text": "Test comment 5 777777777777777777777777777777777777777777777777777777777777777777"
 }
 
 //anoyo

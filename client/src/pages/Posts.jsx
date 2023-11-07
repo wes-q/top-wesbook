@@ -102,10 +102,10 @@ const Posts = ({ user }) => {
                             </div>
 
                             <hr className="w-full border-t border-gray-300 mb-4" />
-                            <span className="mb-4">{post.content}</span>
-                            <hr className="w-full border-t border-gray-300 mb-4" />
+                            <span className="mb-4 break-words">{post.content}</span>
+                            <hr className="w-full border-t border-gray-300 mb-2" />
 
-                            <div className="flex justify-around">
+                            <div className="flex justify-around mb-2">
                                 <div className="flex items-center justify-center cursor-pointer w-full hover:bg-slate-300 rounded-md py-1" onClick={() => handleLike(post.id)}>
                                     {post.isLikedByCurrentUser ? (
                                         <>
@@ -139,9 +139,8 @@ const Posts = ({ user }) => {
                             {/* style="user-select: text; white-space: pre-wrap; word-break: break-word;" */}
                             {/* <div className="outline-none bg-slate-300 rounded-2xl pl-4 pr-3 py-1"> */}
                             {/* </div> */}
-                            <UserCommentBox user={user} />
-                            <hr className="mb-2" />
                             <Comments post={post}></Comments>
+                            <UserCommentBox user={user} />
                         </div>
                     );
                 })}

@@ -20,7 +20,7 @@ const UserCommentBox = ({ user }) => {
         setCommentText(text);
 
         if (text.length > 0) {
-            setPlaceholder();
+            // setPlaceholder();
             setPostIconStyle("fill-cyan-500 hover:cursor-pointer");
         } else {
             setPostIconStyle("hover:cursor-not-allowed");
