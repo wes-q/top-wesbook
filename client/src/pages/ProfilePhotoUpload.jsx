@@ -58,7 +58,7 @@ const ProfilePhotoUpload = ({ setNotification, user, profilePhoto, setUser }) =>
                 form.append("image", file, "image.jpg");
                 // Save the new profile photo to the file storage
                 const response = await axios.post("/api/profile", form);
-                console.log(`RESPONSE FROM API/PROFILE: ${response.data}`);
+                // console.log(`RESPONSE FROM API/PROFILE: ${response.data}`);
                 // Save the new profile photo's URL to the DB but re-authenticate first/
                 // const loggedUserToken = window.localStorage.getItem("loggedUserToken");
 
@@ -146,8 +146,7 @@ const ProfilePhotoUpload = ({ setNotification, user, profilePhoto, setUser }) =>
         <>
             <details className="relative">
                 <summary className="list-none" aria-haspopup="menu" role="button">
-                    {/* <img className="rounded-full overflow-hidden inline-block border-none w-52 h-52 object-cover" src={selectedImage ? selectedImage : noProfilePhoto} alt="@iamwesofph" /> */}
-                    <img className="rounded-full overflow-hidden inline-block border-none w-28 h-28 sm:w-52 sm:h-52 object-cover" src={selectedImage || noProfilePhoto} alt="@iamwesofph" />
+                    <img className="rounded-full overflow-hidden inline-block border-none w-28 h-28 sm:w-52 sm:h-52 object-cover" src={selectedImage || noProfilePhoto} alt="profile photo" referrerpolicy="no-referrer" />
 
                     <div className="relative w-16 left-20 bottom-10 bg-gray-800 rounded-md fill-current text-sm px-2 py-1 mb-2 border border-gray-500">
                         <div className="flex justify-around items-center">

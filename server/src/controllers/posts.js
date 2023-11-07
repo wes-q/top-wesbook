@@ -40,6 +40,10 @@ postsRouter.get("/api/posts", middleware.userExtractor, async (request, response
 postsRouter.get("/api/posts-of-friends", middleware.userExtractor, async (request, response, next) => {
     const user = await User.findById(request.user.id).select("friends.friendId");
     const friendIds = user.friends.map((friend) => friend.friendId);
+
+    // Include the user's own ID in the friendIds
+    friendIds.push(request.user.id);
+
     const postsOfFriends = await Post.find().where("author").in(friendIds).populate({ path: "author", select: "firstName displayName profilePhoto" }).populate({ path: "comments.postedBy", select: "firstName displayName profilePhoto" });
 
     const postsWithIsLiked = postsOfFriends.map((post) => {
