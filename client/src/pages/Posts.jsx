@@ -5,6 +5,7 @@ import ModalNewPost from "./ModalNewPost";
 import DotDotDot from "../icons/dotdotdot.svg?react";
 import Like from "../icons/like.svg?react";
 import Comment from "../icons/comment.svg?react";
+import LikeCount from "../icons/like-count.svg?react";
 import postsService from "../services/posts";
 import sortByDate from "../helpers/helper";
 import { format, parseISO } from "date-fns";
@@ -85,6 +86,12 @@ const Posts = ({ user }) => {
                 {posts.map((post, index) => {
                     const jsDate = parseISO(post.createdAt);
                     const formattedDate = format(jsDate, "MMM dd, yyyy");
+                    const totalLikes = post.likes.length;
+                    const totalComments = post.comments.length;
+
+                    function pluralize(word, count) {
+                        return count === 1 ? word : `${word}s`;
+                    }
 
                     return (
                         <div key={index} className="flex flex-col mx-auto w-80 border ring-1 mb-4 rounded-md bg-slate-200 p-2">
@@ -103,6 +110,21 @@ const Posts = ({ user }) => {
 
                             <hr className="w-full border-t border-gray-300 mb-4" />
                             <span className="mb-4 break-words">{post.content}</span>
+
+                            <div className="flex justify-between text-xs mb-1">
+                                {totalLikes > 0 && (
+                                    <div className="flex">
+                                        <LikeCount className="w-4 mr-1 fill-cyan-500"></LikeCount>
+                                        {totalLikes} {pluralize("like", totalLikes)}
+                                    </div>
+                                )}
+                                {totalComments > 0 && (
+                                    <div>
+                                        {totalComments} {pluralize("comment", totalComments)}
+                                    </div>
+                                )}
+                            </div>
+
                             <hr className="w-full border-t border-gray-300 mb-2" />
 
                             <div className="flex justify-around mb-2">

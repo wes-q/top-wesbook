@@ -83,7 +83,7 @@ const UserCommentBox = ({ user, getAllPosts, postId }) => {
                 <div className="flex flex-col justify-center grow max-w-[260px] outline-none bg-slate-300 rounded-2xl pl-4 pr-3 py-1" spellCheck="true">
                     <div className="flex justify-between w-full items-center">
                         <span className="text-gray-500 w-full cursor-text" onClick={handleCommentClick}>
-                            Write a public comment...
+                            Write a comment...
                         </span>
                         <Send className="w-6 mr-2 cursor-not-allowed"></Send>
                     </div>
