@@ -93,15 +93,22 @@ const userSchema = new mongoose.Schema({
 
 userSchema.set("toJSON", {
     transform: (document, returnedObject) => {
-        // returnedObject.id = returnedObject._id.toString();
-        if (returnedObject) {
-            returnedObject.id = returnedObject._id ? returnedObject._id.toString() : null;
+        delete returnedObject.__v;
+        // the passwordHash should not be revealed
+        delete returnedObject.passwordHash;
+        // the verification token should not be revealed
+        delete returnedObject.verificationToken;
+
+        if (!returnedObject.id && returnedObject._id) {
+            returnedObject.id = returnedObject._id.toString();
             delete returnedObject._id;
-            delete returnedObject.__v;
-            // the passwordHash should not be revealed
-            delete returnedObject.passwordHash;
-            // the verification token should not be revealed
-            delete returnedObject.verificationToken;
+        }
+
+        if (returnedObject.friends) {
+            returnedObject.friends.forEach((friend) => {
+                if (!friend.id && friend._id) friend.id = friend._id.toString();
+                delete friend._id;
+            });
         }
 
         if (returnedObject.friendRequests) {
@@ -111,10 +118,10 @@ userSchema.set("toJSON", {
             });
         }
 
-        if (returnedObject.friends) {
-            returnedObject.friends.forEach((friend) => {
-                if (!friend.id && friend._id) friend.id = friend._id.toString();
-                delete friend._id;
+        if (returnedObject.friendRejects) {
+            returnedObject.friendRejects.forEach((friendRej) => {
+                if (!friendRej.id && friendRej._id) friendRej.id = friendRej._id.toString();
+                delete friendRej._id;
             });
         }
     },

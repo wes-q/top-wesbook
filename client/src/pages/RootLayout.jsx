@@ -29,20 +29,26 @@ export default function RootLayout({ notification, type, user, setNotification, 
                         </a>
                         {showStartTimer && <Timer className="h-auto max-h-10" setSeconds={setSeconds} seconds={seconds}></Timer>}
                         <div className="hidden sm:block">
-                            <NavLink className="text-cyan-400 bg-gray-800 rounded-md px-4 py-1 whitespace-nowrap font-nunito" to="/posts">
+                            <NavLink className="text-cyan-400 bg-gray-800 rounded-md px-4 py-1 whitespace-nowrap" to="/posts">
                                 Posts
                             </NavLink>
-                            <NavLink className="text-cyan-400 bg-gray-800 rounded-md px-4 py-1 whitespace-nowrap font-nunito" to="/users">
+                            <NavLink className="text-cyan-400 bg-gray-800 rounded-md px-4 py-1 whitespace-nowrap" to="/users">
                                 Users
                             </NavLink>
-                            <NavLink className="text-cyan-400 bg-gray-800 rounded-md px-4 py-1 font-nunito" to="/">
+                            {/* <NavLink className="text-cyan-400 bg-gray-800 rounded-md px-4 py-1 whitespace-nowrap" to={`/profile/${user.id}`}>
+                                Profile Page
+                            </NavLink> */}
+                            <NavLink className="text-cyan-400 bg-gray-800 rounded-md px-4 py-1 whitespace-nowrap" to="/update-profile">
+                                Manage Account
+                            </NavLink>
+                            <NavLink className="text-cyan-400 bg-gray-800 rounded-md px-4 py-1" to="/">
                                 Play
                             </NavLink>
-                            <NavLink className="text-cyan-400 bg-gray-800 rounded-md px-4 py-1 whitespace-nowrap font-nunito" to="/leaderboard">
+                            <NavLink className="text-cyan-400 bg-gray-800 rounded-md px-4 py-1 whitespace-nowrap" to="/leaderboard">
                                 Leaderboard
                             </NavLink>
-                            {/* <NavLink className="text-cyan-400 bg-gray-800 hover:underline rounded-md px-4 py-1 uppercase" to="/about">
-                                about
+                            {/* <NavLink className="text-cyan-400 bg-gray-800 hover:underline rounded-md px-4 py-1" to="/about">
+                                About
                             </NavLink> */}
                         </div>
                         <div className="flex items-center gap-6">

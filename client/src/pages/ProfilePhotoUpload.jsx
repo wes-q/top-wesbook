@@ -146,8 +146,7 @@ const ProfilePhotoUpload = ({ setNotification, user, profilePhoto, setUser }) =>
         <>
             <details className="relative">
                 <summary className="list-none" aria-haspopup="menu" role="button">
-                    <img className="rounded-full overflow-hidden inline-block border-none w-28 h-28 sm:w-52 sm:h-52 object-cover" src={selectedImage || noProfilePhoto} alt="profile photo" referrerpolicy="no-referrer" />
-
+                    <img className="rounded-full overflow-hidden inline-block border-none w-28 h-28 sm:w-52 sm:h-52 object-cover" src={selectedImage || noProfilePhoto} alt="profile photo" referrerPolicy="no-referrer" />
                     <div className="relative w-16 left-20 bottom-10 bg-gray-800 rounded-md fill-current text-sm px-2 py-1 mb-2 border border-gray-500">
                         <div className="flex justify-around items-center">
                             <EditPen />

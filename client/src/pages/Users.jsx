@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import noProfilePhoto from "../icons/noprofile.jpg";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const Users = ({ user }) => {
     const [friends, setFriends] = useState([]);
@@ -97,12 +98,16 @@ const Users = ({ user }) => {
                                 <li key={user.id}>
                                     <div className="flex justify-between items-center">
                                         <div className="flex gap-2 items-center">
-                                            <img className="rounded-full w-8" src={user.profilePhoto || noProfilePhoto} alt="profile photo" referrerPolicy="no-referrer" />
+                                            <Link to={`/profile/${user.id}`}>
+                                                <img className="rounded-full w-8 h-8" src={user.profilePhoto || noProfilePhoto} alt="profile photo" referrerPolicy="no-referrer" />
+                                            </Link>
                                             <span className="relative flex h-3 w-3">
                                                 <span className="animate-ping-slow ease-out absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
                                                 <span className="relative rounded-full h-3 w-3 bg-green-500"></span>
                                             </span>
-                                            <span>{user.displayName || user.firstName}</span>
+                                            <Link to={`/profile/${user.id}`}>
+                                                <span className="hover:underline">{user.displayName || user.firstName}</span>
+                                            </Link>
                                         </div>
                                         <button className="bg-gray-200 text-black hover:bg-gray-300 px-2 py-1 rounded-md border border-black transition-colors" onClick={() => handleAddFriend(user.id)}>
                                             Add Friend
@@ -126,12 +131,16 @@ const Users = ({ user }) => {
                                 <li key={user.id}>
                                     <div className="flex justify-between items-center">
                                         <div className="flex gap-2 items-center">
-                                            <img className="rounded-full w-8" src={user.profilePhoto || noProfilePhoto} alt="profile photo" referrerPolicy="no-referrer" />
+                                            <Link to={`/profile/${user.id}`}>
+                                                <img className="rounded-full w-8 h-8" src={user.profilePhoto || noProfilePhoto} alt="profile photo" referrerPolicy="no-referrer" />
+                                            </Link>
                                             <span className="relative flex h-3 w-3">
                                                 <span className="animate-ping-slow ease-out absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
                                                 <span className="relative rounded-full h-3 w-3 bg-green-500"></span>
                                             </span>
-                                            <span>{user.displayName || user.firstName}</span>
+                                            <Link to={`/profile/${user.id}`}>
+                                                <span className="hover:underline">{user.displayName || user.firstName}</span>
+                                            </Link>
                                         </div>
                                         <span className="italic text-xs">Pending</span>
                                         {/* {user.status ? <p>Status: Pending</p> : isRejected ? <p>Status: Rejected</p> : <p>Status: No Requests</p>} */}
@@ -154,12 +163,16 @@ const Users = ({ user }) => {
                                 <li key={user.id}>
                                     <div className="flex justify-between items-center">
                                         <div className="flex gap-2 items-center">
-                                            <img className="rounded-full w-8" src={user.profilePhoto || noProfilePhoto} alt="profile photo" referrerPolicy="no-referrer" />
+                                            <Link to={`/profile/${user.id}`}>
+                                                <img className="rounded-full w-8 h-8" src={user.profilePhoto || noProfilePhoto} alt="profile photo" referrerPolicy="no-referrer" />
+                                            </Link>
                                             <span className="relative flex h-3 w-3">
                                                 <span className="animate-ping-slow ease-out absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
                                                 <span className="relative rounded-full h-3 w-3 bg-green-500"></span>
                                             </span>
-                                            <span>{user.displayName || user.firstName}</span>
+                                            <Link to={`/profile/${user.id}`}>
+                                                <span className="hover:underline">{user.displayName || user.firstName}</span>
+                                            </Link>
                                         </div>
                                         <div>
                                             <button className="bg-gray-200 text-black hover:bg-gray-300 px-2 py-1 rounded-md border border-black transition-colors" onClick={() => handleAcceptFriend(user.id)}>
@@ -212,12 +225,16 @@ const Users = ({ user }) => {
                             {friends.map((user) => (
                                 <li key={user.id}>
                                     <div className="flex gap-2 items-center">
-                                        <img className="rounded-full w-8" src={user.profilePhoto || noProfilePhoto} alt="profile photo" referrerPolicy="no-referrer" />
+                                        <Link to={`/profile/${user.id}`}>
+                                            <img className="rounded-full w-8 h-8 object-cover overflow-hidden" src={user.profilePhoto || noProfilePhoto} alt="profile photo" referrerPolicy="no-referrer" />
+                                        </Link>
                                         <span className="relative flex h-3 w-3">
                                             <span className="animate-ping-slow ease-out absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
                                             <span className="relative rounded-full h-3 w-3 bg-green-500"></span>
                                         </span>
-                                        <span>{user.displayName || user.firstName}</span>
+                                        <Link to={`/profile/${user.id}`}>
+                                            <span className="hover:underline">{user.displayName || user.firstName}</span>
+                                        </Link>
                                     </div>
                                 </li>
                             ))}

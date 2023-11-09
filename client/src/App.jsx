@@ -17,6 +17,7 @@ import Posts from "./pages/Posts";
 import loginService from "./services/login";
 import PlayPage from "./pages/PlayPage";
 import GetJwt from "./pages/GetJwt";
+import ProfilePage from "./pages/ProfilePage";
 
 function App() {
     const [notification, setNotification] = useState(null);
@@ -126,6 +127,7 @@ function App() {
                         <Route path="verification-successful" element={<VerificationSuccessful />} />
                         <Route path="verification-nothing" element={<VerificationNothing />} />
                         <Route path="update-profile" element={<UpdateProfile user={user} setUser={setUser} setNotification={setNotification} />} />
+                        <Route path="profile/:id" element={<ProfilePage user={user} />} />
                     </Route>
 
                     <Route path="login" element={<Login setNotification={setNotification} setUserToken={setUserToken} />} />
