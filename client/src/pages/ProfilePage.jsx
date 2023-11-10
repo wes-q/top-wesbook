@@ -1,5 +1,5 @@
 import React from "react";
-import PostsOfUser from "./PostsOfUser";
+import Posts from "./Posts";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import noProfilePhoto from "../icons/noprofile.jpg";
@@ -40,7 +40,8 @@ const ProfilePage = ({ currentUser }) => {
                     </div>
                     <div className="flex flex-col items-center">
                         {/* <Users /> */}
-                        <PostsOfUser currentUser={currentUser} />
+                        {/* <PostsOfUser currentUser={currentUser} /> */}
+                        <Posts currentUser={currentUser} postsOf="user" />
                         {/* <span>{currentUser.id}</span> */}
                         {/* <span>{userToDisplay.id}</span> */}
                     </div>

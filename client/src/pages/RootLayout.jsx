@@ -34,7 +34,7 @@ export default function RootLayout({ notification, type, user, setNotification, 
                                     My Profile
                                 </NavLink>
                             )}
-                            <NavLink className="text-cyan-400 bg-gray-800 rounded-md px-4 py-1 whitespace-nowrap" to="/posts">
+                            <NavLink className="text-cyan-400 bg-gray-800 rounded-md px-4 py-1 whitespace-nowrap" to="/">
                                 Newsfeed
                             </NavLink>
                             {/* <NavLink className="text-cyan-400 bg-gray-800 rounded-md px-4 py-1 whitespace-nowrap" to={`/profile/${user.id}`}>
@@ -43,7 +43,7 @@ export default function RootLayout({ notification, type, user, setNotification, 
                             <NavLink className="text-cyan-400 bg-gray-800 rounded-md px-4 py-1 whitespace-nowrap" to="/update-profile">
                                 Manage Account
                             </NavLink>
-                            <NavLink className="text-cyan-400 bg-gray-800 rounded-md px-4 py-1" to="/">
+                            <NavLink className="text-cyan-400 bg-gray-800 rounded-md px-4 py-1" to="/play">
                                 Play
                             </NavLink>
                             <NavLink className="text-cyan-400 bg-gray-800 rounded-md px-4 py-1 whitespace-nowrap" to="/leaderboard">
@@ -80,7 +80,7 @@ export default function RootLayout({ notification, type, user, setNotification, 
                                     My Profile
                                 </NavLink>
                             )}
-                            <NavLink className="text-cyan-400 bg-gray-800 rounded-md px-4 py-1 whitespace-nowrap" to="/posts">
+                            <NavLink className="text-cyan-400 bg-gray-800 rounded-md px-4 py-1 whitespace-nowrap" to="/">
                                 Newsfeed
                             </NavLink>
                             {/* <NavLink className="text-cyan-400 bg-gray-800 rounded-md px-4 py-1 whitespace-nowrap" to={`/profile/${user.id}`}>
@@ -89,7 +89,7 @@ export default function RootLayout({ notification, type, user, setNotification, 
                             <NavLink className="text-cyan-400 bg-gray-800 rounded-md px-4 py-1 whitespace-nowrap" to="/update-profile">
                                 Manage Account
                             </NavLink>
-                            <NavLink className="text-cyan-400 bg-gray-800 rounded-md px-4 py-1" to="/">
+                            <NavLink className="text-cyan-400 bg-gray-800 rounded-md px-4 py-1" to="/play">
                                 Play
                             </NavLink>
                             <NavLink className="text-cyan-400 bg-gray-800 rounded-md px-4 py-1 whitespace-nowrap" to="/leaderboard">

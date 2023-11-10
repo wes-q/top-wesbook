@@ -18,6 +18,7 @@ import loginService from "./services/login";
 import PlayPage from "./pages/PlayPage";
 import GetJwt from "./pages/GetJwt";
 import ProfilePage from "./pages/ProfilePage";
+import Newsfeed from "./pages/Newsfeed";
 
 function App() {
     const [notification, setNotification] = useState(null);
@@ -118,10 +119,10 @@ function App() {
             <>
                 <Route path="/" element={<RootLayout notification={notification} setNotification={setNotification} user={user} showFooter={showFooter} showStartTimer={showStartTimer} setSeconds={setSeconds} seconds={seconds} />}>
                     <Route element={<PrivateRoutes />}>
-                        <Route index element={<PlayPage setGame={setGame} />} />
-                        <Route element={<LeaderboardPage />} path="leaderboard" />
+                        <Route index element={<Newsfeed />} />
+                        <Route path="play" element={<PlayPage setGame={setGame} />} />
+                        <Route path="leaderboard" element={<LeaderboardPage />} />
                         <Route path="users" element={<Users user={user} />} />
-                        <Route path="posts" element={<Posts currentUser={user} />} />
                         <Route path="game" element={<Game game={game} setShowFooter={setShowFooter} setShowStartTimer={setShowStartTimer} seconds={seconds} setSeconds={setSeconds} />} />
                         <Route path="about" element={<About />} />
                         <Route path="verification-successful" element={<VerificationSuccessful />} />

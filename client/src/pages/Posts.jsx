@@ -4,10 +4,12 @@ import ModalNewPost from "./ModalNewPost";
 import sortByDate from "../helpers/helper";
 import axios from "axios";
 import Post from "./Post";
+import { useParams } from "react-router-dom";
 
-const Posts = ({ currentUser }) => {
+const Posts = ({ currentUser, postsOf }) => {
     const [showNewPost, setShowNewPost] = useState(false);
     const [posts, setPosts] = useState([]);
+    const { id } = useParams();
 
     useEffect(() => {
         getAllPosts();
@@ -23,7 +25,13 @@ const Posts = ({ currentUser }) => {
             };
         }
 
-        const url = "/api/posts-of-friends";
+        let url;
+        if (postsOf === "friends") {
+            url = "/api/posts-of-friends";
+        } else if (postsOf === "user") {
+            url = `/api/posts/${id}`;
+        }
+
         try {
             // const data = await postsService.getAll({ headers }); // Get all posts
 
