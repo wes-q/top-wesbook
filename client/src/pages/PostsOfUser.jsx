@@ -18,6 +18,7 @@ const PostsOfUser = ({ currentUser }) => {
     const { id } = useParams();
     const [showNewPost, setShowNewPost] = useState(false);
     const [posts, setPosts] = useState([]);
+    const [isCommentClicked, setIsCommentClicked] = useState(false);
 
     useEffect(() => {
         getAllPosts();
@@ -174,7 +175,7 @@ const PostsOfUser = ({ currentUser }) => {
                             {/* <div className="outline-none bg-slate-300 rounded-2xl pl-4 pr-3 py-1"> */}
                             {/* </div> */}
                             <Comments post={post}></Comments>
-                            <UserCommentBox currentUser={currentUser} getAllPosts={getAllPosts} postId={post.id} />
+                            <UserCommentBox currentUser={currentUser} getAllPosts={getAllPosts} postId={post.id} isCommentClicked={isCommentClicked} setIsCommentClicked={setIsCommentClicked} />
                         </div>
                     );
                 })}

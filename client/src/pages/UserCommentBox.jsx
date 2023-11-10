@@ -5,8 +5,7 @@ import Emoji from "../icons/emoji.svg?react";
 import noProfilePhoto from "../icons/noprofile.jpg";
 import axios from "axios";
 
-const UserCommentBox = ({ currentUser, getAllPosts, postId }) => {
-    const [isCommentClicked, setIsCommentClicked] = useState(false);
+const UserCommentBox = ({ currentUser, getAllPosts, postId, isCommentClicked, setIsCommentClicked }) => {
     const [commentText, setCommentText] = useState("");
     const [postIconStyle, setPostIconStyle] = useState("");
     const contentEditableRef = useRef(null);
