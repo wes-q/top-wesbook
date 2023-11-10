@@ -3,7 +3,7 @@ import X from "../icons/x.svg?react";
 import PhotoIcon from "../icons/add-photo.svg?react";
 import postsService from "../services/posts";
 
-const ModalNewPost = ({ setShowNewPost, user, getAllPosts }) => {
+const ModalNewPost = ({ setShowNewPost, currentUser, getAllPosts }) => {
     const [postText, setPostText] = useState(""); // State to track the text in the textarea
     const [postBackgroundColor, setPostBackgroundColor] = useState("bg-gray-500 text-white hover:cursor-not-allowed"); // State to manage the background color
 
@@ -58,10 +58,12 @@ const ModalNewPost = ({ setShowNewPost, user, getAllPosts }) => {
 
                     <hr className="w-full border-t border-gray-300 mb-4" />
 
-                    <div className="flex items-center mb-4">
-                        <img className="rounded-full h-10 w-10 mr-2 object-cover border border-white" src={user.profilePhoto || noProfilePhoto} alt="profile photo" referrerPolicy="no-referrer" />
-                        <span className="font-bold">{user.firstName || user.displayName}</span>
-                    </div>
+                    {currentUser && (
+                        <div className="flex items-center mb-4">
+                            <img className="rounded-full h-10 w-10 mr-2 object-cover border border-white" src={currentUser.profilePhoto || noProfilePhoto} alt="profile photo" referrerPolicy="no-referrer" />
+                            <span className="font-bold">{currentUser.firstName || currentUser.displayName}</span>
+                        </div>
+                    )}
 
                     <textarea className="w-full bg-slate-200 outline-none resize-none mb-4" id="" cols="30" rows="3" placeholder="What's on your mind?" spellCheck="false" onChange={handleTextChange}></textarea>
                     <hr className="w-full border-t border-gray-300 mb-4" />

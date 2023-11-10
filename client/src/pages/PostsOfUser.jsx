@@ -6,21 +6,22 @@ import DotDotDot from "../icons/dotdotdot.svg?react";
 import Like from "../icons/like.svg?react";
 import Comment from "../icons/comment.svg?react";
 import LikeCount from "../icons/like-count.svg?react";
-import postsService from "../services/posts";
 import sortByDate from "../helpers/helper";
 import { format, parseISO } from "date-fns";
 import UserCommentBox from "./UserCommentBox";
 import Comments from "./Comments";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 
-const Posts = ({ user }) => {
+const PostsOfUser = ({ currentUser }) => {
+    const { id } = useParams();
     const [showNewPost, setShowNewPost] = useState(false);
     const [posts, setPosts] = useState([]);
 
     useEffect(() => {
         getAllPosts();
-    }, []);
+    }, [id]);
 
     const getAllPosts = async () => {
         const loggedUserToken = window.localStorage.getItem("loggedUserToken");
@@ -32,11 +33,9 @@ const Posts = ({ user }) => {
             };
         }
 
-        const url = "/api/posts-of-friends";
+        const url = `/api/posts/${id}`;
         try {
-            // const data = await postsService.getAll({ headers }); // Get all posts
-
-            const { data } = await axios.get(url, { headers }); // Get all posts of friends
+            const { data } = await axios.get(url, { headers });
             console.log(sortByDate(data));
             setPosts(data);
         } catch (error) {
@@ -75,16 +74,22 @@ const Posts = ({ user }) => {
 
     return (
         <>
-            {showNewPost && <ModalNewPost setShowNewPost={setShowNewPost} currentUser={user} getAllPosts={getAllPosts} />}
+            {showNewPost && <ModalNewPost setShowNewPost={setShowNewPost} currentUser={currentUser} getAllPosts={getAllPosts} />}
 
             <div className="flex flex-col p-6 text-black text-sm">
-                <div className="flex items-center mx-auto w-80 h-16 border ring-1 mb-4 rounded-md bg-slate-200 p-2 hover:cursor-pointer hover:bg-cyan-400 transition-colors" onClick={handleNewPost}>
-                    <PlusCircle className="h-10 w-10 mr-2" />
-                    <div className="flex flex-col">
-                        <span className="font-bold">Create new post</span>
-                        <span>Share a photo or write something.</span>
-                    </div>
-                </div>
+                {currentUser && (
+                    <>
+                        {currentUser.id === id && (
+                            <div className="flex items-center mx-auto w-80 h-16 border ring-1 mb-4 rounded-md bg-slate-200 p-2 hover:cursor-pointer hover:bg-cyan-400 transition-colors" onClick={handleNewPost}>
+                                <PlusCircle className="h-10 w-10 mr-2" />
+                                <div className="flex flex-col">
+                                    <span className="font-bold">Create new post</span>
+                                    <span>Share a photo or write something.</span>
+                                </div>
+                            </div>
+                        )}
+                    </>
+                )}
 
                 {posts.map((post, index) => {
                     const jsDate = parseISO(post.createdAt);
@@ -101,7 +106,7 @@ const Posts = ({ user }) => {
                             <div className="flex items-center justify-between mb-2">
                                 <div className="flex">
                                     <Link to={`/profile/${post.author.id}`}>
-                                        <img className="rounded-full h-10 w-10 mr-2 object-cover border border-white ring-1 cursor-pointer" src={post.author.profilePhoto || noProfilePhoto} alt="profile photo" referrerPolicy="no-referrer" />
+                                        <img className="rounded-full h-10 w-10 mr-2 object-cover border border-white ring-1" src={post.author.profilePhoto || noProfilePhoto} alt="profile photo" referrerPolicy="no-referrer" />
                                     </Link>
                                     <div className="flex flex-col justify-center">
                                         <Link to={`/profile/${post.author.id}`}>
@@ -169,7 +174,7 @@ const Posts = ({ user }) => {
                             {/* <div className="outline-none bg-slate-300 rounded-2xl pl-4 pr-3 py-1"> */}
                             {/* </div> */}
                             <Comments post={post}></Comments>
-                            <UserCommentBox currentUser={user} getAllPosts={getAllPosts} postId={post.id} />
+                            <UserCommentBox currentUser={currentUser} getAllPosts={getAllPosts} postId={post.id} />
                         </div>
                     );
                 })}
@@ -178,4 +183,4 @@ const Posts = ({ user }) => {
     );
 };
 
-export default Posts;
+export default PostsOfUser;

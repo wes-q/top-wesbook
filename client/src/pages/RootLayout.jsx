@@ -29,11 +29,13 @@ export default function RootLayout({ notification, type, user, setNotification, 
                         </a>
                         {showStartTimer && <Timer className="h-auto max-h-10" setSeconds={setSeconds} seconds={seconds}></Timer>}
                         <div className="hidden sm:block">
+                            {isUserLoaded && (
+                                <NavLink className="text-cyan-400 bg-gray-800 rounded-md px-4 py-1 whitespace-nowrap" to={`/profile/${user.id}`}>
+                                    My Profile
+                                </NavLink>
+                            )}
                             <NavLink className="text-cyan-400 bg-gray-800 rounded-md px-4 py-1 whitespace-nowrap" to="/posts">
-                                Posts
-                            </NavLink>
-                            <NavLink className="text-cyan-400 bg-gray-800 rounded-md px-4 py-1 whitespace-nowrap" to="/users">
-                                Users
+                                Newsfeed
                             </NavLink>
                             {/* <NavLink className="text-cyan-400 bg-gray-800 rounded-md px-4 py-1 whitespace-nowrap" to={`/profile/${user.id}`}>
                                 Profile Page
@@ -73,10 +75,24 @@ export default function RootLayout({ notification, type, user, setNotification, 
                             exit={{ opacity: 0 }} // Define the exit animation
                             transition={{ duration: 0.5, ease: "easeIn" }}
                         >
-                            <NavLink className="text-cyan-400 bg-gray-800 rounded-md px-4 py-1 font-nunito" to="/">
+                            {isUserLoaded && (
+                                <NavLink className="text-cyan-400 bg-gray-800 rounded-md px-4 py-1 whitespace-nowrap" to={`/profile/${user.id}`}>
+                                    My Profile
+                                </NavLink>
+                            )}
+                            <NavLink className="text-cyan-400 bg-gray-800 rounded-md px-4 py-1 whitespace-nowrap" to="/posts">
+                                Newsfeed
+                            </NavLink>
+                            {/* <NavLink className="text-cyan-400 bg-gray-800 rounded-md px-4 py-1 whitespace-nowrap" to={`/profile/${user.id}`}>
+                                Profile Page
+                            </NavLink> */}
+                            <NavLink className="text-cyan-400 bg-gray-800 rounded-md px-4 py-1 whitespace-nowrap" to="/update-profile">
+                                Manage Account
+                            </NavLink>
+                            <NavLink className="text-cyan-400 bg-gray-800 rounded-md px-4 py-1" to="/">
                                 Play
                             </NavLink>
-                            <NavLink className="text-cyan-400 bg-gray-800 rounded-md px-4 py-1 whitespace-nowrap font-nunito" to="/leaderboard">
+                            <NavLink className="text-cyan-400 bg-gray-800 rounded-md px-4 py-1 whitespace-nowrap" to="/leaderboard">
                                 Leaderboard
                             </NavLink>
                         </motion.div>

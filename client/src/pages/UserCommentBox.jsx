@@ -5,7 +5,7 @@ import Emoji from "../icons/emoji.svg?react";
 import noProfilePhoto from "../icons/noprofile.jpg";
 import axios from "axios";
 
-const UserCommentBox = ({ user, getAllPosts, postId }) => {
+const UserCommentBox = ({ currentUser, getAllPosts, postId }) => {
     const [isCommentClicked, setIsCommentClicked] = useState(false);
     const [commentText, setCommentText] = useState("");
     const [postIconStyle, setPostIconStyle] = useState("");
@@ -65,7 +65,7 @@ const UserCommentBox = ({ user, getAllPosts, postId }) => {
     };
     return (
         <div className="flex text-xs">
-            <img className="rounded-full w-8 h-8 mr-2 object-cover border border-white ring-1" src={user.profilePhoto || noProfilePhoto} alt="profile photo" referrerPolicy="no-referrer" />
+            {currentUser && <img className="rounded-full w-8 h-8 mr-2 object-cover border border-white ring-1" src={currentUser.profilePhoto || noProfilePhoto} alt="profile photo" referrerPolicy="no-referrer" />}
             {isCommentClicked ? (
                 <div className="flex flex-col grow max-w-[260px] outline-none bg-slate-300 rounded-2xl pl-4 pr-3 py-1" spellCheck="false">
                     <div ref={contentEditableRef} className="outline-none w-full max-w-full" contentEditable="true" onInput={handleTextChange} onKeyDown={handleKeyPress}></div>

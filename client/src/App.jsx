@@ -127,7 +127,7 @@ function App() {
                         <Route path="verification-successful" element={<VerificationSuccessful />} />
                         <Route path="verification-nothing" element={<VerificationNothing />} />
                         <Route path="update-profile" element={<UpdateProfile user={user} setUser={setUser} setNotification={setNotification} />} />
-                        <Route path="profile/:id" element={<ProfilePage user={user} />} />
+                        <Route path="profile/:id" element={<ProfilePage currentUser={user} />} />
                     </Route>
 
                     <Route path="login" element={<Login setNotification={setNotification} setUserToken={setUserToken} />} />

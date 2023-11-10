@@ -119,6 +119,20 @@ usersRouter.get("/api/users", async (request, response, next) => {
     }
 });
 
+usersRouter.get("/api/users/:id", async (request, response, next) => {
+    try {
+        const users = await User.findById(request.params.id);
+        // const users = await User.find({}).select("email").populate({
+        //     path: "friends.friendId",
+        //     // select: "friends.status",
+        // });
+
+        response.json(users);
+    } catch (error) {
+        next(error);
+    }
+});
+
 usersRouter.get("/api/verify-email", async (req, res) => {
     const token = req.query.token;
 
