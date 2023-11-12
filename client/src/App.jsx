@@ -24,6 +24,7 @@ function App() {
     const [notification, setNotification] = useState(null);
     const [user, setUser] = useState(null);
     const [userToken, setUserToken] = useState("");
+    const [isLoadingUser, setIsLoadingUser] = useState(true);
     const [showFooter, setShowFooter] = useState(true);
     const [showStartTimer, setShowStartTimer] = useState(false);
     const [seconds, setSeconds] = useState(0);
@@ -95,31 +96,34 @@ function App() {
                         setNotification(null);
                     }, 10000);
                 }
-                // next(error);
+            } finally {
+                setIsLoadingUser(false);
             }
+        } else {
+            setIsLoadingUser(false); // Set loading to finished if there is no logged user session
         }
     };
 
-    // Create a higher-order component (HOC) for protecting routes
-    function ProtectedRoute({ element, ...rest }) {
-        // Replace this with your actual authentication check
-        const isAuthenticated = /* Your authentication check logic */ false;
+    // // Create a higher-order component (HOC) for protecting routes
+    // function ProtectedRoute({ element, ...rest }) {
+    //     // Replace this with your actual authentication check
+    //     const isAuthenticated = /* Your authentication check logic */ false;
 
-        if (!isAuthenticated) {
-            // Redirect unauthenticated users to the login page
-            return <Navigate to="/login" />;
-        }
+    //     if (!isAuthenticated) {
+    //         // Redirect unauthenticated users to the login page
+    //         return <Navigate to="/login" />;
+    //     }
 
-        // Render the protected route if the user is authenticated
-        return <Route {...rest} element={element} />;
-    }
+    //     // Render the protected route if the user is authenticated
+    //     return <Route {...rest} element={element} />;
+    // }
 
     const router = createBrowserRouter(
         createRoutesFromElements(
             <>
                 <Route path="/" element={<RootLayout notification={notification} setNotification={setNotification} user={user} showFooter={showFooter} showStartTimer={showStartTimer} setSeconds={setSeconds} seconds={seconds} />}>
-                    <Route element={<PrivateRoutes />}>
-                        <Route index element={<Newsfeed />} />
+                    <Route element={<PrivateRoutes user={user} isLoadingUser={isLoadingUser} />}>
+                        <Route index element={<Newsfeed user={user} />} />
                         <Route path="play" element={<PlayPage setGame={setGame} />} />
                         <Route path="leaderboard" element={<LeaderboardPage />} />
                         <Route path="users" element={<Users user={user} />} />
@@ -131,11 +135,11 @@ function App() {
                         <Route path="profile/:id" element={<ProfilePage currentUser={user} />} />
                     </Route>
 
-                    <Route path="login" element={<Login setNotification={setNotification} setUserToken={setUserToken} />} />
                     <Route path="signup" element={<SignupForm setNotification={setNotification} />} />
                     <Route path="getjwt" element={<GetJwt />} />
                     <Route path="*" element={<NotFound />} />
                 </Route>
+                <Route path="login" element={<Login setNotification={setNotification} setUserToken={setUserToken} />} />
             </>
         )
     );

@@ -101,28 +101,6 @@ GET http://localhost:3001/hello?person=%3Cb%3EJohn%3C/b%3E
 GET http://localhost:3001/hello?person=<b>john</b>
 
 ###
-POST http://localhost:3001/api/anecdotes/
-content-type: application/json
-
-{
-    "content": "Pr",
-    "author": "Donald Knuth",
-    "info": "http://wiki.c2.com/?PrematureOptimization",
-    "votes": 1
-}
-
-###
-POST http://localhost:3001/api/anecdotes/
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MWQ0Y2ViZjNhZDU0MTMwYTE1MzU4YiIsImlhdCI6MTY5NjQ3OTI0OCwiZXhwIjoxNjk2NDgyODQ4fQ.7r50zQFjpBv1kkvLNE3iMToKrrJoSsohSLTmmSoQ5Hc
-
-{
-    "content": "Premature optimization is the root of all evil",
-    "author": "Donald Knuth",
-    "info": "http://wiki.c2.com/?PrematureOptimization",
-    "votes": 1
-}
-###
 GET http://localhost:3001/api/login-local/success
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MzBlZDhiODg2ZDMzMzI0NjcyN2QwZCIsImlhdCI6MTY5NzcwNTQxMCwiZXhwIjoxNjk3NzA5MDEwfQ.SvSQGgRbC9WStVDFFv_PBIP9GM9ONhAsL3jRKHvFEYE
 
@@ -250,24 +228,12 @@ content-type: application/json
 
 ### 
 POST http://localhost:3001/api/friend-requests
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1M2E0YWZkODVhZjFhYmE2ODY1YjY0YSIsImlhdCI6MTY5ODQxMDE5NSwiZXhwIjoxNjk4NDk2NTk1fQ.6H3nmepbAIggqVKojzfFqZ2nJqUR6FLJK0Aqwz9jwX8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1M2E0YjIzODVhZjFhYmE2ODY1YjY1MyIsImlhdCI6MTY5OTYyMjY5OSwiZXhwIjoxNjk5Nzk1NDk5fQ.MJZDGha9paCbRTtah8b5sjC0Y6Xc2DwC9tJy8CQIQNc
 content-type: application/json
 
 {
-    "fromUserId": "653a4afd85af1aba6865b64a",
     "toUserId": "653b8caaac0a2c39713d78ad"
 }
-
-
-###
-POST http://localhost:3001/api/friend-requests
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1M2I4Y2FhYWMwYTJjMzk3MTNkNzhhZCIsImlhdCI6MTY5ODQxODMwMCwiZXhwIjoxNjk4NTA0NzAwfQ.CwErYQ2zXIaT1B50Zcuu1e3aFSyVaMBIrQBjmYcR_L0
-content-type: application/json
-
-{
-    "toUserId": "653b8d0eac0a2c39713d78af"
-}
-
 
 # ###
 # 653a4afd85af1aba6865b64a pius
@@ -293,7 +259,7 @@ PUT http://localhost:3001/api/friend-requests/653b8caaac0a2c39713d78ad/accept
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1M2E0YjBhODVhZjFhYmE2ODY1YjY0ZiIsImlhdCI6MTY5ODQ4MTA2NiwiZXhwIjoxNjk4NTY3NDY2fQ.5BwSiPGqVHplxsF_yWMEiN3L4bmF53y0GpTlszGry2Y
 
 ###
-GET http://localhost:3001/api/users/eligible-friends
+GET http://localhost:3001/api/users/eligible-frien
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1M2I4ZDBlYWMwYTJjMzk3MTNkNzhhZiIsImlhdCI6MTY5ODUwMDQ2NiwiZXhwIjoxNjk4NTg2ODY2fQ.n5GZV_-wXaZAtHiWOTyrJGytD5UWy5MK2Udw6fkpU8A
 
 ###
@@ -306,17 +272,21 @@ eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1M2E0YjIzODVhZjFhYmE2ODY1YjY1MyI
 Jace
 eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1M2I4Y2FhYWMwYTJjMzk3MTNkNzhhZCIsImlhdCI6MTY5ODQxODMwMCwiZXhwIjoxNjk4NTA0NzAwfQ.CwErYQ2zXIaT1B50Zcuu1e3aFSyVaMBIrQBjmYcR_L0
 
-####
-GET http://localhost:3001/api/users/friends
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1M2E0YWZkODVhZjFhYmE2ODY1YjY0YSIsImlhdCI6MTY5OTIyNDc0NiwiZXhwIjoxNjk5NDgzOTQ2fQ.EOyux8qRDvxHyrnZEL45sY-HrqsRcGmRSxCSQar5yMs
+###
+GET http://localhost:3001/api/users/eligible-friends
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1M2E0YjIzODVhZjFhYmE2ODY1YjY1MyIsImlhdCI6MTY5OTYxNjE5NSwiZXhwIjoxNjk5Nzg4OTk1fQ.Dr7b7uBCSOLC8udZk7dIZEOl_mhROFv8blhO2HK2jN0
 
 ###
 GET http://localhost:3001/api/users/pending-friends
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1M2E0YWZkODVhZjFhYmE2ODY1YjY0YSIsImlhdCI6MTY5ODQxMDE5NSwiZXhwIjoxNjk4NDk2NTk1fQ.6H3nmepbAIggqVKojzfFqZ2nJqUR6FLJK0Aqwz9jwX8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1M2E0YjIzODVhZjFhYmE2ODY1YjY1MyIsImlhdCI6MTY5OTYyMjY5OSwiZXhwIjoxNjk5Nzk1NDk5fQ.MJZDGha9paCbRTtah8b5sjC0Y6Xc2DwC9tJy8CQIQNc
 
 ###
 GET http://localhost:3001/api/users/incoming-friends
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1M2E0YjBhODVhZjFhYmE2ODY1YjY0ZiIsImlhdCI6MTY5ODQxMTk3MywiZXhwIjoxNjk4NDk4MzczfQ.8qTgd83AK-R00IwXEzaooQLbkc930CqYAXyai-FTWk8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1M2E0YjIzODVhZjFhYmE2ODY1YjY1MyIsImlhdCI6MTY5OTYyMjY5OSwiZXhwIjoxNjk5Nzk1NDk5fQ.MJZDGha9paCbRTtah8b5sjC0Y6Xc2DwC9tJy8CQIQNc
+
+####
+GET http://localhost:3001/api/users/friends
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1M2E0YjIzODVhZjFhYmE2ODY1YjY1MyIsImlhdCI6MTY5OTYyMjY5OSwiZXhwIjoxNjk5Nzk1NDk5fQ.MJZDGha9paCbRTtah8b5sjC0Y6Xc2DwC9tJy8CQIQNc
 
 ###
 GET http://localhost:3001/api/posts
@@ -332,7 +302,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1M2E0YWZkO
 
 ###
 GET http://localhost:3001/api/posts-of-self
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1M2I4Y2FhYWMwYTJjMzk3MTNkNzhhZCIsImlhdCI6MTY5OTM1NzE5OCwiZXhwIjoxNjk5NjE2Mzk4fQ.1IEZYdlgEXOG0KEOSaRox9wXYL3RZ0UQNSEpGH-oNwU
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1M2E0YjIzODVhZjFhYmE2ODY1YjY1MyIsImlhdCI6MTY5OTYxNjE5NSwiZXhwIjoxNjk5Nzg4OTk1fQ.Dr7b7uBCSOLC8udZk7dIZEOl_mhROFv8blhO2HK2jN0
 
 ###
 GET http://localhost:3001/api/posts/653a4b0a85af1aba6865b64f

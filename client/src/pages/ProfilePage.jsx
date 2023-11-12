@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import noProfilePhoto from "../icons/noprofile.jpg";
 import axios from "axios";
+import Users from "./Users";
 
 const ProfilePage = ({ currentUser }) => {
     const [userToDisplay, setUserToDisplay] = useState([]);
@@ -39,7 +40,7 @@ const ProfilePage = ({ currentUser }) => {
                         <span className="text-xs">{userToDisplay.email}</span>
                     </div>
                     <div className="flex flex-col items-center">
-                        {/* <Users /> */}
+                        {/* <Users user={currentUser} /> */}
                         {/* <PostsOfUser currentUser={currentUser} /> */}
                         <Posts currentUser={currentUser} postsOf="user" />
                         {/* <span>{currentUser.id}</span> */}

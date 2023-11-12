@@ -42,20 +42,6 @@ const upload = multer({ storage: storage });
 //     res.status(200).json({ message: "Image uploaded to Cloudinary!", public_id: req.file.public_id });
 // });
 
-usersRouter.post("/api/profile", upload.single("image"), async (req, res) => {
-    try {
-        const b64 = Buffer.from(req.file.buffer).toString("base64");
-        let dataURI = "data:" + req.file.mimetype + ";base64," + b64;
-        const cldRes = await handleUpload(dataURI);
-        res.status(200).json(cldRes.secure_url);
-    } catch (error) {
-        console.log(error);
-        res.send({
-            message: error.message,
-        });
-    }
-});
-
 // Delete file from server's file storage.  Removed because app is now using Cloudinary to store
 // usersRouter.post("/api/profile-delete", function (req, res, next) {
 //     const filePath = req.body.filePath;
@@ -69,6 +55,20 @@ usersRouter.post("/api/profile", upload.single("image"), async (req, res) => {
 //         res.status(200).send(`File ${filePath} does not exist.`);
 //     }
 // });
+
+usersRouter.get("/api/users", async (request, response, next) => {
+    try {
+        const users = await User.find({});
+        // const users = await User.find({}).select("email").populate({
+        //     path: "friends.friendId",
+        //     // select: "friends.status",
+        // });
+
+        response.json(users);
+    } catch (error) {
+        next(error);
+    }
+});
 
 usersRouter.post(
     "/api/users",
@@ -105,47 +105,15 @@ usersRouter.post(
     }
 );
 
-usersRouter.get("/api/users", async (request, response, next) => {
+// Exclude self, friends, users with pending requests
+usersRouter.get("/api/users/eligible-friends", userExtractor, async (req, res, next) => {
     try {
-        const users = await User.find({});
-        // const users = await User.find({}).select("email").populate({
-        //     path: "friends.friendId",
-        //     // select: "friends.status",
-        // });
-
-        response.json(users);
+        const eligibleUsers = await User.find().where("_id").ne(req.user.id).where("friendRequests.friendId").ne(req.user.id).where("friendRejects.friendId").ne(req.user.id).where("friends.friendId").ne(req.user.id);
+        console.log(eligibleUsers);
+        res.status(200).json(eligibleUsers);
     } catch (error) {
         next(error);
     }
-});
-
-usersRouter.get("/api/users/:id", async (request, response, next) => {
-    try {
-        const users = await User.findById(request.params.id);
-        // const users = await User.find({}).select("email").populate({
-        //     path: "friends.friendId",
-        //     // select: "friends.status",
-        // });
-
-        response.json(users);
-    } catch (error) {
-        next(error);
-    }
-});
-
-usersRouter.get("/api/verify-email", async (req, res) => {
-    const token = req.query.token;
-
-    // if the user is already verified, then show a different page
-    const user = await User.findOne({ verificationToken: token });
-    if (user.isVerified) {
-        res.redirect(`${config.FRONTEND_URL}/verification-nothing`);
-    } else {
-        user.isVerified = true;
-        await user.save();
-        res.redirect(`${config.FRONTEND_URL}/verification-successful`);
-    }
-    // res.status(200).json(`${user.email} is now verified`);
 });
 
 usersRouter.put("/api/users/:id", (request, response, next) => {
@@ -165,13 +133,98 @@ usersRouter.put("/api/users/:id", (request, response, next) => {
         .catch((error) => next(error));
 });
 
+// usersRouter.get("/api/users/friends", userExtractor, async (req, res, next) => {
+//     const friendIds = req.user.friends.map((friend) => {
+//         return {
+//             friendId: friend.friendId,
+//         };
+//     });
+//     res.status(200).json(friendIds);
+// });
+
+// Get all of the users' confirmed friends
+usersRouter.get("/api/users/friends", userExtractor, async (req, res, next) => {
+    try {
+        // Use the User model to create a Mongoose query for populating the 'friends' field
+        const userWithPopulatedFriends = await User.findById(req.user.id).populate("friends.friendId").exec();
+        // res.json(userWithPopulatedFriends);
+
+        // Extract the populated friend data
+        const populatedFriends = userWithPopulatedFriends.friends.map((friend) => {
+            const { friendId } = friend;
+            // Add any other fields you want to extract from the populated friend object
+            const { id, displayName, firstName, profilePhoto, email } = friendId;
+            // return { friendId, displayName, firstName, profilePhoto, email };
+            return { id, displayName, firstName, profilePhoto, email };
+        });
+
+        res.status(200).json(populatedFriends);
+    } catch (error) {
+        next(error);
+    }
+});
+
+// Get all of the users' incoming friend requests
+usersRouter.get("/api/users/incoming-friends", userExtractor, async (req, res, next) => {
+    try {
+        // Use the User model to create a Mongoose query for populating the 'friends' field
+        const userWithPopulatedFriends = await User.findById(req.user.id).populate("friendRequests.friendId").exec();
+        // res.json(userWithPopulatedFriends);
+
+        // Extract the populated friend data
+        const populatedFriends = userWithPopulatedFriends.friendRequests.map((friend) => {
+            const { friendId } = friend;
+            // Add any other fields you want to extract from the populated friend object
+            const { id, displayName, firstName, profilePhoto, email } = friendId;
+            // return { friendId, displayName, firstName, profilePhoto, email };
+            return { id, displayName, firstName, profilePhoto, email };
+        });
+
+        res.status(200).json(populatedFriends);
+    } catch (error) {
+        next(error);
+    }
+});
+
+usersRouter.get("/api/users/pending-friends", userExtractor, async (req, res, next) => {
+    try {
+        const pendingFriends = await User.find({
+            "friendRequests.friendId": req.user.id,
+            "friends.friendId": { $ne: req.user.id }, // exclude if already friend
+        }).exec();
+
+        res.status(200).json(pendingFriends);
+    } catch (error) {
+        next(error);
+    }
+});
+
+usersRouter.get("/api/users/:id", async (request, response, next) => {
+    try {
+        const users = await User.findById(request.params.id);
+        // const users = await User.find({}).select("email").populate({
+        //     path: "friends.friendId",
+        //     // select: "friends.status",
+        // });
+
+        response.json(users);
+    } catch (error) {
+        next(error);
+    }
+});
+
 // Create a friend request
 usersRouter.post("/api/friend-requests", userExtractor, async (req, res, next) => {
     try {
         const { toUserId } = req.body;
         const fromUserId = req.user.id;
+        console.log("SJJDSJDKLSAJDLKJSLADJLSKJDLJS");
+        console.log(toUserId);
+        console.log(fromUserId);
         const fromUser = await User.findById(fromUserId);
         const toUser = await User.findById(toUserId);
+        console.log(fromUser.id);
+        console.log(toUser.id);
 
         // Check if the users exist
         if (!fromUser || !toUser) {
@@ -197,7 +250,7 @@ usersRouter.put("/api/friend-requests/:id/accept", userExtractor, async (req, re
     console.log("API ACCEPT");
     const friendRequestSenderId = req.params.id;
     const friendRequestRecipient = req.user;
-    const friendRequestRecipientId = req.user._id;
+    const friendRequestRecipientId = req.user.id;
 
     try {
         console.log(`friendRequestSenderId: ${friendRequestSenderId}`);
@@ -232,7 +285,7 @@ usersRouter.put("/api/friend-requests/:id/accept", userExtractor, async (req, re
 usersRouter.put("/api/friend-requests/:id/reject", userExtractor, async (req, res, next) => {
     const friendRequestSenderId = req.params.id;
     const friendRequestRecipient = req.user;
-    const friendRequestRecipientId = req.user._id;
+    const friendRequestRecipientId = req.user.id;
 
     try {
         // console.log(`friendRequestSenderId: ${friendRequestSenderId}`);
@@ -261,88 +314,32 @@ usersRouter.put("/api/friend-requests/:id/reject", userExtractor, async (req, re
     }
 });
 
-usersRouter.get("/api/users/eligible-friends", userExtractor, async (req, res, next) => {
-    try {
-        const eligibleUsers = await User.find({
-            _id: { $ne: req.user._id }, // Exclude the current user
-            "friendRequests.friendId": { $ne: req.user._id }, // Exclude users with a pending friend request from the current user
-            "friendRejects.friendId": { $ne: req.user._id }, // Exclude users who rejected a friend request from the current user
-            "friends.friendId": { $ne: req.user._id }, // Exclude users who are already friends with the current user
-        });
+usersRouter.get("/api/verify-email", async (req, res) => {
+    const token = req.query.token;
 
-        // eligibleUsers will contain an array of users who meet the criteria
-        console.log("eligibleUsers");
-        console.log(eligibleUsers);
-        res.status(200).json(eligibleUsers);
-    } catch (error) {
-        next(error);
-        // Handle the error here
+    // if the user is already verified, then show a different page
+    const user = await User.findOne({ verificationToken: token });
+    if (user.isVerified) {
+        res.redirect(`${config.FRONTEND_URL}/verification-nothing`);
+    } else {
+        user.isVerified = true;
+        await user.save();
+        res.redirect(`${config.FRONTEND_URL}/verification-successful`);
     }
+    // res.status(200).json(`${user.email} is now verified`);
 });
 
-// usersRouter.get("/api/users/friends", userExtractor, async (req, res, next) => {
-//     const friendIds = req.user.friends.map((friend) => {
-//         return {
-//             friendId: friend.friendId,
-//         };
-//     });
-//     res.status(200).json(friendIds);
-// });
-
-// Get all of the users' confirmed friends
-usersRouter.get("/api/users/friends", userExtractor, async (req, res, next) => {
+usersRouter.post("/api/profile", upload.single("image"), async (req, res) => {
     try {
-        // Use the User model to create a Mongoose query for populating the 'friends' field
-        const userWithPopulatedFriends = await User.findById(req.user._id).populate("friends.friendId").exec();
-        // res.json(userWithPopulatedFriends);
-
-        // Extract the populated friend data
-        const populatedFriends = userWithPopulatedFriends.friends.map((friend) => {
-            const { friendId } = friend;
-            // Add any other fields you want to extract from the populated friend object
-            const { id, displayName, firstName, profilePhoto, email } = friendId;
-            // return { friendId, displayName, firstName, profilePhoto, email };
-            return { id, displayName, firstName, profilePhoto, email };
+        const b64 = Buffer.from(req.file.buffer).toString("base64");
+        let dataURI = "data:" + req.file.mimetype + ";base64," + b64;
+        const cldRes = await handleUpload(dataURI);
+        res.status(200).json(cldRes.secure_url);
+    } catch (error) {
+        console.log(error);
+        res.send({
+            message: error.message,
         });
-
-        res.status(200).json(populatedFriends);
-    } catch (error) {
-        next(error);
-    }
-});
-
-// Get all of the users' incoming friend requests
-usersRouter.get("/api/users/incoming-friends", userExtractor, async (req, res, next) => {
-    try {
-        // Use the User model to create a Mongoose query for populating the 'friends' field
-        const userWithPopulatedFriends = await User.findById(req.user._id).populate("friendRequests.friendId").exec();
-        // res.json(userWithPopulatedFriends);
-
-        // Extract the populated friend data
-        const populatedFriends = userWithPopulatedFriends.friendRequests.map((friend) => {
-            const { friendId } = friend;
-            // Add any other fields you want to extract from the populated friend object
-            const { id, displayName, firstName, profilePhoto, email } = friendId;
-            // return { friendId, displayName, firstName, profilePhoto, email };
-            return { id, displayName, firstName, profilePhoto, email };
-        });
-
-        res.status(200).json(populatedFriends);
-    } catch (error) {
-        next(error);
-    }
-});
-
-usersRouter.get("/api/users/pending-friends", userExtractor, async (req, res, next) => {
-    try {
-        const pendingFriends = await User.find({
-            "friendRequests.friendId": req.user.id,
-            "friends.friendId": { $ne: req.user.id }, // exclude if already friend
-        }).exec();
-
-        res.status(200).json(pendingFriends);
-    } catch (error) {
-        next(error);
     }
 });
 

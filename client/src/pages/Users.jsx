@@ -192,31 +192,6 @@ const Users = ({ user }) => {
                 </div>
             </div>
 
-            {/* <div className="bg-gray-500 border border-black p-2 rounded-md w-96 mb-6">
-                <div className="text-lg">Rejected friend requests:</div>
-                <div className="">
-                    {users.length > 0 ? (
-                        <ul className="flex flex-col w-72 text-sm">
-                            {users.map((user) => (
-                                <li key={user.id} className="flex items-center gap-4">
-                                    <div className="flex gap-2 items-center">
-                                        <img className="rounded-full w-8" src={user.profilePhoto || noProfilePhoto} alt="profile photo" referrerPolicy="no-referrer" />
-                                        <span>{user.displayName || user.firstName}</span>
-                                    </div>
-                                    <span class="relative flex h-3 w-3">
-                                        <span class="animate-ping-slow ease-out absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
-                                        <span class="relative rounded-full h-3 w-3 bg-green-500"></span>
-                                    </span>
-                                    <span className="text-red-400">Rejected</span>
-                                </li>
-                            ))}
-                        </ul>
-                    ) : (
-                        <p>No users found.</p>
-                    )}
-                </div>
-            </div> */}
-
             <div className="bg-gray-500 border border-black p-2 rounded-md w-52 mb-6">
                 <div className="text-lg">Friends:</div>
                 <div className="">
