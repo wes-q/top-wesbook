@@ -92,12 +92,17 @@ postsRouter.get("/api/posts/:userId", middleware.userExtractor, async (request, 
 postsRouter.patch("/api/posts/:postId/likes", middleware.userExtractor, async (request, response, next) => {
     try {
         const postToUpdate = await Post.findById(request.params.postId);
+        const userIdToDelete = request.user.id;
+        const likeTypeToDelete = "like";
 
-        if (postToUpdate.likes.some((post) => post.user.toString() === request.user.id)) {
-            return response.status(400).json({ message: "Post liked already" });
+        const indexToDelete = postToUpdate.likes.findIndex((like) => like.user.toString() === userIdToDelete && like.likeType === likeTypeToDelete);
+
+        if (indexToDelete !== -1) {
+            postToUpdate.likes.splice(indexToDelete, 1);
+        } else {
+            postToUpdate.likes.push({ user: request.user.id, likeType: "like" });
         }
 
-        postToUpdate.likes.push({ user: request.user.id, likeType: "like" });
         const updatedPost = await postToUpdate.save();
         response.json(updatedPost);
     } catch (error) {
