@@ -49,16 +49,18 @@ const Posts = ({ currentUser, postsOf }) => {
 
     return (
         <>
-            {showNewPost && <ModalNewPost setShowNewPost={setShowNewPost} currentUser={user} getAllPosts={getAllPosts} />}
+            {showNewPost && <ModalNewPost setShowNewPost={setShowNewPost} currentUser={currentUser} getAllPosts={getAllPosts} />}
 
             <div className="flex flex-col p-6 text-black text-sm">
-                <div className="flex items-center mx-auto w-80 h-16 border ring-1 mb-4 rounded-md bg-slate-200 p-2 hover:cursor-pointer hover:bg-cyan-400 transition-colors" onClick={handleNewPost}>
-                    <PlusCircle className="h-10 w-10 mr-2" />
-                    <div className="flex flex-col">
-                        <span className="font-bold">Create new post</span>
-                        <span>Share a photo or write something.</span>
+                {id === currentUser.id && (
+                    <div className="flex items-center mx-auto w-80 h-16 border ring-1 mb-4 rounded-md bg-slate-200 p-2 hover:cursor-pointer hover:bg-cyan-400 transition-colors" onClick={handleNewPost}>
+                        <PlusCircle className="h-10 w-10 mr-2" />
+                        <div className="flex flex-col">
+                            <span className="font-bold">Create new post</span>
+                            <span>Share a photo or write something.</span>
+                        </div>
                     </div>
-                </div>
+                )}
 
                 {posts.map((post, index) => {
                     return <Post key={index} post={post} currentUser={currentUser} getAllPosts={getAllPosts} />;

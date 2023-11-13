@@ -2,6 +2,7 @@ import { useState } from "react";
 import X from "../icons/x.svg?react";
 import PhotoIcon from "../icons/add-photo.svg?react";
 import postsService from "../services/posts";
+import noProfilePhoto from "../icons/noprofile.jpg";
 
 const ModalNewPost = ({ setShowNewPost, currentUser, getAllPosts }) => {
     const [postText, setPostText] = useState(""); // State to track the text in the textarea

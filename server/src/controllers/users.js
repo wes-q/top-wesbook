@@ -199,15 +199,33 @@ usersRouter.get("/api/users/pending-friends", userExtractor, async (req, res, ne
     }
 });
 
-usersRouter.get("/api/users/:id", async (request, response, next) => {
-    try {
-        const users = await User.findById(request.params.id);
-        // const users = await User.find({}).select("email").populate({
-        //     path: "friends.friendId",
-        //     // select: "friends.status",
-        // });
+usersRouter.get("/api/users/:id", userExtractor, async (request, response, next) => {
+    currentUserId = request.user.id;
+    let status;
 
-        response.json(users);
+    try {
+        const user = await User.findById(request.params.id);
+        const isFriends = user.friends.some((friend) => friend.friendId.toString() === currentUserId);
+        const isPending = user.friendRequests.some((friend) => friend.friendId.toString() === currentUserId);
+
+        if (user.id === currentUserId) {
+            status = "self";
+        } else if (isFriends) {
+            status = "friend";
+        } else if (isPending) {
+            status = "pending";
+        } else {
+            status = "notFriend";
+        }
+
+        const userWithStatus = [user].map((user) => {
+            return {
+                ...user.toJSON(),
+                status,
+            };
+        });
+
+        response.json(userWithStatus[0]);
     } catch (error) {
         next(error);
     }
@@ -218,13 +236,12 @@ usersRouter.post("/api/friend-requests", userExtractor, async (req, res, next) =
     try {
         const { toUserId } = req.body;
         const fromUserId = req.user.id;
-        console.log("SJJDSJDKLSAJDLKJSLADJLSKJDLJS");
-        console.log(toUserId);
-        console.log(fromUserId);
+        // console.log(toUserId);
+        // console.log(fromUserId);
         const fromUser = await User.findById(fromUserId);
         const toUser = await User.findById(toUserId);
-        console.log(fromUser.id);
-        console.log(toUser.id);
+        // console.log(fromUser.id);
+        // console.log(toUser.id);
 
         // Check if the users exist
         if (!fromUser || !toUser) {
@@ -247,19 +264,17 @@ usersRouter.post("/api/friend-requests", userExtractor, async (req, res, next) =
 
 // Accept a friend request
 usersRouter.put("/api/friend-requests/:id/accept", userExtractor, async (req, res, next) => {
-    console.log("API ACCEPT");
+    // console.log("API ACCEPT");
     const friendRequestSenderId = req.params.id;
     const friendRequestRecipient = req.user;
     const friendRequestRecipientId = req.user.id;
 
     try {
-        console.log(`friendRequestSenderId: ${friendRequestSenderId}`);
+        // console.log(`friendRequestSenderId: ${friendRequestSenderId}`);
         const friendRequestSender = await User.findById(friendRequestSenderId);
 
         // Check if the current user / recipient has a friend request with the given senders id
         if (friendRequestRecipient.friendRequests.some((friend) => friend.friendId.toString() === friendRequestSenderId)) {
-            console.log("Yes there is!");
-
             // Add the requestor's ID to the friends array of both the requestor and the requestee to signify a confirmed friend
             friendRequestSender.friends.push({ friendId: friendRequestRecipientId });
             friendRequestRecipient.friends.push({ friendId: friendRequestSenderId });
