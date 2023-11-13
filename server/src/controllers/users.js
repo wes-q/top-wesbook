@@ -262,6 +262,25 @@ usersRouter.post("/api/friend-requests", userExtractor, async (req, res, next) =
     }
 });
 
+// Cancel a friend request
+usersRouter.post("/api/friend-requests/:id/cancel", userExtractor, async (req, res, next) => {
+    const userIdToDelete = req.user.id;
+    const userToUpdate = await User.findById(req.params.id);
+
+    try {
+        const indexToDelete = userToUpdate.friendRequests.findIndex((friendReq) => friendReq.friendId.toString() === userIdToDelete);
+
+        if (indexToDelete !== -1) {
+            userToUpdate.friendRequests.splice(indexToDelete, 1);
+        }
+
+        const updatedUser = await userToUpdate.save();
+        res.status(200).json(updatedUser);
+    } catch (error) {
+        next(error);
+    }
+});
+
 // Accept a friend request
 usersRouter.put("/api/friend-requests/:id/accept", userExtractor, async (req, res, next) => {
     // console.log("API ACCEPT");
