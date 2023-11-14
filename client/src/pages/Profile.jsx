@@ -5,6 +5,7 @@ import PersonAddIcon from "../icons/person-add.svg?react";
 import PersonCheckIcon from "../icons/person-check.svg?react";
 import MessengerIcon from "../icons/messenger.svg?react";
 import PersonRemoveIcon from "../icons/person-remove.svg?react";
+import CameraIcon from "../icons/camera.svg?react";
 
 const Profile = ({ userToDisplay }) => {
     const handleAddFriend = async (toUserId) => {
@@ -53,15 +54,27 @@ const Profile = ({ userToDisplay }) => {
         }
     };
 
+    const handleUploadCoverPhoto = () => {
+        alert();
+    };
+
     if (!userToDisplay) {
         return <p>loading...</p>;
     }
 
     return (
         <>
-            <div class="flex justify-center relative mb-[80px]">
+            <div class="relative mb-[80px]">
                 <img src={defaultCoverPhoto} alt="Cover Photo" className="w-full h-36 object-cover" />
-                <img src={userToDisplay.profilePhoto || noProfilePhoto} alt="Circle Image" className="w-32 h-32 absolute top-[80px] rounded-full ring-2 ring-black" /> {/* height of box - half of circle = top margin  */}
+                <button className="absolute bottom-3 right-3 opacity-70 bg-slate-600 text-white text-xs px-2 py-1 rounded-md" onClick={handleUploadCoverPhoto}>
+                    <CameraIcon className="w-5 h-5 fill-white cursor-pointer" />
+                </button>
+                <div className="absolute w-32 h-32 left-1/2 transform -translate-x-1/2 top-[80px] ring-2 ring-black rounded-full">
+                    <img src={userToDisplay.profilePhoto || noProfilePhoto} alt="Circle Image" className="w-32 h-32 rounded-full" /> {/* height of box - half of circle = top margin */}
+                    <button className="absolute right-0 bottom-0 opacity-100 bg-slate-700 text-white text-xs px-2 py-1 rounded-md" onClick={handleUploadCoverPhoto}>
+                        <CameraIcon className="w-5 h-5 fill-white cursor-pointer" />
+                    </button>
+                </div>
             </div>
 
             <div className="flex flex-col items-center mb-4">
@@ -70,7 +83,7 @@ const Profile = ({ userToDisplay }) => {
                 <span className="text-xs mb-4">{userToDisplay.totalFriends} friends</span>
                 {userToDisplay.status === "friend" && (
                     <div className="flex">
-                        <button className="flex items-center bg-slate-400 text-white text-xs px-3 py-1 rounded-md mr-2">
+                        <button className="flex items-center bg-slate-400 text-white text-xs px-3 py-1 rounded-md mr-2 cursor-default">
                             <PersonCheckIcon className="fill-white w-5 h-5 mr-1" />
                             Friends
                         </button>
