@@ -219,9 +219,11 @@ usersRouter.get("/api/users/:id", userExtractor, async (request, response, next)
         }
 
         const userWithStatus = [user].map((user) => {
+            const totalFriends = user.totalFriends;
             return {
                 ...user.toJSON(),
                 status,
+                totalFriends,
             };
         });
 

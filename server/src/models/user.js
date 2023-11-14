@@ -94,6 +94,11 @@ const userSchema = new mongoose.Schema({
     // ],
 });
 
+// Define a virtual property to get the total number of friends
+userSchema.virtual("totalFriends").get(function () {
+    return this.friends.length;
+});
+
 userSchema.set("toJSON", {
     transform: (document, returnedObject) => {
         delete returnedObject.__v;

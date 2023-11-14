@@ -66,7 +66,8 @@ const Profile = ({ userToDisplay }) => {
 
             <div className="flex flex-col items-center mb-4">
                 {userToDisplay.displayName ? <span className="text-2xl font-bold">{userToDisplay.displayName}</span> : <span className="text-2xl font-bold">{`${userToDisplay.firstName} ${userToDisplay.lastName}`}</span>}
-                <span className="text-xs mb-4">{userToDisplay.email}</span>
+                <span className="text-xs">{userToDisplay.email}</span>
+                <span className="text-xs mb-4">{userToDisplay.totalFriends} friends</span>
                 {userToDisplay.status === "friend" && (
                     <div className="flex">
                         <button className="flex items-center bg-slate-400 text-white text-xs px-3 py-1 rounded-md mr-2">
