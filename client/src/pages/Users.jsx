@@ -44,8 +44,6 @@ const Users = ({ user }) => {
     };
 
     const handleAddFriend = async (toUserId) => {
-        console.log(`TOUSERID ${toUserId}`);
-
         const loggedUserToken = window.localStorage.getItem("loggedUserToken");
         if (loggedUserToken) {
             const headerConfig = {
@@ -88,7 +86,7 @@ const Users = ({ user }) => {
     };
 
     return (
-        <div className="p-6">
+        <>
             <div className="bg-gray-500 border border-black p-2 rounded-md w-72 mb-6">
                 <div className="text-lg">Other amazing users of this app:</div>
                 <div className="">
@@ -219,7 +217,7 @@ const Users = ({ user }) => {
                     )}
                 </div>
             </div>
-        </div>
+        </>
     );
 };
 

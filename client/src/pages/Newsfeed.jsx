@@ -4,8 +4,10 @@ import Users from "./Users";
 const Newsfeed = ({ user }) => {
     return (
         <div>
-            <Users user={user} />
-            <Posts currentUser={user} postsOf="friends" />
+            <div className="p-3">
+                <Users user={user} />
+                <Posts currentUser={user} postsOf="friends" />
+            </div>
         </div>
     );
 };

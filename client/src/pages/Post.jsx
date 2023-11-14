@@ -46,7 +46,7 @@ const Post = ({ post, currentUser, getAllPosts }) => {
     };
 
     return (
-        <div className="flex flex-col mx-auto w-80 border ring-1 mb-4 rounded-md bg-slate-200 p-2">
+        <div className="flex flex-col w-full border ring-1 mb-4 rounded-md bg-slate-200 p-2">
             <div className="flex items-center justify-between mb-2">
                 <div className="flex">
                     <Link to={`/profile/${post.author.id}`}>

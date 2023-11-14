@@ -6,7 +6,7 @@ const Comments = ({ post }) => {
     return (
         <div>
             {post.comments.map((comment, index) => (
-                <div key={index} className="flex items-center mb-2 text-xs">
+                <div key={index} className="flex items-start mb-2 text-xs">
                     <Link to={`/profile/${comment.postedBy.id}`}>
                         <img className="rounded-full w-8 h-8 mr-2 object-cover border border-white ring-1" src={comment.postedBy.profilePhoto || noProfilePhoto} alt="profile photo" referrerPolicy="no-referrer" />
                     </Link>
