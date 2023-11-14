@@ -32,6 +32,7 @@ const userSchema = new mongoose.Schema({
     firstName: String,
     lastName: String,
     profilePhoto: String,
+    coverPhoto: String,
     // uploadPhoto: File,
     source: { type: String, required: [true, "source not specified"] },
     lastVisited: { type: Date, default: new Date() },
