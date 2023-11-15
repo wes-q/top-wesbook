@@ -129,29 +129,33 @@ const Profile = ({ userToDisplay, setNotification, setUserToDisplay, setCurrentU
                         e.target.src = defaultCoverPhoto;
                     }}
                 />
-                <label htmlFor="uploadCoverPhoto" className="absolute bottom-3 right-3 opacity-70 bg-slate-600 text-white text-xs px-2 py-1 rounded-md cursor-pointer" tabIndex="1">
-                    <CameraIcon className="w-5 h-5 fill-white cursor-pointer" />
-                    <form encType="multipart/form-data">
-                        <input name="image" className="hidden" type="file" id="uploadCoverPhoto" accept="image/*" onChange={(event) => handleImageUpload(event, "coverPhoto")} onClick={onInputClick} />
-                    </form>
-                </label>
+                {userToDisplay.status === "self" && (
+                    <label htmlFor="uploadCoverPhoto" className="absolute bottom-3 right-3 opacity-70 bg-slate-600 text-white text-xs px-2 py-1 rounded-md cursor-pointer hover:bg-slate-500 transition-colors" tabIndex="1">
+                        <CameraIcon className="w-5 h-5 fill-white cursor-pointer" />
+                        <form encType="multipart/form-data">
+                            <input name="image" className="hidden" type="file" id="uploadCoverPhoto" accept="image/*" onChange={(event) => handleImageUpload(event, "coverPhoto")} onClick={onInputClick} />
+                        </form>
+                    </label>
+                )}
                 <div className="absolute w-32 h-32 left-1/2 transform -translate-x-1/2 top-[80px] ring-2 ring-black rounded-full">
                     <img
                         src={userToDisplay.profilePhoto || noProfilePhoto}
                         alt="Circle Image"
-                        className="w-32 h-32 rounded-full"
+                        className="w-32 h-32 rounded-full object-cover"
                         referrerPolicy="no-referrer"
                         onError={(e) => {
                             e.target.src = noProfilePhoto;
                         }}
                     />{" "}
                     {/* height of box - half of circle = top margin */}
-                    <label htmlFor="uploadProfilePhoto" className="absolute right-0 bottom-0 opacity-100 bg-slate-700 text-white text-xs px-2 py-1 rounded-md cursor-pointer" tabIndex="2">
-                        <CameraIcon className="w-5 h-5 fill-white cursor-pointer" />
-                        <form encType="multipart/form-data">
-                            <input name="image" className="hidden" type="file" id="uploadProfilePhoto" accept="image/*" onChange={(event) => handleImageUpload(event, "profilePhoto")} onClick={onInputClick} />
-                        </form>
-                    </label>
+                    {userToDisplay.status === "self" && (
+                        <label htmlFor="uploadProfilePhoto" className="absolute right-0 bottom-0 opacity-100 bg-slate-700 text-white text-xs px-2 py-1 rounded-md cursor-pointer hover:bg-slate-600 transition-colors" tabIndex="2">
+                            <CameraIcon className="w-5 h-5 fill-white cursor-pointer" />
+                            <form encType="multipart/form-data">
+                                <input name="image" className="hidden" type="file" id="uploadProfilePhoto" accept="image/*" onChange={(event) => handleImageUpload(event, "profilePhoto")} onClick={onInputClick} />
+                            </form>
+                        </label>
+                    )}
                 </div>
             </div>
 
