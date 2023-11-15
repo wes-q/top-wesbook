@@ -73,7 +73,7 @@ const Post = ({ post, getAllPosts, currentUser }) => {
             </div>
 
             <hr className="w-full border-t border-gray-300 mb-4" />
-            <span className="mb-4 break-words">{post.content}</span>
+            <span className="mb-4 break-words whitespace-pre-wrap">{post.content}</span>
 
             <div className="flex justify-between text-xs mb-1">
                 {totalLikes > 0 && (

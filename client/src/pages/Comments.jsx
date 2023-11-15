@@ -22,7 +22,7 @@ const Comments = ({ post }) => {
                         <Link to={`/profile/${comment.postedBy.id}`}>
                             <span className="font-bold hover:underline">{comment.postedBy.firstName || comment.postedBy.displayName}</span>
                         </Link>
-                        <span className="text-black w-full cursor-text break-words">{comment.text}</span>
+                        <span className="text-black w-full cursor-text break-words whitespace-pre-wrap">{comment.text}</span>
                     </div>
                 </div>
             ))}
