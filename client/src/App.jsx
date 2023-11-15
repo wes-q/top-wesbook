@@ -21,7 +21,7 @@ import ProfilePage from "./pages/ProfilePage";
 import Newsfeed from "./pages/Newsfeed";
 
 function App() {
-    const [notification, setNotification] = useState(null);
+    const [notification, setNotification] = useState(false);
     const [user, setUser] = useState(null);
     const [userToken, setUserToken] = useState("");
     const [isLoadingUser, setIsLoadingUser] = useState(true);
@@ -48,8 +48,8 @@ function App() {
                 setUser(data.user);
                 setNotification({ message: "Login successful!", type: "success" });
                 setTimeout(() => {
-                    setNotification(null);
-                }, 1000);
+                    setNotification(false);
+                }, 5000);
             } catch (error) {
                 console.log("Automatic relogin: No user session found.");
                 // Make sure backed always responds with jwt expired for expired tokens

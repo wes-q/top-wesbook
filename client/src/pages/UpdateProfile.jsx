@@ -53,14 +53,14 @@ const UpdateProfile = ({ user, setNotification, setUser }) => {
             setUser(userData);
             setNotification({ message: `User profile updated`, type: "success" });
             setTimeout(() => {
-                setNotification(null);
+                setNotification(false);
             }, 5000);
         } catch (error) {
             if (error.response.data.error) {
                 const firstError = error.response.data.error;
                 setNotification({ message: firstError, type: "error" });
                 setTimeout(() => {
-                    setNotification(null);
+                    setNotification(false);
                 }, 5000);
             }
         }

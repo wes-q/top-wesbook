@@ -1,24 +1,6 @@
-// const Notification = ({ notification }) => {
-//     if (notification === null) {
-//         return null;
-//     }
-//     if (notification.type === "success") {
-//         return <div className="w-full px-4 py-2 rounded-md bg-gray-800 border-black text-green-400 mb-4 whitespace-pre-line">{notification.message}</div>;
-//     } else if (notification.type === "error") {
-//         return <div className="w-full px-4 py-2 rounded-md bg-gray-800 border border-black text-red-400 mb-4 whitespace-pre-line">{notification.message}</div>;
-//     } else if (notification.type === "warning") {
-//         return <div className="w-full px-4 py-2 rounded-md bg-gray-800 border border-black text-amber-400 mb-4 whitespace-pre-line">{notification.message}</div>;
-//     } else if (notification.type === "info") {
-//         return <div className="w-full px-4 py-2 rounded-md bg-gray-800 border border-black text-cyan-400 mb-4 whitespace-pre-line">{notification.message}</div>;
-//     }
-// };
+import { motion, AnimatePresence } from "framer-motion";
 
-// export default Notification;
 const Notification = ({ notification, setNotification }) => {
-    if (notification === null) {
-        return null;
-    }
-
     const typeToColorClass = {
         success: "text-green-400",
         error: "text-red-400",
@@ -29,14 +11,18 @@ const Notification = ({ notification, setNotification }) => {
     const colorClass = typeToColorClass[notification.type] || "text-gray-400";
 
     return (
-        <div className="p-6">
-            <div className={`flex justify-between items-center w-full px-4 py-2 text-justify rounded-md bg-gray-800 border-black border ${colorClass} mb-4 whitespace-pre-line`}>
-                <div>{notification.message}</div>
-                <button className="font-bold text-xl pl-4" onClick={() => setNotification(null)}>
-                    X
-                </button>
-            </div>
-        </div>
+        <AnimatePresence>
+            {notification && (
+                <motion.div className="absolute right-0 z-10 p-6" key="notification" initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.4, ease: "easeInOut" }} exit={{ opacity: 0, x: 30 }}>
+                    <div className={`flex justify-between items-center w-full px-3 py-2 text-justify rounded-md bg-gray-800 border-black border ${colorClass} mb-4 whitespace-pre-line`}>
+                        <span className="text-xs">{notification.message}</span>
+                        <button className="font-bold text-xs pl-4" onClick={() => setNotification(false)}>
+                            X
+                        </button>
+                    </div>
+                </motion.div>
+            )}
+        </AnimatePresence>
     );
 };
 

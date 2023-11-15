@@ -16,7 +16,7 @@ export default function RootLayout({ notification, type, user, setNotification, 
     const [isExpanded, setIsExpanded] = useState(false);
 
     return (
-        <div className="flex flex-col min-h-screen h-full bg-slate-600 text-white text-sm sm:text-base font-nunito">
+        <div className="flex flex-col min-h-screen h-full bg-slate-600 text-white text-sm sm:text-base font-nunito overflow-hidden">
             <header>
                 <nav className="w-full sm:justify-between sm:items-center p-3 sm:p-6 bg-gray-800 specific text-base sm:text-lg">
                     <div className={`flex items-center justify-between ${isExpanded && "mb-4"}`}>
@@ -100,7 +100,7 @@ export default function RootLayout({ notification, type, user, setNotification, 
                 </nav>
             </header>
 
-            <main className="h-full grow overflow-hidden">
+            <main className="relative h-full grow overflow-hidden">
                 <Notification notification={notification} setNotification={setNotification} />
                 <Outlet />
             </main>

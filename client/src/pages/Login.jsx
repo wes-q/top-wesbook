@@ -25,7 +25,7 @@ export default function Login({ setNotification, setUserToken }) {
         // alert("Sorry! Currently not working because facebook login requires business verification :(");
         setNotification({ message: "Sorry! Facebook login currently not working due to business verification requirement :(", type: "warning" });
         setTimeout(() => {
-            setNotification(null);
+            setNotification(false);
         }, 7000);
     };
 
@@ -50,7 +50,7 @@ export default function Login({ setNotification, setUserToken }) {
                 window.localStorage.setItem("loggedUserToken", token);
                 //to set token for anecdote service,
                 // anecdoteService.setToken(user.token)
-                setNotification(null); // TODO: figure out what this is for?
+                setNotification(false);
                 navigate("/");
                 navigate(0);
             } catch (error) {
@@ -59,7 +59,7 @@ export default function Login({ setNotification, setUserToken }) {
                     setNotification({ message: firstError, type: "error" });
                     setIsDisabled(false);
                     setTimeout(() => {
-                        setNotification(null);
+                        setNotification(false);
                     }, 5000);
                 }
             }

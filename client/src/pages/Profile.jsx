@@ -29,7 +29,7 @@ const Profile = ({ userToDisplay, setNotification, setUserToDisplay }) => {
             try {
                 const result = await axios.post("/api/friend-requests", userObject, headerConfig);
                 console.log(result.data);
-                getUser();
+                // getUser();
             } catch (error) {
                 console.log(error);
             }
@@ -49,9 +49,8 @@ const Profile = ({ userToDisplay, setNotification, setUserToDisplay }) => {
             const userObject = {};
 
             try {
-                const result = await axios.post(`/api/friend-requests/${toUserId}/cancel`, userObject, headerConfig);
-                console.log(result.data);
-                getUser();
+                const updatedUser = await axios.post(`/api/friend-requests/${toUserId}/cancel`, userObject, headerConfig);
+                setUserToDisplay(updatedUser.data);
             } catch (error) {
                 console.log(error);
             }

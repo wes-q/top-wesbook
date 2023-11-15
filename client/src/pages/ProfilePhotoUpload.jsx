@@ -82,7 +82,7 @@ const ProfilePhotoUpload = ({ setNotification, user, profilePhoto, setUser }) =>
 
                 setNotification({ message: "Your profile picture has been updated", type: "success" });
                 setTimeout(() => {
-                    setNotification(null);
+                    setNotification(false);
                 }, 5000);
             } catch (error) {
                 // if (error.response.data.error) {
@@ -128,7 +128,7 @@ const ProfilePhotoUpload = ({ setNotification, user, profilePhoto, setUser }) =>
 
                 setNotification({ message: "Your profile picture has been removed", type: "success" });
                 setTimeout(() => {
-                    setNotification(null);
+                    setNotification(false);
                 }, 5000);
             } catch (error) {
                 console.error("Failure", error);

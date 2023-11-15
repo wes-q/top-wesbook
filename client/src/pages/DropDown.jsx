@@ -82,7 +82,7 @@ function DropdownMenu({ user, handleClickOutside, dropdownRef, setNotification, 
             setOpen(!open); // Close the dropdown menu
             setNotification({ message: `Sent verification email to: ${user.email}`, type: "info" });
             setTimeout(() => {
-                setNotification(null);
+                setNotification(false);
             }, 10000);
         } catch (error) {
             console.log(`VERIFYEMAIL${error}`);
