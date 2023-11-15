@@ -146,17 +146,18 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MWVhNzFmZ
 # DELETE http://localhost:3001/api/persons/64d63c1eb5a442d2a637326f
 
 ###
-PUT http://localhost:3001/api/users/6524c7e136fa5c90c348c019
+PUT http://localhost:3001/api/users/6550b4f79738cb8925aeba16
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTBiMzFiOTczOGNiODkyNWFlYjk2NiIsImlhdCI6MTcwMDAyNjQ0NCwiZXhwIjoxNzAwMTk5MjQ0fQ.zD6cCULx-uCIVpCPSdZVeZSR4ovYDSYXpZmKoOUuvaA
 content-type: application/json
 
 {
-    "displayName":"Vincen21zo",
+    "displayName":"Vincenzo",
     "profilePhoto":"http://localhost:3001/static/bank.jpg"
 }
 
 ###
 GET http://localhost:3001/api/users/6550b4f79738cb8925aeba16
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTBiMzFiOTczOGNiODkyNWFlYjk2NiIsImlhdCI6MTY5OTg1MjIzMCwiZXhwIjoxNzAwMDI1MDMwfQ.mfKSa54An-yWYP1lN7efkVjKYODBaU9X1y4MvfXCooU
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTBiMzFiOTczOGNiODkyNWFlYjk2NiIsImlhdCI6MTcwMDAyNjQ0NCwiZXhwIjoxNzAwMTk5MjQ0fQ.zD6cCULx-uCIVpCPSdZVeZSR4ovYDSYXpZmKoOUuvaA
 
 ###
 POST http://localhost:3001/api/profile

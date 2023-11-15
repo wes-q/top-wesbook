@@ -8,7 +8,12 @@ const Notification = ({ notification, setNotification }) => {
         info: "text-cyan-400",
     };
 
-    const colorClass = typeToColorClass[notification.type] || "text-gray-400";
+    let colorClass;
+    if (notification) {
+        colorClass = typeToColorClass[notification.type];
+    } else {
+        colorClass = "text-gray-400";
+    }
 
     return (
         <AnimatePresence>

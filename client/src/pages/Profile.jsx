@@ -68,17 +68,30 @@ const Profile = ({ userToDisplay, setNotification, setUserToDisplay }) => {
     };
 
     const handleImageUpload = async (event, field) => {
+        const loggedUserToken = window.localStorage.getItem("loggedUserToken");
+        if (!loggedUserToken) {
+            return;
+        }
+
+        const headers = {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${loggedUserToken}`,
+        };
+
+        const url1 = "/api/profile";
+        const url2 = `/api/users/${userToDisplay.id}`;
+
         // Display uploaded image to the DOM
         const files = event.target.files;
         const file = files[0];
-        let imageURL;
-        try {
-            imageURL = URL.createObjectURL(file);
-            // setUserToDisplay(imageURL);
-            // URL.revokeObjectURL(selectedImage);
-        } catch (error) {
-            console.error("Error creating object URL:", error);
-        }
+        // let imageURL;
+        // try {
+        //     imageURL = URL.createObjectURL(file);
+        //     // setUserToDisplay(imageURL);
+        //     URL.revokeObjectURL(selectedImage);
+        // } catch (error) {
+        //     console.error("Error creating object URL:", error);
+        // }
 
         // Confirm uploading of image to storage and database
         const text = "Are you sure you want to set this photo as your current avatar?";
@@ -88,12 +101,13 @@ const Profile = ({ userToDisplay, setNotification, setUserToDisplay }) => {
             try {
                 form.append("image", file, "image.jpg");
                 // Save the new profile photo to the file storage
-                const response = await axios.post("/api/profile", form);
-                const userData = await userService.update(userToDisplay.id, { [field]: response.data });
-                setUserToDisplay(userData);
+                const cloudinaryUrl = await axios.post(url1, form);
+                const object = { [field]: cloudinaryUrl.data }; //field should be profilePhoto or coverPhoto
+                const userData = await axios.put(url2, object, { headers });
+                setUserToDisplay(userData.data);
                 setNotification({ message: "Your profile picture has been updated", type: "success" });
                 setTimeout(() => {
-                    setNotification(null);
+                    setNotification(false);
                 }, 5000);
             } catch (error) {
                 console.log(error);

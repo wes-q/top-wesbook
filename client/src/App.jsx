@@ -58,7 +58,7 @@ function App() {
                     window.localStorage.removeItem("loggedUserToken");
                     setNotification({ message: "Session expired for security purposes, please login again.", type: "warning" });
                     setTimeout(() => {
-                        setNotification(null);
+                        setNotification(false);
                     }, 10000);
                 }
             } finally {

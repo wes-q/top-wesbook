@@ -116,23 +116,6 @@ usersRouter.get("/api/users/eligible-friends", userExtractor, async (req, res, n
     }
 });
 
-usersRouter.put("/api/users/:id", (request, response, next) => {
-    const body = request.body;
-
-    const user = {
-        displayName: body.displayName,
-        lastName: body.lastName,
-        firstName: body.firstName,
-        profilePhoto: body.profilePhoto,
-    };
-
-    User.findByIdAndUpdate(request.params.id, user, { new: true })
-        .then((updatedUser) => {
-            response.json(updatedUser);
-        })
-        .catch((error) => next(error));
-});
-
 // usersRouter.get("/api/users/friends", userExtractor, async (req, res, next) => {
 //     const friendIds = req.user.friends.map((friend) => {
 //         return {
@@ -220,6 +203,49 @@ usersRouter.get("/api/users/:id", userExtractor, async (request, response, next)
 
         const userWithStatus = [user].map((user) => {
             const totalFriends = user.totalFriends;
+            return {
+                ...user.toJSON(),
+                status,
+                totalFriends,
+            };
+        });
+
+        response.json(userWithStatus[0]);
+    } catch (error) {
+        next(error);
+    }
+});
+
+usersRouter.put("/api/users/:id", userExtractor, async (request, response, next) => {
+    const currentUserId = request.user.id;
+    let status;
+
+    const body = request.body;
+
+    const user = {
+        displayName: body.displayName,
+        lastName: body.lastName,
+        firstName: body.firstName,
+        profilePhoto: body.profilePhoto,
+    };
+
+    try {
+        const updatedUser = await User.findByIdAndUpdate(request.params.id, user, { new: true });
+        const isFriends = updatedUser.friends.some((friend) => friend.friendId.toString() === currentUserId);
+        const isPending = updatedUser.friendRequests.some((friend) => friend.friendId.toString() === currentUserId);
+
+        if (updatedUser.id === currentUserId) {
+            status = "self";
+        } else if (isFriends) {
+            status = "friend";
+        } else if (isPending) {
+            status = "pending";
+        } else {
+            status = "notFriend";
+        }
+
+        const userWithStatus = [updatedUser].map((user) => {
+            const totalFriends = updatedUser.totalFriends;
             return {
                 ...user.toJSON(),
                 status,
@@ -397,7 +423,7 @@ usersRouter.post("/api/profile", upload.single("image"), async (req, res) => {
         res.status(200).json(cldRes.secure_url);
     } catch (error) {
         console.log(error);
-        res.send({
+        res.status(400).send({
             message: error.message,
         });
     }
