@@ -77,7 +77,7 @@ const UserCommentBox = ({ currentUser, getAllPosts, postId, isCommentClicked, se
                 />
             )}
             {isCommentClicked ? (
-                <div className="flex flex-col grow max-w-[260px] outline-none bg-slate-300 rounded-2xl pl-4 pr-3 py-1" spellCheck="false">
+                <div className="flex flex-col grow max-w-[300px] outline-none bg-slate-300 rounded-2xl pl-4 pr-3 py-1" spellCheck="false">
                     <div ref={contentEditableRef} className="outline-none w-full max-w-full" contentEditable="true" onInput={handleTextChange} onKeyDown={handleKeyPress}></div>
                     <div className="flex justify-between items-center">
                         <div className="flex">
@@ -90,7 +90,7 @@ const UserCommentBox = ({ currentUser, getAllPosts, postId, isCommentClicked, se
                     </div>
                 </div>
             ) : (
-                <div className="flex flex-col justify-center grow max-w-[260px] outline-none bg-slate-300 rounded-2xl pl-4 pr-3 py-1" spellCheck="true">
+                <div className="flex justify-center grow max-w-[300px] outline-none bg-slate-300 rounded-2xl pl-4 pr-3 py-1" spellCheck="true">
                     <div className="flex justify-between w-full items-center">
                         <span className="text-gray-500 w-full cursor-text" onClick={handleCommentClick}>
                             Write a comment...

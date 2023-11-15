@@ -52,8 +52,8 @@ const Posts = ({ userToDisplay, postsOf, currentUser }) => {
             {showNewPost && <ModalNewPost setShowNewPost={setShowNewPost} currentUser={userToDisplay} getAllPosts={getAllPosts} />}
 
             <div className="flex flex-col text-black text-sm items-start">
-                {/* {(id === currentUser.id || postsOf === "friends") && ( */}
-                {userToDisplay.status === "self" && (
+                {/* {userToDisplay.status === "self" && ( */}
+                {(id === currentUser.id || postsOf === "friends") && (
                     <div className="flex items-center w-full h-16 border ring-1 mb-4 rounded-md bg-slate-200 p-2 hover:cursor-pointer hover:bg-cyan-400 transition-colors" onClick={handleNewPost}>
                         <PlusCircle className="h-10 w-10 mr-2" />
                         <div className="flex flex-col">
@@ -62,7 +62,6 @@ const Posts = ({ userToDisplay, postsOf, currentUser }) => {
                         </div>
                     </div>
                 )}
-                {/* )} */}
 
                 {posts.map((post, index) => {
                     return <Post key={index} post={post} getAllPosts={getAllPosts} currentUser={currentUser} />;

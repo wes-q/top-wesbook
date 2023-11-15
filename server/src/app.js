@@ -66,14 +66,14 @@ app.use(
 //     res.sendFile(path.join(__dirname, "dist", "index.html"));
 // });
 
-// app.use(express.static("dist"));
+app.use(express.static("dist"));
 // app.use(express.static(path.join(__dirname, "dist")));
 
 // app.set("views", path.join(__dirname, "views"));
 
 // Serve images like profile photos
 // app.use(express.static("uploads"));
-app.use("/static", express.static("uploads"));
+// app.use("/static", express.static("uploads"));
 
 // app.use(middleware.requestLogger);
 app.use((req, res, next) => {
