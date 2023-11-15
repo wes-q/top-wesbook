@@ -50,7 +50,15 @@ const Post = ({ post, getAllPosts, currentUser }) => {
             <div className="flex items-center justify-between mb-2">
                 <div className="flex">
                     <Link to={`/profile/${post.author.id}`}>
-                        <img className="rounded-full h-10 w-10 mr-2 object-cover border border-white ring-1 cursor-pointer" src={post.author.profilePhoto || noProfilePhoto} alt="profile photo" referrerPolicy="no-referrer" />
+                        <img
+                            className="rounded-full h-10 w-10 mr-2 object-cover border border-white ring-1 cursor-pointer"
+                            src={post.author.profilePhoto || noProfilePhoto}
+                            alt="profile photo"
+                            referrerPolicy="no-referrer"
+                            onError={(e) => {
+                                e.target.src = noProfilePhoto;
+                            }}
+                        />
                     </Link>
                     <div className="flex flex-col justify-center">
                         <Link to={`/profile/${post.author.id}`}>

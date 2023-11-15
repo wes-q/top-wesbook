@@ -227,6 +227,7 @@ usersRouter.put("/api/users/:id", userExtractor, async (request, response, next)
         lastName: body.lastName,
         firstName: body.firstName,
         profilePhoto: body.profilePhoto,
+        coverPhoto: body.coverPhoto,
     };
 
     try {
