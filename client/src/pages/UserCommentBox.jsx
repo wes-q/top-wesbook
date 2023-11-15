@@ -62,6 +62,7 @@ const UserCommentBox = ({ currentUser, getAllPosts, postId, isCommentClicked, se
             handleSubmitComment(postId);
         }
     };
+
     return (
         <div className="flex text-xs">
             {currentUser && <img className="rounded-full w-8 h-8 mr-2 object-cover border border-white ring-1" src={currentUser.profilePhoto || noProfilePhoto} alt="profile photo" referrerPolicy="no-referrer" />}

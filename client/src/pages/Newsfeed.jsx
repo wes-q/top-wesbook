@@ -6,7 +6,7 @@ const Newsfeed = ({ user }) => {
         <div>
             <div className="p-3">
                 <Users user={user} />
-                <Posts currentUser={user} postsOf="friends" />
+                <Posts userToDisplay={user} postsOf="friends" />
             </div>
         </div>
     );

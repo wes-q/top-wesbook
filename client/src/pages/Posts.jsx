@@ -6,14 +6,14 @@ import axios from "axios";
 import Post from "./Post";
 import { useParams } from "react-router-dom";
 
-const Posts = ({ currentUser, postsOf }) => {
+const Posts = ({ userToDisplay, postsOf, currentUser }) => {
     const [showNewPost, setShowNewPost] = useState(false);
     const [posts, setPosts] = useState([]);
     const { id } = useParams();
 
     useEffect(() => {
         getAllPosts();
-    }, []);
+    }, [userToDisplay]);
 
     const getAllPosts = async () => {
         const loggedUserToken = window.localStorage.getItem("loggedUserToken");
@@ -49,10 +49,11 @@ const Posts = ({ currentUser, postsOf }) => {
 
     return (
         <>
-            {showNewPost && <ModalNewPost setShowNewPost={setShowNewPost} currentUser={currentUser} getAllPosts={getAllPosts} />}
+            {showNewPost && <ModalNewPost setShowNewPost={setShowNewPost} currentUser={userToDisplay} getAllPosts={getAllPosts} />}
 
             <div className="flex flex-col text-black text-sm items-start">
-                {(id === currentUser.id || postsOf === "friends") && (
+                {/* {(id === currentUser.id || postsOf === "friends") && ( */}
+                {userToDisplay.status === "self" && (
                     <div className="flex items-center w-full h-16 border ring-1 mb-4 rounded-md bg-slate-200 p-2 hover:cursor-pointer hover:bg-cyan-400 transition-colors" onClick={handleNewPost}>
                         <PlusCircle className="h-10 w-10 mr-2" />
                         <div className="flex flex-col">
@@ -61,9 +62,10 @@ const Posts = ({ currentUser, postsOf }) => {
                         </div>
                     </div>
                 )}
+                {/* )} */}
 
                 {posts.map((post, index) => {
-                    return <Post key={index} post={post} currentUser={currentUser} getAllPosts={getAllPosts} />;
+                    return <Post key={index} post={post} getAllPosts={getAllPosts} currentUser={currentUser} />;
                 })}
             </div>
         </>

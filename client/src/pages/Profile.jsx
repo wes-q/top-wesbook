@@ -1,7 +1,5 @@
-import { useEffect, useState } from "react";
 import noProfilePhoto from "../icons/noprofile.jpg";
 import defaultCoverPhoto from "../icons/default-cover.png";
-import defaultCoverVert from "../icons/default-cover-vert.png";
 import PersonAddIcon from "../icons/person-add.svg?react";
 import PersonCheckIcon from "../icons/person-check.svg?react";
 import MessengerIcon from "../icons/messenger.svg?react";
@@ -9,7 +7,6 @@ import PersonRemoveIcon from "../icons/person-remove.svg?react";
 import CameraIcon from "../icons/camera.svg?react";
 import FormData from "form-data";
 import axios from "axios";
-import userService from "../services/users";
 
 const Profile = ({ userToDisplay, setNotification, setUserToDisplay }) => {
     const handleAddFriend = async (toUserId) => {
@@ -143,6 +140,7 @@ const Profile = ({ userToDisplay, setNotification, setUserToDisplay }) => {
                 {userToDisplay.displayName ? <span className="text-2xl font-bold">{userToDisplay.displayName}</span> : <span className="text-2xl font-bold">{`${userToDisplay.firstName} ${userToDisplay.lastName}`}</span>}
                 <span className="text-xs">{userToDisplay.email}</span>
                 <span className="text-xs mb-4">{userToDisplay.totalFriends} friends</span>
+
                 {userToDisplay.status === "friend" && (
                     <div className="flex">
                         <button className="flex items-center bg-slate-400 text-white text-xs px-3 py-1 rounded-md mr-2 cursor-default">

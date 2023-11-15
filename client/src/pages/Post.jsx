@@ -10,7 +10,7 @@ import Comments from "./Comments";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-const Post = ({ post, currentUser, getAllPosts }) => {
+const Post = ({ post, getAllPosts, currentUser }) => {
     const [isCommentClicked, setIsCommentClicked] = useState(false);
     const jsDate = parseISO(post.createdAt);
     const formattedDate = format(jsDate, "MMM dd, yyyy");

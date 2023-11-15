@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider, Navigate } from "react-router-dom";
+import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from "react-router-dom";
 import NotFound from "./pages/NotFound";
 import RootLayout from "./pages/RootLayout";
 import SignupForm from "./pages/SignupForm";
@@ -12,13 +12,11 @@ import Game from "./pages/Game";
 import LeaderboardPage from "./pages/LeaderboardPage";
 import PrivateRoutes from "./pages/Privateroutes";
 import Users from "./pages/Users";
-import Posts from "./pages/Posts";
-
-import loginService from "./services/login";
 import PlayPage from "./pages/PlayPage";
 import GetJwt from "./pages/GetJwt";
 import ProfilePage from "./pages/ProfilePage";
 import Newsfeed from "./pages/Newsfeed";
+import loginService from "./services/login";
 
 function App() {
     const [notification, setNotification] = useState(false);
