@@ -34,7 +34,7 @@ const SignupForm = ({ setNotification }) => {
             await userService.create(formData);
             setNotification({ message: `You're signed up as ${formData.displayName}!  Redirecting to login page...`, type: "success" });
             setTimeout(() => {
-                setNotification(null);
+                setNotification(false);
                 navigate("/login");
                 navigate(0);
             }, 5000);
@@ -44,7 +44,7 @@ const SignupForm = ({ setNotification }) => {
                 setNotification({ message: firstError, type: "error" });
                 setIsDisabled(false);
                 setTimeout(() => {
-                    setNotification(null);
+                    setNotification(false);
                 }, 5000);
             }
         }

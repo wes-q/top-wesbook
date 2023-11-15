@@ -22,7 +22,7 @@ import Newsfeed from "./pages/Newsfeed";
 
 function App() {
     const [notification, setNotification] = useState(false);
-    const [user, setUser] = useState(null);
+    const [user, setUser] = useState(false);
     const [userToken, setUserToken] = useState("");
     const [isLoadingUser, setIsLoadingUser] = useState(true);
     const [showFooter, setShowFooter] = useState(true);
