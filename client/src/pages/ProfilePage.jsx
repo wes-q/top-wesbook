@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Profile from "./Profile";
 
-const ProfilePage = ({ setNotification, currentUser }) => {
+const ProfilePage = ({ setNotification, currentUser, setCurrentUser }) => {
     const [userToDisplay, setUserToDisplay] = useState([]);
     const { id } = useParams();
 
@@ -31,7 +31,7 @@ const ProfilePage = ({ setNotification, currentUser }) => {
 
     return (
         <div>
-            <Profile userToDisplay={userToDisplay} setNotification={setNotification} setUserToDisplay={setUserToDisplay} />
+            <Profile userToDisplay={userToDisplay} setNotification={setNotification} setUserToDisplay={setUserToDisplay} setCurrentUser={setCurrentUser} />
             <div className="p-3">
                 <Posts userToDisplay={userToDisplay} currentUser={currentUser} postsOf="user" />
             </div>

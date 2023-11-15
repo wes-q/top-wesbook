@@ -8,7 +8,7 @@ import CameraIcon from "../icons/camera.svg?react";
 import FormData from "form-data";
 import axios from "axios";
 
-const Profile = ({ userToDisplay, setNotification, setUserToDisplay }) => {
+const Profile = ({ userToDisplay, setNotification, setUserToDisplay, setCurrentUser }) => {
     const handleAddFriend = async (toUserId) => {
         const loggedUserToken = window.localStorage.getItem("loggedUserToken");
         if (loggedUserToken) {
@@ -58,8 +58,6 @@ const Profile = ({ userToDisplay, setNotification, setUserToDisplay }) => {
         alert();
     };
 
-    const handleUploadProfilePhoto = () => {};
-
     const onInputClick = (event) => {
         event.target.value = "";
     };
@@ -102,6 +100,7 @@ const Profile = ({ userToDisplay, setNotification, setUserToDisplay }) => {
                 const object = { [field]: cloudinaryUrl.data }; //field should be profilePhoto or coverPhoto
                 const userData = await axios.put(url2, object, { headers });
                 setUserToDisplay(userData.data);
+                setCurrentUser(userData.data);
                 setNotification({ message: "Your profile picture has been updated", type: "success" });
                 setTimeout(() => {
                     setNotification(false);

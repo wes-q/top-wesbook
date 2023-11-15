@@ -1,12 +1,12 @@
 import Posts from "./Posts";
 import Users from "./Users";
 
-const Newsfeed = ({ user }) => {
+const Newsfeed = ({ currentUser }) => {
     return (
         <div>
             <div className="p-3">
-                <Users user={user} />
-                <Posts userToDisplay={user} postsOf="friends" />
+                <Users user={currentUser} />
+                <Posts userToDisplay={currentUser} currentUser={currentUser} postsOf="friends" />
             </div>
         </div>
     );

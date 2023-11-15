@@ -20,7 +20,7 @@ import loginService from "./services/login";
 
 function App() {
     const [notification, setNotification] = useState(false);
-    const [user, setUser] = useState(false);
+    const [currentUser, setCurrentUser] = useState(false);
     const [userToken, setUserToken] = useState("");
     const [isLoadingUser, setIsLoadingUser] = useState(true);
     const [showFooter, setShowFooter] = useState(true);
@@ -43,7 +43,7 @@ function App() {
                     },
                 };
                 const data = await loginService.loginSuccess(headerConfig);
-                setUser(data.user);
+                setCurrentUser(data.user);
                 setNotification({ message: "Login successful!", type: "success" });
                 setTimeout(() => {
                     setNotification(false);
@@ -70,18 +70,18 @@ function App() {
     const router = createBrowserRouter(
         createRoutesFromElements(
             <>
-                <Route path="/" element={<RootLayout notification={notification} setNotification={setNotification} user={user} showFooter={showFooter} showStartTimer={showStartTimer} setSeconds={setSeconds} seconds={seconds} />}>
-                    <Route element={<PrivateRoutes user={user} isLoadingUser={isLoadingUser} />}>
-                        <Route index element={<Newsfeed user={user} />} />
+                <Route path="/" element={<RootLayout notification={notification} setNotification={setNotification} user={currentUser} showFooter={showFooter} showStartTimer={showStartTimer} setSeconds={setSeconds} seconds={seconds} />}>
+                    <Route element={<PrivateRoutes user={currentUser} isLoadingUser={isLoadingUser} />}>
+                        <Route index element={<Newsfeed currentUser={currentUser} />} />
                         <Route path="play" element={<PlayPage setGame={setGame} />} />
                         <Route path="leaderboard" element={<LeaderboardPage />} />
-                        <Route path="users" element={<Users user={user} />} />
+                        <Route path="users" element={<Users user={currentUser} />} />
                         <Route path="game" element={<Game game={game} setShowFooter={setShowFooter} setShowStartTimer={setShowStartTimer} seconds={seconds} setSeconds={setSeconds} />} />
                         <Route path="about" element={<About />} />
                         <Route path="verification-successful" element={<VerificationSuccessful />} />
                         <Route path="verification-nothing" element={<VerificationNothing />} />
-                        <Route path="update-profile" element={<UpdateProfile user={user} setUser={setUser} setNotification={setNotification} />} />
-                        <Route path="profile/:id" element={<ProfilePage currentUser={user} setNotification={setNotification} />} />
+                        <Route path="update-profile" element={<UpdateProfile user={currentUser} setUser={setCurrentUser} setNotification={setNotification} />} />
+                        <Route path="profile/:id" element={<ProfilePage currentUser={currentUser} setCurrentUser={setCurrentUser} setNotification={setNotification} />} />
                     </Route>
 
                     <Route path="signup" element={<SignupForm setNotification={setNotification} />} />
