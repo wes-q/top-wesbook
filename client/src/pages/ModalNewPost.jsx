@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import X from "../icons/x.svg?react";
 import PhotoIcon from "../icons/add-photo.svg?react";
 import postsService from "../services/posts";
@@ -7,6 +7,7 @@ import noProfilePhoto from "../icons/noprofile.jpg";
 const ModalNewPost = ({ setShowNewPost, currentUser, getAllPosts }) => {
     const [postText, setPostText] = useState(""); // State to track the text in the textarea
     const [postBackgroundColor, setPostBackgroundColor] = useState("bg-gray-500 text-white hover:cursor-not-allowed"); // State to manage the background color
+    const textAreaRef = useRef(null);
 
     const handleClose = () => {
         setShowNewPost(false);
@@ -47,11 +48,22 @@ const ModalNewPost = ({ setShowNewPost, currentUser, getAllPosts }) => {
         }
     };
 
+    const autoGrow = (element) => {
+        if (!element.current) {
+            return;
+        }
+        const updatedScrollHeight = element.current.scrollHeight;
+        element.current.style.height = updatedScrollHeight + "px";
+
+        console.log(element.current.scrollHeight);
+        element.current.style.height = element.current.scrollHeight + "px";
+    };
+
     return (
         <div className="relative z-10 text-black select-none">
             <div className="fixed inset-0 bg-black bg-opacity-50 transition-opacity"></div>
             <div className="fixed inset-0 z-10 flex flex-col items-center justify-center">
-                <div className="flex flex-col p-4 text-center justify-center w-80 h-auto overflow-hidden rounded-sm bg-slate-200 shadow-xl">
+                <div className="flex flex-col p-4 text-center justify-center w-80 h-auto overflow-hidden rounded-md bg-slate-200 shadow-xl">
                     <div className="flex items-center justify-between w-full mb-4">
                         <span className="font-bold">Create new post</span>
                         <X className="cursor-pointer" onClick={handleClose}></X>
@@ -66,7 +78,7 @@ const ModalNewPost = ({ setShowNewPost, currentUser, getAllPosts }) => {
                         </div>
                     )}
 
-                    <textarea className="w-full bg-slate-200 outline-none resize-none mb-4" id="" cols="30" rows="3" placeholder="What's on your mind?" spellCheck="false" onChange={handleTextChange}></textarea>
+                    <textarea ref={textAreaRef} className="w-full bg-slate-200 outline-none resize-none mb-4 overflow-hidden max-h-96" id="" cols="30" rows="3" placeholder="What's on your mind?" spellCheck="false" onChange={handleTextChange} onInput={autoGrow(textAreaRef)}></textarea>
                     <hr className="w-full border-t border-gray-300 mb-4" />
 
                     <div className="flex items-center justify-between w-full">
