@@ -416,7 +416,7 @@ usersRouter.get("/api/verify-email", async (req, res) => {
     // res.status(200).json(`${user.email} is now verified`);
 });
 
-usersRouter.post("/api/profile", upload.single("image"), async (req, res) => {
+usersRouter.post("/api/uploadImage", upload.single("image"), async (req, res) => {
     try {
         const b64 = Buffer.from(req.file.buffer).toString("base64");
         let dataURI = "data:" + req.file.mimetype + ";base64," + b64;

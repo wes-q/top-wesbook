@@ -8,22 +8,6 @@ import userService from "../services/users";
 const ProfilePhotoUpload = ({ setNotification, user, profilePhoto, setUser }) => {
     const [selectedImage, setSelectedImage] = useState(null);
 
-    // async function uploadImage() {
-    //     const form = new FormData();
-    //     const url = "http://localhost:3001/api/profile";
-
-    //     form.append("image", blob, "image.jpg");
-
-    //     const headers = { "Content-Type": "multipart/form-data" };
-
-    //     try {
-    //         const response = await axios.post(url, form, { headers: headers });
-    //         console.log(response.data);
-    //     } catch (error) {
-    //         console.error("Failure", error);
-    //     }
-    // }
-
     useEffect(() => {
         setSelectedImage(profilePhoto);
     }, [profilePhoto]);
@@ -31,13 +15,6 @@ const ProfilePhotoUpload = ({ setNotification, user, profilePhoto, setUser }) =>
     const handleImageUpload = async (event) => {
         // Display uploaded image to the DOM
         const files = event.target.files;
-
-        //NO need because onclick event handles reset of value of input field
-        // if (files.length === 0) {
-        //     // User canceled the file selection, do nothing or show a message
-        //     console.log("File upload canceled.");
-        //     return;
-        // }
 
         const file = files[0];
         let imageURL;
@@ -57,7 +34,7 @@ const ProfilePhotoUpload = ({ setNotification, user, profilePhoto, setUser }) =>
             try {
                 form.append("image", file, "image.jpg");
                 // Save the new profile photo to the file storage
-                const response = await axios.post("/api/profile", form);
+                const response = await axios.post("/api/uploadImage", form);
                 // console.log(`RESPONSE FROM API/PROFILE: ${response.data}`);
                 // Save the new profile photo's URL to the DB but re-authenticate first/
                 // const loggedUserToken = window.localStorage.getItem("loggedUserToken");

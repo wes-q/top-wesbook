@@ -73,7 +73,7 @@ const Profile = ({ userToDisplay, setNotification, setUserToDisplay, setCurrentU
             Authorization: `Bearer ${loggedUserToken}`,
         };
 
-        const url1 = "/api/profile";
+        const url1 = "/api/uploadImage";
         const url2 = `/api/users/${userToDisplay.id}`;
 
         // Display uploaded image to the DOM

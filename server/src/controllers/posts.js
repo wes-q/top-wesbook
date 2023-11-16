@@ -12,6 +12,7 @@ postsRouter.post("/api/posts", middleware.userExtractor, async (request, respons
             author: request.user.id,
             content: body.content,
             createdAt: currentDate,
+            postPhoto: body.postPhoto,
         });
 
         const savedPost = await post.save();

@@ -1,13 +1,17 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import X from "../icons/x.svg?react";
 import PhotoIcon from "../icons/add-photo.svg?react";
 import postsService from "../services/posts";
 import noProfilePhoto from "../icons/noprofile.jpg";
+import FormData from "form-data";
+import axios from "axios";
 
 const ModalNewPost = ({ setShowNewPost, currentUser, getAllPosts }) => {
     const [postText, setPostText] = useState(""); // State to track the text in the textarea
     const [postBackgroundColor, setPostBackgroundColor] = useState("bg-gray-500 text-white hover:cursor-not-allowed"); // State to manage the background color
     const textAreaRef = useRef(null);
+    const [postImage, setPostImage] = useState(null);
+    const [files, setFiles] = useState(null);
 
     const handleClose = () => {
         setShowNewPost(false);
@@ -16,17 +20,21 @@ const ModalNewPost = ({ setShowNewPost, currentUser, getAllPosts }) => {
     const handleTextChange = (event) => {
         const text = event.target.value.trim();
         setPostText(text); // Update the text in state
-
-        if (text.length > 0) {
-            setPostBackgroundColor("bg-primary text-black ring-1"); // Change to your desired background color
-        } else {
-            setPostBackgroundColor("bg-gray-500 text-white hover:cursor-not-allowed"); // Restore the default background color
-        }
     };
 
     const handlePost = async () => {
+        // Step 1: Save image to cloud storage
+        const url = "/api/uploadImage";
+        const form = new FormData();
+        if (files) {
+            form.append("image", files[0], "image.jpg");
+        }
+        const cloudinaryUrl = await axios.post(url, form);
+
+        // Step 2: Save photo and content to the post collection
         const object = {
             content: postText,
+            postPhoto: cloudinaryUrl.data,
         };
 
         const loggedUserToken = window.localStorage.getItem("loggedUserToken");
@@ -39,8 +47,8 @@ const ModalNewPost = ({ setShowNewPost, currentUser, getAllPosts }) => {
             };
             try {
                 const newPost = await postsService.create(object, headerConfig);
-                // console.log(newPost);
-                setShowNewPost(false);
+                console.log(newPost);
+                setShowNewPost(false); //Close the modal
                 getAllPosts();
             } catch (error) {
                 console.log(error);
@@ -52,18 +60,48 @@ const ModalNewPost = ({ setShowNewPost, currentUser, getAllPosts }) => {
         if (!element.current) {
             return;
         }
-        const updatedScrollHeight = element.current.scrollHeight;
-        element.current.style.height = updatedScrollHeight + "px";
-
-        console.log(element.current.scrollHeight);
         element.current.style.height = element.current.scrollHeight + "px";
     };
+
+    const onInputClick = (event) => {
+        event.target.value = "";
+    };
+
+    const handleAddImage = async (event) => {
+        // Display uploaded image to the DOM
+        const files = event.target.files;
+        const file = files[0];
+        let imageURL;
+        try {
+            imageURL = URL.createObjectURL(file);
+            setPostImage(imageURL);
+            setFiles(files); // Save files to state
+            URL.revokeObjectURL(postImage);
+            // setPostBackgroundColor("bg-primary text-black ring-1");
+        } catch (error) {
+            console.error("Error creating object URL:", error);
+        }
+    };
+
+    const handleRemoveImage = () => {
+        setPostImage(null);
+        setFiles(null);
+    };
+
+    useEffect(() => {
+        // Check if there's text in the textarea or an image is selected
+        if (postText.length > 0 || postImage) {
+            setPostBackgroundColor("bg-primary text-black ring-1"); // Change to your desired background color
+        } else {
+            setPostBackgroundColor("bg-gray-500 text-white hover:cursor-not-allowed"); // Restore the default background color
+        }
+    }, [postText, postImage]);
 
     return (
         <div className="relative z-10 text-black select-none">
             <div className="fixed inset-0 bg-black bg-opacity-50 transition-opacity"></div>
             <div className="fixed inset-0 z-10 flex flex-col items-center justify-center">
-                <div className="flex flex-col p-4 text-center justify-center w-80 h-auto overflow-hidden rounded-md bg-slate-200 shadow-xl">
+                <div className="flex flex-col p-4 text-center justify-center w-80 h-auto rounded-md bg-slate-200 shadow-xl">
                     <div className="flex items-center justify-between w-full mb-4">
                         <span className="font-bold">Create new post</span>
                         <X className="cursor-pointer" onClick={handleClose}></X>
@@ -78,14 +116,28 @@ const ModalNewPost = ({ setShowNewPost, currentUser, getAllPosts }) => {
                         </div>
                     )}
 
-                    <textarea ref={textAreaRef} className="w-full bg-slate-200 outline-none resize-none mb-4 overflow-hidden max-h-96" id="" cols="30" rows="3" placeholder="What's on your mind?" spellCheck="false" onChange={handleTextChange} onInput={autoGrow(textAreaRef)}></textarea>
+                    <textarea ref={textAreaRef} className="w-full bg-slate-200 outline-none resize-none mb-4 overflow-hidden max-h-64" id="" cols="30" rows="3" placeholder="What's on your mind?" spellCheck="false" onChange={handleTextChange} onInput={autoGrow(textAreaRef)}></textarea>
+
+                    {postImage && (
+                        <div className="relative overflow-auto max-h-72">
+                            <button className="absolute top-2 right-2 w-8 h-8 opacity-50 text-white text-sm rounded-full bg-gray-800 hover:bg-gray-700 p-1">
+                                <X className="cursor-pointer fill-white" onClick={handleRemoveImage}></X>
+                            </button>
+                            <img className="object-cover max-w-full h-auto" src={postImage} alt="Post Image" />
+                        </div>
+                    )}
+
                     <hr className="w-full border-t border-gray-300 mb-4" />
 
                     <div className="flex items-center justify-between w-full">
-                        <div className="flex group items-center cursor-pointer">
+                        <label htmlFor="uploadPostImage" className="flex items-center group opacity-100 text-xs px-2 py-1 rounded-md cursor-pointer transition-colors" tabIndex="2">
                             <PhotoIcon className="group-hover:fill-gray-500 mr-2"></PhotoIcon>
                             <span className="group-hover:text-gray-500">Add image</span>
-                        </div>
+                            <form encType="multipart/form-data">
+                                <input name="image" className="hidden" type="file" id="uploadPostImage" accept="image/*" onChange={handleAddImage} onClick={onInputClick} />
+                            </form>
+                        </label>
+
                         <button className={`px-4 py-1 w-1/2 ${postBackgroundColor} bg-gray-500 rounded-sm`} onClick={handlePost}>
                             Post
                         </button>
