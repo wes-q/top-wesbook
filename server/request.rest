@@ -160,7 +160,7 @@ GET http://localhost:3001/api/users/6550b4f79738cb8925aeba16
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTBiMzFiOTczOGNiODkyNWFlYjk2NiIsImlhdCI6MTcwMDAyNjQ0NCwiZXhwIjoxNzAwMTk5MjQ0fQ.zD6cCULx-uCIVpCPSdZVeZSR4ovYDSYXpZmKoOUuvaA
 
 ###
-POST http://localhost:3001/api/profile
+POST http://localhost:3001/api/uploadImage
 Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
 
 ------WebKitFormBoundary7MA4YWxkTrZu0gW
@@ -297,7 +297,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1M2E0YjIzO
 
 ###
 GET http://localhost:3001/api/posts
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1M2E0YWZkODVhZjFhYmE2ODY1YjY0YSIsImlhdCI6MTY5OTQ5MTg5OSwiZXhwIjoxNjk5NzUxMDk5fQ.VZJfZbU50T7tZE6jD21bKN9twu83lCR_1PWkhsnujtw
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTBiNGY3OTczOGNiODkyNWFlYmExNiIsImlhdCI6MTcwMDA1NTMyMCwiZXhwIjoxNzAwMjI4MTIwfQ.BDqx28DEdibedthKArUlQIasj-3n6TXtmyZJkqNsyWk
 
 ###
 GET http://localhost:3001/api/posts-of-friends
@@ -337,3 +337,11 @@ content-type: application/json
 {
     "text": "Test comment 5 777777777777777777777777777777777777777777777777777777777777777777"
 }
+
+###
+DELETE http://localhost:3001/api/posts/6556d6109fe74e96be63f2b1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTBiNGY3OTczOGNiODkyNWFlYmExNiIsImlhdCI6MTcwMDA1NTMyMCwiZXhwIjoxNzAwMjI4MTIwfQ.BDqx28DEdibedthKArUlQIasj-3n6TXtmyZJkqNsyWk
+
+###
+DELETE http://localhost:3001/api/posts/6550b4129738cb8925aeb9a7
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTBiNGY3OTczOGNiODkyNWFlYmExNiIsImlhdCI6MTcwMDA1NTMyMCwiZXhwIjoxNzAwMjI4MTIwfQ.BDqx28DEdibedthKArUlQIasj-3n6TXtmyZJkqNsyWk

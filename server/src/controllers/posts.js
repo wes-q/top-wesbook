@@ -123,4 +123,32 @@ postsRouter.patch("/api/posts/:postId/comments", middleware.userExtractor, async
     }
 });
 
+postsRouter.delete("/api/posts/:postId", middleware.userExtractor, async (request, response, next) => {
+    // request.user.id = string
+    // request.user._id = object
+    const postId = request.params.postId;
+    try {
+        const postToDelete = await Post.findById(postId);
+
+        if (!postToDelete) {
+            // Post not found
+            response.status(404).json({ message: `Post not found with id: ${postId}` });
+            return;
+        }
+
+        // Get author of the post
+        const authorId = postToDelete.author._id.toString();
+
+        // Proceed deletion if the author is the same as the current user
+        if (request.user.id === authorId) {
+            await postToDelete.deleteOne();
+            response.status(200).json({ message: `Deleted post: # ${postId}` });
+        } else {
+            response.status(400).json({ message: "Only author can delete post" });
+        }
+    } catch (error) {
+        next(error);
+    }
+});
+
 module.exports = postsRouter;

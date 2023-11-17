@@ -1,13 +1,15 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import noProfilePhoto from "../icons/noprofile.jpg";
 import DotDotDot from "../icons/dotdotdot.svg?react";
 import Like from "../icons/like.svg?react";
 import Comment from "../icons/comment.svg?react";
 import LikeCount from "../icons/like-count.svg?react";
+import EditPenIcon from "../icons/edit-pen-google.svg?react";
+import DeleteIcon from "../icons/delete.svg?react";
 import { format, parseISO } from "date-fns";
 import UserCommentBox from "./UserCommentBox";
 import Comments from "./Comments";
-import { Link } from "react-router-dom";
 import axios from "axios";
 
 const Post = ({ post, getAllPosts, currentUser }) => {
@@ -68,7 +70,21 @@ const Post = ({ post, getAllPosts, currentUser }) => {
                     </div>
                 </div>
                 <div>
-                    <DotDotDot className="w-4"></DotDotDot>
+                    <details className="relative">
+                        <summary className="list-none" aria-haspopup="menu" role="button">
+                            <DotDotDot className="w-4" />
+                        </summary>
+                        <div className="absolute flex flex-col -bottom-16 -left-[100px] z-10 bg-slate-200 shadow-md border border-gray-300 rounded-md text-xs">
+                            <button className="flex items-center hover:bg-slate-300 w-full transition-colors p-1">
+                                <EditPenIcon className="w-6 h-6 mr-1" />
+                                <span className="w-full whitespace-nowrap text-left">Edit post</span>
+                            </button>
+                            <button className="flex items-center hover:bg-slate-300 w-full transition-colors p-1">
+                                <DeleteIcon className="w-6 h-6 mr-1 fill-red-600" />
+                                <span className="w-full whitespace-nowrap text-left">Delete post</span>
+                            </button>
+                        </div>
+                    </details>
                 </div>
             </div>
 

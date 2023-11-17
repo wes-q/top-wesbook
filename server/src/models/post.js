@@ -51,6 +51,11 @@ postSchema.set("toJSON", {
             delete returnedObject._id;
         }
 
+        if (!returnedObject.author.id && returnedObject.author._id) {
+            returnedObject.author.id = returnedObject.author._id.toString();
+            delete returnedObject.author._id;
+        }
+
         if (returnedObject.likes) {
             returnedObject.likes.forEach((like) => {
                 if (!like.id && like._id) like.id = like._id.toString();
