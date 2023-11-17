@@ -339,9 +339,9 @@ content-type: application/json
 }
 
 ###
-DELETE http://localhost:3001/api/posts/6556d6109fe74e96be63f2b1
+DELETE http://localhost:3001/api/posts/6556d6109fe74e96be63f2b2
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTBiNGY3OTczOGNiODkyNWFlYmExNiIsImlhdCI6MTcwMDA1NTMyMCwiZXhwIjoxNzAwMjI4MTIwfQ.BDqx28DEdibedthKArUlQIasj-3n6TXtmyZJkqNsyWk
 
 ###
-DELETE http://localhost:3001/api/posts/6550b4129738cb8925aeb9a7
+DELETE http://localhost:3001/api/posts/6556d6109fe74e96be63f2b22
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTBiNGY3OTczOGNiODkyNWFlYmExNiIsImlhdCI6MTcwMDA1NTMyMCwiZXhwIjoxNzAwMjI4MTIwfQ.BDqx28DEdibedthKArUlQIasj-3n6TXtmyZJkqNsyWk

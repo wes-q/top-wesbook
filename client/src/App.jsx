@@ -72,7 +72,7 @@ function App() {
             <>
                 <Route path="/" element={<RootLayout notification={notification} setNotification={setNotification} user={currentUser} showFooter={showFooter} showStartTimer={showStartTimer} setSeconds={setSeconds} seconds={seconds} />}>
                     <Route element={<PrivateRoutes user={currentUser} isLoadingUser={isLoadingUser} />}>
-                        <Route index element={<Newsfeed currentUser={currentUser} />} />
+                        <Route index element={<Newsfeed currentUser={currentUser} setNotification={setNotification} />} />
                         <Route path="play" element={<PlayPage setGame={setGame} />} />
                         <Route path="leaderboard" element={<LeaderboardPage />} />
                         <Route path="users" element={<Users user={currentUser} />} />

@@ -28,18 +28,18 @@ const create = async (newObject, headerConfig) => {
 //     }
 // };
 
-// const remove = async (id) => {
-//     try {
-//         const response = await axios.delete(`${baseUrl}/${id}`);
-//         return response.data;
-//     } catch (error) {
-//         throw error;
-//     }
-// };
+const remove = async (id, headers) => {
+    try {
+        const response = await axios.delete(`${baseUrl}/${id}`, headers);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+};
 
 export default {
     getAll,
     create,
     // update,
-    // remove,
+    remove,
 };

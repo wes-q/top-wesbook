@@ -6,7 +6,7 @@ import axios from "axios";
 import Post from "./Post";
 import { useParams } from "react-router-dom";
 
-const Posts = ({ userToDisplay, postsOf, currentUser }) => {
+const Posts = ({ userToDisplay, postsOf, currentUser, setNotification }) => {
     const [showNewPost, setShowNewPost] = useState(false);
     const [posts, setPosts] = useState([]);
     const { id } = useParams();
@@ -64,7 +64,7 @@ const Posts = ({ userToDisplay, postsOf, currentUser }) => {
                 )}
 
                 {posts.map((post, index) => {
-                    return <Post key={index} post={post} getAllPosts={getAllPosts} currentUser={currentUser} />;
+                    return <Post key={index} post={post} getAllPosts={getAllPosts} currentUser={currentUser} setNotification={setNotification} />;
                 })}
             </div>
         </>

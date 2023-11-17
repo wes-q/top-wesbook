@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import noProfilePhoto from "../icons/noprofile.jpg";
 import DotDotDot from "../icons/dotdotdot.svg?react";
@@ -11,13 +11,15 @@ import { format, parseISO } from "date-fns";
 import UserCommentBox from "./UserCommentBox";
 import Comments from "./Comments";
 import axios from "axios";
+import postService from "../services/posts";
 
-const Post = ({ post, getAllPosts, currentUser }) => {
+const Post = ({ post, getAllPosts, currentUser, setNotification }) => {
     const [isCommentClicked, setIsCommentClicked] = useState(false);
     const jsDate = parseISO(post.createdAt);
     const formattedDate = format(jsDate, "MMM dd, yyyy");
     const totalLikes = post.likes.length;
     const totalComments = post.comments.length;
+    const detailsRef = useRef(null);
 
     const handleComment = () => {
         setIsCommentClicked(true);
@@ -47,6 +49,39 @@ const Post = ({ post, getAllPosts, currentUser }) => {
         }
     };
 
+    const handleDeletePost = async (postId) => {
+        let headers;
+        const loggedUserToken = window.localStorage.getItem("loggedUserToken");
+        if (loggedUserToken) {
+            headers = {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${loggedUserToken}`,
+            };
+        } else {
+            return;
+        }
+
+        if (confirm("Are you sure you want to delete this post?")) {
+            console.log(headers);
+            try {
+                await postService.remove(postId, { headers });
+                getAllPosts();
+                setNotification({ message: "Deleted post", type: "success" });
+                setTimeout(() => {
+                    setNotification(false);
+                }, 5000);
+            } catch (error) {
+                console.log(error);
+                setNotification({ message: error.response.data.message, type: "error" });
+                setTimeout(() => {
+                    setNotification(false);
+                }, 5000);
+            } finally {
+                detailsRef.current.open = false; //Close the details element
+            }
+        }
+    };
+
     return (
         <div className="flex flex-col w-full border ring-1 mb-4 rounded-md bg-slate-200 p-2">
             <div className="flex items-center justify-between mb-2">
@@ -70,7 +105,7 @@ const Post = ({ post, getAllPosts, currentUser }) => {
                     </div>
                 </div>
                 <div>
-                    <details className="relative">
+                    <details ref={detailsRef} className="relative">
                         <summary className="list-none" aria-haspopup="menu" role="button">
                             <DotDotDot className="w-4" />
                         </summary>
@@ -79,7 +114,7 @@ const Post = ({ post, getAllPosts, currentUser }) => {
                                 <EditPenIcon className="w-6 h-6 mr-1" />
                                 <span className="w-full whitespace-nowrap text-left">Edit post</span>
                             </button>
-                            <button className="flex items-center hover:bg-slate-300 w-full transition-colors p-1">
+                            <button className="flex items-center hover:bg-slate-300 w-full transition-colors p-1" onClick={() => handleDeletePost(post.id)}>
                                 <DeleteIcon className="w-6 h-6 mr-1 fill-red-600" />
                                 <span className="w-full whitespace-nowrap text-left">Delete post</span>
                             </button>
