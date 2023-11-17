@@ -74,9 +74,11 @@ const Post = ({ post, getAllPosts, currentUser }) => {
 
             <hr className="w-full border-t border-gray-300 mb-4" />
             <span className="mb-4 break-words whitespace-pre-wrap">{post.content}</span>
-            <div className="overflow-auto max-h-[460px] mb-2">
-                <img className="object-cover max-w-full h-auto" src={post.postPhoto} alt="Post Photo" />
-            </div>
+            {post.postPhoto && (
+                <div className="overflow-auto max-h-[460px] mb-2">
+                    <img className="object-cover max-w-full h-auto" src={post.postPhoto} alt="Post Photo" />
+                </div>
+            )}
 
             <div className="flex justify-between text-xs mb-2">
                 {totalLikes > 0 && (

@@ -12,6 +12,7 @@ const ModalNewPost = ({ setShowNewPost, currentUser, getAllPosts }) => {
     const textAreaRef = useRef(null);
     const [postImage, setPostImage] = useState(null);
     const [files, setFiles] = useState(null);
+    const [isDisabled, setIsDisabled] = useState(true);
 
     const handleClose = () => {
         setShowNewPost(false);
@@ -91,9 +92,11 @@ const ModalNewPost = ({ setShowNewPost, currentUser, getAllPosts }) => {
     useEffect(() => {
         // Check if there's text in the textarea or an image is selected
         if (postText.length > 0 || postImage) {
-            setPostBackgroundColor("bg-primary text-black ring-1"); // Change to your desired background color
+            setPostBackgroundColor("bg-primary text-black ring-1");
+            setIsDisabled(false);
         } else {
-            setPostBackgroundColor("bg-gray-500 text-white hover:cursor-not-allowed"); // Restore the default background color
+            setPostBackgroundColor("bg-gray-500 text-white hover:cursor-not-allowed");
+            setIsDisabled(true);
         }
     }, [postText, postImage]);
 
@@ -138,7 +141,7 @@ const ModalNewPost = ({ setShowNewPost, currentUser, getAllPosts }) => {
                             </form>
                         </label>
 
-                        <button className={`px-4 py-1 w-1/2 ${postBackgroundColor} bg-gray-500 rounded-sm`} onClick={handlePost}>
+                        <button className={`px-4 py-1 w-1/2 ${postBackgroundColor} bg-gray-500 rounded-sm`} onClick={handlePost} disabled={isDisabled}>
                             Post
                         </button>
                     </div>
