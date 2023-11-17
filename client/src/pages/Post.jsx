@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import noProfilePhoto from "../icons/noprofile.jpg";
 import DotDotDot from "../icons/dotdotdot.svg?react";
@@ -81,6 +81,25 @@ const Post = ({ post, getAllPosts, currentUser, setNotification }) => {
             }
         }
     };
+
+    // Collapses the popup when user clicks outside
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            // Check if the click is outside the details element
+            if (detailsRef.current && !detailsRef.current.contains(event.target)) {
+                // Close the details element
+                detailsRef.current.open = false;
+            }
+        };
+
+        // Add click event listener to the entire document
+        document.addEventListener("click", handleClickOutside);
+
+        // Clean up the event listener when the component unmounts
+        return () => {
+            document.removeEventListener("click", handleClickOutside);
+        };
+    }, []);
 
     return (
         <div className="flex flex-col w-full border ring-1 mb-4 rounded-md bg-slate-200 p-2">

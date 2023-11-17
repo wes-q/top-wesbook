@@ -1,30 +1,38 @@
-import React from "react";
-import noProfilePhoto from "../icons/noprofile.jpg";
-import { Link } from "react-router-dom";
+import { useEffect, useRef } from "react";
+import Comment from "./Comment";
 
 const Comments = ({ post }) => {
+    //TODO: check if slowdown occurs because each component attaches an event listener to the document
+    // const detailsContainerRef = useRef(null);
+
+    // useEffect(() => {
+    //     const handleClickOutside = (event) => {
+    //         // Check if the click is outside the details element
+    //         if (!detailsContainerRef.current || detailsContainerRef.current.contains(event.target)) {
+    //             return;
+    //         }
+
+    //         // Close the details element
+    //         detailsRef.current.open = false;
+    //     };
+
+    //     // Add click event listener to a common ancestor (detailsContainerRef)
+    //     document.addEventListener("click", handleClickOutside);
+
+    //     // Clean up the event listener when the component unmounts
+    //     return () => {
+    //         document.removeEventListener("click", handleClickOutside);
+    //     };
+    // }, []);
+
+    // const handleDeleteComment = (commentId) => {
+    //     alert(commentId);
+    // };
+
     return (
         <div>
             {post.comments.map((comment, index) => (
-                <div key={index} className="flex items-start mb-2 text-xs">
-                    <Link to={`/profile/${comment.postedBy.id}`}>
-                        <img
-                            className="rounded-full w-8 h-8 mr-2 object-cover border border-white ring-1"
-                            src={comment.postedBy.profilePhoto || noProfilePhoto}
-                            alt="profile photo"
-                            referrerPolicy="no-referrer"
-                            onError={(e) => {
-                                e.target.src = noProfilePhoto;
-                            }}
-                        />
-                    </Link>
-                    <div className="flex flex-col max-w-[260px] outline-none bg-slate-300 rounded-2xl pl-4 pr-4 py-1" spellCheck="true">
-                        <Link to={`/profile/${comment.postedBy.id}`}>
-                            <span className="font-bold hover:underline">{comment.postedBy.firstName || comment.postedBy.displayName}</span>
-                        </Link>
-                        <span className="text-black w-full cursor-text break-words whitespace-pre-wrap">{comment.text}</span>
-                    </div>
-                </div>
+                <Comment comment={comment} key={index} />
             ))}
         </div>
     );
