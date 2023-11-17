@@ -24,18 +24,24 @@ const ModalNewPost = ({ setShowNewPost, currentUser, getAllPosts }) => {
     };
 
     const handlePost = async () => {
-        // Step 1: Save image to cloud storage
-        const url = "/api/uploadImage";
-        const form = new FormData();
+        let postPhoto = "";
+        // Step 1: Save image to cloud storage if there is image
         if (files) {
+            const url = "/api/uploadImage";
+            const form = new FormData();
             form.append("image", files[0], "image.jpg");
+            try {
+                const cloudinaryUrl = await axios.post(url, form);
+                postPhoto = cloudinaryUrl.data;
+            } catch (error) {
+                console.log(error);
+            }
         }
-        const cloudinaryUrl = await axios.post(url, form);
 
         // Step 2: Save photo and content to the post collection
         const object = {
             content: postText,
-            postPhoto: cloudinaryUrl.data,
+            postPhoto: postPhoto,
         };
 
         const loggedUserToken = window.localStorage.getItem("loggedUserToken");

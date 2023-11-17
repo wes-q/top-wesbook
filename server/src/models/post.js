@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 
+// Can nest postPhoto inside content in order to make content required with either photo or text
+// Can make postPhoto an array to allow multiple photos in a single post
 const postSchema = new mongoose.Schema({
     author: {
         type: mongoose.Schema.Types.ObjectId,
@@ -8,7 +10,6 @@ const postSchema = new mongoose.Schema({
     },
     content: {
         type: String,
-        required: true,
         max: 280,
     },
     postPhoto: {
