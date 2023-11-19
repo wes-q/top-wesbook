@@ -5,6 +5,7 @@ const { body } = require("express-validator");
 const User = require("../models/user");
 const config = require("../utils/config");
 const { validateRequestSchema, userExtractor } = require("../utils/middleware");
+const appendVirtualFields = require("../utils/appendVirtualFields");
 
 // const path = require("path");
 // const fs = require("fs");
@@ -261,16 +262,14 @@ usersRouter.put("/api/users/:id", userExtractor, async (request, response, next)
 });
 
 // Create a friend request
+// Requires JWT inside Authorization Bearer header
+// Requires object with toUserId: String
 usersRouter.post("/api/friend-requests", userExtractor, async (req, res, next) => {
     try {
         const { toUserId } = req.body;
         const fromUserId = req.user.id;
-        // console.log(toUserId);
-        // console.log(fromUserId);
         const fromUser = await User.findById(fromUserId);
         const toUser = await User.findById(toUserId);
-        // console.log(fromUser.id);
-        // console.log(toUser.id);
 
         // Check if the users exist
         if (!fromUser || !toUser) {
@@ -285,7 +284,8 @@ usersRouter.post("/api/friend-requests", userExtractor, async (req, res, next) =
         toUser.friendRequests.push({ friendId: fromUserId });
         const updatedUser = await toUser.save();
 
-        res.status(201).json(updatedUser);
+        const appendedUser = appendVirtualFields(updatedUser, fromUserId);
+        res.status(201).json(appendedUser);
     } catch (error) {
         next(error);
     }
