@@ -285,7 +285,7 @@ usersRouter.post("/api/friend-requests", userExtractor, async (req, res, next) =
         const updatedUser = await toUser.save();
 
         const appendedUser = appendVirtualFields(updatedUser, fromUserId);
-        res.status(201).json(appendedUser);
+        res.status(201).json(appendedUser[0]);
     } catch (error) {
         next(error);
     }
@@ -296,7 +296,6 @@ usersRouter.post("/api/friend-requests/:id/cancel", userExtractor, async (req, r
     const currentUserId = req.user.id;
     const userIdToDelete = req.user.id;
     const userToUpdate = await User.findById(req.params.id);
-    let status;
 
     try {
         const indexToDelete = userToUpdate.friendRequests.findIndex((friendReq) => friendReq.friendId.toString() === userIdToDelete);
@@ -306,29 +305,8 @@ usersRouter.post("/api/friend-requests/:id/cancel", userExtractor, async (req, r
         }
         const updatedUser = await userToUpdate.save();
 
-        const isFriends = updatedUser.friends.some((friend) => friend.friendId.toString() === currentUserId);
-        const isPending = updatedUser.friendRequests.some((friend) => friend.friendId.toString() === currentUserId);
-
-        if (updatedUser.id === currentUserId) {
-            status = "self";
-        } else if (isFriends) {
-            status = "friend";
-        } else if (isPending) {
-            status = "pending";
-        } else {
-            status = "notFriend";
-        }
-
-        const userWithStatus = [updatedUser].map((user) => {
-            const totalFriends = user.totalFriends;
-            return {
-                ...user.toJSON(),
-                status,
-                totalFriends,
-            };
-        });
-
-        res.status(200).json(userWithStatus[0]);
+        const appendedUser = appendVirtualFields(updatedUser, currentUserId);
+        res.status(200).json(appendedUser[0]);
     } catch (error) {
         next(error);
     }

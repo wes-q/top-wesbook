@@ -161,11 +161,11 @@ const Profile = ({ userToDisplay, setNotification, setUserToDisplay, setCurrentU
                 )}
                 {userToDisplay.status === "pending" && (
                     <div className="flex">
-                        <button className="flex items-center bg-cyan-400 text-white text-xs px-3 py-1 rounded-md mr-2" onClick={() => handleCancel(userToDisplay.id)}>
+                        <button className="flex items-center bg-slate-400 text-white text-xs px-3 py-1 rounded-md mr-2" onClick={() => handleCancel(userToDisplay.id)}>
                             <PersonRemoveIcon className="fill-white w-5 h-5 mr-1" />
                             Request sent
                         </button>
-                        <button className="flex items-center bg-slate-400 text-white text-xs px-3 py-1 rounded-md">
+                        <button className="flex items-center bg-cyan-400 text-white text-xs px-3 py-1 rounded-md">
                             <MessengerIcon className="fill-white w-4 h-4 mr-1" />
                             Message
                         </button>
