@@ -21,9 +21,11 @@ const Post = ({ post, getAllPosts, currentUser, setNotification }) => {
     const totalLikes = post.likes.length;
     const totalComments = post.comments.length;
     const detailsRef = useRef(null);
+    const contentEditableRef = useRef(null);
 
     const handleComment = () => {
         setIsCommentClicked(true);
+        contentEditableRef.current && contentEditableRef.current.focus();
     };
 
     function pluralize(word, count) {
@@ -173,7 +175,7 @@ const Post = ({ post, getAllPosts, currentUser, setNotification }) => {
             <hr className="w-full border-t border-gray-300 mb-4" />
 
             <Comments post={post} setNotification={setNotification} getAllPosts={getAllPosts}></Comments>
-            <UserCommentBox currentUser={currentUser} getAllPosts={getAllPosts} postId={post.id} setIsCommentClicked={setIsCommentClicked} isCommentClicked={isCommentClicked} />
+            <UserCommentBox currentUser={currentUser} getAllPosts={getAllPosts} postId={post.id} setIsCommentClicked={setIsCommentClicked} isCommentClicked={isCommentClicked} contentEditableRef={contentEditableRef} />
         </div>
     );
 };

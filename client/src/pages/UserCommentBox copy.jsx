@@ -12,9 +12,9 @@ const UserCommentBox = ({ currentUser, getAllPosts, postId, isCommentClicked, se
     const [isDisabled, setIsDisabled] = useState(true);
     // const [placeholder, setPlaceholder] = useState()
 
-    // const handlePlaceholderClick = () => {
-    //     // setIsCommentClicked(true);
-    //     // alert();
+    // const handleCommentClick = () => {
+    //     setIsCommentClicked(true);
+    //     alert();
     //     contentEditableRef.current.focus();
     // };
 
@@ -86,21 +86,30 @@ const UserCommentBox = ({ currentUser, getAllPosts, postId, isCommentClicked, se
                     }}
                 />
             )}
-            <div className="relative flex flex-col grow max-w-[280px] outline-none bg-slate-300 rounded-2xl pl-4 pr-3 py-1" spellCheck="false">
-                <div ref={contentEditableRef} className="outline-none w-full max-w-full py-1" contentEditable="true" onInput={handleTextChange}></div>
-                <span className="absolute top-2 text-gray-500" onClick={() => contentEditableRef.current.focus()}>
-                    {isDisabled && "Write a comment..."}
-                </span>
-                <div className="flex justify-between items-center">
-                    <div className="flex">
-                        <Emoji className="w-5 mr-1" />
-                        <Camera className="w-5 mr-1" />
-                    </div>
-                    <div>
-                        <Send className={`w-6 ${postIconStyle}`} onClick={() => handleSubmitComment(postId)}></Send>
+            {isCommentClicked ? (
+                <div className="flex flex-col grow max-w-[300px] outline-none bg-slate-300 rounded-2xl pl-4 pr-3 py-1" spellCheck="false">
+                    <div ref={contentEditableRef} className="outline-none w-full max-w-full py-1" contentEditable="true" onInput={handleTextChange}></div>
+                    <div className="flex justify-between items-center">
+                        <div className="flex">
+                            <Emoji className="w-5 mr-1" />
+                            <Camera className="w-5 mr-1" />
+                        </div>
+                        <div>
+                            <Send className={`w-6 mr-2 ${postIconStyle}`} onClick={() => handleSubmitComment(postId)}></Send>
+                        </div>
                     </div>
                 </div>
-            </div>
+            ) : (
+                <div className="flex justify-center grow max-w-[300px] outline-none bg-slate-300 rounded-2xl pl-4 pr-3 py-1" spellCheck="true">
+                    <div className="flex justify-between w-full items-center">
+                        <span className="text-gray-500 w-full cursor-text">
+                            {/* <span className="text-gray-500 w-full cursor-text" onClick={handleCommentClick}> */}
+                            Write a comment...
+                        </span>
+                        <Send className="w-6 mr-2 cursor-not-allowed"></Send>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

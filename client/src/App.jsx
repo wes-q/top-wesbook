@@ -30,16 +30,22 @@ function App() {
     const [game, setGame] = useState(null);
 
     useEffect(() => {
-        getUserLocal();
+        const timeoutId = getUserLocal();
+
+        return () => {
+            // Cleanup code
+            clearTimeout(timeoutId);
+        };
     }, []);
 
     const getUserLocal = async () => {
         const headers = getUserHeaders();
+        let timeoutId;
         try {
             const data = await loginService.loginSuccess({ headers });
             setCurrentUser(data.user);
             setNotification({ message: "Login successful!", type: "success" });
-            setTimeout(() => {
+            timeoutId = setTimeout(() => {
                 setNotification(false);
             }, 5000);
         } catch (error) {
@@ -56,6 +62,7 @@ function App() {
         } finally {
             setIsLoadingUser(false);
         }
+        return timeoutId;
     };
 
     const router = createBrowserRouter(
