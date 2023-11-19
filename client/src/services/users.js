@@ -34,9 +34,9 @@ const create = async (newObject) => {
 //     }
 // };
 
-const update = async (id, newObject, customHeaders) => {
+const update = async (id, newObject, headers) => {
     try {
-        const response = await axios.put(`${baseUrl}/${id}`, newObject, { headers: customHeaders });
+        const response = await axios.put(`${baseUrl}/${id}`, newObject, headers);
         return response.data;
     } catch (error) {
         throw error;

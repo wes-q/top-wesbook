@@ -4,8 +4,9 @@ import { Link } from "react-router-dom";
 import DotDotDotIcon from "../icons/dotdotdot.svg?react";
 import EditPenIcon from "../icons/edit-pen-google.svg?react";
 import DeleteIcon from "../icons/delete.svg?react";
+import getUserHeaders from "../helpers/getUserHeaders";
 
-const Comment = ({ comment }) => {
+const Comment = ({ comment, postId }) => {
     const detailsRef = useRef(null);
 
     // Collapses the popup when user clicks outside
@@ -27,9 +28,7 @@ const Comment = ({ comment }) => {
         };
     }, []);
 
-    const handleDeleteComment = (commentId) => {
-        alert(commentId);
-    };
+    const handleDeleteComment = (commentId, postId) => {};
 
     return (
         <div className="flex items-start mb-2 text-xs">

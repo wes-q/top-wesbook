@@ -3,6 +3,7 @@ import userService from "../services/users";
 import { useNavigate } from "react-router-dom";
 import Spinner from "../icons/spinner.svg?react";
 import ProfilePhotoUpload from "./ProfilePhotoUpload";
+import getUserHeaders from "../helpers/getUserHeaders";
 
 const UpdateProfile = ({ user, setNotification, setUser }) => {
     const navigate = useNavigate();
@@ -43,11 +44,14 @@ const UpdateProfile = ({ user, setNotification, setUser }) => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+
         setDisplayNameDisabled(true);
         setLastNameDisabled(true);
         setFirstNameDisabled(true);
+
+        const headers = getUserHeaders();
         try {
-            const userData = await userService.update(user.id, formData);
+            const userData = await userService.update(user.id, formData, { headers });
             console.log(`USERDATA: ${JSON.stringify(userData)}`);
             // if DB was successfully updated then update the state also
             setUser(userData);

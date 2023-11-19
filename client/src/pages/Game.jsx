@@ -110,33 +110,22 @@ const Game = ({ setShowFooter, setShowStartTimer, seconds, setSeconds, game }) =
             }
 
             // Attempt to save score to database if the user is logged in
-            const loggedUserToken = window.localStorage.getItem("loggedUserToken");
-            if (loggedUserToken) {
-                // const endpoint = "http://localhost:3001/api/scores/";
-                const endpoint = "/api/scores/";
+            const url = "/api/scores/";
+            const object = {
+                puzzle: game.puzzle,
+                seconds: seconds,
+            };
+            const headers = getUserHeaders();
 
-                const newScore = {
-                    puzzle: game.puzzle,
-                    seconds: seconds,
-                };
-
-                const headerConfig = {
-                    headers: {
-                        "Content-Type": "application/json",
-                        Authorization: `Bearer ${loggedUserToken}`,
-                    },
-                };
-
-                try {
-                    await axios.post(endpoint, newScore, headerConfig);
-                    setIsUserLegit(true);
-                } catch (error) {
-                    console.log(error);
-                    setIsUserLegit(false);
-                }
-            } else {
+            try {
+                await axios.post(url, object, { headers });
+                setIsUserLegit(true);
+            } catch (error) {
+                console.log(error);
                 setIsUserLegit(false);
             }
+        } else {
+            setIsUserLegit(false);
         }
     };
 

@@ -73,20 +73,16 @@ function DropdownMenu({ user, handleClickOutside, dropdownRef, setNotification, 
     };
 
     const verifyEmail = async () => {
-        const loggedUserToken = window.localStorage.getItem("loggedUserToken");
-        const headerConfig = {
-            headers: { Authorization: `Bearer ${loggedUserToken}` },
-        };
-
+        const headers = getUserHeaders();
         try {
-            await emailService.sendEmail(headerConfig);
+            await emailService.sendEmail({ headers });
             setOpen(!open); // Close the dropdown menu
             setNotification({ message: `Sent verification email to: ${user.email}`, type: "info" });
             setTimeout(() => {
                 setNotification(false);
-            }, 10000);
+            }, 5000);
         } catch (error) {
-            console.log(`VERIFYEMAIL${error}`);
+            console.log(error);
         }
     };
 
