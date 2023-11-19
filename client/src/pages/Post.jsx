@@ -47,7 +47,6 @@ const Post = ({ post, getAllPosts, currentUser, setNotification }) => {
         const headers = getUserHeaders();
 
         if (confirm("Are you sure you want to delete this post?")) {
-            console.log(headers);
             try {
                 await postService.remove(postId, { headers });
                 getAllPosts();
@@ -173,7 +172,7 @@ const Post = ({ post, getAllPosts, currentUser, setNotification }) => {
 
             <hr className="w-full border-t border-gray-300 mb-4" />
 
-            <Comments post={post}></Comments>
+            <Comments post={post} setNotification={setNotification} getAllPosts={getAllPosts}></Comments>
             <UserCommentBox currentUser={currentUser} getAllPosts={getAllPosts} postId={post.id} setIsCommentClicked={setIsCommentClicked} isCommentClicked={isCommentClicked} />
         </div>
     );

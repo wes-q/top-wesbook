@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import Comment from "./Comment";
 
-const Comments = ({ post }) => {
+const Comments = ({ post, setNotification, getAllPosts }) => {
     //TODO: check if slowdown occurs because each component attaches an event listener to the document
     // const detailsContainerRef = useRef(null);
 
@@ -28,7 +28,7 @@ const Comments = ({ post }) => {
     return (
         <div>
             {post.comments.map((comment, index) => (
-                <Comment comment={comment} key={index} postId={post.id} />
+                <Comment comment={comment} key={index} postId={post.id} setNotification={setNotification} getAllPosts={getAllPosts} />
             ))}
         </div>
     );

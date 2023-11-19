@@ -4,9 +4,10 @@ import { Link } from "react-router-dom";
 import DotDotDotIcon from "../icons/dotdotdot.svg?react";
 import EditPenIcon from "../icons/edit-pen-google.svg?react";
 import DeleteIcon from "../icons/delete.svg?react";
+import axios from "axios";
 import getUserHeaders from "../helpers/getUserHeaders";
 
-const Comment = ({ comment, postId }) => {
+const Comment = ({ comment, postId, setNotification, getAllPosts }) => {
     const detailsRef = useRef(null);
 
     // Collapses the popup when user clicks outside
@@ -28,7 +29,31 @@ const Comment = ({ comment, postId }) => {
         };
     }, []);
 
-    const handleDeleteComment = (commentId, postId) => {};
+    const handleDeleteComment = async (postId, commentId) => {
+        if (confirm("Are you sure you want to delete this post?")) {
+            const url = `/api/posts/${postId}/comments/${commentId}`;
+            const headers = getUserHeaders();
+
+            try {
+                const message = await axios.delete(url, { headers });
+                console.log(message.data);
+                getAllPosts();
+                // setNotification({ message: message.data.message, type: "info" });
+                setNotification({ message: "Comment deleted", type: "info" });
+                setTimeout(() => {
+                    setNotification(false);
+                }, 2000);
+            } catch (error) {
+                console.log(error);
+                setNotification({ message: error.response.data.message, type: "error" });
+                setTimeout(() => {
+                    setNotification(false);
+                }, 5000);
+            } finally {
+                detailsRef.current.open = false; //Close the details element
+            }
+        }
+    };
 
     return (
         <div className="flex items-start mb-2 text-xs">
@@ -61,7 +86,7 @@ const Comment = ({ comment, postId }) => {
                             <EditPenIcon className="w-6 h-6 mr-1" />
                             <span className="w-full whitespace-nowrap text-left">Edit</span>
                         </button>
-                        <button className="flex items-center hover:bg-slate-300 w-full transition-colors p-1" onClick={() => handleDeleteComment(comment.id)}>
+                        <button className="flex items-center hover:bg-slate-300 w-full transition-colors p-1" onClick={() => handleDeleteComment(postId, comment.id)}>
                             <DeleteIcon className="w-6 h-6 mr-1 fill-red-600" />
                             <span className="w-full whitespace-nowrap text-left">Delete</span>
                         </button>

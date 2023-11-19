@@ -151,7 +151,10 @@ postsRouter.delete("/api/posts/:postId", middleware.userExtractor, async (reques
     }
 });
 
-// # DELETE /api/posts/:postId/comments/:commentId
+// DELETE /api/posts/:postId/comments/:commentId
+// Requires JWT inside Authorization Bearer header
+// Requires postId and commentId as params
+// Returns message for notification
 postsRouter.delete("/api/posts/:postId/comments/:commentId", middleware.userExtractor, async (request, response, next) => {
     //get the comment to delete
     //check if it is found
