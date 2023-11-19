@@ -152,25 +152,25 @@ postsRouter.delete("/api/posts/:postId", middleware.userExtractor, async (reques
 });
 
 // # DELETE /api/posts/:postId/comments/:commentId
-postsRouter.delete("/api/comments/:commentId", middleware.userExtractor, async (request, response, next) => {
+postsRouter.delete("/api/posts/:postId/comments/:commentId", middleware.userExtractor, async (request, response, next) => {
     //get the comment to delete
     //check if it is found
     //if found then check if the author is the current user
     //if yes then delete the comment
 
-    // const postId = request.params.postId;
+    const postId = request.params.postId;
     const commentId = request.params.commentId;
     const userId = request.user.id;
     try {
-        // const postToUpdate = await Post.findById(postId);
+        const postToUpdate = await Post.findById(postId);
 
-        // if (!postToUpdate) {
-        //     // Post not found
-        //     response.status(404).json({ message: `Post not found with id: ${postId}` });
-        //     return;
-        // }
+        if (!postToUpdate) {
+            // Post not found
+            response.status(404).json({ message: `Post not found with id: ${postId}` });
+            return;
+        }
 
-        const commentToDelete = Post.comments.find((comment) => comment._id.toString() === commentId);
+        const commentToDelete = postToUpdate.comments.find((comment) => comment._id.toString() === commentId);
 
         if (!commentToDelete) {
             // Post not found

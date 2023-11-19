@@ -18,9 +18,8 @@ const Profile = ({ userToDisplay, setNotification, setUserToDisplay, setCurrentU
         };
 
         try {
-            const result = await axios.post(url, userObject, { headers });
-            console.log(result.data);
-            // getUser();
+            const updatedUser = await axios.post(url, userObject, { headers });
+            setUserToDisplay(updatedUser.data);
         } catch (error) {
             console.log(error);
         }
