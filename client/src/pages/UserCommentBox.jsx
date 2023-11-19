@@ -18,8 +18,7 @@ const UserCommentBox = ({ currentUser, getAllPosts, postId, isCommentClicked, se
     };
 
     const handleTextChange = (event) => {
-        // const text = event.target.innerText;
-        const text = contentEditableRef.current.innerText;
+        const text = contentEditableRef.current.innerText.trim();
         setCommentText(text);
     };
 
