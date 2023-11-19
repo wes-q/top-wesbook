@@ -7,11 +7,11 @@ import Profile from "./Profile";
 
 const ProfilePage = ({ setNotification, currentUser, setCurrentUser }) => {
     const [userToDisplay, setUserToDisplay] = useState([]);
-    const { id } = useParams();
+    const { userId } = useParams();
 
     useEffect(() => {
         getUser();
-    }, [id]);
+    }, [userId]);
 
     const getUser = async () => {
         const loggedUserToken = window.localStorage.getItem("loggedUserToken");
@@ -23,7 +23,7 @@ const ProfilePage = ({ setNotification, currentUser, setCurrentUser }) => {
             };
         }
 
-        const url = `/api/users/${id}`;
+        const url = `/api/users/${userId}`;
         const user = await axios.get(url, { headers });
         console.log(user.data);
         setUserToDisplay(user.data);

@@ -8,6 +8,7 @@ import DeleteIcon from "../icons/delete.svg?react";
 const Comment = ({ comment }) => {
     const detailsRef = useRef(null);
 
+    // Collapses the popup when user clicks outside
     useEffect(() => {
         const handleClickOutside = (event) => {
             // Check if the click is outside the details element
@@ -25,6 +26,10 @@ const Comment = ({ comment }) => {
             document.removeEventListener("click", handleClickOutside);
         };
     }, []);
+
+    const handleDeleteComment = (commentId) => {
+        alert(commentId);
+    };
 
     return (
         <div className="flex items-start mb-2 text-xs">

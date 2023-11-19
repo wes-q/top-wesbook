@@ -76,7 +76,8 @@ postsRouter.get("/api/posts-of-self", middleware.userExtractor, async (request, 
     response.json(postsWithIsLiked);
 });
 
-postsRouter.get("/api/posts/:userId", middleware.userExtractor, async (request, response, next) => {
+//GET /api/users/{userId}/posts
+postsRouter.get("/api/users/:userId/posts", middleware.userExtractor, async (request, response, next) => {
     const posts = await Post.find().where("author").equals(request.params.userId).populate({ path: "author", select: "firstName displayName profilePhoto" }).populate({ path: "comments.postedBy", select: "firstName displayName profilePhoto" });
 
     const postsWithIsLiked = posts.map((post) => {
@@ -146,6 +147,48 @@ postsRouter.delete("/api/posts/:postId", middleware.userExtractor, async (reques
         } else {
             response.status(400).json({ message: "Only author can delete post" });
         }
+    } catch (error) {
+        next(error);
+    }
+});
+
+// # DELETE /api/posts/:postId/comments/:commentId
+postsRouter.delete("/api/posts/:postId/comments/:commentId", middleware.userExtractor, async (request, response, next) => {
+    //get the comment to delete
+    //check if it is found
+    //if found then check if the author is the current user
+    //if yes then delete the comment
+
+    // const postId = request.params.postId;
+    // const commentId = request.params.commentId;
+    const postId = request.params.postId;
+    try {
+        const postToDelete = await Post.findById(postId);
+
+        if (!postToDelete) {
+            // Post not found
+            response.status(404).json({ message: `Post not found with id: ${postId}` });
+            return;
+        }
+
+        // try {
+        //     // const postToUpdate = await Post.findById(postId);
+        //     const postToUpdate = await Post.findById(request.params.postId);
+
+        //     // const commentToDelete = await postToUpdate.comments.findbyId(commentId);
+        //     response.json(postToUpdate);
+
+        // if (!commentToDelete) {
+        //     // Post not found
+        //     response.status(404).json({ message: `Comment not found with id: ${commentId}` });
+        //     return;
+        // }
+
+        // await commentToDelete.deleteOne();
+        // response.status(200).json({ message: `Deleted comment: # ${commentId}` });
+
+        // // Get author of the post
+        // const authorId = postToDelete.author._id.toString();
     } catch (error) {
         next(error);
     }

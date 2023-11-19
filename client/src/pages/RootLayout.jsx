@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Outlet, NavLink } from "react-router-dom";
 import Footer from "./Footer";
 import Notification from "./Notification";
@@ -13,6 +13,27 @@ export default function RootLayout({ notification, user, setNotification, showFo
     // const isUserLoaded = user && user.firstName && user.profilePhoto;
     const isUserLoaded = user;
     const [isExpanded, setIsExpanded] = useState(false);
+
+    // const dropdownRef = useRef(null);
+    // const dropdownRef2 = useRef(null);
+
+    // // Collapses the popup when user clicks outside
+    // useEffect(() => {
+    //     const handleClickOutside = (event) => {
+    //         if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+    //             // Close the navbar dropdown
+    //             // setIsExpanded(false);
+    //             dropdownRef.current.open = false;
+    //             dropdownRef2.current.open = false;
+    //         }
+    //     };
+
+    //     document.addEventListener("click", handleClickOutside);
+
+    //     return () => {
+    //         document.removeEventListener("click", handleClickOutside);
+    //     };
+    // }, []);
 
     return (
         <div className="flex flex-col min-h-screen h-full bg-slate-600 text-white text-sm sm:text-base font-nunito">
@@ -69,6 +90,7 @@ export default function RootLayout({ notification, user, setNotification, showFo
                     <AnimatePresence>
                         {isExpanded && (
                             <motion.div
+                                // ref={dropdownRef}
                                 className="absolute top-16 left-0 z-40 grid grid-cols-2 sm:hidden sm:flex-row sm:justify-center sm:items-center sm:gap-10"
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
@@ -95,6 +117,7 @@ export default function RootLayout({ notification, user, setNotification, showFo
                     <AnimatePresence>
                         {isExpanded && (
                             <motion.div
+                                // ref={dropdownRef2}
                                 className="absolute z-10 grid grid-cols-2 left-0 top-16 w-full h-auto bg-gray-800 p-3"
                                 initial={{ opacity: 0, height: 0 }}
                                 animate={{ opacity: 1, height: "auto" }}

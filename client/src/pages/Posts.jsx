@@ -9,7 +9,7 @@ import { useParams } from "react-router-dom";
 const Posts = ({ userToDisplay, postsOf, currentUser, setNotification }) => {
     const [showNewPost, setShowNewPost] = useState(false);
     const [posts, setPosts] = useState([]);
-    const { id } = useParams();
+    const { userId } = useParams();
 
     useEffect(() => {
         getAllPosts();
@@ -29,7 +29,8 @@ const Posts = ({ userToDisplay, postsOf, currentUser, setNotification }) => {
         if (postsOf === "friends") {
             url = "/api/posts-of-friends";
         } else if (postsOf === "user") {
-            url = `/api/posts/${id}`;
+            // url = `/api/posts/${id}`;
+            url = `/api/users/${userId}/posts`;
         }
 
         try {
@@ -53,7 +54,7 @@ const Posts = ({ userToDisplay, postsOf, currentUser, setNotification }) => {
 
             <div className="flex flex-col text-black text-sm items-start">
                 {/* {userToDisplay.status === "self" && ( */}
-                {(id === currentUser.id || postsOf === "friends") && (
+                {(userId === currentUser.id || postsOf === "friends") && (
                     <div className="flex items-center w-full h-16 border ring-1 mb-4 rounded-md bg-slate-200 p-2 hover:cursor-pointer hover:bg-cyan-400 transition-colors" onClick={handleNewPost}>
                         <PlusCircle className="h-10 w-10 mr-2" />
                         <div className="flex flex-col">

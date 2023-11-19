@@ -81,7 +81,7 @@ function App() {
                         <Route path="verification-successful" element={<VerificationSuccessful />} />
                         <Route path="verification-nothing" element={<VerificationNothing />} />
                         <Route path="update-profile" element={<UpdateProfile user={currentUser} setUser={setCurrentUser} setNotification={setNotification} />} />
-                        <Route path="profile/:id" element={<ProfilePage currentUser={currentUser} setCurrentUser={setCurrentUser} setNotification={setNotification} />} />
+                        <Route path="profile/:userId" element={<ProfilePage currentUser={currentUser} setCurrentUser={setCurrentUser} setNotification={setNotification} />} />
                     </Route>
 
                     <Route path="signup" element={<SignupForm setNotification={setNotification} />} />

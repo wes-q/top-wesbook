@@ -312,8 +312,16 @@ GET http://localhost:3001/api/posts-of-self
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1M2E0YjIzODVhZjFhYmE2ODY1YjY1MyIsImlhdCI6MTY5OTYxNjE5NSwiZXhwIjoxNjk5Nzg4OTk1fQ.Dr7b7uBCSOLC8udZk7dIZEOl_mhROFv8blhO2HK2jN0
 
 ###
-GET http://localhost:3001/api/posts/6550b31b9738cb8925aeb966
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTBiMzFiOTczOGNiODkyNWFlYjk2NiIsImlhdCI6MTcwMDAzMTk3MCwiZXhwIjoxNzAwMjA0NzcwfQ.hSwBsLunRqasEp707vWZSlaJIf6ladW9uEKq4TfTwh8
+GET http://localhost:3001/api/users/6550b31b9738cb8925aeb966/posts
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTBiMzFiOTczOGNiODkyNWFlYjk2NiIsImlhdCI6MTcwMDM1MDMxNiwiZXhwIjoxNzAwNTIzMTE2fQ.QR3Y0LlUiyP05ufsmcqTiHD3Wug5DmTG25LJceNdFkI
+
+###
+DELETE http://localhost:3001/api/posts/6550b31b9738cb8925aeb966/comments/65572cee5d3a3197899ea5c1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTBiMzFiOTczOGNiODkyNWFlYjk2NiIsImlhdCI6MTcwMDM1MDMxNiwiZXhwIjoxNzAwNTIzMTE2fQ.QR3Y0LlUiyP05ufsmcqTiHD3Wug5DmTG25LJceNdFkI
+
+# GET /api/posts/:postId/comments
+# POST /api/posts/:postId/comments
+# DELETE /api/posts/:postId/comments/:commentId
 
 
 ###
@@ -345,3 +353,4 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTBiNGY3O
 ###
 DELETE http://localhost:3001/api/posts/6556d6109fe74e96be63f2b22
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTBiNGY3OTczOGNiODkyNWFlYmExNiIsImlhdCI6MTcwMDA1NTMyMCwiZXhwIjoxNzAwMjI4MTIwfQ.BDqx28DEdibedthKArUlQIasj-3n6TXtmyZJkqNsyWk
+

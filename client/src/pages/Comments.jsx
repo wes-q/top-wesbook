@@ -25,10 +25,6 @@ const Comments = ({ post }) => {
     //     };
     // }, []);
 
-    // const handleDeleteComment = (commentId) => {
-    //     alert(commentId);
-    // };
-
     return (
         <div>
             {post.comments.map((comment, index) => (
