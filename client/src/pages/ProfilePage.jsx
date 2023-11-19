@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Profile from "./Profile";
+import getUserHeaders from "../helpers/getUserHeaders";
 
 const ProfilePage = ({ setNotification, currentUser, setCurrentUser }) => {
     const [userToDisplay, setUserToDisplay] = useState([]);
@@ -14,18 +15,9 @@ const ProfilePage = ({ setNotification, currentUser, setCurrentUser }) => {
     }, [userId]);
 
     const getUser = async () => {
-        const loggedUserToken = window.localStorage.getItem("loggedUserToken");
-        let headers;
-        if (loggedUserToken) {
-            headers = {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${loggedUserToken}`,
-            };
-        }
-
         const url = `/api/users/${userId}`;
+        const headers = getUserHeaders();
         const user = await axios.get(url, { headers });
-        console.log(user.data);
         setUserToDisplay(user.data);
     };
 

@@ -8,6 +8,7 @@ import CogIcon from "../icons/cog.svg?react";
 import emailService from "../services/emailService";
 import { useNavigate } from "react-router-dom";
 import noProfilePhoto from "../icons/noprofile.jpg";
+import getUserHeaders from "../helpers/getUserHeaders";
 
 export default function DropDown({ user, setNotification }) {
     const [open, setOpen] = useState(false);

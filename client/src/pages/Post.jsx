@@ -12,6 +12,7 @@ import UserCommentBox from "./UserCommentBox";
 import Comments from "./Comments";
 import axios from "axios";
 import postService from "../services/posts";
+import getUserHeaders from "../helpers/getUserHeaders";
 
 const Post = ({ post, getAllPosts, currentUser, setNotification }) => {
     const [isCommentClicked, setIsCommentClicked] = useState(false);
@@ -30,36 +31,20 @@ const Post = ({ post, getAllPosts, currentUser, setNotification }) => {
     }
 
     const handleLike = async (postId) => {
-        const loggedUserToken = window.localStorage.getItem("loggedUserToken");
-        if (loggedUserToken) {
-            const headers = {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${loggedUserToken}`,
-            };
+        const headers = getUserHeaders();
+        const url = `/api/posts/${postId}/likes`;
+        const object = {};
 
-            const url = `/api/posts/${postId}/likes`;
-            const object = {};
-
-            try {
-                await axios.patch(url, object, { headers });
-                getAllPosts();
-            } catch (error) {
-                console.log(error);
-            }
+        try {
+            await axios.patch(url, object, { headers });
+            getAllPosts();
+        } catch (error) {
+            console.log(error);
         }
     };
 
     const handleDeletePost = async (postId) => {
-        let headers;
-        const loggedUserToken = window.localStorage.getItem("loggedUserToken");
-        if (loggedUserToken) {
-            headers = {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${loggedUserToken}`,
-            };
-        } else {
-            return;
-        }
+        const headers = getUserHeaders();
 
         if (confirm("Are you sure you want to delete this post?")) {
             console.log(headers);

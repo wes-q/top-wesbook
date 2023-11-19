@@ -4,6 +4,7 @@ import Camera from "../icons/camera.svg?react";
 import Emoji from "../icons/emoji.svg?react";
 import noProfilePhoto from "../icons/noprofile.jpg";
 import axios from "axios";
+import getUserHeaders from "../helpers/getUserHeaders";
 
 const UserCommentBox = ({ currentUser, getAllPosts, postId, isCommentClicked, setIsCommentClicked }) => {
     const [commentText, setCommentText] = useState("");
@@ -34,25 +35,18 @@ const UserCommentBox = ({ currentUser, getAllPosts, postId, isCommentClicked, se
             return;
         }
 
-        const loggedUserToken = window.localStorage.getItem("loggedUserToken");
-        if (loggedUserToken) {
-            const headers = {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${loggedUserToken}`,
-            };
+        const url = `/api/posts/${postId}/comments`;
+        const object = { text: commentText };
+        const headers = getUserHeaders();
 
-            const url = `/api/posts/${postId}/comments`;
-            const object = { text: commentText };
-
-            try {
-                await axios.patch(url, object, { headers });
-                setCommentText("");
-                setIsDisabled(true);
-                contentEditableRef.current.textContent = "";
-                getAllPosts();
-            } catch (error) {
-                console.log(error);
-            }
+        try {
+            await axios.patch(url, object, { headers });
+            setCommentText("");
+            setIsDisabled(true);
+            contentEditableRef.current.textContent = "";
+            getAllPosts();
+        } catch (error) {
+            console.log(error);
         }
     };
 

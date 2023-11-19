@@ -39,7 +39,6 @@ const update = async (id, newObject, customHeaders) => {
         const response = await axios.put(`${baseUrl}/${id}`, newObject, { headers: customHeaders });
         return response.data;
     } catch (error) {
-        // Handle any errors here
         throw error;
     }
 };

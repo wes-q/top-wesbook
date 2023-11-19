@@ -7,55 +7,36 @@ import PersonRemoveIcon from "../icons/person-remove.svg?react";
 import CameraIcon from "../icons/camera.svg?react";
 import FormData from "form-data";
 import axios from "axios";
+import getUserHeaders from "../helpers/getUserHeaders";
 
 const Profile = ({ userToDisplay, setNotification, setUserToDisplay, setCurrentUser }) => {
     const handleAddFriend = async (toUserId) => {
-        const loggedUserToken = window.localStorage.getItem("loggedUserToken");
-        if (loggedUserToken) {
-            const headerConfig = {
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${loggedUserToken}`,
-                },
-            };
+        const url = "/api/friend-requests";
+        const headers = getUserHeaders();
+        const userObject = {
+            toUserId: toUserId,
+        };
 
-            const userObject = {
-                toUserId: toUserId,
-            };
-
-            try {
-                const result = await axios.post("/api/friend-requests", userObject, headerConfig);
-                console.log(result.data);
-                // getUser();
-            } catch (error) {
-                console.log(error);
-            }
+        try {
+            const result = await axios.post(url, userObject, { headers });
+            console.log(result.data);
+            // getUser();
+        } catch (error) {
+            console.log(error);
         }
     };
 
     const handleCancel = async (toUserId) => {
-        const loggedUserToken = window.localStorage.getItem("loggedUserToken");
-        if (loggedUserToken) {
-            const headerConfig = {
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${loggedUserToken}`,
-                },
-            };
+        const url = `/api/friend-requests/${toUserId}/cancel`;
+        const headers = getUserHeaders();
+        const userObject = {};
 
-            const userObject = {};
-
-            try {
-                const updatedUser = await axios.post(`/api/friend-requests/${toUserId}/cancel`, userObject, headerConfig);
-                setUserToDisplay(updatedUser.data);
-            } catch (error) {
-                console.log(error);
-            }
+        try {
+            const updatedUser = await axios.post(url, userObject, { headers });
+            setUserToDisplay(updatedUser.data);
+        } catch (error) {
+            console.log(error);
         }
-    };
-
-    const handleUploadCoverPhoto = () => {
-        alert();
     };
 
     const onInputClick = (event) => {
@@ -63,16 +44,7 @@ const Profile = ({ userToDisplay, setNotification, setUserToDisplay, setCurrentU
     };
 
     const handleImageUpload = async (event, field) => {
-        const loggedUserToken = window.localStorage.getItem("loggedUserToken");
-        if (!loggedUserToken) {
-            return;
-        }
-
-        const headers = {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${loggedUserToken}`,
-        };
-
+        const headers = getUserHeaders();
         const url1 = "/api/uploadImage";
         const url2 = `/api/users/${userToDisplay.id}`;
 

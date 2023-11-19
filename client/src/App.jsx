@@ -17,6 +17,7 @@ import GetJwt from "./pages/GetJwt";
 import ProfilePage from "./pages/ProfilePage";
 import Newsfeed from "./pages/Newsfeed";
 import loginService from "./services/login";
+import getUserHeaders from "./helpers/getUserHeaders";
 
 function App() {
     const [notification, setNotification] = useState(false);
@@ -33,37 +34,27 @@ function App() {
     }, []);
 
     const getUserLocal = async () => {
-        const loggedUserToken = window.localStorage.getItem("loggedUserToken");
-        if (loggedUserToken) {
-            try {
-                const headerConfig = {
-                    headers: {
-                        "Content-Type": "application/json",
-                        Authorization: `Bearer ${loggedUserToken}`,
-                    },
-                };
-                const data = await loginService.loginSuccess(headerConfig);
-                setCurrentUser(data.user);
-                setNotification({ message: "Login successful!", type: "success" });
+        const headers = getUserHeaders();
+        try {
+            const data = await loginService.loginSuccess({ headers });
+            setCurrentUser(data.user);
+            setNotification({ message: "Login successful!", type: "success" });
+            setTimeout(() => {
+                setNotification(false);
+            }, 5000);
+        } catch (error) {
+            console.log("Automatic relogin: No user session found.");
+            // Make sure backed always responds with jwt expired for expired tokens
+            if (error.response.data.error === "jwt expired") {
+                // Handle the removal of the expired token in the browsers local storage
+                window.localStorage.removeItem("loggedUserToken");
+                setNotification({ message: "Session expired for security purposes, please login again.", type: "warning" });
                 setTimeout(() => {
                     setNotification(false);
-                }, 5000);
-            } catch (error) {
-                console.log("Automatic relogin: No user session found.");
-                // Make sure backed always responds with jwt expired for expired tokens
-                if (error.response.data.error === "jwt expired") {
-                    // Handle the removal of the expired token in the browsers local storage
-                    window.localStorage.removeItem("loggedUserToken");
-                    setNotification({ message: "Session expired for security purposes, please login again.", type: "warning" });
-                    setTimeout(() => {
-                        setNotification(false);
-                    }, 10000);
-                }
-            } finally {
-                setIsLoadingUser(false);
+                }, 10000);
             }
-        } else {
-            setIsLoadingUser(false); // Set loading to finished if there is no logged user session
+        } finally {
+            setIsLoadingUser(false);
         }
     };
 

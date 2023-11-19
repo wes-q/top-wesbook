@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import noProfilePhoto from "../icons/noprofile.jpg";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import getUserHeaders from "../helpers/getUserHeaders";
 
 const Users = ({ user }) => {
     const [friends, setFriends] = useState([]);
@@ -14,74 +15,52 @@ const Users = ({ user }) => {
     }, [user]);
 
     const fetchData = async () => {
-        // if (user && user.id) {
-        const loggedUserToken = window.localStorage.getItem("loggedUserToken");
-        if (loggedUserToken) {
-            const headerConfig = {
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${loggedUserToken}`,
-                },
-            };
+        const headers = getUserHeaders();
 
-            try {
-                const eligibleFriends = await axios.get("/api/users/eligible-friends", headerConfig);
-                setEligibleFriends(eligibleFriends.data);
+        try {
+            const eligibleFriends = await axios.get("/api/users/eligible-friends", { headers });
+            setEligibleFriends(eligibleFriends.data);
 
-                const pendingFriends = await axios.get("/api/users/pending-friends", headerConfig);
-                setPendingFriends(pendingFriends.data);
+            const pendingFriends = await axios.get("/api/users/pending-friends", { headers });
+            setPendingFriends(pendingFriends.data);
 
-                const friends = await axios.get("/api/users/friends", headerConfig);
-                setFriends(friends.data);
+            const friends = await axios.get("/api/users/friends", { headers });
+            setFriends(friends.data);
 
-                const incomingFriends = await axios.get("/api/users/incoming-friends", headerConfig);
-                setIncomingFriends(incomingFriends.data);
-            } catch (error) {
-                console.log(error);
-            }
+            const incomingFriends = await axios.get("/api/users/incoming-friends", { headers });
+            setIncomingFriends(incomingFriends.data);
+        } catch (error) {
+            console.log(error);
         }
-        // }
     };
 
     const handleAddFriend = async (toUserId) => {
-        const loggedUserToken = window.localStorage.getItem("loggedUserToken");
-        if (loggedUserToken) {
-            const headerConfig = {
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${loggedUserToken}`,
-                },
-            };
+        const url = "/api/friend-requests";
+        const headers = getUserHeaders();
+        const userObject = {
+            toUserId: toUserId,
+        };
 
-            const userObject = {
-                toUserId: toUserId,
-            };
-
-            try {
-                const result = await axios.post("/api/friend-requests", userObject, headerConfig);
-                console.log(result.data);
-                fetchData();
-            } catch (error) {
-                console.log(error);
-            }
+        try {
+            const result = await axios.post(url, userObject, { headers });
+            console.log(result.data);
+            fetchData();
+        } catch (error) {
+            console.log(error);
         }
     };
 
     const handleAcceptFriend = async (toUserId) => {
-        const loggedUserToken = window.localStorage.getItem("loggedUserToken");
-        if (loggedUserToken) {
-            const headers = {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${loggedUserToken}`,
-            };
-            const data = {};
-            try {
-                const result = await axios.put(`/api/friend-requests/${toUserId}/accept`, data, { headers });
-                console.log(result.data);
-                fetchData();
-            } catch (error) {
-                console.log(error);
-            }
+        const url = `/api/friend-requests/${toUserId}/accept`;
+        const headers = getUserHeaders();
+
+        const object = {};
+        try {
+            const result = await axios.put(url, object, { headers });
+            console.log(result.data);
+            fetchData();
+        } catch (error) {
+            console.log(error);
         }
     };
 

@@ -5,6 +5,7 @@ import postsService from "../services/posts";
 import noProfilePhoto from "../icons/noprofile.jpg";
 import FormData from "form-data";
 import axios from "axios";
+import getUserHeaders from "../helpers/getUserHeaders";
 
 const ModalNewPost = ({ setShowNewPost, currentUser, getAllPosts }) => {
     const [postText, setPostText] = useState(""); // State to track the text in the textarea
@@ -44,22 +45,14 @@ const ModalNewPost = ({ setShowNewPost, currentUser, getAllPosts }) => {
             postPhoto: postPhoto,
         };
 
-        const loggedUserToken = window.localStorage.getItem("loggedUserToken");
-        if (loggedUserToken) {
-            const headerConfig = {
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${loggedUserToken}`,
-                },
-            };
-            try {
-                const newPost = await postsService.create(object, headerConfig);
-                console.log(newPost);
-                setShowNewPost(false); //Close the modal
-                getAllPosts();
-            } catch (error) {
-                console.log(error);
-            }
+        const headers = getUserHeaders();
+        try {
+            const newPost = await postsService.create(object, { headers });
+            console.log(newPost);
+            setShowNewPost(false); //Close the modal
+            getAllPosts();
+        } catch (error) {
+            console.log(error);
         }
     };
 

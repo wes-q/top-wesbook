@@ -4,6 +4,7 @@ import AnimCheck from "../icons/anim-check.svg?react";
 import axios from "axios";
 import Modal from "./Modal";
 import { useNavigate } from "react-router-dom";
+import getUserHeaders from "../helpers/getUserHeaders";
 
 const Game = ({ setShowFooter, setShowStartTimer, seconds, setSeconds, game }) => {
     const [x, setX] = useState(0);

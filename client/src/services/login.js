@@ -10,9 +10,9 @@ const login = async (credentials) => {
     }
 };
 
-const loginSuccess = async (headerConfig) => {
+const loginSuccess = async (headers) => {
     try {
-        const response = await axios.get(`${baseUrl}/success`, headerConfig);
+        const response = await axios.get(`${baseUrl}/success`, headers);
         return response.data;
     } catch (error) {
         throw error;

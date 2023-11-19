@@ -1,18 +1,18 @@
 import axios from "axios";
 const baseUrl = `/api/posts`;
 
-const getAll = async (headerConfig) => {
+const getAll = async (headers) => {
     try {
-        const response = await axios.get(baseUrl, headerConfig);
+        const response = await axios.get(baseUrl, headers);
         return response.data;
     } catch (error) {
         throw error;
     }
 };
 
-const create = async (newObject, headerConfig) => {
+const create = async (newObject, headers) => {
     try {
-        const response = await axios.post(baseUrl, newObject, headerConfig);
+        const response = await axios.post(baseUrl, newObject, headers);
         return response.data;
     } catch (error) {
         throw error;

@@ -28,7 +28,7 @@ const Comments = ({ post }) => {
     return (
         <div>
             {post.comments.map((comment, index) => (
-                <Comment comment={comment} key={index} />
+                <Comment comment={comment} key={index} postId={post.id} />
             ))}
         </div>
     );

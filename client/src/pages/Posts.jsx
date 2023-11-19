@@ -5,6 +5,7 @@ import sortByDate from "../helpers/helper";
 import axios from "axios";
 import Post from "./Post";
 import { useParams } from "react-router-dom";
+import getUserHeaders from "../helpers/getUserHeaders";
 
 const Posts = ({ userToDisplay, postsOf, currentUser, setNotification }) => {
     const [showNewPost, setShowNewPost] = useState(false);
@@ -16,14 +17,7 @@ const Posts = ({ userToDisplay, postsOf, currentUser, setNotification }) => {
     }, [userToDisplay]);
 
     const getAllPosts = async () => {
-        const loggedUserToken = window.localStorage.getItem("loggedUserToken");
-        let headers;
-        if (loggedUserToken) {
-            headers = {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${loggedUserToken}`,
-            };
-        }
+        const headers = getUserHeaders();
 
         let url;
         if (postsOf === "friends") {

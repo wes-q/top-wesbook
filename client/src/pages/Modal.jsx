@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import ControllerIcon from "../icons/controller.svg?react";
 
 const Modal = ({ seconds, isUserLegit }) => {
     return (

@@ -316,8 +316,8 @@ GET http://localhost:3001/api/users/6550b31b9738cb8925aeb966/posts
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTBiMzFiOTczOGNiODkyNWFlYjk2NiIsImlhdCI6MTcwMDM1MDMxNiwiZXhwIjoxNzAwNTIzMTE2fQ.QR3Y0LlUiyP05ufsmcqTiHD3Wug5DmTG25LJceNdFkI
 
 ###
-DELETE http://localhost:3001/api/posts/6550b31b9738cb8925aeb966/comments/65572cee5d3a3197899ea5c1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTBiMzFiOTczOGNiODkyNWFlYjk2NiIsImlhdCI6MTcwMDM1MDMxNiwiZXhwIjoxNzAwNTIzMTE2fQ.QR3Y0LlUiyP05ufsmcqTiHD3Wug5DmTG25LJceNdFkI
+DELETE http://localhost:3001/api/posts/6556d5f49fe74e96be63f270/comments/65572cee5d3a3197899ea5c1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTBiNGY3OTczOGNiODkyNWFlYmExNiIsImlhdCI6MTcwMDM1NDU3OCwiZXhwIjoxNzAwNTI3Mzc4fQ.Mt9shpyFIuoZf_RoUVyQJYowWHK7Qu1nC65Lh53RyyY
 
 # GET /api/posts/:postId/comments
 # POST /api/posts/:postId/comments
