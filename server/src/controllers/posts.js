@@ -181,14 +181,51 @@ postsRouter.delete("/api/posts/:postId/comments/:commentId", middleware.userExtr
             return;
         }
 
-        // // Get author of the post
-        const authorId = postToUpdate.author._id.toString();
-        if (authorId === userId) {
+        // Get author of the comment
+        const postedBy = commentToDelete.postedBy.toString();
+        console.log(postedBy);
+        if (postedBy === userId) {
             postToUpdate.comments.pull({ _id: commentId });
             await postToUpdate.save();
             response.status(200).json({ message: `Deleted comment: # ${commentId}` });
         } else {
             response.status(401).json({ message: `Only author is authorized to delete comment` });
+        }
+    } catch (error) {
+        next(error);
+    }
+});
+
+// Update the posts content and postPhoto
+// PATCH /api/posts/:postId
+// Requires JWT inside Authorization Bearer header
+// Requires object containing content and postPhoto
+// Requires postId as params
+// Returns the updated post
+postsRouter.patch("/api/posts/:postId", middleware.userExtractor, async (request, response, next) => {
+    const currentUserId = request.user.id;
+    const postId = request.params.postId;
+    const body = request.body;
+
+    const newObject = {
+        content: body.content,
+        postPhoto: body.postPhoto,
+    };
+
+    try {
+        const postToUpdate = await Post.findById(postId);
+
+        if (!postToUpdate) {
+            response.status(404).json({ message: `Post not found with id: ${postId}` });
+            return;
+        }
+
+        const authorId = postToUpdate.author.toString();
+        if (currentUserId === authorId) {
+            const updatedPost = await Post.findByIdAndUpdate(postId, newObject, { new: true });
+            response.status(200).json(updatedPost);
+        } else {
+            response.status(401).json({ message: `Only author is authorized to edit post` });
         }
     } catch (error) {
         next(error);

@@ -10,16 +10,17 @@ const UserCommentBox = ({ currentUser, getAllPosts, postId, isCommentClicked, se
     const [commentText, setCommentText] = useState("");
     const [postIconStyle, setPostIconStyle] = useState("");
     const [isDisabled, setIsDisabled] = useState(true);
+    const [showPlaceholder, setShowPlaceholder] = useState(true);
+
     // const [placeholder, setPlaceholder] = useState()
 
-    // const handlePlaceholderClick = () => {
-    //     // setIsCommentClicked(true);
-    //     // alert();
-    //     contentEditableRef.current.focus();
-    // };
+    const handlePlaceholderClick = () => {
+        contentEditableRef.current.focus();
+        setIsCommentClicked(true);
+    };
 
     const handleTextChange = (event) => {
-        const text = contentEditableRef.current.innerText.trim();
+        const text = contentEditableRef.current.innerText;
         setCommentText(text);
     };
 
@@ -61,8 +62,17 @@ const UserCommentBox = ({ currentUser, getAllPosts, postId, isCommentClicked, se
             // Trim the value and check if it's an empty string
             return value.trim() === "";
         };
+        const isTextareaSomewhatEmpty = (value) => {
+            // Trim the value and check if it's an empty string
+            return value === "";
+        };
 
         const x = isTextareaEmpty(commentText);
+        if (isTextareaSomewhatEmpty(commentText)) {
+            setShowPlaceholder(true);
+        } else {
+            setShowPlaceholder(false);
+        }
 
         if (!x) {
             setPostIconStyle("fill-cyan-500 hover:cursor-pointer");
@@ -87,19 +97,21 @@ const UserCommentBox = ({ currentUser, getAllPosts, postId, isCommentClicked, se
                 />
             )}
             <div className="relative flex flex-col grow max-w-[280px] outline-none bg-slate-300 rounded-2xl pl-4 pr-3 py-1" spellCheck="false">
-                <div ref={contentEditableRef} className="outline-none w-full max-w-full py-1" contentEditable="true" onInput={handleTextChange}></div>
-                <span className="absolute top-2 text-gray-500" onClick={() => contentEditableRef.current.focus()}>
-                    {isDisabled && "Write a comment..."}
+                <div ref={contentEditableRef} className="outline-none w-full max-w-full py-1" contentEditable="true" onInput={handleTextChange} onClick={() => setIsCommentClicked(true)}></div>
+                <span className="absolute top-2 text-gray-500" onClick={handlePlaceholderClick}>
+                    {showPlaceholder && "Write a comment..."}
                 </span>
-                <div className="flex justify-between items-center">
-                    <div className="flex">
-                        <Emoji className="w-5 mr-1" />
-                        <Camera className="w-5 mr-1" />
+                {isCommentClicked && (
+                    <div className="flex justify-between items-center">
+                        <div className="flex">
+                            <Emoji className="w-5 mr-1" />
+                            <Camera className="w-5 mr-1" />
+                        </div>
+                        <div>
+                            <Send className={`w-6 ${postIconStyle}`} onClick={() => handleSubmitComment(postId)}></Send>
+                        </div>
                     </div>
-                    <div>
-                        <Send className={`w-6 ${postIconStyle}`} onClick={() => handleSubmitComment(postId)}></Send>
-                    </div>
-                </div>
+                )}
             </div>
         </div>
     );

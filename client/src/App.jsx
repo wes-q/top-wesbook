@@ -33,7 +33,6 @@ function App() {
         const timeoutId = getUserLocal();
 
         return () => {
-            // Cleanup code
             clearTimeout(timeoutId);
         };
     }, []);

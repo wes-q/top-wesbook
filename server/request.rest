@@ -317,7 +317,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTBiMzFiO
 
 ###
 DELETE http://localhost:3001/api/posts/655974d6aa661554a4e17ee8/comments/65597654aa661554a4e17f65
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTBiNGY3OTczOGNiODkyNWFlYmExNiIsImlhdCI6MTcwMDM1NDU3OCwiZXhwIjoxNzAwNTI3Mzc4fQ.Mt9shpyFIuoZf_RoUVyQJYowWHK7Qu1nC65Lh53RyyY
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTk3NGI1YWE2NjE1NTRhNGUxN2ViNSIsImlhdCI6MTcwMDM3Mzk4OSwiZXhwIjoxNzAwNTQ2Nzg5fQ.6bFMuEv5Ke3iy-ucoCAmrU2DXMsB8_CdPTGDeI2EFCE
 
 # GET /api/posts/:postId/comments
 # POST /api/posts/:postId/comments
@@ -351,6 +351,15 @@ DELETE http://localhost:3001/api/posts/6556d6109fe74e96be63f2b2
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTBiNGY3OTczOGNiODkyNWFlYmExNiIsImlhdCI6MTcwMDA1NTMyMCwiZXhwIjoxNzAwMjI4MTIwfQ.BDqx28DEdibedthKArUlQIasj-3n6TXtmyZJkqNsyWk
 
 ###
-DELETE http://localhost:3001/api/posts/6556d6109fe74e96be63f2b22
+DELETE http://localhost:3001/api/posts/6556d6109fe74e96be63f2b2
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTBiNGY3OTczOGNiODkyNWFlYmExNiIsImlhdCI6MTcwMDA1NTMyMCwiZXhwIjoxNzAwMjI4MTIwfQ.BDqx28DEdibedthKArUlQIasj-3n6TXtmyZJkqNsyWk
+
+###
+PATCH  http://localhost:3001/api/posts/655a2f04c3f95d52495cd655
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTk3NGI1YWE2NjE1NTRhNGUxN2ViNSIsImlhdCI6MTcwMDM3Mzk4OSwiZXhwIjoxNzAwNTQ2Nzg5fQ.6bFMuEv5Ke3iy-ucoCAmrU2DXMsB8_CdPTGDeI2EFCE
+content-type: application/json
+
+{
+    "content": "new content 2"
+}
 

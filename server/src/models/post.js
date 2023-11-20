@@ -71,4 +71,6 @@ postSchema.set("toJSON", {
     },
 });
 
-module.exports = mongoose.model("Post", postSchema);
+// module.exports = mongoose.model("Post", postSchema);
+const Post = mongoose.model("post", postSchema);
+module.exports = Post;
