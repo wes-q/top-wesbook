@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { Outlet, NavLink } from "react-router-dom";
+import { Outlet, NavLink, Link } from "react-router-dom";
 import Footer from "./Footer";
 import Notification from "./Notification";
 import DropDown from "./DropDown";
@@ -40,13 +40,13 @@ export default function RootLayout({ notification, user, setNotification, showFo
             <header>
                 <nav className="relative w-full sm:justify-between sm:items-center p-3 sm:p-6 bg-gray-800 specific text-base sm:text-lg">
                     <div className={`flex items-center justify-between ${isExpanded && "mb-0"}`}>
-                        <a className="flex items-center" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
+                        <Link className="flex items-center" to="/">
                             <WesbookLogo className="w-10 h-auto select-none" />
-                            <div className="-skew-y-6 select-none hidden sm:block">
-                                {/* <span className="font-handlee text-4xl font-extrabold italic text-cyan-400">Wes</span>
-                                <span className="font-handlee text-4xl font-extrabold italic">book</span> */}
+                            <div className="-skew-y-6 select-none sm:block">
+                                <span className="font-handlee text-2xl font-extrabold italic text-cyan-400">Wes</span>
+                                <span className="font-handlee text-2xl font-extrabold italic">book</span>
                             </div>
-                        </a>
+                        </Link>
                         {showStartTimer && <Timer className="h-auto max-h-10" setSeconds={setSeconds} seconds={seconds}></Timer>}
                         <div className="hidden sm:block">
                             {isUserLoaded && (
