@@ -131,7 +131,7 @@ const Profile = ({ userToDisplay, setNotification, setUserToDisplay, setCurrentU
             </div>
 
             <div className="flex flex-col items-center mb-4">
-                {userToDisplay.displayName ? <span className="text-2xl font-bold">{userToDisplay.displayName}</span> : <span className="text-2xl font-bold">{`${userToDisplay.firstName} ${userToDisplay.lastName}`}</span>}
+                {userToDisplay.displayName ? <span className="text-3xl font-bold break-words">{userToDisplay.displayName}</span> : <span className="text-3xl font-bold break-words">{`${userToDisplay.firstName} ${userToDisplay.lastName}`}</span>}
                 <span className="text-xs">{userToDisplay.email}</span>
                 <span className="text-xs mb-4">{userToDisplay.totalFriends} friends</span>
 
