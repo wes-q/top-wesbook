@@ -187,7 +187,7 @@ const Post = ({ post, getAllPosts, currentUser, setNotification }) => {
 
                 <hr className="w-full border-t border-gray-300 mb-4" />
 
-                <Comments post={post} setNotification={setNotification} getAllPosts={getAllPosts}></Comments>
+                <Comments post={post} setNotification={setNotification} getAllPosts={getAllPosts} currentUser={currentUser} />
                 <UserCommentBox currentUser={currentUser} getAllPosts={getAllPosts} postId={post.id} setIsCommentClicked={setIsCommentClicked} isCommentClicked={isCommentClicked} contentEditableRef={contentEditableRef} />
             </div>
         </>

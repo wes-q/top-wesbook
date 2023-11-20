@@ -7,7 +7,7 @@ import DeleteIcon from "../icons/delete.svg?react";
 import axios from "axios";
 import getUserHeaders from "../helpers/getUserHeaders";
 
-const Comment = ({ comment, postId, setNotification, getAllPosts }) => {
+const Comment = ({ comment, postId, setNotification, getAllPosts, currentUser }) => {
     const detailsRef = useRef(null);
 
     // Collapses the popup when user clicks outside
@@ -81,11 +81,13 @@ const Comment = ({ comment, postId, setNotification, getAllPosts }) => {
                             <DotDotDotIcon className="w-3 h-3" />
                         </div>
                     </summary>
-                    <div className="absolute flex flex-col -bottom-16 -left-16 z-10 bg-slate-200 shadow-md border border-gray-300 rounded-md text-xs select-none">
-                        <button className="flex items-center hover:bg-slate-300 w-full transition-colors p-1">
-                            <EditPenIcon className="w-6 h-6 mr-1" />
-                            <span className="w-full whitespace-nowrap text-left">Edit</span>
-                        </button>
+                    <div className="absolute flex flex-col top-5 -left-16 z-10 bg-slate-200 shadow-md border border-gray-300 rounded-md text-xs select-none">
+                        {/* {comment.postedBy.id === currentUser.id && (
+                            <button className="flex items-center hover:bg-slate-300 w-full transition-colors p-1" onClick={() => handleEditComment(postId, comment.id)}>
+                                <EditPenIcon className="w-6 h-6 mr-1" />
+                                <span className="w-full whitespace-nowrap text-left">Edit</span>
+                            </button>
+                        )} */}
                         <button className="flex items-center hover:bg-slate-300 w-full transition-colors p-1" onClick={() => handleDeleteComment(postId, comment.id)}>
                             <DeleteIcon className="w-6 h-6 mr-1 fill-red-600" />
                             <span className="w-full whitespace-nowrap text-left">Delete</span>
