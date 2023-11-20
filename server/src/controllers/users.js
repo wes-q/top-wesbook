@@ -126,28 +126,6 @@ usersRouter.get("/api/users/eligible-friends", userExtractor, async (req, res, n
 //     res.status(200).json(friendIds);
 // });
 
-// Get all of the users' confirmed friends
-usersRouter.get("/api/users/friends", userExtractor, async (req, res, next) => {
-    try {
-        // Use the User model to create a Mongoose query for populating the 'friends' field
-        const userWithPopulatedFriends = await User.findById(req.user.id).populate("friends.friendId").exec();
-        // res.json(userWithPopulatedFriends);
-
-        // Extract the populated friend data
-        const populatedFriends = userWithPopulatedFriends.friends.map((friend) => {
-            const { friendId } = friend;
-            // Add any other fields you want to extract from the populated friend object
-            const { id, displayName, firstName, profilePhoto, email } = friendId;
-            // return { friendId, displayName, firstName, profilePhoto, email };
-            return { id, displayName, firstName, profilePhoto, email };
-        });
-
-        res.status(200).json(populatedFriends);
-    } catch (error) {
-        next(error);
-    }
-});
-
 // Get all of the users' incoming friend requests
 usersRouter.get("/api/users/incoming-friends", userExtractor, async (req, res, next) => {
     try {
@@ -212,6 +190,29 @@ usersRouter.get("/api/users/:id", userExtractor, async (request, response, next)
         });
 
         response.json(userWithStatus[0]);
+    } catch (error) {
+        next(error);
+    }
+});
+
+// Get all of the users' confirmed friends
+usersRouter.get("/api/users/:userId/friends", userExtractor, async (req, res, next) => {
+    const userId = req.params.userId;
+    try {
+        // Use the User model to create a Mongoose query for populating the 'friends' field
+        const userWithPopulatedFriends = await User.findById(userId).populate("friends.friendId").exec();
+        // res.json(userWithPopulatedFriends);
+
+        // Extract the populated friend data
+        const populatedFriends = userWithPopulatedFriends.friends.map((friend) => {
+            const { friendId } = friend;
+            // Add any other fields you want to extract from the populated friend object
+            const { id, displayName, firstName, lastName, profilePhoto, email } = friendId;
+            // return { friendId, displayName, firstName, profilePhoto, email };
+            return { id, displayName, firstName, lastName, profilePhoto, email };
+        });
+
+        res.status(200).json(populatedFriends);
     } catch (error) {
         next(error);
     }
