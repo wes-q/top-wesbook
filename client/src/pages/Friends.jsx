@@ -4,9 +4,12 @@ import { Link } from "react-router-dom";
 const Friends = ({ usersFriends }) => {
     return (
         <div className="w-full ring-1 bg-slate-200 rounded-md mb-4 text-black p-3">
-            <div className="flex flex-col">
-                <div className="text-xl font-extrabold">Friends</div>
-                <div className="text-base font-bold mb-3 hover:underline">{usersFriends.length} friends</div>
+            <div className="flex justify-between">
+                <div className="flex flex-col">
+                    <div className="text-xl font-extrabold">Friends</div>
+                    <div className="text-base font-bold mb-3">{usersFriends.length} friends</div>
+                </div>
+                <div className="text-cyan-500 hover:underline cursor-pointer h-min">See all friends</div>
             </div>
             <div className="grid grid-cols-3 gap-2">
                 {usersFriends.map((friend, index) => {
