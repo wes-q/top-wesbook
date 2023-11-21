@@ -24,7 +24,7 @@ const Users = ({ user }) => {
             const pendingFriends = await axios.get("/api/users/pending-friends", { headers });
             setPendingFriends(pendingFriends.data);
 
-            const friends = await axios.get("/api/users/friends", { headers });
+            const friends = await axios.get(`/api/users/${user.id}/friends`, { headers });
             setFriends(friends.data);
 
             const incomingFriends = await axios.get("/api/users/incoming-friends", { headers });

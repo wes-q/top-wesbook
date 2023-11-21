@@ -19,10 +19,15 @@ function createRandomUser() {
     };
 }
 
-const user = createRandomUser();
-console.log(user);
+// const user = createRandomUser();
 
-async function saveUserToMongoDB(user) {
+// const users = faker.helpers.multiple(createRandomUser, {
+//     count: 5,
+// });
+
+// console.log(users);
+
+async function saveUserToMongoDB(users) {
     const uri = "mongodb+srv://wes:wes21@cluster0.ai8ufze.mongodb.net/wesbookDB?retryWrites=true&w=majority";
     const client = new MongoClient(uri);
 
@@ -32,7 +37,7 @@ async function saveUserToMongoDB(user) {
         const collection = database.collection("users");
 
         // Insert the user into the collection
-        await collection.insertOne(user);
+        await collection.insertMany(users);
 
         console.log("User saved to MongoDB successfully!");
     } finally {
@@ -41,11 +46,14 @@ async function saveUserToMongoDB(user) {
 }
 
 async function main() {
-    const user = createRandomUser();
-    console.log(user);
+    // const user = createRandomUser();
+    const users = faker.helpers.multiple(createRandomUser, {
+        count: 5,
+    });
+    console.log(users);
 
     // Save the user to MongoDB
-    await saveUserToMongoDB(user);
+    await saveUserToMongoDB(users);
 }
 
 main();

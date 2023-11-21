@@ -197,10 +197,9 @@ usersRouter.get("/api/users/:id", userExtractor, async (request, response, next)
 
 // Get all of the users' confirmed friends
 usersRouter.get("/api/users/:userId/friends", userExtractor, async (req, res, next) => {
-    const userId = req.params.userId;
     try {
         // Use the User model to create a Mongoose query for populating the 'friends' field
-        const userWithPopulatedFriends = await User.findById(userId).populate("friends.friendId").exec();
+        const userWithPopulatedFriends = await User.findById(req.params.userId).populate("friends.friendId").exec();
         // res.json(userWithPopulatedFriends);
 
         // Extract the populated friend data
