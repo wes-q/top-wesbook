@@ -6,6 +6,7 @@ import axios from "axios";
 import Profile from "./Profile";
 import getUserHeaders from "../helpers/getUserHeaders";
 import Friends from "./Friends";
+import AboutUser from "./AboutUser";
 
 const ProfilePage = ({ setNotification, currentUser, setCurrentUser }) => {
     const [userToDisplay, setUserToDisplay] = useState([]);
@@ -35,6 +36,7 @@ const ProfilePage = ({ setNotification, currentUser, setCurrentUser }) => {
         <div>
             <Profile userToDisplay={userToDisplay} setNotification={setNotification} setUserToDisplay={setUserToDisplay} setCurrentUser={setCurrentUser} />
             <div className="pb-3 px-3">
+                <AboutUser userToDisplay={userToDisplay} />
                 <Friends usersFriends={usersFriends} />
                 <Posts userToDisplay={userToDisplay} currentUser={currentUser} postsOf="user" setNotification={setNotification} />
             </div>

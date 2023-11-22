@@ -219,43 +219,31 @@ usersRouter.get("/api/users/:userId/friends", userExtractor, async (req, res, ne
 
 usersRouter.put("/api/users/:id", userExtractor, async (request, response, next) => {
     const currentUserId = request.user.id;
-    let status;
+    const userToUpdateId = request.params.id;
+
+    if (currentUserId !== userToUpdateId) {
+        response.status(401).json({ message: `Only the same user is authorized to update their info` });
+        return;
+    }
 
     const body = request.body;
-
     const user = {
         displayName: body.displayName,
         lastName: body.lastName,
         firstName: body.firstName,
         profilePhoto: body.profilePhoto,
         coverPhoto: body.coverPhoto,
+        bio: body.bio,
+        gender: body.gender,
+        livesIn: body.livesIn,
+        worksAt: body.worksAt,
+        jobTitle: body.jobTitle,
     };
 
     try {
-        const updatedUser = await User.findByIdAndUpdate(request.params.id, user, { new: true });
-        const isFriends = updatedUser.friends.some((friend) => friend.friendId.toString() === currentUserId);
-        const isPending = updatedUser.friendRequests.some((friend) => friend.friendId.toString() === currentUserId);
-
-        if (updatedUser.id === currentUserId) {
-            status = "self";
-        } else if (isFriends) {
-            status = "friend";
-        } else if (isPending) {
-            status = "pending";
-        } else {
-            status = "notFriend";
-        }
-
-        const userWithStatus = [updatedUser].map((user) => {
-            const totalFriends = updatedUser.totalFriends;
-            return {
-                ...user.toJSON(),
-                status,
-                totalFriends,
-            };
-        });
-
-        response.json(userWithStatus[0]);
+        const updatedUser = await User.findByIdAndUpdate(userToUpdateId, user, { new: true });
+        const appendedUser = appendVirtualFields(updatedUser, currentUserId);
+        response.status(201).json(appendedUser[0]);
     } catch (error) {
         next(error);
     }

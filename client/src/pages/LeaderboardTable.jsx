@@ -44,7 +44,7 @@ const LeaderboardTable = ({ selectedGame }) => {
                     // const formattedDate = format(score.dateFinished, "MMM-dd-yyyy");
                     // console.log(formattedDate);
                     const jsDate = parseISO(score.dateFinished);
-                    const formattedDate = format(jsDate, "MMM dd, yyyy"); // Format the date
+                    const formattedDate = format(jsDate, "MMM dd, yyyy");
 
                     return (
                         // <tr key={index} className="text-black first:text-lg first:bg-cyan-400 even:bg-slate-200">

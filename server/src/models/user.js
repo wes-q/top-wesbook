@@ -80,6 +80,18 @@ const userSchema = new mongoose.Schema({
             },
         },
     ],
+    memberSince: {
+        type: Date,
+        default: Date.now,
+    },
+    bio: String,
+    gender: {
+        type: String,
+        // enum: ["Male", "Female", "Non-Binary", "Other", "Prefer not to say"],
+    },
+    livesIn: String,
+    worksAt: String,
+    jobTitle: String,
     // notifications: [
     //     {
     //         type: String, // e.g., 'friend_request', 'message', 'block', etc.

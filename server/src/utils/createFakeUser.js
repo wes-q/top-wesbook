@@ -7,15 +7,33 @@ function createRandomUser() {
     const lastName = faker.person.lastName();
     // const email = faker.helpers.unique(faker.internet.email, [firstName, lastName]);
     const email = faker.internet.email({ firstName, lastName });
+    const bio = faker.person.bio();
+    const gender = faker.person.gender();
+    const livesIn = faker.location.country();
+    const jobTitle = faker.person.jobTitle();
+    const worksAt = faker.company.name();
+    // const monthlyIncome = faker.finance.amount(1000, 10000, 0, "$");
+    const monthlyIncome = parseInt(faker.finance.amount(1000, 10000, 0));
+    const memberSince = faker.date.past({ years: 10 });
+    const color = faker.internet.color();
 
     return {
         // _id: faker.string.uuid(),
         profilePhoto: faker.internet.avatar(sex),
-        coverPhoto: faker.image.urlPicsumPhotos({ width: 851, height: 315 }),
+        // coverPhoto: faker.image.urlPicsumPhotos({ width: 851, height: 315 }),
+        coverPhoto: faker.image.urlLoremFlickr({ width: 851, height: 315 }),
         email,
         firstName,
         lastName,
         source: "faker",
+        bio,
+        gender,
+        livesIn,
+        jobTitle,
+        worksAt,
+        monthlyIncome,
+        memberSince,
+        color,
     };
 }
 

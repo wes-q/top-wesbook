@@ -132,9 +132,8 @@ const Profile = ({ userToDisplay, setNotification, setUserToDisplay, setCurrentU
 
             <div className="flex flex-col items-center mb-4">
                 {userToDisplay.displayName ? <span className="text-3xl font-bold break-words">{userToDisplay.displayName}</span> : <span className="text-3xl font-bold break-words">{`${userToDisplay.firstName} ${userToDisplay.lastName}`}</span>}
-                <span className="text-xs">{userToDisplay.email}</span>
+                {userToDisplay.bio && <span className={`text-xs italic m-1 text-cyan-400`}>"{userToDisplay.bio}"</span>}
                 <span className="text-xs mb-4">{userToDisplay.totalFriends} friends</span>
-
                 {userToDisplay.status === "friend" && (
                     <div className="flex">
                         <button className="flex items-center bg-slate-400 text-white text-xs px-3 py-1 rounded-md mr-2 cursor-default">

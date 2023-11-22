@@ -17,11 +17,13 @@ function createRandomPost() {
     const comment2 = faker.lorem.sentence();
     const postedBy = new ObjectId(authorObjectIds[randomIndex2]);
     const postedBy2 = new ObjectId(authorObjectIds[randomIndex3]);
+    const postPhoto = faker.image.urlLoremFlickr();
 
     return {
         author,
         content,
-        postPhoto: faker.image.urlPicsumPhotos(),
+        // postPhoto: faker.image.urlPicsumPhotos(),
+        postPhoto,
         comments: [
             {
                 text: comment,

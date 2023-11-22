@@ -125,9 +125,14 @@ export default function RootLayout({ notification, user, setNotification, showFo
                                 transition={{ duration: 0.4, ease: "easeOut" }}
                             >
                                 {isUserLoaded && (
-                                    <NavLink className="flex items-center text-cyan-400 rounded-md px-4 whitespace-nowrap h-8 w-full text-sm" to={`/profile/${user.id}`} style={{ textDecoration: "none" }}>
-                                        My Profile
-                                    </NavLink>
+                                    <>
+                                        <NavLink className="flex items-center text-cyan-400 rounded-md px-4 whitespace-nowrap h-8 w-full text-sm" to={`/profile/${user.id}`} style={{ textDecoration: "none" }}>
+                                            My Profile
+                                        </NavLink>
+                                        <NavLink className="flex items-center text-cyan-400 rounded-md px-4 whitespace-nowrap h-8 w-full text-sm" to={"/friends"} style={{ textDecoration: "none" }}>
+                                            Friends
+                                        </NavLink>
+                                    </>
                                 )}
                                 <NavLink className="flex items-center text-cyan-400 rounded-md px-4 whitespace-nowrap h-8 w-full text-sm" to="/" style={{ textDecoration: "none" }}>
                                     Newsfeed

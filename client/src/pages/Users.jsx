@@ -76,7 +76,15 @@ const Users = ({ user }) => {
                                     <div className="flex justify-between items-center">
                                         <div className="flex gap-2 items-center">
                                             <Link to={`/profile/${user.id}`}>
-                                                <img className="rounded-full w-8 h-8 object-cover" src={user.profilePhoto || noProfilePhoto} alt="profile photo" referrerPolicy="no-referrer" />
+                                                <img
+                                                    className="rounded-full w-8 h-8 object-cover"
+                                                    src={user.profilePhoto || noProfilePhoto}
+                                                    alt="profile photo"
+                                                    referrerPolicy="no-referrer"
+                                                    onError={(e) => {
+                                                        e.target.src = noProfilePhoto;
+                                                    }}
+                                                />
                                             </Link>
                                             <span className="relative flex h-3 w-3">
                                                 <span className="animate-ping-slow ease-out absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
