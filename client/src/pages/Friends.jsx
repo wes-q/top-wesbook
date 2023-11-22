@@ -9,7 +9,9 @@ const Friends = ({ usersFriends }) => {
                     <div className="text-xl font-extrabold">Friends</div>
                     <div className="text-base font-bold mb-3">{usersFriends.length} friends</div>
                 </div>
-                <div className="text-cyan-500 hover:underline cursor-pointer h-min">See all friends</div>
+                <Link to={"/friends"}>
+                    <div className="text-cyan-500 hover:underline cursor-pointer h-min">See all friends</div>
+                </Link>
             </div>
             <div className="grid grid-cols-3 gap-2">
                 {usersFriends.map((friend, index) => {

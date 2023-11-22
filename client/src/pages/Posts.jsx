@@ -59,7 +59,7 @@ const Posts = ({ userToDisplay, postsOf, currentUser, setNotification }) => {
                 )}
                 {posts.length === 0 && (
                     <div className="w-full border ring-1 mb-4 rounded-md bg-slate-200 p-2">
-                        <div className="">User has no posts yet</div>
+                        <div className="">No posts yet</div>
                     </div>
                 )}
                 {posts.map((post, index) => {

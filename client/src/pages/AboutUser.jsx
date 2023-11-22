@@ -1,5 +1,6 @@
 import React from "react";
 import { format, parseISO } from "date-fns";
+import { Link } from "react-router-dom";
 import WorkIcon from "../icons/work-google.svg?react";
 import GenderIcon from "../icons/gender-google.svg?react";
 import MailIcon from "../icons/mail-google.svg?react";
@@ -27,7 +28,14 @@ const AboutUser = ({ userToDisplay }) => {
     console.log(userToDisplay);
     return (
         <div className="w-full ring-1 bg-slate-200 rounded-md mb-4 text-black p-3">
-            <div className="text-xl font-extrabold mb-3">About</div>
+            <div className="flex justify-between mb-3">
+                <div className="flex flex-col">
+                    <div className="text-xl font-extrabold">About</div>
+                </div>
+                <Link to={"/update-profile"}>
+                    <div className="text-cyan-500 hover:underline cursor-pointer h-min">Edit info</div>
+                </Link>
+            </div>
             <div className="flex flex-col">
                 <InfoItem icon={GenderIcon} label="Gender" value={userToDisplay.gender} />
                 <InfoItem icon={EarthIcon} label="Lives in" value={userToDisplay.livesIn} />
