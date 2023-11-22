@@ -153,7 +153,8 @@ content-type: application/json
 {
     "displayName":"Lyra",
     "bio": "angel, dawnbringer",
-    "gender": "female"
+    "gender": "female",
+    "worksAt": "Copiose degusto cibus victus cursim. Aperiam deduco vigor supellex tergeo voveo. Ocer dapifer contego coepi angelus ventus esse uter aequitas."
 }
 
 ###

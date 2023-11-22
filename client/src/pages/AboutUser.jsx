@@ -8,9 +8,11 @@ import ClockIcon from "../icons/clock-google.svg?react";
 
 const InfoItem = ({ icon, label, value }) => (
     <div className="flex items-center gap-1">
-        {icon && React.createElement(icon, { className: "w-4 h-4" })}
-        <span>{label}:</span>
-        <span className="font-bold">{value || "No information"}</span>
+        {icon && React.createElement(icon, { className: "w-4 h-4 flex-shrink-0" })}
+        {/* {icon && <span className="flex-shrink-0">{React.createElement(icon, { className: "w-4 h-4" })}</span>} */}
+
+        <span className="whitespace-nowrap">{label}:</span>
+        <span className="font-bold truncate">{value || "No information"}</span>
     </div>
 );
 
