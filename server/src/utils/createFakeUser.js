@@ -13,9 +13,9 @@ function createRandomUser() {
     const jobTitle = faker.person.jobTitle();
     const worksAt = faker.company.name();
     // const monthlyIncome = faker.finance.amount(1000, 10000, 0, "$");
-    const monthlyIncome = parseInt(faker.finance.amount(1000, 10000, 0));
+    // const monthlyIncome = parseInt(faker.finance.amount(1000, 10000, 0));
     const memberSince = faker.date.past({ years: 10 });
-    const color = faker.internet.color();
+    // const color = faker.internet.color();
 
     return {
         // _id: faker.string.uuid(),
@@ -31,9 +31,9 @@ function createRandomUser() {
         livesIn,
         jobTitle,
         worksAt,
-        monthlyIncome,
+        // monthlyIncome,
         memberSince,
-        color,
+        // color,
     };
 }
 
