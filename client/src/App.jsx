@@ -15,10 +15,13 @@ import Users from "./pages/Users";
 import PlayPage from "./pages/PlayPage";
 import GetJwt from "./pages/GetJwt";
 import ProfilePage from "./pages/ProfilePage";
-import FriendsPage from "./pages/FriendsPage";
+import FriendsLayout from "./pages/FriendsLayout";
 import Newsfeed from "./pages/Newsfeed";
 import loginService from "./services/login";
 import getUserHeaders from "./helpers/getUserHeaders";
+import Suggestions from "./pages/Suggestions";
+import Requests from "./pages/Requests";
+import FriendsB from "./pages/FriendsB";
 
 function App() {
     const [notification, setNotification] = useState(false);
@@ -73,7 +76,12 @@ function App() {
                         <Route index element={<Newsfeed currentUser={currentUser} setNotification={setNotification} />} />
                         <Route path="play" element={<PlayPage setGame={setGame} />} />
                         <Route path="leaderboard" element={<LeaderboardPage />} />
-                        <Route path="friends" element={<FriendsPage currentUser={currentUser} />} />
+                        <Route path="friends-page" element={<FriendsLayout currentUser={currentUser} />}>
+                            <Route index element={<Suggestions />} />
+                            <Route path="suggestions" element={<Suggestions />} />
+                            <Route path="requests" element={<Requests />} />
+                            <Route path="friends" element={<FriendsB currentUser={currentUser} />} />
+                        </Route>
                         <Route path="users" element={<Users user={currentUser} />} />
                         <Route path="game" element={<Game game={game} setShowFooter={setShowFooter} setShowStartTimer={setShowStartTimer} seconds={seconds} setSeconds={setSeconds} />} />
                         <Route path="about" element={<About />} />

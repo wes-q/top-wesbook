@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .specific .active {
-    @apply bg-cyan-400 text-gray-800;
+    @apply bg-cyan-400 text-black;
 }
 
 .font-handlee {

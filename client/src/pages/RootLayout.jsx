@@ -129,7 +129,7 @@ export default function RootLayout({ notification, user, setNotification, showFo
                                         <NavLink className="flex items-center text-cyan-400 rounded-md px-4 whitespace-nowrap h-8 w-full text-sm" to={`/profile/${user.id}`} style={{ textDecoration: "none" }}>
                                             My Profile
                                         </NavLink>
-                                        <NavLink className="flex items-center text-cyan-400 rounded-md px-4 whitespace-nowrap h-8 w-full text-sm" to={"/friends"} style={{ textDecoration: "none" }}>
+                                        <NavLink className="flex items-center text-cyan-400 rounded-md px-4 whitespace-nowrap h-8 w-full text-sm" to={"/friends-page/suggestions"} style={{ textDecoration: "none" }}>
                                             Friends
                                         </NavLink>
                                     </>

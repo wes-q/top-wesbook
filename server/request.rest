@@ -283,7 +283,7 @@ eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1M2I4Y2FhYWMwYTJjMzk3MTNkNzhhZCI
 
 ###
 GET http://localhost:3001/api/users/eligible-friends
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTBiNGY3OTczOGNiODkyNWFlYmExNiIsImlhdCI6MTcwMDQ1MTMwMywiZXhwIjoxNzAwNjI0MTAzfQ.bzI57K7BVO1WnSiZD4CpLyVSm7vCPrAqd5kdATt-iSg
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTBiMzFiOTczOGNiODkyNWFlYjk2NiIsImlhdCI6MTcwMDcxMTcyOSwiZXhwIjoxNzAwODg0NTI5fQ.RBKWBkuTdgq7JTWpvK_XtPVE7H3OaX1AJ_9pC__oAIY
 
 ###
 GET http://localhost:3001/api/users/pending-friends
