@@ -3,7 +3,7 @@ import GithubLogo from "../icons/githublogo2.svg?react";
 const Footer = () => (
     <div className="flex flex-col justify-center items-center bg-gray-800 p-4 text-center h-10 text-xs sm:text-base sm:h-20">
         <div className="flex text-[6px] sm:text-sm">
-            <span className="mr-6">Created by: Wes Q.</span>
+            <span className="mr-6">© Wes Q. 2023</span>
             <div>
                 <span>Icons by </span>
                 <a className="text-gray-200 underline" href="https://icons8.com" target="_blank">

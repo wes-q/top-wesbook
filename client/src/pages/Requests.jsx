@@ -4,7 +4,8 @@ import axios from "axios";
 import getUserHeaders from "../helpers/getUserHeaders";
 import { Link } from "react-router-dom";
 import PersonAddIcon from "../icons/person-add.svg?react";
-import PersonCheckIcon from "../icons/person-check.svg?react";
+import CheckIcon from "../icons/check-google.svg?react";
+import XIcon from "../icons/x-close-google.svg?react";
 import MessengerIcon from "../icons/messenger.svg?react";
 import PersonRemoveIcon from "../icons/person-remove.svg?react";
 
@@ -47,7 +48,7 @@ const Requests = () => {
                                 <li className="flex items-center sm:flex-col sm:border sm:border-gray-400 sm:rounded-lg sm:overflow-hidden" key={friend.id}>
                                     <Link to={`/profile/${friend.id}`}>
                                         <img
-                                            className="w-16 sm:w-40 aspect-square object-cover rounded-full sm:rounded-none bg-slate-200 cursor-pointer ring-1 sm:ring-0"
+                                            className="w-[79px] sm:w-40 aspect-square object-cover rounded-full sm:rounded-none bg-slate-200 cursor-pointer ring-1 sm:ring-0"
                                             src={friend.profilePhoto || noProfilePhoto}
                                             alt="profile photo"
                                             referrerPolicy="no-referrer"
@@ -57,7 +58,7 @@ const Requests = () => {
                                         />
                                     </Link>
 
-                                    <div className="flex flex-col p-2 sm:w-40 sm:bg-slate-300">
+                                    <div className="flex flex-col p-2 sm:w-40 sm:bg-slate-300 sm:h-[112px] h-[88px]">
                                         <div className="truncate">
                                             <Link to={`/profile/${friend.id}`}>
                                                 <span className="text-base font-semibold break-words cursor-pointer hover:underline">{friend.displayName || friend.firstName + " " + friend.lastName}</span>
@@ -66,11 +67,11 @@ const Requests = () => {
                                         <span className="sm:text-xs">0 mutual friends</span>
                                         <div className="flex sm:flex-col sm:gap-1">
                                             <button className="flex items-center justify-center w-28 sm:w-full bg-cyan-400 text-white text-xs px-3 py-1 rounded-md mr-2" onClick={() => handleAddFriend(userToDisplay.id)}>
-                                                <PersonAddIcon className="fill-white w-4 h-4 mr-1" />
+                                                <CheckIcon className="fill-white w-5 h-5 mr-1" />
                                                 Confirm
                                             </button>
                                             <button className="flex items-center justify-center w-28 sm:w-full bg-slate-400 text-white text-xs px-3 py-1 rounded-md">
-                                                <MessengerIcon className="fill-white w-4 h-4 mr-1" />
+                                                <XIcon className="fill-white w-5 h-5 mr-1" />
                                                 Reject
                                             </button>
                                         </div>
@@ -97,7 +98,7 @@ const Requests = () => {
                                 <li className="flex items-center sm:flex-col sm:border sm:border-gray-400 sm:rounded-lg sm:overflow-hidden" key={friend.id}>
                                     <Link to={`/profile/${friend.id}`}>
                                         <img
-                                            className="w-16 sm:w-40 aspect-square object-cover rounded-full sm:rounded-none bg-slate-200 cursor-pointer ring-1 sm:ring-0"
+                                            className="w-[79px] sm:w-40 aspect-square object-cover rounded-full sm:rounded-none bg-slate-200 cursor-pointer ring-1 sm:ring-0"
                                             src={friend.profilePhoto || noProfilePhoto}
                                             alt="profile photo"
                                             referrerPolicy="no-referrer"
@@ -107,7 +108,7 @@ const Requests = () => {
                                         />
                                     </Link>
 
-                                    <div className="flex flex-col p-2 sm:w-40 sm:bg-slate-300">
+                                    <div className="flex flex-col p-2 sm:w-40 sm:bg-slate-300 sm:h-[112px] h-[88px]">
                                         <div className="truncate">
                                             <Link to={`/profile/${friend.id}`}>
                                                 <span className="text-base font-semibold break-words cursor-pointer hover:underline">{friend.displayName || friend.firstName + " " + friend.lastName}</span>
