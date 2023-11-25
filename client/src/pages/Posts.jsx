@@ -42,6 +42,20 @@ const Posts = ({ userToDisplay, postsOf, currentUser, setNotification }) => {
         setShowNewPost(true);
     };
 
+    // Updates the like state
+    const handleLikeChange = (postId, newLikedValue) => {
+        // Find the post in the array and update its isLikedByUser property
+        const updatedPosts = posts.map((post) => {
+            if (post.id === postId) {
+                return { ...post, isLikedByCurrentUser: !newLikedValue };
+            }
+            return post;
+        });
+
+        // Update the state with the new array
+        setPosts(updatedPosts);
+    };
+
     return (
         <>
             {showNewPost && <ModalNewPost setShowNewPost={setShowNewPost} currentUser={userToDisplay} getAllPosts={getAllPosts} />}
@@ -59,11 +73,11 @@ const Posts = ({ userToDisplay, postsOf, currentUser, setNotification }) => {
                 )}
                 {posts.length === 0 && (
                     <div className="w-full border ring-1 mb-4 rounded-md bg-slate-200 p-2">
-                        <div className="">No posts from friends yet. Maybe its time to add some friends! </div>
+                        <div className="whitespace-pre-wrap">No posts from friends yet.{"\n"}Maybe it's time to add some friends!</div>
                     </div>
                 )}
                 {posts.map((post, index) => {
-                    return <Post key={index} post={post} getAllPosts={getAllPosts} currentUser={currentUser} setNotification={setNotification} />;
+                    return <Post key={index} post={post} getAllPosts={getAllPosts} currentUser={currentUser} setNotification={setNotification} handleLikeChange={handleLikeChange} />;
                 })}
             </div>
         </>

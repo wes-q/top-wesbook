@@ -15,11 +15,11 @@ import postService from "../services/posts";
 import getUserHeaders from "../helpers/getUserHeaders";
 import ModalEditPost from "./ModalEditPost";
 
-const Post = ({ post, getAllPosts, currentUser, setNotification }) => {
+const Post = ({ post, getAllPosts, currentUser, setNotification, handleLikeChange }) => {
+    const [totalLikes, setTotalLikes] = useState(post.likes.length);
     const [isCommentClicked, setIsCommentClicked] = useState(false);
     const jsDate = parseISO(post.createdAt);
     const formattedDate = format(jsDate, "MMM dd, yyyy");
-    const totalLikes = post.likes.length;
     const totalComments = post.comments.length;
     const detailsRef = useRef(null);
     const contentEditableRef = useRef(null);
@@ -41,7 +41,13 @@ const Post = ({ post, getAllPosts, currentUser, setNotification }) => {
 
         try {
             await axios.patch(url, object, { headers });
-            getAllPosts();
+            // getAllPosts(); // instead of refreshing all the posts, only update the state
+            handleLikeChange(postId, post.isLikedByCurrentUser);
+            if (post.isLikedByCurrentUser === true) {
+                setTotalLikes(totalLikes - 1);
+            } else {
+                setTotalLikes(totalLikes + 1);
+            }
         } catch (error) {
             console.log(error);
         }

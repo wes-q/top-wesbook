@@ -11,7 +11,6 @@ import About from "./pages/About";
 import Game from "./pages/Game";
 import LeaderboardPage from "./pages/LeaderboardPage";
 import PrivateRoutes from "./pages/Privateroutes";
-import Users from "./pages/Users";
 import PlayPage from "./pages/PlayPage";
 import GetJwt from "./pages/GetJwt";
 import ProfilePage from "./pages/ProfilePage";
@@ -82,7 +81,6 @@ function App() {
                             <Route path="requests" element={<Requests />} />
                             <Route path="friends" element={<FriendsB currentUser={currentUser} />} />
                         </Route>
-                        <Route path="users" element={<Users user={currentUser} />} />
                         <Route path="game" element={<Game game={game} setShowFooter={setShowFooter} setShowStartTimer={setShowStartTimer} seconds={seconds} setSeconds={setSeconds} />} />
                         <Route path="about" element={<About />} />
                         <Route path="verification-successful" element={<VerificationSuccessful />} />
