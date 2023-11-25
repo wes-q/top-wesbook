@@ -126,20 +126,16 @@ usersRouter.get("/api/users/eligible-friends", userExtractor, async (req, res, n
 //     res.status(200).json(friendIds);
 // });
 
-// Get all of the users' incoming friend requests
+// Incoming friend requests
+// Check the currentUsers request list for all the ids
 usersRouter.get("/api/users/incoming-friends", userExtractor, async (req, res, next) => {
     try {
-        // Use the User model to create a Mongoose query for populating the 'friends' field
-        const userWithPopulatedFriends = await User.findById(req.user.id).populate("friendRequests.friendId").exec();
-        // res.json(userWithPopulatedFriends);
+        const userWithPopulatedFriends = await User.findById(req.user.id).populate("friendRequests.friendId", "email displayName firstName lastName profilePhoto").exec();
 
-        // Extract the populated friend data
         const populatedFriends = userWithPopulatedFriends.friendRequests.map((friend) => {
             const { friendId } = friend;
-            // Add any other fields you want to extract from the populated friend object
-            const { id, displayName, firstName, profilePhoto, email } = friendId;
-            // return { friendId, displayName, firstName, profilePhoto, email };
-            return { id, displayName, firstName, profilePhoto, email };
+            const { id, displayName, firstName, lastName, profilePhoto, email } = friendId;
+            return { id, displayName, firstName, lastName, profilePhoto, email };
         });
 
         res.status(200).json(populatedFriends);
@@ -148,6 +144,8 @@ usersRouter.get("/api/users/incoming-friends", userExtractor, async (req, res, n
     }
 });
 
+// Outgoing friend requests
+// Check each user request list in the database if it contains the currentUser's id
 usersRouter.get("/api/users/pending-friends", userExtractor, async (req, res, next) => {
     try {
         const pendingFriends = await User.find({
@@ -155,7 +153,12 @@ usersRouter.get("/api/users/pending-friends", userExtractor, async (req, res, ne
             "friends.friendId": { $ne: req.user.id }, // exclude if already friend
         }).exec();
 
+        // const mappedFriends = pendingFriends.map(({ id, displayName, lastName, profilePhoto, email, firstName }) => {
+        //     return { id, displayName, firstName, lastName, profilePhoto, email };
+        // });
+
         res.status(200).json(pendingFriends);
+        // res.status(200).json(mappedFriends);
     } catch (error) {
         next(error);
     }

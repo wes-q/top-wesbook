@@ -3,7 +3,6 @@ import noProfilePhoto from "../icons/noprofile.jpg";
 import axios from "axios";
 import getUserHeaders from "../helpers/getUserHeaders";
 import { Link } from "react-router-dom";
-import PersonAddIcon from "../icons/person-add.svg?react";
 import CheckIcon from "../icons/check-google.svg?react";
 import XIcon from "../icons/x-close-google.svg?react";
 import MessengerIcon from "../icons/messenger.svg?react";
@@ -30,6 +29,34 @@ const Requests = () => {
             console.log(error);
         } finally {
             setLoading(false);
+        }
+    };
+
+    const handleAcceptFriend = async (toUserId) => {
+        const url = `/api/friend-requests/${toUserId}/accept`;
+        const headers = getUserHeaders();
+
+        const object = {};
+        try {
+            const result = await axios.put(url, object, { headers });
+            // console.log(result.data);
+            fetchData();
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const handleCancel = async (toUserId) => {
+        const url = `/api/friend-requests/${toUserId}/cancel`;
+        const headers = getUserHeaders();
+        const userObject = {};
+
+        try {
+            const result = await axios.post(url, userObject, { headers });
+            // console.log(result.data);
+            fetchData();
+        } catch (error) {
+            console.log(error);
         }
     };
 
@@ -66,7 +93,7 @@ const Requests = () => {
                                         </div>
                                         <span className="sm:text-xs">0 mutual friends</span>
                                         <div className="flex sm:flex-col sm:gap-1">
-                                            <button className="flex items-center justify-center w-28 sm:w-full bg-cyan-400 text-white text-xs px-3 py-1 rounded-md mr-2" onClick={() => handleAddFriend(userToDisplay.id)}>
+                                            <button className="flex items-center justify-center w-28 sm:w-full bg-cyan-400 text-white text-xs px-3 py-1 rounded-md mr-2" onClick={() => handleAcceptFriend(friend.id)}>
                                                 <CheckIcon className="fill-white w-5 h-5 mr-1" />
                                                 Confirm
                                             </button>
@@ -116,7 +143,7 @@ const Requests = () => {
                                         </div>
                                         <span className="sm:text-xs">0 mutual friends</span>
                                         <div className="flex sm:flex-col sm:gap-1">
-                                            <button className="flex items-center justify-center w-28 sm:w-full bg-slate-400 text-white text-xs px-3 py-1 rounded-md mr-2" onClick={() => handleAddFriend(userToDisplay.id)}>
+                                            <button className="flex items-center justify-center w-28 sm:w-full bg-slate-400 text-white text-xs px-3 py-1 rounded-md mr-2" onClick={() => handleCancel(friend.id)}>
                                                 <PersonRemoveIcon className="fill-white w-5 h-5 mr-1" />
                                                 Cancel
                                             </button>
