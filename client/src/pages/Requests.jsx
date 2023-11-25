@@ -46,6 +46,20 @@ const Requests = () => {
         }
     };
 
+    const handleRejectFriend = async (toUserId) => {
+        const url = `/api/friend-requests/${toUserId}/reject`;
+        const headers = getUserHeaders();
+
+        const object = {};
+        try {
+            const result = await axios.put(url, object, { headers });
+            // console.log(result.data);
+            fetchData();
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     const handleCancel = async (toUserId) => {
         const url = `/api/friend-requests/${toUserId}/cancel`;
         const headers = getUserHeaders();
@@ -97,7 +111,7 @@ const Requests = () => {
                                                 <CheckIcon className="fill-white w-5 h-5 mr-1" />
                                                 Confirm
                                             </button>
-                                            <button className="flex items-center justify-center w-28 sm:w-full bg-slate-400 text-white text-xs px-3 py-1 rounded-md">
+                                            <button className="flex items-center justify-center w-28 sm:w-full bg-slate-400 text-white text-xs px-3 py-1 rounded-md" onClick={() => handleRejectFriend(friend.id)}>
                                                 <XIcon className="fill-white w-5 h-5 mr-1" />
                                                 Reject
                                             </button>

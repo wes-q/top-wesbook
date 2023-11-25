@@ -50,10 +50,15 @@ export default function RootLayout({ notification, user, setNotification, showFo
                         {showStartTimer && <Timer className="h-auto max-h-10" setSeconds={setSeconds} seconds={seconds}></Timer>}
                         <div className="hidden sm:block">
                             {isUserLoaded && (
-                                <NavLink className="text-cyan-400 bg-gray-800 rounded-md px-4 py-1 whitespace-nowrap" to={`/profile/${user.id}`}>
-                                    My Profile
-                                </NavLink>
+                                <>
+                                    <NavLink className="text-cyan-400 bg-gray-800 rounded-md px-4 py-1 whitespace-nowrap" to={`/profile/${user.id}`}>
+                                        My Profile
+                                    </NavLink>
+                                </>
                             )}
+                            <NavLink className="text-cyan-400 bg-gray-800 rounded-md px-4 py-1 whitespace-nowrap" to={"/friends-page/suggestions"} style={{ textDecoration: "none" }}>
+                                Friends
+                            </NavLink>
                             <NavLink className="text-cyan-400 bg-gray-800 rounded-md px-4 py-1 whitespace-nowrap" to="/">
                                 Newsfeed
                             </NavLink>
