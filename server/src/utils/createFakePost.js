@@ -15,6 +15,8 @@ function createRandomPost() {
     const content = faker.lorem.text();
     const comment = faker.lorem.words();
     const comment2 = faker.lorem.sentence();
+    const comment1Id = new ObjectId(); // Manually generate _id for comment 1
+    const comment2Id = new ObjectId(); // Manually generate _id for comment 2
     const postedBy = new ObjectId(authorObjectIds[randomIndex2]);
     const postedBy2 = new ObjectId(authorObjectIds[randomIndex3]);
     const postPhoto = faker.image.urlLoremFlickr();
@@ -28,10 +30,12 @@ function createRandomPost() {
             {
                 text: comment,
                 postedBy: postedBy,
+                _id: comment1Id,
             },
             {
                 text: comment2,
                 postedBy: postedBy2,
+                _id: comment2Id,
             },
         ],
     };
