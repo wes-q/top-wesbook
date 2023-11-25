@@ -50,7 +50,7 @@ function App() {
             setNotification({ message: "Login successful!", type: "success" });
             timeoutId = setTimeout(() => {
                 setNotification(false);
-            }, 5000);
+            }, 2000);
         } catch (error) {
             console.log("Automatic relogin: No user session found.");
             // Make sure backed always responds with jwt expired for expired tokens

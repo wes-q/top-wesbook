@@ -323,13 +323,15 @@ usersRouter.put("/api/friend-requests/:id/accept", userExtractor, async (req, re
             await friendRequestRecipient.save();
 
             // Remove the friend request from the recipient's friendRequests array
-            const res = await friendRequestRecipient
-                .updateOne(
-                    { $pull: { friendRequests: { friendId: friendRequestSenderId } } },
-                    { runValidators: true } // This option will trigger validation
-                )
-                .exec();
-            // console.log(JSON.stringify(res));
+            // const res = await friendRequestRecipient
+            //     .updateOne(
+            //         { $pull: { friendRequests: { friendId: friendRequestSenderId } } },
+            //         { runValidators: true }
+            //     )
+            //     .exec();
+
+            await friendRequestRecipient.updateOne({ $pull: { friendRequests: { friendId: friendRequestSenderId } } }).exec();
+            await friendRequestSender.updateOne({ $pull: { friendRequests: { friendId: friendRequestRecipientId } } }).exec();
         }
         res.status(200).json({ message: `User ${friendRequestRecipientId} has accepted friend request from ${friendRequestSenderId}` });
     } catch (error) {
