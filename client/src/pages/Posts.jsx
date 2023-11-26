@@ -73,7 +73,11 @@ const Posts = ({ userToDisplay, postsOf, currentUser, setNotification }) => {
                 )}
                 {posts.length === 0 && (
                     <div className="w-full border ring-1 mb-4 rounded-md bg-slate-200 p-2">
-                        <div className="whitespace-pre-wrap">No posts from friends yet.{"\n"}Maybe it's time to add some friends!</div>
+                        {postsOf === "friends" ? ( // asdasdsa
+                            <div className="whitespace-pre-wrap">No posts from friends yet.{"\n"}Maybe it's time to add some friends!</div>
+                        ) : (
+                            <div className="whitespace-pre-wrap">This user has no posts yet</div>
+                        )}
                     </div>
                 )}
                 {posts.map((post, index) => {

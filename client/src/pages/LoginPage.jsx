@@ -1,8 +1,9 @@
 import Footer from "./Footer";
 import Login from "./Login";
 import WesbookLogo from "../icons/wesbooklogo.svg?react";
+import Notification from "./Notification";
 
-const LoginPage = () => {
+const LoginPage = ({ setNotification, notification }) => {
     const handleSurprise = () => {
         confetti({
             particleCount: 100,
@@ -13,6 +14,9 @@ const LoginPage = () => {
     };
     return (
         <div className="flex flex-col justify-between h-screen">
+            <div className="-skew-y-3 z-50">
+                <Notification notification={notification} setNotification={setNotification} />
+            </div>
             <div></div>
             <div className="flex flex-col sm:flex-row justify-start sm:justify-around px-12 sm:p-0">
                 <div></div>
@@ -29,7 +33,7 @@ const LoginPage = () => {
                 </div>
                 <div className="invisible sm:visible border-l-2"></div>
                 <div>
-                    <Login />
+                    <Login setNotification={setNotification} notification={notification} />
                 </div>
                 <div></div>
                 <div></div>

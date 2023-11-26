@@ -2,7 +2,69 @@ const { MongoClient } = require("mongodb");
 const ObjectId = require("mongodb").ObjectId;
 const { faker } = require("@faker-js/faker");
 
-const authorObjectIds = ["6550b31b9738cb8925aeb966", "6550b43c9738cb8925aeb9da", "6550b4f79738cb8925aeba16", "6551af488dc715fc810930a4", "655974b5aa661554a4e17eb5", "655984f9cdf54644327b89ab", "6559855acdf54644327b89e5", "655985eacdf54644327b89e7", "655b72ee2dc69a64ff0e5638", "655b75643eae4b275c4cde72", "655b75a25bd0120c66ac1368", "655b75ba0d5f8178e07e9cee", "655cac0d89dd9e91b34a274b", "655cae531bebd35109b86da3", "655cae531bebd35109b86da4", "655cae531bebd35109b86da5", "655cae531bebd35109b86da6", "655cae531bebd35109b86da7"];
+const authorObjectIds = [
+    "655b72ee2dc69a64ff0e5638",
+    "655b75643eae4b275c4cde72",
+    "655b75a25bd0120c66ac1368",
+    "655b75ba0d5f8178e07e9cee",
+    "655cac0d89dd9e91b34a274b",
+    "655cae531bebd35109b86da3",
+    "655cae531bebd35109b86da4",
+    "655cae531bebd35109b86da6",
+    "655cae531bebd35109b86da7",
+    "655cae531bebd35109b86da5",
+    "655cbd93192f5c6e3e1ee589",
+    "655cbd93192f5c6e3e1ee58b",
+    "655cbd93192f5c6e3e1ee588",
+    "655cbd93192f5c6e3e1ee58c",
+    "655cbd93192f5c6e3e1ee58a",
+    "655cbf74f9c2aacedfc38648",
+    "655cbf74f9c2aacedfc3864a",
+    "655cbf74f9c2aacedfc38646",
+    "655cbf74f9c2aacedfc38647",
+    "655cbf74f9c2aacedfc38649",
+    "655d5e0834d4cbc3ab5cc3f6",
+    "655d5e0834d4cbc3ab5cc3f5",
+    "655d5e0834d4cbc3ab5cc3f7",
+    "655d5e0834d4cbc3ab5cc3f4",
+    "655d5e0834d4cbc3ab5cc3f8",
+    "655d5ffc9cad1de2b1b15f21",
+    "655d5ffc9cad1de2b1b15f20",
+    "655d5ffc9cad1de2b1b15f1f",
+    "655d5ffc9cad1de2b1b15f22",
+    "655d5ffc9cad1de2b1b15f1e",
+    "655d78a0e1ed1d25add769da",
+    "655d78a0e1ed1d25add769dd",
+    "655d78a0e1ed1d25add769d9",
+    "655d78a0e1ed1d25add769dc",
+    "655d78a0e1ed1d25add769db",
+    "655d8db751b62d8f8ea17b9e",
+    "655d8db751b62d8f8ea17b9f",
+    "655d8db751b62d8f8ea17b9d",
+    "655d8db751b62d8f8ea17b9c",
+    "655d8db751b62d8f8ea17ba0",
+    "6562ca321ee788dd6caf1c7b",
+    "6562ca321ee788dd6caf1c7c",
+    "6562ca321ee788dd6caf1c7d",
+    "6562ca321ee788dd6caf1c7e",
+    "6562ca321ee788dd6caf1c7f",
+    "6562ca321ee788dd6caf1c80",
+    "6562ca321ee788dd6caf1c81",
+    "6562ca321ee788dd6caf1c82",
+    "6562ca321ee788dd6caf1c83",
+    "6562ca321ee788dd6caf1c84",
+    "6562ca321ee788dd6caf1c85",
+    "6562ca321ee788dd6caf1c86",
+    "6562ca321ee788dd6caf1c87",
+    "6562ca321ee788dd6caf1c88",
+    "6562ca321ee788dd6caf1c89",
+    "6562ca321ee788dd6caf1c8a",
+    "6562ca321ee788dd6caf1c8b",
+    "6562ca321ee788dd6caf1c8c",
+    "6562ca321ee788dd6caf1c8d",
+    "6562ca321ee788dd6caf1c8e",
+];
+
 // const randomIndex = Math.floor(Math.random() * authorObjectIds.length);
 // const randomIndex2 = Math.floor(Math.random() * authorObjectIds.length);
 
@@ -19,13 +81,13 @@ function createRandomPost() {
     const comment2Id = new ObjectId(); // Manually generate _id for comment 2
     const postedBy = new ObjectId(authorObjectIds[randomIndex2]);
     const postedBy2 = new ObjectId(authorObjectIds[randomIndex3]);
-    const postPhoto = faker.image.urlLoremFlickr("dogs cats");
+    // const postPhoto = faker.image.urlLoremFlickr("dogs cats");
 
     return {
         author,
         content,
-        // postPhoto: faker.image.urlPicsumPhotos(),
-        postPhoto,
+        postPhoto: faker.image.urlPicsumPhotos(),
+        // postPhoto,
         comments: [
             {
                 text: comment,

@@ -20,8 +20,8 @@ function createRandomUser() {
     return {
         // _id: faker.string.uuid(),
         profilePhoto: faker.internet.avatar(sex),
-        // coverPhoto: faker.image.urlPicsumPhotos({ width: 851, height: 315 }),
-        coverPhoto: faker.image.urlLoremFlickr({ width: 851, height: 315 }),
+        coverPhoto: faker.image.urlPicsumPhotos({ width: 851, height: 315 }),
+        // coverPhoto: faker.image.urlLoremFlickr({ width: 851, height: 315 }),
         email,
         firstName,
         lastName,
@@ -66,7 +66,7 @@ async function saveUserToMongoDB(users) {
 async function main() {
     // const user = createRandomUser();
     const users = faker.helpers.multiple(createRandomUser, {
-        count: 5,
+        count: 20,
     });
     console.log(users);
 
