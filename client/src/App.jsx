@@ -3,7 +3,7 @@ import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } 
 import NotFound from "./pages/NotFound";
 import RootLayout from "./pages/RootLayout";
 import SignupForm from "./pages/SignupForm";
-import Login from "./pages/Login";
+import LoginPage from "./pages/LoginPage";
 import VerificationSuccessful from "./pages/VerificationSuccessful";
 import VerificationNothing from "./pages/VerificationNothing";
 import UpdateProfile from "./pages/UpdateProfile";
@@ -93,7 +93,7 @@ function App() {
                     <Route path="getjwt" element={<GetJwt />} />
                     <Route path="*" element={<NotFound />} />
                 </Route>
-                <Route path="login" element={<Login setNotification={setNotification} setUserToken={setUserToken} />} />
+                <Route path="login" element={<LoginPage setNotification={setNotification} notification={notification} />} />
             </>
         )
     );

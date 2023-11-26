@@ -37,7 +37,7 @@ const FriendsB = ({ currentUser }) => {
             ) : (
                 <ul className="flex flex-col sm:flex-row sm:flex-wrap sm:gap-2">
                     {friends.length > 0 ? (
-                        friends.map((friend) => (
+                        friends.map((friend, index) => (
                             <li className="flex items-center justify-between sm:flex-col sm:border sm:border-gray-400 sm:rounded-lg sm:overflow-hidden" key={friend.id}>
                                 <div className="flex items-center sm:flex-col">
                                     <Link to={`/profile/${friend.id}`}>

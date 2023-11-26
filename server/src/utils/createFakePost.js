@@ -19,7 +19,7 @@ function createRandomPost() {
     const comment2Id = new ObjectId(); // Manually generate _id for comment 2
     const postedBy = new ObjectId(authorObjectIds[randomIndex2]);
     const postedBy2 = new ObjectId(authorObjectIds[randomIndex3]);
-    const postPhoto = faker.image.urlLoremFlickr();
+    const postPhoto = faker.image.urlLoremFlickr("dogs cats");
 
     return {
         author,
