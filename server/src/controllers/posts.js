@@ -27,14 +27,18 @@ postsRouter.get("/api/posts", middleware.userExtractor, async (request, response
     try {
         const posts = await Post.find({}).populate({ path: "author", select: "firstName displayName profilePhoto" }).populate({ path: "comments.postedBy", select: "firstName displayName profilePhoto" });
         // const posts = await Post.find({}).populate({ path: "author" });
-        const postsWithIsLiked = posts.map((post) => {
+        const appendedPosts = posts.map((post) => {
             const isLikedByCurrentUser = post.likes.some((like) => like.user.toString() === request.user.id);
+            const totalLikes = post.likes.length;
+            const totalComments = post.comments.length;
             return {
                 ...post.toJSON(),
                 isLikedByCurrentUser,
+                totalLikes,
+                totalComments,
             };
         });
-        response.json(postsWithIsLiked);
+        response.json(appendedPosts);
     } catch (error) {
         next(error);
     }
@@ -50,15 +54,18 @@ postsRouter.get("/api/posts-of-friends", middleware.userExtractor, async (reques
     const postsOfFriends = await Post.find().where("author").in(friendIds).populate({ path: "author", select: "firstName displayName profilePhoto" }).populate({ path: "comments.postedBy", select: "firstName displayName profilePhoto" });
     // const postsOfFriends = await Post.find().where("author").in(friendIds).populate({ path: "author", select: "firstName displayName profilePhoto" });
 
-    const postsWithIsLiked = postsOfFriends.map((post) => {
+    const appendedPosts = postsOfFriends.map((post) => {
         const isLikedByCurrentUser = post.likes.some((like) => like.user.toString() === request.user.id);
+        const totalLikes = post.likes.length;
+        const totalComments = post.comments.length;
         return {
             ...post.toJSON(),
             isLikedByCurrentUser,
+            totalLikes,
+            totalComments,
         };
     });
-
-    response.json(postsWithIsLiked);
+    response.json(appendedPosts);
 });
 
 postsRouter.get("/api/posts-of-self", middleware.userExtractor, async (request, response, next) => {
@@ -80,15 +87,18 @@ postsRouter.get("/api/posts-of-self", middleware.userExtractor, async (request, 
 postsRouter.get("/api/users/:userId/posts", middleware.userExtractor, async (request, response, next) => {
     const posts = await Post.find().where("author").equals(request.params.userId).populate({ path: "author", select: "firstName displayName profilePhoto" }).populate({ path: "comments.postedBy", select: "firstName displayName profilePhoto" });
 
-    const postsWithIsLiked = posts.map((post) => {
+    const appendedPosts = posts.map((post) => {
         const isLikedByCurrentUser = post.likes.some((like) => like.user.toString() === request.user.id);
+        const totalLikes = post.likes.length;
+        const totalComments = post.comments.length;
         return {
             ...post.toJSON(),
             isLikedByCurrentUser,
+            totalLikes,
+            totalComments,
         };
     });
-
-    response.json(postsWithIsLiked);
+    response.json(appendedPosts);
 });
 
 postsRouter.patch("/api/posts/:postId/likes", middleware.userExtractor, async (request, response, next) => {

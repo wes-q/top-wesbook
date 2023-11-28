@@ -16,11 +16,9 @@ import getUserHeaders from "../helpers/getUserHeaders";
 import ModalEditPost from "./ModalEditPost";
 
 const Post = ({ post, getAllPosts, currentUser, setNotification, handleLikeChange }) => {
-    const [totalLikes, setTotalLikes] = useState(post.likes.length);
     const [isCommentClicked, setIsCommentClicked] = useState(false);
     const jsDate = parseISO(post.createdAt);
     const formattedDate = format(jsDate, "MMM dd, yyyy");
-    const totalComments = post.comments.length;
     const detailsRef = useRef(null);
     const contentEditableRef = useRef(null);
     const [showEditPost, setShowEditPost] = useState(false);
@@ -38,7 +36,6 @@ const Post = ({ post, getAllPosts, currentUser, setNotification, handleLikeChang
         const headers = getUserHeaders();
         const url = `/api/posts/${postId}/likes`;
         const object = {};
-
         try {
             await axios.patch(url, object, { headers });
             // getAllPosts(); // instead of refreshing all the posts, only update the state
@@ -156,15 +153,15 @@ const Post = ({ post, getAllPosts, currentUser, setNotification, handleLikeChang
                 )}
 
                 <div className="flex justify-between text-xs mb-2">
-                    {totalLikes > 0 && (
+                    {post.totalLikes > 0 && (
                         <div className="flex">
                             <LikeCount className="w-4 mr-1 fill-cyan-500"></LikeCount>
-                            {totalLikes} {pluralize("like", totalLikes)}
+                            {post.totalLikes} {pluralize("like", post.totalLikes)}
                         </div>
                     )}
-                    {totalComments > 0 && (
+                    {post.totalComments > 0 && (
                         <div>
-                            {totalComments} {pluralize("comment", totalComments)}
+                            {post.totalComments} {pluralize("comment", post.totalComments)}
                         </div>
                     )}
                 </div>

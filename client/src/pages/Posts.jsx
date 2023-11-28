@@ -51,7 +51,6 @@ const Posts = ({ userToDisplay, postsOf, currentUser, setNotification }) => {
             }
             return post;
         });
-
         // Update the state with the new array
         setPosts(updatedPosts);
     };
