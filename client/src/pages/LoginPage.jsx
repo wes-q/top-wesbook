@@ -13,11 +13,10 @@ const LoginPage = ({ setNotification, notification }) => {
         });
     };
     return (
-        <div className="flex flex-col justify-between h-screen">
+        <div className="flex flex-col justify-between h-screen overflow-hidden">
             <div className="-skew-y-3 z-50">
                 <Notification notification={notification} setNotification={setNotification} />
             </div>
-            <div></div>
             <div className="flex flex-col sm:flex-row justify-start sm:justify-around px-12 sm:p-0">
                 <div></div>
                 <div></div>

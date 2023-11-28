@@ -18,7 +18,7 @@ const Notification = ({ notification, setNotification }) => {
     return (
         <AnimatePresence>
             {notification && (
-                <motion.div className="fixed right-3 z-50" key="notification" initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.4, ease: "easeInOut" }} exit={{ opacity: 0, x: 30 }}>
+                <motion.div className="fixed right-3 top-24 z-50" key="notification" initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.4, ease: "easeInOut" }} exit={{ opacity: 0, x: 30 }}>
                     <div className={`flex justify-between items-center w-full px-3 py-2 text-left rounded-md bg-gray-800 border-black border ${colorClass} mb-4 whitespace-pre-line shadow-lg`}>
                         <span className="text-xs whitespace-pre-wrap">{notification.message}</span>
                         <button className="font-bold text-xs pl-4" onClick={() => setNotification(false)}>

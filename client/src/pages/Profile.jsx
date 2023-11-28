@@ -72,7 +72,11 @@ const Profile = ({ userToDisplay, setNotification, setUserToDisplay, setCurrentU
                 const userData = await axios.put(url2, object, { headers });
                 setUserToDisplay(userData.data);
                 setCurrentUser(userData.data);
-                setNotification({ message: "Your profile picture has been updated", type: "success" });
+                if (field === "coverPhoto") {
+                    setNotification({ message: "Your cover photo has been updated", type: "success" });
+                } else if (field === "profilePhoto") {
+                    setNotification({ message: "Your profile photo has been updated", type: "success" });
+                }
                 setTimeout(() => {
                     setNotification(false);
                 }, 5000);
