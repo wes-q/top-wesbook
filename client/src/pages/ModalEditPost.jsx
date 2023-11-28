@@ -20,7 +20,7 @@ const ModalEditPost = ({ post, setShowEditPost, currentUser, getAllPosts }) => {
     };
 
     const handleTextChange = (event) => {
-        const content = event.target.value.trim();
+        const content = event.target.value;
         setPostContent(content); // Update the text in state
     };
 
@@ -123,7 +123,7 @@ const ModalEditPost = ({ post, setShowEditPost, currentUser, getAllPosts }) => {
                         </div>
                     )}
 
-                    <textarea ref={textAreaRef} value={postContent} className="w-full bg-slate-200 outline-none resize-none mb-4 overflow-hidden max-h-64" id="" cols="30" rows="3" placeholder="What's on your mind?" spellCheck="false" onChange={handleTextChange} onInput={autoGrow(textAreaRef)} />
+                    <textarea ref={textAreaRef} value={postContent} className="w-full bg-slate-200 outline-none resize-none mb-4 overflow-hidden max-h-64" id="" cols="30" rows="3" placeholder="What's on your mind?" spellCheck="false" autoFocus onChange={handleTextChange} onInput={autoGrow(textAreaRef)} />
 
                     {postPhoto && (
                         <div className="relative overflow-auto max-h-72">

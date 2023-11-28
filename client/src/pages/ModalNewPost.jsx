@@ -20,7 +20,7 @@ const ModalNewPost = ({ setShowNewPost, currentUser, getAllPosts }) => {
     };
 
     const handleTextChange = (event) => {
-        const text = event.target.value.trim();
+        const text = event.target.value;
         setPostText(text); // Update the text in state
     };
 
