@@ -1,4 +1,4 @@
-# The Odin Project - A Photo Tagging App (Where's Waldo Game)
+# Wesbook - my own version of Facebook.
 
 ## Live Preview - https://wesbook.onrender.com
 
