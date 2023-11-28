@@ -32,9 +32,11 @@ const AboutUser = ({ userToDisplay }) => {
                 <div className="flex flex-col">
                     <div className="text-xl font-extrabold">About</div>
                 </div>
-                <Link to={"/update-profile"}>
-                    <div className="text-cyan-500 hover:underline cursor-pointer h-min">Edit info</div>
-                </Link>
+                {userToDisplay.status === "self" && (
+                    <Link to={"/update-profile"}>
+                        <div className="text-cyan-500 hover:underline cursor-pointer h-min">Edit info</div>
+                    </Link>
+                )}
             </div>
             <div className="flex flex-col">
                 <InfoItem icon={GenderIcon} label="Gender" value={userToDisplay.gender} />
