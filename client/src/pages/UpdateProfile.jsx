@@ -14,7 +14,6 @@ const UpdateProfile = ({ user, setNotification, setUser }) => {
         gender: user.gender,
         worksAt: user.worksAt,
         livesIn: user.livesIn,
-        worksAt: user.worksAt,
         jobTitle: user.jobTitle,
     });
 
