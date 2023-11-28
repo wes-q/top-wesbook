@@ -1,7 +1,7 @@
 import noProfilePhoto from "../icons/noprofile.jpg";
 import { Link } from "react-router-dom";
 
-const Friends = ({ usersFriends }) => {
+const Friends = ({ usersFriends, userId, currentUser }) => {
     return (
         <div className="w-full ring-1 bg-slate-200 rounded-md mb-4 text-black p-3">
             <div className="flex justify-between">
@@ -9,9 +9,11 @@ const Friends = ({ usersFriends }) => {
                     <div className="text-xl font-extrabold">Friends</div>
                     <div className="text-base font-bold mb-3">{usersFriends.length} friends</div>
                 </div>
-                <Link to={"/friends"}>
-                    <div className="text-cyan-500 hover:underline cursor-pointer h-min">See all friends</div>
-                </Link>
+                {userId === currentUser.id && (
+                    <Link to={"/friends-page/friends"}>
+                        <div className="text-cyan-500 hover:underline cursor-pointer h-min">See all friends</div>
+                    </Link>
+                )}
             </div>
             <div className="grid grid-cols-3 gap-2">
                 {usersFriends.map((friend, index) => {

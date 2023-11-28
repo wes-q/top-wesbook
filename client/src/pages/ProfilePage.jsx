@@ -37,7 +37,7 @@ const ProfilePage = ({ setNotification, currentUser, setCurrentUser }) => {
             <Profile userToDisplay={userToDisplay} setNotification={setNotification} setUserToDisplay={setUserToDisplay} setCurrentUser={setCurrentUser} />
             <div className="pb-3 px-3">
                 <AboutUser userToDisplay={userToDisplay} />
-                <Friends usersFriends={usersFriends} />
+                <Friends usersFriends={usersFriends} userId={userId} currentUser={currentUser} />
                 <Posts userToDisplay={userToDisplay} currentUser={currentUser} postsOf="user" setNotification={setNotification} />
             </div>
         </div>

@@ -1,6 +1,7 @@
 const { MongoClient } = require("mongodb");
 const ObjectId = require("mongodb").ObjectId;
 const { faker } = require("@faker-js/faker");
+const Post = require("../models/post");
 
 const authorObjectIds = [
     "655b72ee2dc69a64ff0e5638",
@@ -82,10 +83,12 @@ function createRandomPost() {
     const postedBy = new ObjectId(authorObjectIds[randomIndex2]);
     const postedBy2 = new ObjectId(authorObjectIds[randomIndex3]);
     // const postPhoto = faker.image.urlLoremFlickr("dogs cats");
+    const createdAt = new Date();
 
     return {
         author,
         content,
+        createdAt,
         postPhoto: faker.image.urlPicsumPhotos(),
         // postPhoto,
         comments: [
