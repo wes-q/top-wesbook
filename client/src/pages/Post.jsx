@@ -40,11 +40,6 @@ const Post = ({ post, getAllPosts, currentUser, setNotification, handleLikeChang
             await axios.patch(url, object, { headers });
             // getAllPosts(); // instead of refreshing all the posts, only update the state
             handleLikeChange(postId, post.isLikedByCurrentUser);
-            if (post.isLikedByCurrentUser === true) {
-                setTotalLikes(totalLikes - 1);
-            } else {
-                setTotalLikes(totalLikes + 1);
-            }
         } catch (error) {
             console.log(error);
         }

@@ -45,9 +45,16 @@ const Posts = ({ userToDisplay, postsOf, currentUser, setNotification }) => {
     // Updates the like state
     const handleLikeChange = (postId, newLikedValue) => {
         // Find the post in the array and update its isLikedByUser property
+        let totalLikes;
         const updatedPosts = posts.map((post) => {
             if (post.id === postId) {
-                return { ...post, isLikedByCurrentUser: !newLikedValue };
+                if (newLikedValue === true) {
+                    totalLikes = post.totalLikes - 1;
+                } else {
+                    totalLikes = post.totalLikes + 1;
+                }
+
+                return { ...post, isLikedByCurrentUser: !newLikedValue, totalLikes: totalLikes };
             }
             return post;
         });
