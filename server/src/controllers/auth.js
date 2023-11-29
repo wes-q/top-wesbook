@@ -113,9 +113,9 @@ passport.use(
                     return done(null, newUser);
                 }
 
-                if (currentUser.source != "google") {
-                    return done(null, false, { message: `We were unable to log you in with that login method. Log in with the current social provider linked to your account, either Google or GitHub.` });
-                }
+                // if (currentUser.source != "google") {
+                //     return done(null, false, { message: `We were unable to log you in with that login method. Log in with the current social provider linked to your account, either Google or GitHub.` });
+                // }
 
                 currentUser.lastVisited = new Date();
                 return done(null, currentUser);
@@ -162,10 +162,10 @@ passport.use(
                     return done(null, newUser);
                 }
 
-                if (currentUser.source != "github") {
-                    console.log("User email found using another provider");
-                    return done(null, false, { message: `Sorry! We were unable to log you in with that login method.\nPlease log in with the current social provider linked to your account, either Google or GitHub.` });
-                }
+                // if (currentUser.source != "github") {
+                //     console.log("User email found using another provider");
+                //     return done(null, false, { message: `Sorry! We were unable to log you in with that login method.\nPlease log in with the current social provider linked to your account, either Google or GitHub.` });
+                // }
 
                 currentUser.lastVisited = new Date(); //TODO: What is the purpose of this code? Need to save afterward?
                 return done(null, currentUser);
