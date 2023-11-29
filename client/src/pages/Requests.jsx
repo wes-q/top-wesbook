@@ -152,7 +152,19 @@ const Requests = () => {
                                     <div className="flex flex-col p-2 sm:w-40 sm:bg-slate-300 sm:h-[112px] h-[88px]">
                                         <div className="truncate">
                                             <Link to={`/profile/${friend.id}`}>
-                                                <span className="text-base font-semibold break-words cursor-pointer hover:underline">{friend.displayName || friend.firstName + " " + friend.lastName}</span>
+                                                {(() => {
+                                                    if (friend.displayName) {
+                                                        return <span className="font-semibold break-words hover:underline">{friend.displayName}</span>;
+                                                    } else if (friend.firstName && friend.lastName) {
+                                                        return <span className="font-semibold break-words hover:underline">{`${friend.firstName} ${friend.lastName}`}</span>;
+                                                    } else if (friend.firstName) {
+                                                        return <span className="font-semibold break-words hover:underline">{friend.firstName}</span>;
+                                                    } else if (friend.lastName) {
+                                                        return <span className="font-semibold break-words hover:underline">{friend.lastName}</span>;
+                                                    } else {
+                                                        return null;
+                                                    }
+                                                })()}
                                             </Link>
                                         </div>
                                         <span className="sm:text-xs">0 mutual friends</span>

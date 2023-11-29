@@ -112,7 +112,19 @@ const Post = ({ post, getAllPosts, currentUser, setNotification, handleLikeChang
                         </Link>
                         <div className="flex flex-col justify-center">
                             <Link to={`/profile/${post.author.id}`}>
-                                <span className="font-bold hover:underline">{post.author.firstName || post.author.displayName}</span>
+                                {(() => {
+                                    if (post.author.displayName) {
+                                        return <span className="font-bold hover:underline">{post.author.displayName}</span>;
+                                    } else if (post.author.firstName && post.author.lastName) {
+                                        return <span className="font-bold hover:underline">{`${post.author.firstName} ${post.author.lastName}`}</span>;
+                                    } else if (post.author.firstName) {
+                                        return <span className="font-bold hover:underline">{post.author.firstName}</span>;
+                                    } else if (post.author.lastName) {
+                                        return <span className="font-bold hover:underline">{post.author.lastName}</span>;
+                                    } else {
+                                        return null;
+                                    }
+                                })()}
                             </Link>
                             <span className="text-xs">{formattedDate}</span>
                         </div>

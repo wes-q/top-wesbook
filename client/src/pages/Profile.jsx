@@ -135,7 +135,14 @@ const Profile = ({ userToDisplay, setNotification, setUserToDisplay, setCurrentU
             </div>
 
             <div className="flex flex-col items-center mb-4">
-                {userToDisplay.displayName ? <span className="text-3xl font-bold break-words">{userToDisplay.displayName}</span> : <span className="text-3xl font-bold break-words">{`${userToDisplay.firstName} ${userToDisplay.lastName}`}</span>}
+                {/* {userToDisplay.displayName 
+                ? <span className="text-3xl font-bold break-words">{userToDisplay.displayName}</span> 
+                : <span className="text-3xl font-bold break-words">
+                    {`${userToDisplay.firstName} ${userToDisplay.lastName}`}
+                </span>} */}
+
+                {userToDisplay.displayName ? <span className="text-3xl font-bold break-words">{userToDisplay.displayName}</span> : userToDisplay.firstName && userToDisplay.lastName ? <span className="text-3xl font-bold break-words">{`${userToDisplay.firstName} ${userToDisplay.lastName}`}</span> : userToDisplay.firstName ? <span className="text-3xl font-bold break-words">{userToDisplay.firstName}</span> : userToDisplay.lastName ? <span className="text-3xl font-bold break-words">{userToDisplay.lastName}</span> : null}
+
                 {userToDisplay.bio && <span className={`text-xs italic m-1 text-cyan-400`}>"{userToDisplay.bio}"</span>}
                 <span className="text-xs mb-4">{userToDisplay.totalFriends} friends</span>
                 {userToDisplay.status === "friend" && (

@@ -30,7 +30,20 @@ const Friends = ({ usersFriends, userId, currentUser }) => {
                                     }}
                                 />
                             </Link>
-                            <span className="font-semibold break-words">{friend.displayName || friend.firstName + " " + friend.lastName}</span>
+                            {/* <span className="font-semibold break-words">{friend.displayName || friend.firstName + " " + friend.lastName}</span> */}
+                            {(() => {
+                                if (friend.displayName) {
+                                    return <span className="font-semibold break-words">{friend.displayName}</span>;
+                                } else if (friend.firstName && friend.lastName) {
+                                    return <span className="font-semibold break-words">{`${friend.firstName} ${friend.lastName}`}</span>;
+                                } else if (friend.firstName) {
+                                    return <span className="font-semibold break-words">{friend.firstName}</span>;
+                                } else if (friend.lastName) {
+                                    return <span className="font-semibold break-words">{friend.lastName}</span>;
+                                } else {
+                                    return null;
+                                }
+                            })()}
                         </div>
                     );
                 })}

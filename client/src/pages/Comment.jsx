@@ -71,7 +71,19 @@ const Comment = ({ comment, postId, setNotification, getAllPosts, currentUser })
             <div className="flex items-center group">
                 <div className="flex flex-col max-w-[260px] outline-none bg-slate-300 rounded-2xl pl-4 pr-4 py-1 mr-1" spellCheck="true">
                     <Link to={`/profile/${comment.postedBy.id}`}>
-                        <span className="font-bold hover:underline">{comment.postedBy.firstName || comment.postedBy.displayName}</span>
+                        {(() => {
+                            if (comment.postedBy.displayName) {
+                                return <span className="font-bold hover:underline">{comment.postedBy.displayName}</span>;
+                            } else if (comment.postedBy.firstName && comment.postedBy.lastName) {
+                                return <span className="font-bold hover:underline">{`${comment.postedBy.firstName} ${comment.postedBy.lastName}`}</span>;
+                            } else if (comment.postedBy.firstName) {
+                                return <span className="font-bold hover:underline">{comment.postedBy.firstName}</span>;
+                            } else if (comment.postedBy.lastName) {
+                                return <span className="font-bold hover:underline">{comment.postedBy.lastName}</span>;
+                            } else {
+                                return null;
+                            }
+                        })()}
                     </Link>
                     <span className="text-black w-full cursor-text break-words whitespace-pre-wrap">{comment.text}</span>
                 </div>

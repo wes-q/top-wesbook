@@ -69,7 +69,7 @@ postsRouter.get("/api/posts-of-friends", middleware.userExtractor, async (reques
 });
 
 postsRouter.get("/api/posts-of-self", middleware.userExtractor, async (request, response, next) => {
-    const postsOfSelf = await Post.find().where("author").equals(request.user.id).populate({ path: "author", select: "firstName displayName profilePhoto" }).populate({ path: "comments.postedBy", select: "firstName displayName profilePhoto" });
+    const postsOfSelf = await Post.find().where("author").equals(request.user.id).populate({ path: "author", select: "firstName lastName displayName profilePhoto" }).populate({ path: "comments.postedBy", select: "firstName lastName displayName profilePhoto" });
     // const postsOfSelf = await Post.find().where("author").equals(request.user.id).populate("comments.postedBy");
     // const postsOfSelf = await Post.find().populate("comments.postedBy");
 
@@ -85,7 +85,7 @@ postsRouter.get("/api/posts-of-self", middleware.userExtractor, async (request, 
 });
 
 postsRouter.get("/api/users/:userId/posts", middleware.userExtractor, async (request, response, next) => {
-    const posts = await Post.find().where("author").equals(request.params.userId).populate({ path: "author", select: "firstName displayName profilePhoto" }).populate({ path: "comments.postedBy", select: "firstName displayName profilePhoto" });
+    const posts = await Post.find().where("author").equals(request.params.userId).populate({ path: "author", select: "firstName lastName displayName profilePhoto" }).populate({ path: "comments.postedBy", select: "firstName lastName displayName profilePhoto" });
 
     const appendedPosts = posts.map((post) => {
         const isLikedByCurrentUser = post.likes.some((like) => like.user.toString() === request.user.id);

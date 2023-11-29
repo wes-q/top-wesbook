@@ -214,14 +214,6 @@ router.get(
         successRedirect: `${config.FRONTEND_URL}/getjwt`,
         failureMessage: true, // Capture failure message
     })
-    // ,
-    // (req, res) => {
-    //     // Assuming user data is available in req.user after successful authentication
-    //     const userData = req.user;
-
-    //     // Send the JWT as a response to the client
-    //     res.json({ token });
-    // }
 );
 
 router.get("/auth/getjwt", async (req, res) => {
