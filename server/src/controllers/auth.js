@@ -255,7 +255,7 @@ router.get("/auth/github", passport.authenticate("github", { scope: ["user:email
 router.get(
     "/auth/github/callback",
     passport.authenticate("github", {
-        failureRedirect: `${config.FRONTEND_URL}/login`,
+        failureRedirect: `${config.FRONTEND_URL}/fail`,
         successRedirect: `${config.FRONTEND_URL}/getjwt`,
         failureMessage: true, // Capture failure message
         // failureRedirect: `http://localhost:1111`,
