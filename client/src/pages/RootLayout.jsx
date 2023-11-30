@@ -38,7 +38,7 @@ export default function RootLayout({ notification, user, setNotification, showFo
     return (
         <div className="flex flex-col min-h-screen h-full bg-slate-600 text-white text-sm sm:text-base font-nunito">
             <header>
-                <nav className="relative w-full sm:justify-between sm:items-center p-3 sm:p-6 bg-gray-800 specific text-base sm:text-lg">
+                <nav className="fixed top-0 z-30 w-full sm:justify-between sm:items-center p-3 sm:p-3 bg-gray-800 specific text-base sm:text-lg">
                     <div className={`flex items-center justify-between ${isExpanded && "mb-0"}`}>
                         <Link className="flex items-center" to="/">
                             <WesbookLogo className="w-10 h-auto select-none" />
@@ -66,7 +66,7 @@ export default function RootLayout({ notification, user, setNotification, showFo
                                 Profile Page
                             </NavLink> */}
                             <NavLink className="text-cyan-400 bg-gray-800 rounded-md px-4 py-1 whitespace-nowrap" to="/update-profile">
-                                Manage Account
+                                M
                             </NavLink>
                             <NavLink className="text-cyan-400 bg-gray-800 rounded-md px-4 py-1" to="/play">
                                 Play
@@ -154,7 +154,12 @@ export default function RootLayout({ notification, user, setNotification, showFo
                 </nav>
             </header>
 
-            <main className="relative h-full grow overflow-hidden">
+            {/* <main className="relative h-full grow overflow-hidden">
+                <Notification notification={notification} setNotification={setNotification} />
+                <Outlet />
+            </main> */}
+
+            <main className="relative h-full grow mt-16">
                 <Notification notification={notification} setNotification={setNotification} />
                 <Outlet />
             </main>

@@ -33,12 +33,18 @@ const ProfilePage = ({ setNotification, currentUser, setCurrentUser }) => {
     };
 
     return (
-        <div>
+        <div className="sm:px-96">
             <Profile userToDisplay={userToDisplay} setNotification={setNotification} setUserToDisplay={setUserToDisplay} setCurrentUser={setCurrentUser} />
-            <div className="pb-3 px-3">
-                <AboutUser userToDisplay={userToDisplay} />
-                <Friends usersFriends={usersFriends} userId={userId} currentUser={currentUser} />
-                <Posts userToDisplay={userToDisplay} currentUser={currentUser} postsOf="user" setNotification={setNotification} />
+            <div className="flex gap-4">
+                <div className="w-2/3">
+                    <div className="sticky top-16">
+                        <AboutUser userToDisplay={userToDisplay} />
+                        <Friends usersFriends={usersFriends} userId={userId} currentUser={currentUser} />
+                    </div>
+                </div>
+                <div className="">
+                    <Posts userToDisplay={userToDisplay} currentUser={currentUser} postsOf="user" setNotification={setNotification} />
+                </div>
             </div>
         </div>
     );
