@@ -41,9 +41,9 @@ export default function RootLayout({ notification, user, setNotification, showFo
     // }, []);
 
     return (
-        <div className="flex flex-col min-h-screen h-full bg-slate-600 text-white text-sm sm:text-base font-nunito">
+        <div className="flex flex-col min-h-screen h-full bg-slate-800 text-white text-sm sm:text-base font-nunito">
             <header>
-                <nav className="fixed top-0 z-30 w-full sm:justify-between sm:items-center p-3 bg-gray-800 navbar text-base sm:text-lg">
+                <nav className="fixed top-0 z-30 w-full sm:justify-between sm:items-center p-3 bg-slate-700 navbar text-base sm:text-lg">
                     <div className={`flex items-center justify-between ${isExpanded && "mb-0"}`}>
                         <Link className="flex items-center" to="/">
                             <WesbookLogo className="w-10 h-auto select-none" />

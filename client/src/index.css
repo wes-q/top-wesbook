@@ -18,6 +18,10 @@
     font-family: "Nunito", "sans";
 }
 
+.font-helvetica {
+    font-family: "Helvetica", "Arial", sans-serif;
+}
+
 @keyframes spin {
     0% {
         transform: rotate(0deg);

@@ -29,7 +29,7 @@ const LeaderboardTable = ({ selectedGame }) => {
     }
 
     return (
-        <table className="mx-auto text-xs sm:text-base overflow-hidden border-spacing-0 border-separate text-light-background w-full max-w-[750px] shadow-md select-none">
+        <table className="mx-auto text-xs sm:text-base overflow-hidden border-spacing-0 border-separate text-light-background w-full max-w-[750px] shadow-md select-none rounded-lg">
             <thead className="bg-slate-300 dark:bg-slate-800">
                 <tr className="text-light-text dark:text-dark-text">
                     <td className="p-4">Rank</td>
