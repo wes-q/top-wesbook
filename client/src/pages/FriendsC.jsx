@@ -23,7 +23,7 @@ const FriendsC = ({ currentUser }) => {
     };
 
     return (
-        <div className="wrapper sticky top-16">
+        <div className="wrapper sticky top-14">
             <div className="bg-slate-600 p-2 rounded-md w-72 mb-6 max-h-[710px] content custom-scrollbar">
                 <div className="px-2 text-base">Contacts</div>
                 <div className="">

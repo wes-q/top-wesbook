@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.navbar .active {
+    @apply text-cyan-400 border-b-2 border-current;
+}
+
 .specific .active {
     @apply bg-cyan-400 text-black;
 }
