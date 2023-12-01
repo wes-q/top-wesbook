@@ -58,7 +58,7 @@ const Suggestions = ({ friends }) => {
                             <li className="flex items-center sm:flex-col sm:border sm:border-gray-400 sm:rounded-lg sm:overflow-hidden" key={friend.id}>
                                 <Link to={`/profile/${friend.id}`}>
                                     <img
-                                        className="w-[79px] sm:w-40 aspect-square object-cover rounded-full sm:rounded-none bg-slate-200 cursor-pointer ring-1 sm:ring-0"
+                                        className="w-[79px] sm:w-44 aspect-square object-cover rounded-full sm:rounded-none bg-slate-200 cursor-pointer ring-1 sm:ring-0"
                                         src={friend.profilePhoto || noProfilePhoto}
                                         alt="profile photo"
                                         referrerPolicy="no-referrer"
@@ -68,7 +68,7 @@ const Suggestions = ({ friends }) => {
                                     />
                                 </Link>
 
-                                <div className="flex flex-col p-2 sm:w-40 sm:bg-slate-300 sm:h-[112px] h-[88px]">
+                                <div className="flex flex-col p-2 sm:w-44 sm:bg-slate-300 sm:h-[112px] h-[88px]">
                                     <div className="truncate">
                                         <Link to={`/profile/${friend.id}`}>
                                             {(() => {

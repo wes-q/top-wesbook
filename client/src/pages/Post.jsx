@@ -154,8 +154,11 @@ const Post = ({ post, getAllPosts, currentUser, setNotification, handleLikeChang
                 <hr className="w-full border-t border-gray-300 mb-4" />
                 <span className="mb-4 break-words whitespace-pre-wrap">{post.content}</span>
                 {post.postPhoto && (
-                    <div className="overflow-auto max-h-[460px] mb-2">
-                        <img className="object-cover max-w-full h-auto" src={post.postPhoto} alt="Post Photo" />
+                    <div className="wrapper">
+                        {/* <div className="overflow-auto max-h-[460px] mb-2 content custom-scrollbar"> */}
+                        <div className="mb-2">
+                            <img className="object-cover max-w-full h-auto" src={post.postPhoto} alt="Post Photo" />
+                        </div>
                     </div>
                 )}
 
