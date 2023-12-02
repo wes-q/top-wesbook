@@ -43,7 +43,7 @@ export default function Login({ setNotification, notification }) {
             try {
                 //this validates the password against DB, and creates JWT token
                 const token = await loginService.login({ email: email.value, password: password.value });
-                console.log(`LOGIN SERVICE NO ERROR ${token}`);
+                // console.log(`LOGIN SERVICE NO ERROR ${token}`);
                 window.localStorage.setItem("loggedUserToken", token);
                 //to set token for anecdote service,
                 // anecdoteService.setToken(user.token)

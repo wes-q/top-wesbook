@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider, useNavigate } from "react-router-dom";
 import NotFound from "./pages/NotFound";
 import RootLayout from "./pages/RootLayout";
 import SignupForm from "./pages/SignupForm";
@@ -31,6 +31,7 @@ function App() {
     const [showStartTimer, setShowStartTimer] = useState(false);
     const [seconds, setSeconds] = useState(0);
     const [game, setGame] = useState(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const timeoutId = getUserLocal();
@@ -46,6 +47,13 @@ function App() {
         try {
             const data = await loginService.loginSuccess({ headers });
             setCurrentUser(data.user);
+            // console.log(currentUser);
+            // if (currentUser === false) {
+            //     alert();
+            // } else {
+            //     console.log("navigating to home");
+            //     navigate("/");
+            // }
             setNotification({ message: "Login successful!", type: "success" });
             timeoutId = setTimeout(() => {
                 setNotification(false);

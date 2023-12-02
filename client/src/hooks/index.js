@@ -17,7 +17,6 @@ export const useField = (type) => {
         onChange,
         reset,
     };
-    console.log(obj);
     return obj;
 };
 
