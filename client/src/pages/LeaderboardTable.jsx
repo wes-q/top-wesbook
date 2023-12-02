@@ -49,10 +49,10 @@ const LeaderboardTable = ({ selectedGame }) => {
                     return (
                         // <tr key={index} className="text-black first:text-lg first:bg-cyan-400 even:bg-slate-200">
                         <tr key={index} className="text-black even:bg-slate-200 first:bg-cyan-400">
-                            <td className="p-4">{index + 1}</td>
-                            <td className="flex items-center p-4 overflow-hidden text-ellipsis max-w-[150px]">
-                                <img className="sm:w-10 sm:h-10 w-6 h-6 rounded-full mr-2 whitespace-nowrap object-cover" src={score.user.profilePhoto || "/noprofile.jpg"} alt="profile" />
-                                {score.user.displayName || score.user.firstName}
+                            <td className="py-4 pl-4">{index + 1}</td>
+                            <td className="flex items-center p-4 max-w-[150px]">
+                                <img className="sm:w-10 sm:h-10 w-6 h-6 rounded-full mr-2 object-cover" src={score.user.profilePhoto || "/noprofile.jpg"} alt="profile" />
+                                <span className="truncate">{score.user.displayName || score.user.firstName}</span>
                             </td>
                             <td className="p-4">{score.seconds}s</td>
                             <td className="p-4 text-ellipsis whitespace-nowrap">{formattedDate}</td>
