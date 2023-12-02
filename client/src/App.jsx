@@ -31,7 +31,7 @@ function App() {
     const [showStartTimer, setShowStartTimer] = useState(false);
     const [seconds, setSeconds] = useState(0);
     const [game, setGame] = useState(null);
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     useEffect(() => {
         const timeoutId = getUserLocal();
