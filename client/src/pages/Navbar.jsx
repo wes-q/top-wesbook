@@ -23,34 +23,29 @@ const Navbar = ({ user, showStartTimer, setSeconds, seconds, setNotification }) 
             </Link>
             {showStartTimer && <Timer className="h-auto max-h-10" setSeconds={setSeconds} seconds={seconds}></Timer>}
             <div className="hidden sm:flex gap-1">
-                <NavLink className="px-8 py-2 hover:bg-slate-600 transition-colors rounded-t-md" to="/">
+                <NavLink className="group relative px-8 py-2 hover:bg-slate-600 transition-colors rounded-t-md" to="/">
                     <HomeIcon className="fill-current" />
+                    <div className="absolute top-14 left-0 right-0 mx-auto w-fit invisible group-hover:visible delay-200 opacity-80 bg-white rounded-md text-sm px-2 py-1 text-black shadow-md shadow-black">Home</div>
                 </NavLink>
                 {isUserLoaded && (
                     <>
                         <NavLink className="group relative px-8 py-2 hover:bg-slate-600 transition-colors rounded-t-md" to={`/profile/${user.id}`}>
                             <ProfileIcon className="fill-current" />
-                            <div className="absolute top-14 left-0 invisible group-hover:visible delay-300 opacity-80 bg-white rounded-md text-sm px-2 py-1 text-black shadow-md shadow-black">My Profile</div>
+                            <div className="absolute top-14 left-0 right-0 mx-auto w-fit invisible group-hover:visible delay-200 opacity-80 bg-white rounded-md text-sm px-2 py-1 text-black shadow-md shadow-black">My Profile</div>
                         </NavLink>
                     </>
                 )}
                 <NavLink className="group relative px-8 py-2 hover:bg-slate-600 transition-colors rounded-t-md" to={"/friends-page/suggestions"} style={{ textDecoration: "none" }}>
                     <FriendsIcon className="fill-current" />
-                    <motion.div
-                        className="absolute top-14 left-0 invisible group-hover:visible opacity-80 bg-white rounded-md text-sm px-2 py-1 text-black shadow-md shadow-black"
-                        initial={{ x: 100 }}
-                        animate={{ x: -100 }}
-                        // exit={{ opacity: 0 }} //
-                        transition={{ duration: 0.6 }}
-                    >
-                        Friends
-                    </motion.div>
+                    <div className="absolute top-14 left-0 right-0 mx-auto w-fit invisible group-hover:visible delay-200 opacity-80 bg-white rounded-md text-sm px-2 py-1 text-black shadow-md shadow-black">Friends</div>
                 </NavLink>
-                <NavLink className="px-8 py-2 hover:bg-slate-600 transition-colors rounded-t-md" to="/play">
+                <NavLink className="group relative px-8 py-2 hover:bg-slate-600 transition-colors rounded-t-md" to="/play">
                     <PlayIcon className="fill-current" />
+                    <div className="absolute top-14 left-0 right-0 mx-auto w-fit invisible group-hover:visible delay-200 opacity-80 bg-white rounded-md text-sm px-2 py-1 text-black shadow-md shadow-black">Play</div>
                 </NavLink>
-                <NavLink className="px-8 py-2 hover:bg-slate-600 transition-colors rounded-t-md" to="/leaderboard">
+                <NavLink className="group relative px-8 py-2 hover:bg-slate-600 transition-colors rounded-t-md" to="/leaderboard">
                     <LeaderboardIcon className="fill-current" />
+                    <div className="absolute top-14 left-0 right-0 mx-auto w-fit invisible group-hover:visible delay-200 opacity-80 bg-white rounded-md text-sm px-2 py-1 text-black shadow-md shadow-black">Leaderboard</div>
                 </NavLink>
             </div>
 
