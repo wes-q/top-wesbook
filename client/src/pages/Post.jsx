@@ -96,7 +96,7 @@ const Post = ({ post, getAllPosts, currentUser, setNotification, handleLikeChang
         <>
             {showEditPost && <ModalEditPost post={post} setShowEditPost={setShowEditPost} currentUser={currentUser} getAllPosts={getAllPosts} />}
 
-            <div className="flex flex-col w-full border ring-1 mb-4 rounded-md bg-slate-200 p-2 sm:p-3">
+            <div className="flex flex-col w-full border ring-1 rounded-md bg-slate-200 p-2 sm:p-3">
                 <div className="flex items-center justify-between mb-2">
                     <div className="flex">
                         <Link to={`/profile/${post.author.id}`}>

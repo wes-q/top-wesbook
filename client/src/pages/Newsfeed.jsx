@@ -11,7 +11,7 @@ const Newsfeed = ({ currentUser, setNotification }) => {
 
     return (
         <div className="relative">
-            <div className="flex sm:gap-4 justify-center max-w-max mx-auto relative p-3">
+            <div className="flex sm:gap-4 justify-center max-w-max mx-auto relative pt-3 px-3">
                 <div className="">
                     <div className="hidden sm:flex flex-col w-72 sticky top-20">
                         <div className="flex flex-col justify-center rounded-lg bg-slate-800 mb-4">

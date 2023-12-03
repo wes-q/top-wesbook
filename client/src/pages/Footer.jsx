@@ -1,7 +1,7 @@
 import GithubLogo from "../icons/githublogo2.svg?react";
 
 const Footer = () => (
-    <div className="flex flex-col justify-center text-xs sm:text-base items-center text-white bg-gray-800 p-4 text-center h-16 sm:h-20">
+    <div className="flex flex-col justify-center text-xs sm:text-base items-center text-white bg-slate-800 p-4 text-center h-16 sm:h-20">
         <div className="flex sm:text-sm">
             <a className="" href="https://github.com/iamwesofph/top-wesbook" target="_blank">
                 <span className="mr-6">© Wes Q. 2023</span>

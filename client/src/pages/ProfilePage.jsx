@@ -35,7 +35,7 @@ const ProfilePage = ({ setNotification, currentUser, setCurrentUser }) => {
     return (
         <div className="sm:px-96">
             <Profile userToDisplay={userToDisplay} setNotification={setNotification} setUserToDisplay={setUserToDisplay} setCurrentUser={setCurrentUser} />
-            <div className="sm:flex sm:gap-4 p-3 sm:p-0">
+            <div className="sm:flex sm:gap-4 px-3 sm:p-0">
                 <div className="sm:w-2/3">
                     <div className="sm:sticky sm:top-16">
                         <AboutUser userToDisplay={userToDisplay} />
