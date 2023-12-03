@@ -9,7 +9,7 @@ import ClockIcon from "../icons/clock-google.svg?react";
 
 const InfoItem = ({ icon, label, value }) => (
     <div className="flex items-center gap-1">
-        {icon && React.createElement(icon, { className: "w-4 h-4 flex-shrink-0" })}
+        {icon && React.createElement(icon, { className: "w-4 h-4 flex-shrink-0 fill-current" })}
         {/* {icon && <span className="flex-shrink-0">{React.createElement(icon, { className: "w-4 h-4" })}</span>} */}
 
         <span className="whitespace-nowrap">{label}:</span>
@@ -27,14 +27,14 @@ const AboutUser = ({ userToDisplay }) => {
 
     console.log(userToDisplay);
     return (
-        <div className="w-full ring-1 bg-slate-200 rounded-md mb-4 text-black p-3">
+        <div className="w-full shadow-md bg-light-b dark:bg-dark-b rounded-md mb-4 p-3">
             <div className="flex justify-between mb-3">
                 <div className="flex flex-col">
                     <div className="text-xl font-extrabold">About</div>
                 </div>
                 {userToDisplay.status === "self" && (
                     <Link to={"/update-profile"}>
-                        <div className="text-cyan-500 hover:underline cursor-pointer h-min">Edit info</div>
+                        <div className="text-primary dark:text-primaryDark hover:underline cursor-pointer h-min">Edit info</div>
                     </Link>
                 )}
             </div>

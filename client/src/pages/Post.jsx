@@ -96,7 +96,7 @@ const Post = ({ post, getAllPosts, currentUser, setNotification, handleLikeChang
         <>
             {showEditPost && <ModalEditPost post={post} setShowEditPost={setShowEditPost} currentUser={currentUser} getAllPosts={getAllPosts} />}
 
-            <div className="flex flex-col w-full border ring-1 rounded-md bg-slate-200 p-2 sm:p-3">
+            <div className="flex flex-col w-full bg-light-b dark:bg-dark-b rounded-md p-2 sm:p-3 shadow-md">
                 <div className="flex items-center justify-between mb-2">
                     <div className="flex">
                         <Link to={`/profile/${post.author.id}`}>
@@ -132,17 +132,16 @@ const Post = ({ post, getAllPosts, currentUser, setNotification, handleLikeChang
                     <div>
                         <details ref={detailsRef} className="relative">
                             <summary className="list-none" aria-haspopup="menu" role="button">
-                                <DotDotDot className="w-4" />
+                                <DotDotDot className="w-4 fill-current" />
                             </summary>
-                            {/* <div className="absolute flex flex-col -bottom-16 -left-[100px] z-10 bg-slate-200 shadow-md border border-gray-300 rounded-md text-xs"> */}
-                            <div className="absolute flex flex-col top-3 -left-[100px] z-10 bg-slate-200 shadow-md border border-gray-300 rounded-md text-xs">
+                            <div className="absolute flex flex-col top-3 -left-[100px] z-10 bg-light-b dark:bg-dark-b shadow-md rounded-md text-xs overflow-hidden border border-light-c dark:border-dark-c">
                                 {post.author.id === currentUser.id && (
-                                    <button className="flex items-center hover:bg-slate-300 w-full transition-colors p-1" onClick={() => handleEditPost(post.id)}>
-                                        <EditPenIcon className="w-6 h-6 mr-1" />
+                                    <button className="flex items-center hover:bg-light-a hover:dark:bg-dark-a w-full transition-colors p-1" onClick={() => handleEditPost(post.id)}>
+                                        <EditPenIcon className="w-6 h-6 mr-1 fill-current" />
                                         <span className="w-full whitespace-nowrap text-left">Edit post</span>
                                     </button>
                                 )}
-                                <button className="flex items-center hover:bg-slate-300 w-full transition-colors p-1" onClick={() => handleDeletePost(post.id)}>
+                                <button className="flex items-center hover:bg-light-a hover:dark:bg-dark-a w-full transition-colors p-1" onClick={() => handleDeletePost(post.id)}>
                                     <DeleteIcon className="w-6 h-6 mr-1 fill-red-600" />
                                     <span className="w-full whitespace-nowrap text-left">Delete post</span>
                                 </button>
@@ -151,7 +150,7 @@ const Post = ({ post, getAllPosts, currentUser, setNotification, handleLikeChang
                     </div>
                 </div>
 
-                <hr className="w-full border-t border-gray-300 mb-4" />
+                <hr className="w-full border-t border-light-c dark:border-dark-a mb-4" />
                 <span className="mb-4 break-words whitespace-pre-wrap">{post.content}</span>
                 {post.postPhoto && (
                     <div className="wrapper">
@@ -165,7 +164,7 @@ const Post = ({ post, getAllPosts, currentUser, setNotification, handleLikeChang
                 <div className="flex justify-between text-xs mb-2">
                     {post.totalLikes > 0 && (
                         <div className="flex">
-                            <LikeCount className="w-4 mr-1 fill-cyan-500"></LikeCount>
+                            <LikeCount className="w-4 mr-1 fill-primary dark:fill-primaryDark"></LikeCount>
                             {post.totalLikes} {pluralize("like", post.totalLikes)}
                         </div>
                     )}
@@ -176,29 +175,29 @@ const Post = ({ post, getAllPosts, currentUser, setNotification, handleLikeChang
                     )}
                 </div>
 
-                <hr className="w-full border-t border-gray-300 mb-2" />
+                <hr className="w-full border-t border-light-c dark:border-dark-a mb-2" />
 
                 <div className="flex justify-around mb-2">
-                    <div className="flex items-center justify-center cursor-pointer w-full hover:bg-slate-300 rounded-md py-1" onClick={() => handleLike(post.id)}>
+                    <div className="flex items-center justify-center cursor-pointer w-full hover:bg-light-c hover:dark:bg-dark-a rounded-md py-1" onClick={() => handleLike(post.id)}>
                         {post.isLikedByCurrentUser ? (
                             <>
-                                <Like className="w-4 mr-2 fill-cyan-500"></Like>
-                                <span className="text-cyan-500">Like</span>
+                                <Like className="w-4 mr-2 fill-primary dark:fill-primaryDark"></Like>
+                                <span className="text-primary dark:text-primaryDark">Like</span>
                             </>
                         ) : (
                             <>
-                                <Like className="w-4 mr-2"></Like>
+                                <Like className="w-4 mr-2 fill-current"></Like>
                                 <span>Like</span>
                             </>
                         )}
                     </div>
-                    <div className="flex items-center justify-center cursor-pointer w-full hover:bg-slate-300 rounded-md py-1" onClick={handleComment}>
-                        <Comment className="w-4 mr-2"></Comment>
+                    <div className="flex items-center justify-center cursor-pointer w-full hover:bg-light-c hover:dark:bg-dark-a rounded-md py-1" onClick={handleComment}>
+                        <Comment className="w-4 mr-2 fill-current"></Comment>
                         <span>Comment</span>
                     </div>
                 </div>
 
-                <hr className="w-full border-t border-gray-300 mb-4" />
+                <hr className="w-full border-t border-light-c dark:border-dark-a mb-4" />
 
                 <Comments post={post} setNotification={setNotification} getAllPosts={getAllPosts} currentUser={currentUser} />
                 <UserCommentBox currentUser={currentUser} getAllPosts={getAllPosts} postId={post.id} setIsCommentClicked={setIsCommentClicked} isCommentClicked={isCommentClicked} contentEditableRef={contentEditableRef} />

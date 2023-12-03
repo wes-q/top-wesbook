@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .navbar .active {
-    @apply text-cyan-400 border-b-2 border-current;
+    @apply text-primary dark:text-primaryDark border-b-2 border-current;
 }
 
 .specific .active {

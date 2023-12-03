@@ -24,7 +24,7 @@ export default function DropDown({ user, setNotification }) {
 
     return (
         <>
-            <button className="flex justify-center items-center bg-slate-700 border border-cyan-400 rounded-3xl px-4 py-2 text-sm hover:bg-slate-900 transition-colors duration-300 whitespace-nowrap" onClick={() => setOpen(!open)} ref={buttonRef}>
+            <button className="flex justify-center items-center bg-light-b dark:bg-dark-b border border-primary rounded-3xl px-4 py-2 text-sm hover:bg-light-c hover:dark:bg-dark-c transition-colors duration-300 whitespace-nowrap" onClick={() => setOpen(!open)} ref={buttonRef}>
                 <span className="mr-1">{user.firstName || user.displayName}</span>
                 <DropDownCaret />
             </button>
@@ -88,7 +88,7 @@ function DropdownMenu({ user, handleClickOutside, dropdownRef, setNotification, 
 
     return (
         <motion.div
-            className="h-auto w-72 absolute right-0 flex flex-col border border-cyan-400 bg-gray-800 rounded-lg text-sm z-50"
+            className="h-auto w-72 absolute right-0 flex flex-col shadow-lg bg-light-b dark:bg-dark-b  rounded-lg text-sm z-50"
             // initial={{ opacity: 0, scale: 0.3, x: 50, y: -150 }}
             // animate={{ opacity: 1, scale: 1, x: -22, y: 20 }}
             // exit={{ opacity: 0, scale: 0.3, x: 50, y: -150 }} // Define the exit animation
@@ -111,11 +111,11 @@ function DropdownMenu({ user, handleClickOutside, dropdownRef, setNotification, 
 
                 <div>
                     {user.isVerified ? (
-                        <button className="px-4 py-2 bg-slate-700 rounded-lg hover:bg-slate-500 transition-colors" onClick={() => manageAccount()}>
+                        <button className="px-4 py-2 bg-light-c dark:bg-dark-a rounded-lg hover: transition-colors" onClick={() => manageAccount()}>
                             Manage your account
                         </button>
                     ) : (
-                        <button className="px-4 py-2 bg-slate-700 rounded-lg hover:bg-slate-500 transition-colors text-red-500" onClick={() => verifyEmail()}>
+                        <button className="px-4 py-2 bg-light-c dark:bg-dark-a rounded-lg hover:bg-slate-500 transition-colors text-red-500" onClick={() => verifyEmail()}>
                             Verify email
                         </button>
                     )}

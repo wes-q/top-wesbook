@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Friends = ({ usersFriends, userId, currentUser }) => {
     return (
-        <div className="w-full ring-1 bg-slate-200 rounded-md mb-4 text-black p-3">
+        <div className="w-full bg-light-b dark:bg-dark-b shadow-md rounded-md mb-4 p-3">
             <div className="flex justify-between">
                 <div className="flex flex-col">
                     <div className="text-xl font-extrabold">Friends</div>

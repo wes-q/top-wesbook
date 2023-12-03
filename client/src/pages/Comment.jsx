@@ -69,7 +69,7 @@ const Comment = ({ comment, postId, setNotification, getAllPosts, currentUser })
                 />
             </Link>
             <div className="flex items-center group">
-                <div className="flex flex-col max-w-[260px] outline-none bg-slate-300 rounded-2xl pl-4 pr-4 py-1 mr-1" spellCheck="true">
+                <div className="flex flex-col max-w-[260px] outline-none bg-light-c dark:bg-dark-a rounded-2xl pl-4 pr-4 py-1 mr-1" spellCheck="true">
                     <Link to={`/profile/${comment.postedBy.id}`}>
                         {(() => {
                             if (comment.postedBy.displayName) {
@@ -85,7 +85,7 @@ const Comment = ({ comment, postId, setNotification, getAllPosts, currentUser })
                             }
                         })()}
                     </Link>
-                    <span className="text-black w-full cursor-text break-words whitespace-pre-wrap">{comment.text}</span>
+                    <span className="w-full cursor-text break-words whitespace-pre-wrap">{comment.text}</span>
                 </div>
                 <details className="relative" ref={detailsRef}>
                     <summary className="list-none" aria-haspopup="menu" role="button">
