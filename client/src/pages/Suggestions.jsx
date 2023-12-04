@@ -45,9 +45,9 @@ const Suggestions = ({ friends }) => {
     };
 
     return (
-        <div className="w-full ring-1 bg-slate-200 rounded-md mb-3 text-black p-3">
+        <div className="w-full shadow-md bg-light-b dark:bg-dark-b rounded-md mb-3 p-3">
             <div className="font-semibold text-xl mb-3">People you may know</div>
-            <hr className="w-full border-t border-gray-300 mb-3" />
+            <hr className="w-full border-t border-light-c dark:border-dark-a mb-3" />
 
             {loading ? (
                 <p>Loading friends...</p>
@@ -55,10 +55,10 @@ const Suggestions = ({ friends }) => {
                 <ul className="flex flex-col sm:flex-row sm:flex-wrap sm:gap-2">
                     {eligibleFriends.length > 0 ? (
                         eligibleFriends.map((friend) => (
-                            <li className="flex items-center sm:flex-col sm:border sm:border-gray-400 sm:rounded-lg sm:overflow-hidden" key={friend.id}>
+                            <li className="flex items-center sm:flex-col sm:border sm:border-neutral sm:rounded-lg sm:overflow-hidden" key={friend.id}>
                                 <Link to={`/profile/${friend.id}`}>
                                     <img
-                                        className="w-[79px] sm:w-44 aspect-square object-cover rounded-full sm:rounded-none bg-slate-200 cursor-pointer ring-1 sm:ring-0"
+                                        className="w-[79px] sm:w-44 aspect-square object-cover rounded-full sm:rounded-none cursor-pointer ring-1 sm:ring-0"
                                         src={friend.profilePhoto || noProfilePhoto}
                                         alt="profile photo"
                                         referrerPolicy="no-referrer"
@@ -68,7 +68,7 @@ const Suggestions = ({ friends }) => {
                                     />
                                 </Link>
 
-                                <div className="flex flex-col p-2 sm:w-44 sm:bg-slate-300 sm:h-[112px] h-[88px]">
+                                <div className="flex flex-col p-2 sm:w-44 sm:bg-light-b sm:dark:bg-dark-a sm:h-[112px] h-[88px]">
                                     <div className="truncate">
                                         <Link to={`/profile/${friend.id}`}>
                                             {(() => {
@@ -94,12 +94,12 @@ const Suggestions = ({ friends }) => {
                                             <div className="text-red-500">Error sending request.</div>
                                         ) : (
                                             <>
-                                                <button className="flex items-center justify-center w-28 sm:w-full bg-cyan-400 text-white text-xs px-3 py-1 rounded-md mr-2" onClick={() => handleAddFriend(friend.id)}>
-                                                    <PersonAddIcon className="fill-white w-5 h-5 mr-1" />
+                                                <button className="flex items-center justify-center w-28 sm:w-full bg-primaryDark dark:bg-primaryDark text-xs px-3 py-1 rounded-md mr-2" onClick={() => handleAddFriend(friend.id)}>
+                                                    <PersonAddIcon className="fill-current w-5 h-5 mr-1" />
                                                     Add Friend
                                                 </button>
-                                                <button className="flex items-center justify-center w-28 sm:w-full bg-slate-400 text-white text-xs px-3 py-1 rounded-md">
-                                                    <MessengerIcon className="fill-white w-4 h-4 mr-1" />
+                                                <button className="flex items-center justify-center w-28 sm:w-full bg-light-c dark:bg-neutral text-xs px-3 py-1 rounded-md">
+                                                    <MessengerIcon className="fill-current w-4 h-4 mr-1" />
                                                     Message
                                                 </button>
                                                 {/* <button onClick={() => handleAddFriend(friend.id)}>Add Friend</button> */}

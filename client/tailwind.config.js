@@ -20,6 +20,7 @@ export default {
                     b: "#334155",
                     c: "#1e293b",
                 },
+                neutral: "#94a3b8",
             },
             boxShadow: {
                 primary: "0 20px 60px -10px #d21e32",
