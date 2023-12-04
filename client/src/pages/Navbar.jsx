@@ -15,7 +15,7 @@ const Navbar = ({ user, showStartTimer, setSeconds, seconds, setNotification }) 
     function toggleDarkMode() {
         document.documentElement.classList.toggle("dark");
     }
-
+    // comment
     return (
         <div className="flex justify-between bg-light-b dark:bg-dark-b h-16">
             <Link className="flex items-center py-3 pl-3" to="/">
