@@ -134,7 +134,7 @@ const ModalEditPost = ({ post, setShowEditPost, currentUser, getAllPosts }) => {
                         </div>
                     )}
 
-                    <hr className="w-full border-t border-gray-300 mb-4" />
+                    <hr className="w-full border-t border-light-c dark:border-dark-a mb-4" />
 
                     <div className="flex items-center justify-between w-full">
                         <label htmlFor="uploadPostPhoto" className="flex items-center group opacity-100 text-xs px-2 py-1 rounded-md cursor-pointer transition-colors" tabIndex="2">

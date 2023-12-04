@@ -157,36 +157,36 @@ const Profile = ({ userToDisplay, setNotification, setUserToDisplay, setCurrentU
                 <span className="text-sm mb-4">{userToDisplay.totalFriends} friends</span>
                 {userToDisplay.status === "friend" && (
                     <div className="flex">
-                        <button className="flex items-center bg-slate-400 text-white text-xs px-3 py-1 rounded-md mr-2 cursor-default">
-                            <PersonCheckIcon className="fill-white w-5 h-5 mr-1" />
+                        <button className="flex items-center bg-light-b dark:bg-dark-b text-xs px-3 py-1 rounded-md mr-2 cursor-default">
+                            <PersonCheckIcon className="fill-current w-5 h-5 mr-1" />
                             Friends
                         </button>
-                        <button className="flex items-center bg-cyan-400 text-white text-xs px-3 py-1 rounded-md">
-                            <MessengerIcon className="fill-white w-4 h-4 mr-1" />
+                        <button className="flex items-center bg-primary dark:bg-primaryDark text-xs px-3 py-1 rounded-md">
+                            <MessengerIcon className="fill-current w-4 h-4 mr-1" />
                             Message
                         </button>
                     </div>
                 )}
                 {userToDisplay.status === "notFriend" && (
                     <div className="flex">
-                        <button className="flex items-center bg-cyan-400 text-white text-xs px-3 py-1 rounded-md mr-2" onClick={() => handleAddFriend(userToDisplay.id)}>
-                            <PersonAddIcon className="fill-white w-5 h-5 mr-1" />
+                        <button className="flex items-center bg-primary dark:bg-primaryDark text-xs px-3 py-1 rounded-md mr-2" onClick={() => handleAddFriend(userToDisplay.id)}>
+                            <PersonAddIcon className="fill-current w-5 h-5 mr-1" />
                             Add Friend
                         </button>
-                        <button className="flex items-center bg-slate-400 text-white text-xs px-3 py-1 rounded-md">
-                            <MessengerIcon className="fill-white w-4 h-4 mr-1" />
+                        <button className="flex items-center bg-light-b dark:bg-dark-b text-xs px-3 py-1 rounded-md">
+                            <MessengerIcon className="fill-current w-4 h-4 mr-1" />
                             Message
                         </button>
                     </div>
                 )}
                 {userToDisplay.status === "pending" && (
                     <div className="flex">
-                        <button className="flex items-center bg-slate-400 text-white text-xs px-3 py-1 rounded-md mr-2" onClick={() => handleCancel(userToDisplay.id)}>
-                            <PersonRemoveIcon className="fill-white w-5 h-5 mr-1" />
+                        <button className="flex items-center bg-light-b dark:bg-dark-b text-xs px-3 py-1 rounded-md mr-2" onClick={() => handleCancel(userToDisplay.id)}>
+                            <PersonRemoveIcon className="fill-current w-5 h-5 mr-1" />
                             Request sent
                         </button>
-                        <button className="flex items-center bg-cyan-400 text-white text-xs px-3 py-1 rounded-md">
-                            <MessengerIcon className="fill-white w-4 h-4 mr-1" />
+                        <button className="flex items-center bg-primary dark:bg-primaryDark text-xs px-3 py-1 rounded-md">
+                            <MessengerIcon className="fill-current w-4 h-4 mr-1" />
                             Message
                         </button>
                     </div>

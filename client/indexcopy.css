@@ -1,0 +1,146 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.navbar .active {
+    @apply text-primary dark:text-primaryDark border-b-2 border-current;
+}
+
+.specific .active {
+    @apply bg-cyan-400 text-black;
+}
+
+.font-handlee {
+    font-family: "Handlee", cursive;
+}
+
+.font-nunito {
+    font-family: "Nunito", "sans";
+}
+
+.font-helvetica {
+    font-family: "Helvetica", "Arial", sans-serif;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.animate-spin-slow {
+    animation: spin 3s linear infinite;
+}
+@keyframes ping {
+    0% {
+        transform: scale(1);
+        opacity: 0.5;
+    }
+    50% {
+        transform: scale(1.5);
+        opacity: 0.7;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 0.5;
+    }
+}
+.animate-ping-slow {
+    animation: ping 2s linear infinite;
+}
+
+/* For Chrome and Safari*/
+.custom-scrollbar-main::-webkit-scrollbar {
+    width: 14px;
+}
+
+.custom-scrollbar-main::-webkit-scrollbar-track {
+    background: #3a6dd4;
+}
+
+.custom-scrollbar-main::-webkit-scrollbar-thumb {
+    background: #d1d5db;
+    border-radius: 10px;
+}
+
+.custom-scrollbar-main::-webkit-scrollbar-button {
+    background: #6b7280;
+    height: 14px;
+}
+
+/* For Firefox */
+.custom-scrollbar-main {
+    scrollbar-color: #d1d5db #6b7280;
+}
+
+/* For WebKit browsers like Chrome and Safari */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: inherit; /*Slate-600*/
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #64748b; /*Slate-500*/
+    border-radius: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-button {
+    background: inherit;
+    height: 10px;
+}
+
+/* For Firefox */
+.custom-scrollbar {
+    scrollbar-color: #64748b #4b5563;
+}
+
+/* Wrapper and content used for hidden scrollbars appearing on hover */
+.content {
+    overflow-y: scroll;
+    mask-image: linear-gradient(to top, transparent, black), linear-gradient(to left, transparent 17px, black 17px);
+    mask-size: 100% 20000px;
+    mask-position: left bottom;
+    -webkit-mask-image: linear-gradient(to top, transparent, black), linear-gradient(to left, transparent 17px, black 17px);
+    -webkit-mask-size: 100% 20000px;
+    -webkit-mask-position: left bottom;
+    transition: mask-position 0.2s, -webkit-mask-position 0.2s;
+}
+
+.content:hover {
+    -webkit-mask-position: left top;
+    mask-position: left top;
+}
+
+.wrapper {
+    float: left;
+}
+
+/* For Chrome and Safari*/
+.custom-scrollbar-mainDark::-webkit-scrollbar {
+    width: 14px;
+}
+
+.custom-scrollbar-mainDark::-webkit-scrollbar-track {
+    background: #cc45ba;
+}
+
+.custom-scrollbar-mainDark::-webkit-scrollbar-thumb {
+    background: #6b7280;
+    border-radius: 10px;
+}
+
+.custom-scrollbar-mainDark::-webkit-scrollbar-button {
+    background: #d1d5db;
+    height: 14px;
+}
+
+/* For Firefox */
+.custom-scrollbar-mainDark {
+    scrollbar-color: #6b7280 #d1d5db;
+}
