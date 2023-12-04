@@ -31,12 +31,12 @@ const gamesData = [
 
 function GameCard({ game, setGame }) {
     return (
-        <div className="flex flex-col p-6 shadow-md w-[350px] h-[350px] sm:h-96 bg-slate-700 dark:bg-dark-secondary rounded-lg">
+        <div className="flex flex-col p-6 shadow-md w-[350px] h-[350px] sm:h-96 bg-light-b dark:bg-dark-b rounded-lg overflow-hidden">
             <img src={game.imageSrc} alt="game preview" className="h-[70%] object-cover rounded-t-lg" draggable="false" />
             <div className="flex flex-col items-center p-2">
                 <h2 className="text-lg text-center whitespace-nowrap mb-6">{game.name}</h2>
-                <Link className="flex gap-1 items-center justify-center rounded-lg bg-primary text-dark-background px-4 hover:shadow-primary hover:translate-y-[-3px] transition ease-in-out duration-300 active:scale-95 select-none" to="/game" onClick={() => setGame(game)}>
-                    <ControllerIcon />
+                <Link className="flex gap-1 items-center justify-center rounded-lg bg-primary dark:bg-primaryDark px-4 hover:shadow-primary hover:translate-y-[-3px] transition ease-in-out duration-300 active:scale-95 select-none" to="/game" onClick={() => setGame(game)}>
+                    <ControllerIcon className="fill-current" />
                     <span>Start</span>
                 </Link>
             </div>

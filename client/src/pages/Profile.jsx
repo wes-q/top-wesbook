@@ -153,7 +153,7 @@ const Profile = ({ userToDisplay, setNotification, setUserToDisplay, setCurrentU
                         return null;
                     }
                 })()}
-                {userToDisplay.bio && <span className={`text-xs sm:text-base italic m-1 text-cyan-400`}>"{userToDisplay.bio}"</span>}
+                {userToDisplay.bio && <span className={`text-xs sm:text-base italic m-1 text-primary dark:text-primaryDark`}>"{userToDisplay.bio}"</span>}
                 <span className="text-sm mb-4">{userToDisplay.totalFriends} friends</span>
                 {userToDisplay.status === "friend" && (
                     <div className="flex">

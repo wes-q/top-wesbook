@@ -7,7 +7,7 @@ const LeaderboardPage = () => {
 
     return (
         <div className="p-6">
-            <h2 className="text-2xl mb-8 text-white text-center">Leaderboard</h2>
+            <h2 className="text-2xl mb-8 text-center">Leaderboard</h2>
             <GameListForLeaderboard setSelectedGame={setSelectedGame} selectedGame={selectedGame} />
             <LeaderboardTable selectedGame={selectedGame} />
         </div>

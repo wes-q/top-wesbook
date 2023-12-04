@@ -88,34 +88,36 @@ function DropdownMenu({ user, handleClickOutside, dropdownRef, setNotification, 
 
     return (
         <motion.div
-            className="h-auto w-72 absolute right-0 flex flex-col shadow-lg bg-light-b dark:bg-dark-b  rounded-lg text-sm z-50"
+            className="sm:h-auto sm:w-72 w-52 h-auto absolute right-0 top-0 flex flex-col shadow-lg bg-light-b dark:bg-dark-b rounded-lg text-xs sm:text-sm z-50 border border-neutral"
             // initial={{ opacity: 0, scale: 0.3, x: 50, y: -150 }}
             // animate={{ opacity: 1, scale: 1, x: -22, y: 20 }}
             // exit={{ opacity: 0, scale: 0.3, x: 50, y: -150 }} // Define the exit animation
             // transition={{ duration: 0.2, ease: "easeIn" }}
-            initial={{ opacity: 0, scale: 0.3, x: 50, y: 100 }}
-            animate={{ opacity: 1, scale: 1, x: -22, y: 300 }}
-            exit={{ opacity: 0, scale: 0.3, x: 50, y: 150 }} // Define the exit animation
+            // initial={{ opacity: 0, scale: 0.3, x: 50, y: 100 }}
+            initial={{ opacity: 0, scale: 0.3, x: 50, y: -100 }}
+            // animate={{ opacity: 1, scale: 1, x: -22, y: 300 }}
+            animate={{ opacity: 1, scale: 1, x: -22, y: 100 }}
+            exit={{ opacity: 0, scale: 0.3, x: 50, y: -100 }} // Define the exit animation
             transition={{ duration: 0.2, ease: "easeIn" }}
             ref={dropdownRef}
         >
-            <div className="flex flex-col items-center gap-6 py-6">
+            <div className="flex flex-col items-center gap-2 sm:gap-6 py-3 sm:py-6">
                 <img className="rounded-full h-14 w-14 object-cover border border-white" src={user.profilePhoto || noProfilePhoto} alt="profile photo" referrerPolicy="no-referrer" />
                 {/* <div>{user.profilePhoto ? <img className="rounded-full h-14 w-14 object-cover border border-white" src={`${user.profilePhoto}?${new Date().getTime()}`} alt="profile photo" referrerPolicy="no-referrer" /> : <CogIcon className="w-6 h-6 fill-current m-3" />}</div> */}
                 {/* src={`${user.profilePhoto}?${new Date().getTime()}`}  */}
                 {/* This is a hacky technique to prevent cache related error */}
                 <div className="flex flex-col items-center justify-center">
                     <span className="text-lg font-bold">{user.firstName || user.displayName}</span>
-                    <h3 className="text-xs">{user.email}</h3>
+                    <h3 className="text-[10px] sm:text-xs">{user.email}</h3>
                 </div>
 
                 <div>
                     {user.isVerified ? (
-                        <button className="px-4 py-2 bg-light-c dark:bg-dark-a rounded-lg hover: transition-colors" onClick={() => manageAccount()}>
+                        <button className="px-4 py-2 bg-light-c dark:bg-dark-a rounded-lg hover:ring-1 transition-colors" onClick={() => manageAccount()}>
                             Manage your account
                         </button>
                     ) : (
-                        <button className="px-4 py-2 bg-light-c dark:bg-dark-a rounded-lg hover:bg-slate-500 transition-colors text-red-500" onClick={() => verifyEmail()}>
+                        <button className="px-4 py-2 bg-light-c dark:bg-dark-a rounded-lg hover:ring-1 transition-colors text-red-500" onClick={() => verifyEmail()}>
                             Verify email
                         </button>
                     )}
@@ -123,24 +125,24 @@ function DropdownMenu({ user, handleClickOutside, dropdownRef, setNotification, 
             </div>
 
             <div className="flex flex-col items-start">
-                <button className="flex items-center hover:text-cyan-400 hover:bg-slate-700 w-full transition-colors">
-                    <BellIcon className="w-6 h-6 fill-current m-3" />
+                <button className="flex items-center hover:text-primary hover:dark:text-primaryDark hover:bg-light-c hover:dark:bg-dark-a w-full transition-colors">
+                    <BellIcon className="w-5 h-5 sm:w-6 sm:h-6 fill-current mx-3 my-1 sm:m-3 mb-2" />
                     <span>Notifications</span>
                 </button>
-                <button className="flex items-center hover:text-cyan-400 hover:bg-slate-700 w-full transition-colors">
-                    <PlusIcon className="w-6 h-6 fill-current m-3" />
+                <button className="flex items-center hover:text-primary hover:dark:text-primaryDark hover:bg-light-c hover:dark:bg-dark-a w-full transition-colors">
+                    <PlusIcon className="w-5 h-5 sm:w-6 sm:h-6 fill-current mx-3 my-1 sm:m-3 mb-2" />
                     <span>Support</span>
                 </button>
-                <button className="flex items-center hover:text-cyan-400 hover:bg-slate-700 w-full transition-colors">
-                    <MessengerIcon className="w-6 h-6 fill-current m-3" />
+                <button className="flex items-center hover:text-primary hover:dark:text-primaryDark hover:bg-light-c hover:dark:bg-dark-a w-full transition-colors">
+                    <MessengerIcon className="w-5 h-5 sm:w-6 sm:h-6 fill-current mx-3 my-1 sm:m-3 mb-2" />
                     <span>Give us Feedback</span>
                 </button>
-                <button className="flex items-center hover:text-cyan-400 hover:bg-slate-700 w-full transition-colors">
-                    <CogIcon className="w-6 h-6 fill-current m-3" />
+                <button className="flex items-center hover:text-primary hover:dark:text-primaryDark hover:bg-light-c hover:dark:bg-dark-a w-full transition-colors">
+                    <CogIcon className="w-5 h-5 sm:w-6 sm:h-6 fill-current mx-3 my-1 sm:m-3 mb-2" />
                     <span>Settings</span>
                 </button>
 
-                <div className="h-[1px] relative bg-cyan-400 w-full"></div>
+                <div className="h-[1px] relative bg-light-c dark:bg-dark-c w-full"></div>
             </div>
             <div className="m-3">
                 <span className="cursor-pointer" onClick={handleLogout}>

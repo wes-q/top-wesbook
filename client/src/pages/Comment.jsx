@@ -89,11 +89,11 @@ const Comment = ({ comment, postId, setNotification, getAllPosts, currentUser })
                 </div>
                 <details className="relative" ref={detailsRef}>
                     <summary className="list-none" aria-haspopup="menu" role="button">
-                        <div className="rounded-full group-hover:visible invisible hover:bg-slate-300 p-2">
-                            <DotDotDotIcon className="w-3 h-3" />
+                        <div className="rounded-full group-hover:visible invisible hover:bg-light-c hover:dark:bg-dark-a p-2">
+                            <DotDotDotIcon className="w-3 h-3 fill-current" />
                         </div>
                     </summary>
-                    <div className="absolute flex flex-col top-5 -left-16 z-10 bg-slate-200 shadow-md border border-gray-300 rounded-md text-xs select-none">
+                    <div className="absolute flex flex-col top-5 -left-16 z-10 bg-light-a dark:bg-dark-a shadow-md border border-light-c dark:border-dark-c rounded-md text-xs select-none">
                         {/* {comment.postedBy.id === currentUser.id && (
                             <button className="flex items-center hover:bg-slate-300 w-full transition-colors p-1" onClick={() => handleEditComment(postId, comment.id)}>
                                 <EditPenIcon className="w-6 h-6 mr-1" />

@@ -17,7 +17,7 @@ const Navbar = ({ user, showStartTimer, setSeconds, seconds, setNotification }) 
     }
 
     return (
-        <div className="flex justify-between bg-light-b dark:bg-dark-b">
+        <div className="flex justify-between bg-light-b dark:bg-dark-b h-16">
             <Link className="flex items-center py-3 pl-3" to="/">
                 <WesbookLogo className="w-10 h-10 select-none" />
                 <div className="-skew-y-6 select-none sm:block">
@@ -58,13 +58,13 @@ const Navbar = ({ user, showStartTimer, setSeconds, seconds, setNotification }) 
             <div className="flex items-center justify-end pr-3 w-[144px]">
                 <div className="flex">
                     <button onClick={toggleDarkMode} className="flex justify-center items-center sm:justify-start rounded-lg grayscale hover:grayscale-0 transition-all duration-300">
-                        <svg className="inline dark:hidden w-8 mx-6 min-w-0 sm:min-w-[2rem]" id="lightIcon" aria-hidden="true" focusable="false" data-prefix="fad" data-icon="moon-stars" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                        <svg className="inline dark:hidden w-6 mx-3" id="lightIcon" aria-hidden="true" focusable="false" data-prefix="fad" data-icon="moon-stars" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                             <g>
                                 <path className="text-primaryDark" fill="currentColor" d="M320 32L304 0l-16 32-32 16 32 16 16 32 16-32 32-16zm138.7 149.3L432 128l-26.7 53.3L352 208l53.3 26.7L432 288l26.7-53.3L512 208z"></path>
                                 <path className="text-primary" fill="currentColor" d="M332.2 426.4c8.1-1.6 13.9 8 8.6 14.5a191.18 191.18 0 0 1-149 71.1C85.8 512 0 426 0 320c0-120 108.7-210.6 227-188.8 8.2 1.6 10.1 12.6 2.8 16.7a150.3 150.3 0 0 0-76.1 130.8c0 94 85.4 165.4 178.5 147.7z"></path>
                             </g>
                         </svg>
-                        <svg className="hidden dark:inline w-8 mx-6 min-w-0 sm:min-w-[2rem]" id="darkIcon" aria-hidden="true" focusable="false" data-prefix="fad" data-icon="sunglasses" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+                        <svg className="hidden dark:inline w-6 mx-3" id="darkIcon" aria-hidden="true" focusable="false" data-prefix="fad" data-icon="sunglasses" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
                             <g>
                                 <path
                                     className="text-primary"
