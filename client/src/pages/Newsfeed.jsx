@@ -1,7 +1,7 @@
 import Posts from "./Posts";
 import FriendsC from "./FriendsC";
 import Sidebar2 from "./Sidebar2";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import noProfilePhoto from "../icons/noprofile.jpg";
 import Footer2 from "./Footer2";
 
@@ -56,19 +56,21 @@ const Newsfeed = ({ currentUser, setNotification }) => {
                                 ></i>
                                 <span>Saved</span>
                             </button>
-                            <button className="flex items-center gap-2 p-2 hover:text-primary hover:dark:text-primaryDark hover:bg-light-b hover:dark:bg-dark-b w-full transition-colors rounded-md" onClick={() => setNotification({ message: "Feature ongoing development.", type: "info" })}>
-                                <i
-                                    className="block bg-cover bg-no-repeat w-9 h-9"
-                                    style={{
-                                        backgroundImage: `url(${imageUrl2})`,
-                                        backgroundPosition: "0 0px",
-                                        backgroundSize: "37px 251px",
-                                    }}
-                                ></i>
-                                <span>Messenger</span>
-                            </button>
 
-                            <button className="flex items-center gap-2 p-2 hover:text-primary hover:dark:text-primaryDark hover:bg-light-b hover:dark:bg-dark-b w-full transition-colors rounded-md">
+                            <Link to={"/messenger"}>
+                                <button className="flex items-center gap-2 p-2 hover:text-primary hover:dark:text-primaryDark hover:bg-light-b hover:dark:bg-dark-b w-full transition-colors rounded-md">
+                                    <i
+                                        className="block bg-cover bg-no-repeat w-9 h-9"
+                                        style={{
+                                            backgroundImage: `url(${imageUrl2})`,
+                                            backgroundPosition: "0 0px",
+                                            backgroundSize: "37px 251px",
+                                        }}
+                                    ></i>
+                                    <span>Messenger</span>
+                                </button>
+                            </Link>
+                            <button className="flex items-center gap-2 p-2 hover:text-primary hover:dark:text-primaryDark hover:bg-light-b hover:dark:bg-dark-b w-full transition-colors rounded-md" onClick={() => setNotification({ message: "Feature ongoing development.", type: "info" })}>
                                 <i
                                     className="block bg-cover bg-no-repeat w-9 h-9"
                                     style={{
