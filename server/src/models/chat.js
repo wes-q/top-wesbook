@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const chatMessageSchema = new mongoose.Schema({
+const chatSchema = new mongoose.Schema({
     sender: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
@@ -18,10 +18,11 @@ const chatMessageSchema = new mongoose.Schema({
     },
     createdAt: {
         type: Date,
+        default: Date.now,
     },
 });
 
-chatMessageSchema.set("toJSON", {
+chatSchema.set("toJSON", {
     transform: (document, returnedObject) => {
         delete returnedObject.__v;
 
@@ -42,5 +43,5 @@ chatMessageSchema.set("toJSON", {
     },
 });
 
-const ChatMessage = mongoose.model("chatMessage", chatMessageSchema);
-module.exports = ChatMessage;
+const Chat = mongoose.model("chat", chatSchema);
+module.exports = Chat;
