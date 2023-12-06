@@ -13,6 +13,7 @@ const emailRouter = require("./controllers/email");
 const characterLocationsRouter = require("./controllers/characterLocations");
 const scoresRouter = require("./controllers/scores");
 const postsRouter = require("./controllers/posts");
+const chatsRouter = require("./controllers/chats");
 
 const middleware = require("./utils/middleware");
 const winstonLogger = require("./utils/winstonLogger");
@@ -71,7 +72,7 @@ io.on("connection", (socket) => {
 });
 
 server.listen(3003, () => {
-    console.log("server running at http://localhost:3003");
+    console.log("IO server running at http://localhost:3003");
 });
 
 winstonLogger.info(`connecting to ${config.MONGODB_URI}`);
@@ -151,6 +152,7 @@ app.use("/", emailRouter);
 app.use("/", characterLocationsRouter);
 app.use("/", scoresRouter);
 app.use("/", postsRouter);
+app.use("/", chatsRouter);
 
 // Catch-all route to handle client side routing
 app.use("/*", (req, res) => {

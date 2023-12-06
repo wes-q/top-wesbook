@@ -6,7 +6,8 @@ const middleware = require("../utils/middleware");
 chatsRouter.get("/api/chats/:userId", middleware.userExtractor, async (request, response, next) => {
     const currentUserId = request.user.id;
     const anotherUserId = request.params.userId;
-
+    console.log(currentUserId);
+    console.log(anotherUserId);
     try {
         // const conversation = await Chat.find({}).where("sender").equals(currentUserId);
         const conversation = await Chat.find()
@@ -25,9 +26,16 @@ chatsRouter.get("/api/chats/:userId", middleware.userExtractor, async (request, 
 
 // Save a chat document
 chatsRouter.post("/api/chats", middleware.userExtractor, async (request, response, next) => {
+    // console.log("API CHATS");
     const currentUserId = request.user.id;
+    console.log(currentUserId);
+
     try {
         const body = request.body;
+        const x = body.recipientId;
+        const y = body.message;
+        console.log(x);
+        console.log(y);
         const currentDate = new Date().toISOString(); // Generates the current date and time in ISO 8601 format
 
         const chat = new Chat({
@@ -38,7 +46,7 @@ chatsRouter.post("/api/chats", middleware.userExtractor, async (request, respons
         });
 
         const savedChat = await chat.save();
-        response.json(savedChat);
+        response.status(200).json(savedChat);
     } catch (error) {
         next(error);
     }

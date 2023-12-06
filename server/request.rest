@@ -370,3 +370,26 @@ content-type: application/json
     "content": "new content 2"
 }
 
+###
+GET http://localhost:3001/api/chats/655974b5aa661554a4e17eb5
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTBiMzFiOTczOGNiODkyNWFlYjk2NiIsImlhdCI6MTcwMTg0NjExNywiZXhwIjoxNzAyMDE4OTE3fQ.uRa8H3OnyQ7-QxTcQI7svXrcLHrWobX4jbiij02-h-o
+
+###
+POST http://localhost:3001/api/chats
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTBiMzFiOTczOGNiODkyNWFlYjk2NiIsImlhdCI6MTcwMTg0NjExNywiZXhwIjoxNzAyMDE4OTE3fQ.uRa8H3OnyQ7-QxTcQI7svXrcLHrWobX4jbiij02-h-o
+content-type: application/json
+
+{
+    "message": "message 1",
+    "recipientId": "655974b5aa661554a4e17eb5"
+}
+
+###
+POST http://localhost:3001/api/chats
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTk3NGI1YWE2NjE1NTRhNGUxN2ViNSIsImlhdCI6MTcwMTg0NjE5NCwiZXhwIjoxNzAyMDE4OTk0fQ.cKL8w2yu30MW2_psWf-GAsoG7ZSqPGiphhoAYeu8Q3g
+content-type: application/json
+
+{
+    "message": "reply 1",
+    "recipientId": "6550b31b9738cb8925aeb966"
+}
