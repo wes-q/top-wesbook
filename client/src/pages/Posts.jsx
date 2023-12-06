@@ -31,7 +31,8 @@ const Posts = ({ userToDisplay, postsOf, currentUser, setNotification }) => {
             // const data = await postsService.getAll({ headers }); // Get all posts
 
             const { data } = await axios.get(url, { headers }); // Get all posts of friends
-            console.log(sortByDate(data));
+            sortByDate(data);
+            // console.log(data);
             setPosts(data);
         } catch (error) {
             console.log(error);
