@@ -33,8 +33,8 @@ const jwtExpiration = process.env.JWT_EXPIRATION || "1h"; // Default to 1 hour
 
 loginRouter.post("/api/login-local", async (request, response, next) => {
     const { email, password } = request.body;
-    console.log(`EMAIL ${email}`);
-    console.log(`PASSWORD ${password}`);
+    // console.log(`EMAIL ${email}`);
+    // console.log(`PASSWORD ${password}`);
 
     try {
         // Do not allow login of unverified user if that same email has a verified user
@@ -82,8 +82,8 @@ loginRouter.post("/api/login-local", async (request, response, next) => {
 
 // This route uses the JWT sent via header to find the associated user from DB and return the user in response
 loginRouter.get("/api/login-local/success", middleware.userExtractor, function (req, res) {
-    console.log("LOGIN CONTROLLER");
-    console.log(req.user);
+    // console.log("LOGIN CONTROLLER");
+    // console.log(req.user);
     if (req.user) {
         res.status(200).json({
             error: false,

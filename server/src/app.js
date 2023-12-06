@@ -29,6 +29,51 @@ const path = require("path");
 
 mongoose.set("strictQuery", false);
 
+// Socket.io part
+const http = require("http");
+// const { createServer } = require("node:http");
+// const server = createServer(app);
+const server = http.createServer(app);
+const { Server } = require("socket.io");
+// const io = new Server(server);
+const io = new Server(server, {
+    cors: {
+        origin: "http://localhost:5173",
+        methods: ["GET", "POST"],
+    },
+});
+
+io.on("connection", (socket) => {
+    console.log("a user connected");
+    socket.on("disconnect", () => {
+        console.log("user disconnected");
+    });
+    socket.onAny((eventName, ...args) => {
+        console.log(eventName); // 'hello'
+        console.log(args); // [ 1, '2', { 3: '4', 5: ArrayBuffer (1) [ 6 ] } ]
+    });
+});
+
+io.on("connection", (socket) => {
+    socket.on("join", (userRoom) => {
+        socket.leaveAll();
+        socket.join(userRoom);
+        console.log(`user joined ${userRoom}`);
+    });
+    socket.on("send", (stringsent, userRoom) => {
+        // console.log(stringsent);
+        // socket.broadcast.emit("chat message", stringsent);
+        // socket.emit("chat message", stringsent);
+        // io.emit("chat message", stringsent);
+        io.to(userRoom).emit("pm", stringsent);
+        console.log(`sent pm ${stringsent} to ${userRoom}`);
+    });
+});
+
+server.listen(3003, () => {
+    console.log("server running at http://localhost:3003");
+});
+
 winstonLogger.info(`connecting to ${config.MONGODB_URI}`);
 
 const connectToMongoDB = async () => {

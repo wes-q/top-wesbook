@@ -22,6 +22,7 @@ import getUserHeaders from "./helpers/getUserHeaders";
 import Suggestions from "./pages/Suggestions";
 import Requests from "./pages/Requests";
 import FriendsB from "./pages/FriendsB";
+import setDarkModeOnPreference from "./helpers/setDarkModeOnPreference";
 
 function App() {
     const [notification, setNotification] = useState(false);
@@ -32,9 +33,9 @@ function App() {
     const [showStartTimer, setShowStartTimer] = useState(false);
     const [seconds, setSeconds] = useState(0);
     const [game, setGame] = useState(null);
-    // const navigate = useNavigate();
 
     useEffect(() => {
+        setDarkModeOnPreference();
         const timeoutId = getUserLocal();
 
         return () => {
