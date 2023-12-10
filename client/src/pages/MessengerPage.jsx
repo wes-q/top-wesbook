@@ -4,6 +4,8 @@ import FriendsMessenger from "./FriendsMessenger";
 import { socket } from "../socket";
 // import io from "socket.io-client";
 // const socket = io.connect("http://localhost:3003");
+import axios from "axios";
+import getUserHeaders from "../helpers/getUserHeaders";
 
 const MessengerPage = ({ currentUser }) => {
     const [message, setMessage] = useState([]);
@@ -16,8 +18,9 @@ const MessengerPage = ({ currentUser }) => {
         e.preventDefault();
         if (message.trim() !== "") {
             // setMessages([...messages, inputValue]);
-            socket.emit("send", message, room);
-            setMessage("");
+            socket.emit("send", message, room); // Send instant message to related client instance
+            saveMessage(message, recipient.id); // Save message to the database
+            setMessage(""); // Reset the input field and state
         }
     };
 
@@ -37,31 +40,47 @@ const MessengerPage = ({ currentUser }) => {
 
     useEffect(() => {
         socket.on("pm", (msg) => {
-            setMessagesReceived((prevMessages) => [...prevMessages, msg]);
+            setMessagesReceived((prevMessages) => [...prevMessages, { message: msg }]);
         });
-        // // Your Socket.io logic goes here
-        // socket.on("pm", (msg) => {
-        //     alert("io received");
-        //     // setMessages((prevMessages) => [...prevMessages, msg]);
-
-        //     // const item = document.createElement("li");
-        //     // item.textContent = msg;
-        //     // messages.appendChild(item);
-        //     // window.scrollTo(0, document.body.scrollHeight);
-        // });
-
         // return () => {
         //     socket.off("connect", onConnect);
         //     socket.off("disconnect", onDisconnect);
         //     socket.off("foo", onFooEvent);
         // };
-    }, [socket]);
+    }, []);
+
+    const saveMessage = async (message, recipient) => {
+        const headers = getUserHeaders();
+        const url = `/api/chats/`;
+        const object = {
+            message: message,
+            recipient: recipient,
+        };
+        try {
+            await axios.post(url, object, { headers });
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const fetchConversation = async (userId) => {
+        const headers = getUserHeaders();
+
+        try {
+            const conversation = await axios.get(`/api/chats/${userId}`, { headers });
+            console.log(conversation.data);
+            setMessagesReceived(conversation.data);
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
     useEffect(() => {
         const generatedRoomName = generateRoomName(currentUser.firstName, recipient.firstName);
         console.log(generatedRoomName);
         socket.emit("join", generatedRoomName);
         setRoom(generatedRoomName);
+        fetchConversation(recipient.id);
     }, [recipient]);
 
     return (
@@ -74,9 +93,9 @@ const MessengerPage = ({ currentUser }) => {
             </div>
             <div className="flex flex-col justify-between dark:bg-dark-b w-full p-3">
                 <ul className="list-none m-0 p-0">
-                    {messagesReceived.map((msg, index) => (
+                    {messagesReceived.map((message, index) => (
                         <li key={index} className="even:bg-light-c even:dark:bg-dark-a">
-                            {msg}
+                            {message.message}
                         </li>
                     ))}
                     {/* <li>{messagesReceived}</li> */}
