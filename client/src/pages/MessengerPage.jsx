@@ -18,7 +18,7 @@ const MessengerPage = ({ currentUser }) => {
         e.preventDefault();
         if (message.trim() !== "") {
             // setMessages([...messages, inputValue]);
-            socket.emit("send", message, room); // Send instant message to related client instance
+            socket.emit("send", message, room, currentUser.id); // Send instant message to related client instance
             saveMessage(message, recipient.id); // Save message to the database
             setMessage(""); // Reset the input field and state
         }
@@ -39,8 +39,8 @@ const MessengerPage = ({ currentUser }) => {
     }
 
     useEffect(() => {
-        socket.on("pm", (msg) => {
-            setMessagesReceived((prevMessages) => [...prevMessages, { message: msg }]);
+        socket.on("pm", (msg, userId) => {
+            setMessagesReceived((prevMessages) => [...prevMessages, { message: msg, sender: userId }]);
         });
         // return () => {
         //     socket.off("connect", onConnect);
@@ -78,7 +78,7 @@ const MessengerPage = ({ currentUser }) => {
     useEffect(() => {
         const generatedRoomName = generateRoomName(currentUser.firstName, recipient.firstName);
         console.log(generatedRoomName);
-        socket.emit("join", generatedRoomName);
+        socket.emit("join", generatedRoomName, currentUser.id);
         setRoom(generatedRoomName);
         fetchConversation(recipient.id);
     }, [recipient]);

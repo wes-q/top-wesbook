@@ -30,7 +30,7 @@ const path = require("path");
 
 mongoose.set("strictQuery", false);
 
-// Socket.io part
+/*8888888888888888 Socket.io part 8888888888888888*/
 const http = require("http");
 // const { createServer } = require("node:http");
 // const server = createServer(app);
@@ -56,24 +56,25 @@ io.on("connection", (socket) => {
 });
 
 io.on("connection", (socket) => {
-    socket.on("join", (userRoom) => {
+    socket.on("join", (userRoom, userId) => {
         socket.leaveAll();
         socket.join(userRoom);
-        console.log(`user joined ${userRoom}`);
+        console.log(`${userId} joined ${userRoom}`);
     });
-    socket.on("send", (stringsent, userRoom) => {
+    socket.on("send", (stringsent, userRoom, userId) => {
         // console.log(stringsent);
         // socket.broadcast.emit("chat message", stringsent);
         // socket.emit("chat message", stringsent);
         // io.emit("chat message", stringsent);
-        io.to(userRoom).emit("pm", stringsent);
-        console.log(`sent pm ${stringsent} to ${userRoom}`);
+        io.to(userRoom).emit("pm", stringsent, userId);
+        console.log(`${userId} sent pm ${stringsent} to ${userRoom}`);
     });
 });
 
 server.listen(3003, () => {
     console.log("IO server running at http://localhost:3003");
 });
+/*8888888888888888 Socket.io part 8888888888888888*/
 
 winstonLogger.info(`connecting to ${config.MONGODB_URI}`);
 
