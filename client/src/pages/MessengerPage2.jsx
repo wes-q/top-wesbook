@@ -2,7 +2,7 @@ import FriendsMessenger from "./FriendsMessenger";
 import Sidebar1 from "./Sidebar1";
 import Sidebar2 from "./Sidebar2";
 import Footer2 from "./Footer2";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { socket } from "../socket";
 import axios from "axios";
 import getUserHeaders from "../helpers/getUserHeaders";
@@ -12,6 +12,7 @@ const MessengerPage2 = ({ currentUser, setShowFooter }) => {
     const [messagesReceived, setMessagesReceived] = useState([]);
     const [recipient, setRecipient] = useState([]);
     const [room, setRoom] = useState([]);
+    const audioRefCoin = useRef(null);
 
     useEffect(() => {
         setShowFooter(false);
@@ -58,6 +59,11 @@ const MessengerPage2 = ({ currentUser, setShowFooter }) => {
     useEffect(() => {
         socket.on("pm", (msg, userId) => {
             setMessagesReceived((prevMessages) => [...prevMessages, { message: msg, sender: userId }]);
+
+            if (audioRefCoin.current && userId !== currentUser.id) {
+                audioRefCoin.current.currentTime = 0;
+                audioRefCoin.current.play();
+            }
         });
         // return () => {
         //     socket.off("connect", onConnect);
@@ -67,21 +73,27 @@ const MessengerPage2 = ({ currentUser, setShowFooter }) => {
     }, []);
 
     return (
-        <div className="relative">
-            <div className="flex sm:gap-4 justify-center max-w-max mx-auto relative pt-3 px-3">
-                <div className="">
-                    <div className="hidden sm:flex flex-col w-72 sticky top-20">
-                        <Sidebar1 currentUser={currentUser} />
-                        <Sidebar2 />
-                        {/* <Footer2 /> */}
+        <>
+            <audio ref={audioRefCoin}>
+                <source src="/mixkit-retro-game-notification-212.wav" type="audio/mpeg" />
+                Your browser does not support the audio element.
+            </audio>
+            <div className="relative">
+                <div className="flex sm:gap-4 justify-center max-w-max mx-auto relative pt-3 px-3">
+                    <div className="">
+                        <div className="hidden sm:flex flex-col w-72 sticky top-20">
+                            <Sidebar1 currentUser={currentUser} />
+                            <Sidebar2 />
+                            {/* <Footer2 /> */}
+                        </div>
+                    </div>
+                    <MessengerChat currentUser={currentUser} messagesReceived={messagesReceived} room={room} recipient={recipient} />
+                    <div className="hidden sm:block">
+                        <FriendsMessenger currentUser={currentUser} setRecipient={setRecipient} />
                     </div>
                 </div>
-                <MessengerChat currentUser={currentUser} messagesReceived={messagesReceived} room={room} recipient={recipient} />
-                <div className="hidden sm:block">
-                    <FriendsMessenger currentUser={currentUser} setRecipient={setRecipient} />
-                </div>
             </div>
-        </div>
+        </>
     );
 };
 
