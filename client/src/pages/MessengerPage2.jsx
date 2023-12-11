@@ -89,7 +89,7 @@ const MessengerPage2 = ({ currentUser, setShowFooter }) => {
                     </div>
                     <MessengerChat currentUser={currentUser} messagesReceived={messagesReceived} room={room} recipient={recipient} />
                     <div className="hidden sm:block">
-                        <FriendsMessenger currentUser={currentUser} setRecipient={setRecipient} />
+                        <FriendsMessenger currentUser={currentUser} setRecipient={setRecipient} recipient={recipient} />
                     </div>
                 </div>
             </div>

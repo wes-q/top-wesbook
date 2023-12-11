@@ -3,6 +3,7 @@ import Send from "../icons/send.svg?react";
 import getUserHeaders from "../helpers/getUserHeaders";
 import { socket } from "../socket";
 import axios from "axios";
+import noProfilePhoto from "../icons/noprofile.jpg";
 
 const MessengerChat = ({ messagesReceived, room, currentUser, recipient }) => {
     const [message, setMessage] = useState("");
@@ -118,8 +119,8 @@ const MessengerChat = ({ messagesReceived, room, currentUser, recipient }) => {
                     <span>No chats selected</span>
                 </div>
             ) : (
-                <div className="flex flex-col bg-light-c dark:bg-dark-c sm:w-[573px] p-3 text-xs mb-[35px]">
-                    <div className="h-full">
+                <div className="flex flex-col bg-light-c dark:bg-dark-c sm:w-[573px] p-3 text-xs mb-[35px] justify-end">
+                    <div className="">
                         {messagesReceived.length === 0 && (
                             <div className="flex justify-center">
                                 <span>No chats with this friend yet</span>
@@ -150,6 +151,10 @@ const MessengerChat = ({ messagesReceived, room, currentUser, recipient }) => {
                             <Send className={`w-6 mb-1 ${postIconStyle}`}></Send>
                         </button>
                     </form>
+                    <div className="fixed top-16 flex items-center sm:w-[573px] gap-2 bg-light-c dark:bg-dark-c p-2">
+                        <img className="rounded-full w-8 h-8 object-cover" src={recipient.profilePhoto || noProfilePhoto} alt="profile photo" referrerPolicy="no-referrer" />
+                        <span className="truncate text-base">{recipient.displayName || recipient.firstName}</span>
+                    </div>
                 </div>
             )}
         </>
