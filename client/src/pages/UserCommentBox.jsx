@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, forwardRef, useImperativeHandle } from "react";
+import { useState, useEffect } from "react";
 import Send from "../icons/send.svg?react";
 import Camera from "../icons/camera.svg?react";
 import Emoji from "../icons/emoji.svg?react";

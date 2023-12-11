@@ -28,7 +28,7 @@ chatsRouter.get("/api/chats/:userId", middleware.userExtractor, async (request, 
 chatsRouter.post("/api/chats", middleware.userExtractor, async (request, response, next) => {
     // console.log("API CHATS");
     const currentUserId = request.user.id;
-    console.log(currentUserId);
+    // console.log(currentUserId);
 
     try {
         const body = request.body;
