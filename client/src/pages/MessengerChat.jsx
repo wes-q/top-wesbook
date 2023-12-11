@@ -9,8 +9,9 @@ const MessengerChat = ({ messagesReceived, room, currentUser, recipient }) => {
     const [postIconStyle, setPostIconStyle] = useState("");
     const [isDisabled, setIsDisabled] = useState(true);
     const [showPlaceholder, setShowPlaceholder] = useState(true);
-    const [marginPush, setMarginPush] = useState("");
+    // const [marginPush, setMarginPush] = useState("");
     const textAreaRef = useRef(null);
+    const messagesEndRef = useRef(null);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -82,36 +83,57 @@ const MessengerChat = ({ messagesReceived, room, currentUser, recipient }) => {
         autoGrow(textAreaRef);
     };
 
+    // useEffect(() => {
+    //     // Scroll to the bottom when messagesReceived changes
+    //     if (chatContainerRef.current) {
+    //         chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+    //     }
+    // }, [messagesReceived]);
+
+    useEffect(() => {
+        // document.getElementById("ElementID").scrollIntoView();
+        // or, use a ref and
+        // chatContainerRef.current.scrollIntoView({ behavior: "smooth" });
+        // messagesEndRef.current.scrollIntoView(true);
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    }, [messagesReceived]);
+
+    // const scrollToBottom = () => {
+    //     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    // };
+
     return (
         // <div className={`flex flex-col bg-light-c dark:bg-dark-c sm:w-[573px] p-3 text-xs mb-[${marginPush}]`}>
-        <div className="flex flex-col bg-light-c dark:bg-dark-c sm:w-[573px] p-3 text-xs mb-[35px]">
-            <div className="">
-                {messagesReceived.map((message, index) => {
-                    let style;
-                    if (message.sender === currentUser.id) {
-                        style = "flex justify-end";
-                    } else {
-                        style = "flex justify-start";
-                    }
-                    return (
-                        <div key={index} className={style}>
-                            {/* <div className="bg-primary max-w-[50%] rounded-2xl px-4 py-1 mb-1"> */}
-                            <div className={message.sender === currentUser.id ? "bg-primary dark:bg-primaryDark max-w-[50%] rounded-2xl px-3 py-1 mb-1" : "bg-light-b dark:bg-dark-b max-w-[50%] rounded-2xl px-3 py-1 mb-1"}>
-                                <span className="break-words">{message.message}</span>
+        <>
+            <div className="flex flex-col bg-light-c dark:bg-dark-c sm:w-[573px] p-3 text-xs mb-[35px]">
+                <div className="h-auto">
+                    {messagesReceived.map((message, index) => {
+                        let style;
+                        if (message.sender === currentUser.id) {
+                            style = "flex justify-end";
+                        } else {
+                            style = "flex justify-start";
+                        }
+                        return (
+                            <div key={index} className={style}>
+                                {/* <div className="bg-primary max-w-[50%] rounded-2xl px-4 py-1 mb-1"> */}
+                                <div className={message.sender === currentUser.id ? "bg-primary dark:bg-primaryDark max-w-[50%] rounded-2xl px-3 py-1 mb-1" : "bg-light-b dark:bg-dark-b max-w-[50%] rounded-2xl px-3 py-1 mb-1"}>
+                                    <span className="break-words whitespace-pre-wrap">{message.message}</span>
+                                </div>
                             </div>
-                        </div>
-                    );
-                })}
+                        );
+                    })}
+                    <div ref={messagesEndRef} />
+                </div>
+                <form className="fixed bottom-0 flex items-end sm:w-[573px] gap-2 bg-light-c dark:bg-dark-c p-2" onSubmit={handleSubmit}>
+                    {/* <textarea ref={textAreaRef} className="w-full max-h-32 bg-light-a dark:bg-dark-a rounded-2xl outline-none resize-none overflow-y-auto px-3 py-2" placeholder={showPlaceholder ? "Aa" : ""} spellCheck="false" autoFocus rows="1" onChange={(event) => setMessage(event.target.value)} onInput={() => autoGrow(textAreaRef)} /> */}
+                    <textarea ref={textAreaRef} className="w-full max-h-12 bg-light-a dark:bg-dark-a rounded-2xl outline-none resize-none overflow-y-auto px-3 py-2" placeholder={showPlaceholder ? "Aa" : ""} spellCheck="false" autoFocus rows="1" onChange={handleChange} />
+                    <button type="submit" className="rounded-md outline-none">
+                        <Send className={`w-6 mb-1 ${postIconStyle}`}></Send>
+                    </button>
+                </form>
             </div>
-            <form className="fixed bottom-0 flex items-end sm:w-[573px] gap-2 bg-light-c dark:bg-dark-c p-2" onSubmit={handleSubmit}>
-                {/* <textarea ref={textAreaRef} className="w-full max-h-32 bg-light-a dark:bg-dark-a rounded-2xl outline-none resize-none overflow-y-auto px-3 py-2" placeholder={showPlaceholder ? "Aa" : ""} spellCheck="false" autoFocus rows="1" onChange={(event) => setMessage(event.target.value)} onInput={() => autoGrow(textAreaRef)} /> */}
-                <textarea ref={textAreaRef} className="w-full max-h-12 bg-light-a dark:bg-dark-a rounded-2xl outline-none resize-none overflow-y-auto px-3 py-2" placeholder={showPlaceholder ? "Aa" : ""} spellCheck="false" autoFocus rows="1" onChange={handleChange} />
-                <button type="submit" className="rounded-md outline-none">
-                    <Send className={`w-6 mb-1 ${postIconStyle}`}></Send>
-                    {/* <span>SEND</span> */}
-                </button>
-            </form>
-        </div>
+        </>
     );
 };
 
