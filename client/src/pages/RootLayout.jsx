@@ -13,7 +13,7 @@ export default function RootLayout({ notification, user, setNotification, showFo
                 </nav>
             </header>
 
-            <main className="relative grow mt-16 mb-16 sm:mb-4">
+            <main className="relative mt-16 mb-16 sm:mb-4">
                 <Notification notification={notification} setNotification={setNotification} />
                 <Outlet />
             </main>

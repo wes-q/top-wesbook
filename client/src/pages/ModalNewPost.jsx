@@ -56,6 +56,7 @@ const ModalNewPost = ({ setShowNewPost, currentUser, getAllPosts }) => {
         }
     };
 
+    // Autogrow is used for textarea with a set number of initial rows but grows as the user types, but not needed for input with initial single row
     const autoGrow = (element) => {
         if (!element.current) {
             return;
