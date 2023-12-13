@@ -5,7 +5,7 @@ import getUserHeaders from "../helpers/getUserHeaders";
 // import { socket } from "../socket";
 import { io } from "socket.io-client";
 // const socket = io("http://localhost:3004");
-const socket = io("https://wesbook.onrender.com:3004");
+const socket = io("https://wesbook.onrender.com:443");
 
 import axios from "axios";
 import noProfilePhoto from "../icons/noprofile.jpg";
