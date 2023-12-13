@@ -65,7 +65,7 @@ const Posts = ({ userToDisplay, postsOf, currentUser, setNotification }) => {
 
     return (
         <>
-            <div className="flex flex-col text-sm items-start sm:w-[573px] gap-4">
+            <div className="flex flex-col text-sm items-start sm:max-w-[573px] gap-4">
                 {showNewPost && <ModalNewPost setShowNewPost={setShowNewPost} currentUser={userToDisplay} getAllPosts={getAllPosts} />}
                 {/* {userToDisplay.status === "self" && ( */}
                 {(userId === currentUser.id || postsOf === "friends") && (

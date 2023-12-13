@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Friends = ({ usersFriends, userId, currentUser }) => {
     return (
-        <div className="w-full bg-light-b dark:bg-dark-b shadow-md rounded-md mb-4 p-3">
+        <div className="bg-light-b dark:bg-dark-b shadow-md rounded-md mb-4 p-3">
             <div className="flex justify-between">
                 <div className="flex flex-col">
                     <div className="text-xl font-extrabold">Friends</div>
@@ -15,7 +15,7 @@ const Friends = ({ usersFriends, userId, currentUser }) => {
                     </Link>
                 )}
             </div>
-            <div className="grid grid-cols-3 gap-2">
+            <div className="grid grid-cols-4 sm:grid-cols-2 md:grid-cols-3 gap-2">
                 {usersFriends.map((friend, index) => {
                     return (
                         <div key={index} className="flex flex-col gap-1">
@@ -33,13 +33,13 @@ const Friends = ({ usersFriends, userId, currentUser }) => {
                             {/* <span className="font-semibold break-words">{friend.displayName || friend.firstName + " " + friend.lastName}</span> */}
                             {(() => {
                                 if (friend.displayName) {
-                                    return <span className="font-semibold break-words">{friend.displayName}</span>;
+                                    return <span className="font-semibold truncate">{friend.displayName}</span>;
                                 } else if (friend.firstName && friend.lastName) {
-                                    return <span className="font-semibold break-words">{`${friend.firstName} ${friend.lastName}`}</span>;
+                                    return <span className="font-semibold truncate">{`${friend.firstName} ${friend.lastName}`}</span>;
                                 } else if (friend.firstName) {
-                                    return <span className="font-semibold break-words">{friend.firstName}</span>;
+                                    return <span className="font-semibold truncate">{friend.firstName}</span>;
                                 } else if (friend.lastName) {
-                                    return <span className="font-semibold break-words">{friend.lastName}</span>;
+                                    return <span className="font-semibold truncate">{friend.lastName}</span>;
                                 } else {
                                     return null;
                                 }

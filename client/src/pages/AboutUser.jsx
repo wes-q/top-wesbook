@@ -27,7 +27,7 @@ const AboutUser = ({ userToDisplay }) => {
 
     console.log(userToDisplay);
     return (
-        <div className="w-full shadow-md bg-light-b dark:bg-dark-b rounded-md mb-4 p-3">
+        <div className="shadow-md bg-light-b dark:bg-dark-b rounded-md mb-4 p-3">
             <div className="flex justify-between mb-3">
                 <div className="flex flex-col">
                     <div className="text-xl font-extrabold">About</div>
