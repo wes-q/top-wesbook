@@ -73,7 +73,7 @@ io.on("connection", (socket) => {
 });
 
 server.listen(config.IO_PORT, () => {
-    console.log(`IO server running at ${config.PORT}`);
+    console.log(`IO server running at ${config.IO_PORT}`);
 });
 /*8888888888888888 Socket.io part 8888888888888888*/
 
