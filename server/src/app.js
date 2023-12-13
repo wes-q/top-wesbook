@@ -39,7 +39,8 @@ const { Server } = require("socket.io");
 // const io = new Server(server);
 const io = new Server(server, {
     cors: {
-        origin: "http://localhost:5173",
+        // origin: "http://localhost:5173",
+        origin: config.FRONTEND_URL,
         methods: ["GET", "POST"],
     },
 });
@@ -71,8 +72,8 @@ io.on("connection", (socket) => {
     });
 });
 
-server.listen(3003, () => {
-    console.log("IO server running at http://localhost:3003");
+server.listen(config.PORT, () => {
+    console.log(`IO server running at ${config.PORT}`);
 });
 /*8888888888888888 Socket.io part 8888888888888888*/
 
