@@ -120,7 +120,7 @@ const MessengerChat = ({ messagesReceived, room, currentUser, recipient }) => {
                     <span>No chats selected</span>
                 </div>
             ) : (
-                <div className="flex flex-col relative bg-light-c dark:bg-dark-c py-3 text-xs mb-[35px] justify-end mt-20">
+                <div className="flex flex-col relative bg-light-c dark:bg-dark-c py-3 text-xs mb-[50px] justify-end mt-20">
                     <div className="">
                         {messagesReceived.length === 0 && (
                             <div className="flex justify-center">
