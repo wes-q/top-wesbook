@@ -10,8 +10,7 @@ import UpdateProfile from "./pages/UpdateProfile";
 import About from "./pages/About";
 import Game from "./pages/Game";
 import LeaderboardPage from "./pages/LeaderboardPage";
-// import MessengerPage from "./pages/MessengerPage";
-import MessengerPage2 from "./pages/MessengerPage2";
+import MessengerPage from "./pages/MessengerPage";
 import PrivateRoutes from "./pages/Privateroutes";
 import PlayPage from "./pages/PlayPage";
 import GetJwt from "./pages/GetJwt";
@@ -98,7 +97,7 @@ function App() {
                         <Route path="verification-nothing" element={<VerificationNothing />} />
                         <Route path="update-profile" element={<UpdateProfile user={currentUser} setUser={setCurrentUser} setNotification={setNotification} />} />
                         <Route path="profile/:userId" element={<ProfilePage currentUser={currentUser} setCurrentUser={setCurrentUser} setNotification={setNotification} />} />
-                        <Route path="messenger" element={<MessengerPage2 currentUser={currentUser} setShowFooter={setShowFooter} />} />
+                        <Route path="messenger" element={<MessengerPage currentUser={currentUser} setShowFooter={setShowFooter} />} />
                     </Route>
 
                     <Route path="signup" element={<SignupForm setNotification={setNotification} />} />

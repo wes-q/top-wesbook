@@ -1,7 +1,8 @@
 import { useState, useRef, useEffect } from "react";
 import Send from "../icons/send.svg?react";
 import getUserHeaders from "../helpers/getUserHeaders";
-
+import axios from "axios";
+import noProfilePhoto from "../icons/noprofile.jpg";
 import { socket } from "../socket";
 // import { io } from "socket.io-client";
 // const socket = io("http://localhost:3001");
@@ -14,9 +15,6 @@ import { socket } from "../socket";
 // socket.on("connect_timeout", (timeout) => {
 //     console.error("Socket connection timeout:", timeout);
 // });
-
-import axios from "axios";
-import noProfilePhoto from "../icons/noprofile.jpg";
 
 const MessengerChat = ({ messagesReceived, room, currentUser, recipient }) => {
     const [message, setMessage] = useState("");

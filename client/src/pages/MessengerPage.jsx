@@ -1,102 +1,118 @@
-// import { useState, useRef, useEffect } from "react";
-// import FriendsMessenger from "./FriendsMessenger";
-// // import { io } from "socket.io-client";
-// import { socket } from "../socket";
-// // import io from "socket.io-client";
-// // const socket = io.connect("http://localhost:3003");
-// import axios from "axios";
-// import getUserHeaders from "../helpers/getUserHeaders";
+import FriendsMessenger from "./FriendsMessenger";
+import Sidebar1 from "./Sidebar1";
+import Sidebar2 from "./Sidebar2";
+import Footer2 from "./Footer2";
+import { useState, useEffect, useRef } from "react";
+import axios from "axios";
+import getUserHeaders from "../helpers/getUserHeaders";
+import MessengerChat from "./MessengerChat";
+import { socket } from "../socket";
+// import { io } from "socket.io-client";
+// const socket = io("http://localhost:3001");
+// const socket = io("https://wesbook.onrender.com:443");
 
-// const MessengerPage = ({ currentUser }) => {
-//     const [message, setMessage] = useState([]);
-//     const [messagesReceived, setMessagesReceived] = useState([]);
+// socket.on("connect_error", (error) => {
+//     console.error("Socket connection error:", error);
+// });
 
-//     const [recipient, setRecipient] = useState([]);
-//     const [room, setRoom] = useState([]);
+// socket.on("connect_timeout", (timeout) => {
+//     console.error("Socket connection timeout:", timeout);
+// });
 
-//     const textAreaRef = useRef(null);
+const MessengerPage = ({ currentUser, setShowFooter }) => {
+    const [messagesReceived, setMessagesReceived] = useState([]);
+    const [recipient, setRecipient] = useState([]);
+    const [room, setRoom] = useState([]);
+    const audioRefCoin = useRef(null);
 
-//     const handleSubmit = (e) => {
-//         e.preventDefault();
-//         if (message.trim() !== "") {
-//             // setMessages([...messages, inputValue]);
-//             socket.emit("send", message, room, currentUser.id); // Send instant message to related client instance
-//             saveMessage(message, recipient.id); // Save message to the database
-//             setMessage(""); // Reset the input field and state
-//         }
-//     };
+    useEffect(() => {
+        setShowFooter(false);
 
-//     function generateRoomName(id1, id2) {
-//         let room;
-//         const result = id1.localeCompare(id2);
+        return () => {
+            setShowFooter(true);
+        };
+    }, []);
 
-//         if (result < 0) {
-//             room = `${id1}_${id2}`;
-//         } else if (result > 0) {
-//             room = `${id2}_${id1}`;
-//         } else {
-//             room = `${id1}_${id2}`;
-//         }
-//         return room;
-//     }
+    function generateRoomName(id1, id2) {
+        let room;
+        const result = id1.localeCompare(id2);
 
-//     useEffect(() => {
-//         socket.on("pm", (msg, userId) => {
-//             setMessagesReceived((prevMessages) => [...prevMessages, { message: msg, sender: userId }]);
-//         });
-//         // return () => {
-//         //     socket.off("connect", onConnect);
-//         //     socket.off("disconnect", onDisconnect);
-//         //     socket.off("foo", onFooEvent);
-//         // };
-//     }, []);
+        if (result < 0) {
+            room = `${id1}_${id2}`;
+        } else if (result > 0) {
+            room = `${id2}_${id1}`;
+        } else {
+            room = `${id1}_${id2}`;
+        }
+        return room;
+    }
 
-//     const saveMessage = async (message, recipient) => {
-//         const headers = getUserHeaders();
-//         const url = `/api/chats/`;
-//         const object = {
-//             message: message,
-//             recipient: recipient,
-//         };
-//         try {
-//             await axios.post(url, object, { headers });
-//         } catch (error) {
-//             console.log(error);
-//         }
-//     };
+    const fetchConversation = async (userId) => {
+        const headers = getUserHeaders();
 
-//     const fetchConversation = async (userId) => {
-//         const headers = getUserHeaders();
+        try {
+            const conversation = await axios.get(`/api/chats/${userId}`, { headers });
+            console.log(conversation.data);
+            setMessagesReceived(conversation.data);
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
-//         try {
-//             const conversation = await axios.get(`/api/chats/${userId}`, { headers });
-//             console.log(conversation.data);
-//             setMessagesReceived(conversation.data);
-//         } catch (error) {
-//             console.log(error);
-//         }
-//     };
+    useEffect(() => {
+        const generatedRoomName = generateRoomName(currentUser.firstName, recipient.firstName);
+        // console.log(generatedRoomName);
+        socket.emit("join", generatedRoomName, currentUser.id);
+        setRoom(generatedRoomName);
+        fetchConversation(recipient.id);
+    }, [recipient]);
 
-//     useEffect(() => {
-//         const generatedRoomName = generateRoomName(currentUser.firstName, recipient.firstName);
-//         console.log(generatedRoomName);
-//         socket.emit("join", generatedRoomName, currentUser.id);
-//         setRoom(generatedRoomName);
-//         fetchConversation(recipient.id);
-//     }, [recipient]);
+    useEffect(() => {
+        socket.on("pm", (msg, userId) => {
+            setMessagesReceived((prevMessages) => [...prevMessages, { message: msg, sender: userId }]);
 
-//     const autoGrow = (element) => {
-//         if (!element.current) {
-//             return;
-//         }
-//         element.current.style.height = element.current.scrollHeight + "px";
-//     };
+            if (audioRefCoin.current && userId !== currentUser.id) {
+                audioRefCoin.current.currentTime = 0;
+                audioRefCoin.current.play();
+            }
+        });
+        // return () => {
+        //     socket.off("connect", onConnect);
+        //     socket.off("disconnect", onDisconnect);
+        //     socket.off("foo", onFooEvent);
+        // };
+    }, []);
 
-//     return (
-//         <div className="flex">
-//             <FriendsMessenger currentUser={currentUser} setRecipient={setRecipient} />
-//         </div>
-//     );
-// };
+    return (
+        <>
+            <audio ref={audioRefCoin}>
+                <source src="/mixkit-retro-game-notification-212.wav" type="audio/mpeg" />
+                Your browser does not support the audio element.
+            </audio>
+            <div className="relative">
+                <div className="flex lg:justify-center relative gap-4 px-3">
+                    <div className="block lg:hidden md:w-72">
+                        <FriendsMessenger currentUser={currentUser} setRecipient={setRecipient} recipient={recipient} />
+                    </div>
+                    <div className="hidden lg:block">
+                        <div className="lg:flex flex-col w-72 sticky top-20">
+                            <Sidebar1 currentUser={currentUser} />
+                            <Sidebar2 />
+                            {/* <Footer2 /> */}
+                        </div>
+                    </div>
+                    {/* <div className="lg:max-w-[33vw] min-w-[200px] grow"> */}
+                    <div className="lg:max-w-[33vw] grow">
+                        {/* 573px */}
+                        <MessengerChat currentUser={currentUser} messagesReceived={messagesReceived} room={room} recipient={recipient} />
+                    </div>
+                    <div className="hidden lg:block w-72">
+                        <FriendsMessenger currentUser={currentUser} setRecipient={setRecipient} recipient={recipient} />
+                    </div>
+                </div>
+            </div>
+        </>
+    );
+};
 
-// export default MessengerPage;
+export default MessengerPage;
