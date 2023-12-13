@@ -49,17 +49,17 @@ io.on("connection", (socket) => {
     });
 });
 
-io.on("connection", (socket) => {
-    const transport = socket.conn.transport.name; // in most cases, "polling"
-    console.log("TRANSPORT");
-    console.log(transport);
+// io.on("connection", (socket) => {
+//     const transport = socket.conn.transport.name; // in most cases, "polling"
+//     console.log("TRANSPORT");
+//     console.log(transport);
 
-    socket.conn.on("upgrade", () => {
-        const upgradedTransport = socket.conn.transport.name; // in most cases, "websocket"
-        console.log("UPGRADED TRANSPORT");
-        console.log(upgradedTransport);
-    });
-});
+//     socket.conn.on("upgrade", () => {
+//         const upgradedTransport = socket.conn.transport.name; // in most cases, "websocket"
+//         console.log("UPGRADED TRANSPORT");
+//         console.log(upgradedTransport);
+//     });
+// });
 
 /* Start the combined server */
 server.listen(config.PORT, () => {
