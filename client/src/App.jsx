@@ -10,7 +10,7 @@ import UpdateProfile from "./pages/UpdateProfile";
 import About from "./pages/About";
 import Game from "./pages/Game";
 import LeaderboardPage from "./pages/LeaderboardPage";
-import MessengerPage from "./pages/MessengerPage";
+// import MessengerPage from "./pages/MessengerPage";
 import MessengerPage2 from "./pages/MessengerPage2";
 import PrivateRoutes from "./pages/Privateroutes";
 import PlayPage from "./pages/PlayPage";
