@@ -72,12 +72,12 @@ io.on("connection", (socket) => {
     });
 });
 
-// server.listen(config.IO_PORT, () => {
-//     console.log(`IO server running at ${config.IO_PORT}`);
-// });
-server.listen(3005, () => {
-    console.log(`IO server running at 3005`);
+server.listen(config.IO_PORT, () => {
+    console.log(`IO server running at ${config.IO_PORT}`);
 });
+// server.listen(3005, () => {
+//     console.log(`IO server running at 3005`);
+// });
 /*8888888888888888 Socket.io part 8888888888888888*/
 
 winstonLogger.info(`connecting to ${config.MONGODB_URI}`);
