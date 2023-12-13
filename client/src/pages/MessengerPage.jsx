@@ -19,7 +19,7 @@ import { socket } from "../socket";
 //     console.error("Socket connection timeout:", timeout);
 // });
 
-const MessengerPage = ({ currentUser, setShowFooter }) => {
+const MessengerPage = ({ currentUser, setShowFooter, setNotification }) => {
     const [messagesReceived, setMessagesReceived] = useState([]);
     const [recipient, setRecipient] = useState([]);
     const [room, setRoom] = useState([]);
@@ -96,7 +96,7 @@ const MessengerPage = ({ currentUser, setShowFooter }) => {
                     </div>
                     <div className="hidden lg:block">
                         <div className="lg:flex flex-col w-72 sticky top-20">
-                            <Sidebar1 currentUser={currentUser} />
+                            <Sidebar1 currentUser={currentUser} setNotification={setNotification} />
                             <Sidebar2 />
                             {/* <Footer2 /> */}
                         </div>

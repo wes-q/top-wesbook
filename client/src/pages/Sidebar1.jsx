@@ -1,7 +1,7 @@
 import { NavLink, Link } from "react-router-dom";
 import noProfilePhoto from "../icons/noprofile.jpg";
 
-const Sidebar1 = ({ currentUser }) => {
+const Sidebar1 = ({ currentUser, setNotification }) => {
     const imageUrl = "https://static.xx.fbcdn.net/rsrc.php/v3/yj/r/A5UbHHnDt8X.png?_nc_eui2=AeHSL0Q4tGlL21d52WMHwPvtSHvZZLqYliNIe9lkupiWI12POmLNqk1BRNvTzpPYIdY";
     const imageUrl2 = "https://static.xx.fbcdn.net/rsrc.php/v3/yU/r/jZrrNiQ6uUi.png?_nc_eui2=AeETgSekBuq7dxcXZK6LlqNiLDD_-cPEkoMsMP_5w8SSg81rqtMjA51Y80AvU2-sQI4";
 
