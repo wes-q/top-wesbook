@@ -8,23 +8,23 @@ export default function RootLayout({ notification, user, setNotification, showFo
     return (
         <div className="flex flex-col min-h-screen h-full bg-light-c dark:bg-dark-c text-sm sm:text-base font-nunito">
             <header>
-                <nav className="fixed top-0 z-30 w-full sm:justify-between sm:items-center navbar text-base sm:text-lg h-auto shadow-md">
+                <nav className="fixed top-0 z-30 w-full md:justify-between md:items-center navbar text-base md:text-lg h-auto shadow-md">
                     <Navbar user={user} showStartTimer={showStartTimer} setSeconds={setSeconds} seconds={seconds} setNotification={setNotification} />
                 </nav>
             </header>
 
-            <main className="relative mt-16 mb-16 sm:mb-4">
+            <main className="relative grow mt-16 mb-16 md:mb-4">
                 <Notification notification={notification} setNotification={setNotification} />
                 <Outlet />
             </main>
 
             {showFooter && (
-                <footer className="hidden sm:block">
+                <footer className="hidden md:block">
                     <Footer />
                 </footer>
             )}
 
-            <div className="sm:hidden fixed bottom-0 z-30 w-full bg-light-b dark:bg-dark-b navbar">
+            <div className="md:hidden fixed bottom-0 z-30 w-full bg-light-b dark:bg-dark-b navbar">
                 <BottomNavbar user={user} />
             </div>
         </div>

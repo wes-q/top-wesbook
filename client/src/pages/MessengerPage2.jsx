@@ -79,16 +79,23 @@ const MessengerPage2 = ({ currentUser, setShowFooter }) => {
                 Your browser does not support the audio element.
             </audio>
             <div className="relative">
-                <div className="flex sm:gap-4 justify-center max-w-max mx-auto relative pt-3 px-3">
-                    <div className="">
-                        <div className="hidden sm:flex flex-col w-72 sticky top-20">
+                <div className="flex lg:justify-center relative gap-4 px-3">
+                    <div className="block lg:hidden md:w-72">
+                        <FriendsMessenger currentUser={currentUser} setRecipient={setRecipient} recipient={recipient} />
+                    </div>
+                    <div className="hidden lg:block">
+                        <div className="lg:flex flex-col w-72 sticky top-20">
                             <Sidebar1 currentUser={currentUser} />
                             <Sidebar2 />
                             {/* <Footer2 /> */}
                         </div>
                     </div>
-                    <MessengerChat currentUser={currentUser} messagesReceived={messagesReceived} room={room} recipient={recipient} />
-                    <div className="hidden sm:block">
+                    {/* <div className="lg:max-w-[33vw] min-w-[200px] grow"> */}
+                    <div className="lg:max-w-[33vw] grow">
+                        {/* 573px */}
+                        <MessengerChat currentUser={currentUser} messagesReceived={messagesReceived} room={room} recipient={recipient} />
+                    </div>
+                    <div className="hidden lg:block w-72">
                         <FriendsMessenger currentUser={currentUser} setRecipient={setRecipient} recipient={recipient} />
                     </div>
                 </div>

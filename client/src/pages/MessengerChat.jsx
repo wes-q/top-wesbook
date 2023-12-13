@@ -107,9 +107,10 @@ const MessengerChat = ({ messagesReceived, room, currentUser, recipient }) => {
         // <div className={`flex flex-col bg-light-c dark:bg-dark-c sm:w-[573px] p-3 text-xs mb-[${marginPush}]`}>
         <>
             {recipient.length === 0 ? (
-                <div className="flex flex-col items-center justify-center sm:w-[573px]">
+                <div className="flex flex-col items-center justify-center">
+                    {/* <div className="flex flex-col items-center justify-center sm:w-[573px]"></div> */}
                     <i
-                        className="block bg-cover bg-no-repeat w-72 h-52"
+                        className="block bg-cover bg-no-repeat sm:w-72 sm:h-52 w-36 h-24"
                         style={{
                             backgroundImage: 'url("https://static.xx.fbcdn.net/rsrc.php/v3/yQ/r/uJKYQg0NhYr.png")',
                             backgroundPosition: "0px 0px",
@@ -119,7 +120,7 @@ const MessengerChat = ({ messagesReceived, room, currentUser, recipient }) => {
                     <span>No chats selected</span>
                 </div>
             ) : (
-                <div className="flex flex-col bg-light-c dark:bg-dark-c sm:w-[573px] p-3 text-xs mb-[35px] justify-end">
+                <div className="flex flex-col relative bg-light-c dark:bg-dark-c py-3 text-xs mb-[35px] justify-end mt-20">
                     <div className="">
                         {messagesReceived.length === 0 && (
                             <div className="flex justify-center">
@@ -136,7 +137,7 @@ const MessengerChat = ({ messagesReceived, room, currentUser, recipient }) => {
                             return (
                                 <div key={index} className={style}>
                                     {/* <div className="bg-primary max-w-[50%] rounded-2xl px-4 py-1 mb-1"> */}
-                                    <div className={message.sender === currentUser.id ? "bg-primary dark:bg-primaryDark max-w-[70%] rounded-2xl px-3 py-1 mb-1" : "bg-light-b dark:bg-dark-b max-w-[70%] rounded-2xl px-3 py-1 mb-1"}>
+                                    <div className={message.sender === currentUser.id ? "bg-primary dark:bg-primaryDark max-w-[300px] rounded-2xl px-3 py-1 mb-1" : "bg-light-b dark:bg-dark-b max-w-[300px] rounded-2xl px-3 py-1 mb-1"}>
                                         <span className="break-words whitespace-pre-wrap">{message.message}</span>
                                     </div>
                                 </div>
@@ -144,14 +145,14 @@ const MessengerChat = ({ messagesReceived, room, currentUser, recipient }) => {
                         })}
                         <div ref={messagesEndRef} />
                     </div>
-                    <form className="fixed bottom-0 flex items-end sm:w-[573px] gap-2 bg-light-c dark:bg-dark-c p-2" onSubmit={handleSubmit}>
+                    <form className="fixed bottom-[48px] md:bottom-0 custom-max-width w-full lg:max-w-[33vw] flex items-end gap-2 bg-light-c dark:bg-dark-c py-6" onSubmit={handleSubmit}>
                         {/* <textarea ref={textAreaRef} className="w-full max-h-32 bg-light-a dark:bg-dark-a rounded-2xl outline-none resize-none overflow-y-auto px-3 py-2" placeholder={showPlaceholder ? "Aa" : ""} spellCheck="false" autoFocus rows="1" onChange={(event) => setMessage(event.target.value)} onInput={() => autoGrow(textAreaRef)} /> */}
-                        <textarea ref={textAreaRef} value={message} className="w-full max-h-12 bg-light-a dark:bg-dark-a rounded-2xl outline-none resize-none overflow-y-auto px-3 py-2" placeholder={showPlaceholder ? "Aa" : ""} spellCheck="false" autoFocus rows="1" onChange={handleChange} />
+                        <textarea ref={textAreaRef} value={message} className="max-h-12 grow bg-light-a dark:bg-dark-a rounded-2xl outline-none resize-none overflow-y-auto px-3 py-2" placeholder={showPlaceholder ? "Aa" : ""} spellCheck="false" autoFocus rows="1" onChange={handleChange} />
                         <button type="submit" className="rounded-md outline-none">
                             <Send className={`w-6 mb-1 ${postIconStyle}`}></Send>
                         </button>
                     </form>
-                    <div className="fixed top-16 flex items-center sm:w-[573px] gap-2 bg-light-c dark:bg-dark-c p-2">
+                    <div className="fixed top-16 h-20 w-full lg:max-w-[33vw] flex items-center gap-2 bg-light-c dark:bg-dark-c p-2">
                         <img className="rounded-full w-8 h-8 object-cover" src={recipient.profilePhoto || noProfilePhoto} alt="profile photo" referrerPolicy="no-referrer" />
                         <span className="truncate text-base">{recipient.displayName || recipient.firstName}</span>
                     </div>

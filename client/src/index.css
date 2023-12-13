@@ -120,3 +120,35 @@
 .wrapper {
     float: left;
 }
+
+/* .custom-max-width {
+    max-width: calc(100vw - 325px);
+} */
+
+/* .custom-max-width {
+    max-width: calc(100vw - 130px);
+} */
+
+/* .custom-max-width {
+    max-width: 33vw;
+} */
+
+/* @media (min-width: 768px) {
+    .md-custom-max-width {
+        max-width: calc(100vw - 130px);
+    }
+} */
+
+/* @media (min-width: 768px) {
+    .md-custom-max-width {
+        max-width: calc(100vw - 335px);
+    }
+} */
+
+.custom-max-width {
+    max-width: calc(100vw - 115px);
+
+    @media (min-width: 768px) {
+        max-width: calc(100vw - 335px);
+    }
+}

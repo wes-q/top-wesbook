@@ -9,7 +9,7 @@ const Newsfeed = ({ currentUser, setNotification }) => {
         <div className="relative">
             <div className="flex sm:gap-4 justify-center max-w-max mx-auto relative pt-3 px-3">
                 <div className="">
-                    <div className="hidden sm:flex flex-col w-72 sticky top-20">
+                    <div className="hidden lg:flex flex-col w-72 sticky top-20">
                         <Sidebar1 currentUser={currentUser} />
                         <Sidebar2 />
                         <Footer2 />
@@ -17,7 +17,7 @@ const Newsfeed = ({ currentUser, setNotification }) => {
                 </div>
 
                 <Posts userToDisplay={currentUser} currentUser={currentUser} postsOf="friends" setNotification={setNotification} />
-                <div className="hidden sm:block">
+                <div className="hidden lg:block">
                     <FriendsC currentUser={currentUser} />
                 </div>
             </div>

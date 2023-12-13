@@ -28,7 +28,7 @@ const Navbar = ({ user, showStartTimer, setSeconds, seconds, setNotification }) 
 
             {showStartTimer && <Timer className="h-auto max-h-10" setSeconds={setSeconds} seconds={seconds}></Timer>}
 
-            <div className="hidden sm:flex gap-1 pt-3 sm:w-[573px]">
+            <div className="hidden md:flex gap-1 pt-3 md:w-[573px]">
                 <NavLink className="group relative flex grow items-center justify-center px-8 hover:bg-light-c dark:hover:bg-dark-a transition-colors rounded-t-lg" to="/">
                     <HomeIcon className="fill-current" />
                     <div className="absolute top-14 left-0 right-0 mx-auto w-fit invisible group-hover:visible delay-200 opacity-80 bg-white rounded-md text-sm px-2 py-1 text-black shadow-md">Home</div>
