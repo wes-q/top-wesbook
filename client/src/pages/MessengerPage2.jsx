@@ -9,6 +9,14 @@ import { io } from "socket.io-client";
 // const socket = io("http://localhost:3004");
 const socket = io("https://wesbook.onrender.com:443");
 
+socket.on("connect_error", (error) => {
+    console.error("Socket connection error:", error);
+});
+
+socket.on("connect_timeout", (timeout) => {
+    console.error("Socket connection timeout:", timeout);
+});
+
 import axios from "axios";
 import getUserHeaders from "../helpers/getUserHeaders";
 import MessengerChat from "./MessengerChat";
