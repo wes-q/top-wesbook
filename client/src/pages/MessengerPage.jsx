@@ -60,11 +60,13 @@ const MessengerPage = ({ currentUser, setShowFooter, setNotification }) => {
     };
 
     useEffect(() => {
-        const generatedRoomName = generateRoomName(currentUser.firstName, recipient.firstName);
-        // console.log(generatedRoomName);
-        socket.emit("join", generatedRoomName, currentUser.id);
-        setRoom(generatedRoomName);
-        fetchConversation(recipient.id);
+        if (recipient.length !== 0) {
+            const generatedRoomName = generateRoomName(currentUser.firstName, recipient.firstName);
+            // console.log(generatedRoomName);
+            socket.emit("join", generatedRoomName, currentUser.id);
+            setRoom(generatedRoomName);
+            fetchConversation(recipient.id);
+        }
     }, [recipient]);
 
     useEffect(() => {

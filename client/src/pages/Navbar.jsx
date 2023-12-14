@@ -4,6 +4,7 @@ import WesbookLogo from "../icons/wesbooklogo.svg?react";
 import { motion, AnimatePresence } from "framer-motion";
 import Timer from "./Timer";
 import ProfileIcon from "../icons/account-circle-profile-google.svg?react";
+import MessengerIcon from "../icons/messenger.svg?react";
 import FriendsIcon from "../icons/friends-group-google.svg?react";
 import HomeIcon from "../icons/home-google.svg?react";
 import PlayIcon from "../icons/play-videogame-google.svg?react";
@@ -33,6 +34,14 @@ const Navbar = ({ user, showStartTimer, setSeconds, seconds, setNotification }) 
                     <HomeIcon className="fill-current" />
                     <div className="absolute top-14 left-0 right-0 mx-auto w-fit invisible group-hover:visible delay-200 opacity-80 bg-white rounded-md text-sm px-2 py-1 text-black shadow-md">Home</div>
                 </NavLink>
+                <NavLink className="group relative flex grow items-center justify-center px-8 py-2 hover:bg-light-c dark:hover:bg-dark-a transition-colors rounded-t-lg" to={"/friends-page/suggestions"} style={{ textDecoration: "none" }}>
+                    <FriendsIcon className="fill-current" />
+                    <div className="absolute top-14 left-0 right-0 mx-auto w-fit invisible group-hover:visible delay-200 opacity-80 bg-white rounded-md text-sm px-2 py-1 text-black shadow-md">Friends</div>
+                </NavLink>
+                <NavLink className="group relative flex grow items-center justify-center px-8 py-2 hover:bg-light-c dark:hover:bg-dark-a transition-colors rounded-t-lg" to="/messenger">
+                    <MessengerIcon className="fill-current w-6 h-6" />
+                    <div className="absolute top-14 left-0 right-0 mx-auto w-fit invisible group-hover:visible delay-200 opacity-80 bg-white rounded-md text-sm px-2 py-1 text-black shadow-md">Messenger</div>
+                </NavLink>
                 {isUserLoaded && (
                     <>
                         <NavLink className="group relative flex grow items-center justify-center px-8 py-2 hover:bg-light-c dark:hover:bg-dark-a transition-colors rounded-t-lg" to={`/profile/${user.id}`}>
@@ -41,17 +50,9 @@ const Navbar = ({ user, showStartTimer, setSeconds, seconds, setNotification }) 
                         </NavLink>
                     </>
                 )}
-                <NavLink className="group relative flex grow items-center justify-center px-8 py-2 hover:bg-light-c dark:hover:bg-dark-a transition-colors rounded-t-lg" to={"/friends-page/suggestions"} style={{ textDecoration: "none" }}>
-                    <FriendsIcon className="fill-current" />
-                    <div className="absolute top-14 left-0 right-0 mx-auto w-fit invisible group-hover:visible delay-200 opacity-80 bg-white rounded-md text-sm px-2 py-1 text-black shadow-md">Friends</div>
-                </NavLink>
                 <NavLink className="group relative flex grow items-center justify-center px-8 py-2 hover:bg-light-c dark:hover:bg-dark-a transition-colors rounded-t-lg" to="/play">
                     <PlayIcon className="fill-current" />
                     <div className="absolute top-14 left-0 right-0 mx-auto w-fit invisible group-hover:visible delay-200 opacity-80 bg-white rounded-md text-sm px-2 py-1 text-black shadow-md">Play</div>
-                </NavLink>
-                <NavLink className="group relative flex grow items-center justify-center px-8 py-2 hover:bg-light-c dark:hover:bg-dark-a transition-colors rounded-t-lg" to="/leaderboard">
-                    <LeaderboardIcon className="fill-current" />
-                    <div className="absolute top-14 left-0 right-0 mx-auto w-fit invisible group-hover:visible delay-200 opacity-80 bg-white rounded-md text-sm px-2 py-1 text-black shadow-md">Leaderboard</div>
                 </NavLink>
             </div>
 
