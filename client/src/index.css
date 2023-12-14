@@ -145,10 +145,18 @@
     }
 } */
 
-.custom-max-width {
-    max-width: calc(100vw - 115px);
+/* .custom-max-width {
+    max-width: calc(100vw - 105px);
 
     @media (min-width: 768px) {
         max-width: calc(100vw - 335px);
+    }
+} */
+
+.custom-max-width {
+    max-width: calc(100vw - 95px);
+
+    @media (min-width: 768px) {
+        max-width: calc(100vw - 325px);
     }
 }

@@ -156,14 +156,14 @@ const MessengerChat = ({ messagesReceived, room, currentUser, recipient }) => {
                         })}
                         <div ref={messagesEndRef} />
                     </div>
-                    <form className="fixed bottom-[48px] md:bottom-0 custom-max-width w-full lg:max-w-[33vw] flex items-end gap-2 bg-light-c dark:bg-dark-c py-6" onSubmit={handleSubmit}>
+                    <form className="fixed bottom-[48px] md:bottom-0 w-full custom-max-width lg:max-w-[33vw] flex items-end gap-2 bg-light-c dark:bg-dark-c py-6 pr-3" onSubmit={handleSubmit}>
                         {/* <textarea ref={textAreaRef} className="w-full max-h-32 bg-light-a dark:bg-dark-a rounded-2xl outline-none resize-none overflow-y-auto px-3 py-2" placeholder={showPlaceholder ? "Aa" : ""} spellCheck="false" autoFocus rows="1" onChange={(event) => setMessage(event.target.value)} onInput={() => autoGrow(textAreaRef)} /> */}
                         <textarea ref={textAreaRef} value={message} className="max-h-12 grow bg-light-a dark:bg-dark-a rounded-2xl outline-none resize-none overflow-y-auto px-3 py-2" placeholder={showPlaceholder ? "Aa" : ""} spellCheck="false" autoFocus rows="1" onChange={handleChange} />
                         <button type="submit" className="rounded-md outline-none">
                             <Send className={`w-6 mb-1 ${postIconStyle}`}></Send>
                         </button>
                     </form>
-                    <div className="fixed top-16 h-20 w-full lg:max-w-[33vw] flex items-center gap-2 bg-light-c dark:bg-dark-c p-2">
+                    <div className="fixed top-16 h-20 w-full custom-max-width lg:max-w-[33vw] flex items-center gap-2 bg-light-c dark:bg-dark-c p-2">
                         <img className="rounded-full w-8 h-8 object-cover" src={recipient.profilePhoto || noProfilePhoto} alt="profile photo" referrerPolicy="no-referrer" />
                         <span className="truncate text-base">{recipient.displayName || recipient.firstName}</span>
                     </div>
