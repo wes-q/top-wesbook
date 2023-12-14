@@ -24,7 +24,7 @@ const FriendsMessenger = ({ currentUser, setRecipient, recipient }) => {
     return (
         <div className="wrapper sticky top-20 md:w-72 px-0">
             {/* <div className="rounded-md mb-6 max-h-[710px] content custom-scrollbar"> */}
-            <div className="pr-2 mb-6 max-h-[710px] overflow-auto content custom-scrollbar">
+            <div className="px-2 mb-6 max-h-[710px] overflow-auto content custom-scrollbar">
                 {friends.length > 0 ? (
                     <>
                         <ul className="flex flex-col justify-center">

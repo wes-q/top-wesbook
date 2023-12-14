@@ -148,7 +148,7 @@ const MessengerChat = ({ messagesReceived, room, currentUser, recipient }) => {
                             return (
                                 <div key={index} className={style}>
                                     {/* <div className="bg-primary max-w-[50%] rounded-2xl px-4 py-1 mb-1"> */}
-                                    <div className={message.sender === currentUser.id ? "bg-primary dark:bg-primaryDark max-w-[300px] rounded-2xl px-3 py-1 mb-1" : "bg-light-b dark:bg-dark-b max-w-[300px] rounded-2xl px-3 py-1 mb-1"}>
+                                    <div className={message.sender === currentUser.id ? "bg-primary dark:bg-primaryDark max-[450px]:max-w-[200px] max-w-[300px] rounded-2xl px-3 py-1 mb-1" : "bg-light-b dark:bg-dark-b max-[450px]:max-w-[200px] max-w-[300px] rounded-2xl px-3 py-1 mb-1"}>
                                         <span className="break-words whitespace-pre-wrap">{message.message}</span>
                                     </div>
                                 </div>

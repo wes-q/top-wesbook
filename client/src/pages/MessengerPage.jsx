@@ -91,8 +91,8 @@ const MessengerPage = ({ currentUser, setShowFooter, setNotification }) => {
                 <source src="/mixkit-retro-game-notification-212.wav" type="audio/mpeg" />
                 Your browser does not support the audio element.
             </audio>
-            <div className="relative">
-                <div className="flex lg:justify-center relative gap-4 px-3">
+            <div className="relative py-4">
+                <div className="flex lg:justify-center relative gap-0 md:gap-4 px-3">
                     <div className="block lg:hidden md:w-72">
                         <FriendsMessenger currentUser={currentUser} setRecipient={setRecipient} recipient={recipient} />
                     </div>
