@@ -1,14 +1,12 @@
 import { NavLink, Link } from "react-router-dom";
 import DropDown from "./DropDown";
 import WesbookLogo from "../icons/wesbooklogo.svg?react";
-import { motion, AnimatePresence } from "framer-motion";
 import Timer from "./Timer";
 import ProfileIcon from "../icons/account-circle-profile-google.svg?react";
 import MessengerIcon from "../icons/messenger.svg?react";
 import FriendsIcon from "../icons/friends-group-google.svg?react";
 import HomeIcon from "../icons/home-google.svg?react";
 import PlayIcon from "../icons/play-videogame-google.svg?react";
-import LeaderboardIcon from "../icons/trophy-google.svg?react";
 
 const Navbar = ({ user, showStartTimer, setSeconds, seconds, setNotification }) => {
     const isUserLoaded = user;
@@ -16,7 +14,7 @@ const Navbar = ({ user, showStartTimer, setSeconds, seconds, setNotification }) 
     function toggleDarkMode() {
         document.documentElement.classList.toggle("dark");
     }
-    // comment
+
     return (
         <div className="flex justify-between bg-light-b dark:bg-dark-b h-16">
             <Link className="flex items-center py-3 pl-3" to="/">

@@ -3,7 +3,7 @@ import ProfileIcon from "../icons/account-circle-profile-google.svg?react";
 import FriendsIcon from "../icons/friends-group-google.svg?react";
 import HomeIcon from "../icons/home-google.svg?react";
 import PlayIcon from "../icons/play-videogame-google.svg?react";
-import LeaderboardIcon from "../icons/trophy-google.svg?react";
+import MessengerIcon from "../icons/messenger.svg?react";
 
 const BottomNavbar = ({ user }) => {
     const isUserLoaded = user;
