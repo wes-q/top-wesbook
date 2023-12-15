@@ -82,22 +82,22 @@
 }
 
 .custom-scrollbar::-webkit-scrollbar-track {
-    background: inherit; /*Slate-600*/
+    background: #6b7280;
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-    background: #64748b; /*Slate-500*/
+    background: #d1d5db;
     border-radius: 6px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-button {
-    background: inherit;
+    background: #6b7280;
     height: 10px;
 }
 
 /* For Firefox */
 .custom-scrollbar {
-    scrollbar-color: #64748b #4b5563;
+    scrollbar-color: #d1d5db #6b7280;
 }
 
 /* Wrapper and content used for hidden scrollbars appearing on hover */

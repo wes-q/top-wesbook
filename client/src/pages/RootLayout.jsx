@@ -3,8 +3,10 @@ import Footer from "./Footer";
 import Notification from "./Notification";
 import Navbar from "./Navbar";
 import BottomNavbar from "./BottomNavbar";
+import { useEffect, useState } from "react";
+import MessengerPopup from "./MessengerPopup";
 
-export default function RootLayout({ notification, user, setNotification, showFooter, showStartTimer, setSeconds, seconds }) {
+export default function RootLayout({ notification, user, setNotification, showFooter, showStartTimer, setSeconds, seconds, chatRecipient, showChat, setShowChat }) {
     return (
         <div className="flex flex-col min-h-screen h-full bg-light-c dark:bg-dark-c text-sm sm:text-base font-nunito">
             <header>
@@ -24,7 +26,13 @@ export default function RootLayout({ notification, user, setNotification, showFo
                 </footer>
             )}
 
-            <div className="md:hidden fixed bottom-0 z-30 w-full bg-light-b dark:bg-dark-b navbar">
+            {showChat && (
+                <div className="fixed bottom-0 right-20 z-30">
+                    <MessengerPopup currentUser={user} chatRecipient={chatRecipient} setShowChat={setShowChat} />
+                </div>
+            )}
+
+            <div className="md:hidden fixed bottom-0 z-40 w-full bg-light-b dark:bg-dark-b navbar">
                 <BottomNavbar user={user} />
             </div>
         </div>

@@ -20,7 +20,7 @@ const Navbar = ({ user, showStartTimer, setSeconds, seconds, setNotification }) 
             <Link className="flex items-center py-3 pl-3" to="/">
                 <WesbookLogo className="w-10 h-10 select-none" />
                 <div className="-skew-y-6 select-none sm:block">
-                    <span className="font-handlee text-2xl font-extrabold italic text-primary">Wes</span>
+                    <span className="font-handlee text-2xl font-extrabold italic text-primaryDark ">Wes</span>
                     <span className="font-handlee text-2xl font-extrabold italic">book</span>
                 </div>
             </Link>

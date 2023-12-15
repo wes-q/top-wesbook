@@ -79,7 +79,7 @@ const FriendsB = ({ currentUser }) => {
                                         </div>
                                     </div>
                                 </div>
-                                <Dotdotdot className="w-4 visible sm:hidden" />
+                                <Dotdotdot className="w-4 visible sm:hidden fill-current" />
                             </li>
                         ))
                     ) : (

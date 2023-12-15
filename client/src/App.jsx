@@ -33,6 +33,8 @@ function App() {
     const [showStartTimer, setShowStartTimer] = useState(false);
     const [seconds, setSeconds] = useState(0);
     const [game, setGame] = useState(null);
+    const [chatRecipient, setChatRecipient] = useState([]);
+    const [showChat, setShowChat] = useState(false);
 
     useEffect(() => {
         setDarkModeOnPreference();
@@ -80,9 +82,9 @@ function App() {
     const router = createBrowserRouter(
         createRoutesFromElements(
             <>
-                <Route path="/" element={<RootLayout notification={notification} setNotification={setNotification} user={currentUser} showFooter={showFooter} showStartTimer={showStartTimer} setSeconds={setSeconds} seconds={seconds} />}>
+                <Route path="/" element={<RootLayout notification={notification} setNotification={setNotification} user={currentUser} showFooter={showFooter} showStartTimer={showStartTimer} setSeconds={setSeconds} seconds={seconds} chatRecipient={chatRecipient} showChat={showChat} setShowChat={setShowChat} />}>
                     <Route element={<PrivateRoutes user={currentUser} isLoadingUser={isLoadingUser} />}>
-                        <Route index element={<Newsfeed currentUser={currentUser} setNotification={setNotification} />} />
+                        <Route index element={<Newsfeed currentUser={currentUser} setNotification={setNotification} setChatRecipient={setChatRecipient} setShowChat={setShowChat} />} />
                         <Route path="play" element={<PlayPage setGame={setGame} />} />
                         <Route path="leaderboard" element={<LeaderboardPage />} />
                         <Route path="friends-page" element={<FriendsLayout currentUser={currentUser} />}>
