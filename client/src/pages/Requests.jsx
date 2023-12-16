@@ -8,7 +8,7 @@ import XIcon from "../icons/x-close-google.svg?react";
 import MessengerIcon from "../icons/messenger.svg?react";
 import PersonRemoveIcon from "../icons/person-remove.svg?react";
 
-const Requests = () => {
+const Requests = ({ setChatRecipient, setShowChat }) => {
     const [loading, setLoading] = useState(true);
     const [incomingFriends, setIncomingFriends] = useState([]);
     const [pendingFriends, setPendingFriends] = useState([]);
@@ -72,6 +72,11 @@ const Requests = () => {
         } catch (error) {
             console.log(error);
         }
+    };
+
+    const handleOpenChat = (friend) => {
+        setChatRecipient(friend);
+        setShowChat(true);
     };
 
     return (
@@ -173,7 +178,7 @@ const Requests = () => {
                                                 <PersonRemoveIcon className="fill-current w-5 h-5 mr-1" />
                                                 Cancel
                                             </button>
-                                            <button className="flex items-center justify-center w-28 sm:w-full bg-primaryDark dark:bg-primaryDark text-xs px-3 py-1 rounded-md">
+                                            <button className="flex items-center justify-center w-28 sm:w-full bg-primaryDark dark:bg-primaryDark text-xs px-3 py-1 rounded-md" onClick={() => handleOpenChat(friend)}>
                                                 <MessengerIcon className="fill-current w-4 h-4 mr-1" />
                                                 Message
                                             </button>

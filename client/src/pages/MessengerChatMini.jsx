@@ -6,7 +6,7 @@ import axios from "axios";
 import noProfilePhoto from "../icons/noprofile.jpg";
 import { socket } from "../socket";
 
-const MessengerChat = ({ messagesReceived, room, currentUser, recipient, setShowChat }) => {
+const MessengerChatMini = ({ messagesReceived, room, currentUser, recipient, setShowChat }) => {
     const [message, setMessage] = useState("");
     const [postIconStyle, setPostIconStyle] = useState("");
     const [isDisabled, setIsDisabled] = useState(true);
@@ -52,7 +52,6 @@ const MessengerChat = ({ messagesReceived, room, currentUser, recipient, setShow
         if (!element.current) {
             return;
         }
-        console.log(element.current.style.height);
         // if (showPlaceholder) {
         //     element.current.style.height = "0px";
         // }
@@ -160,4 +159,4 @@ const MessengerChat = ({ messagesReceived, room, currentUser, recipient, setShow
     );
 };
 
-export default MessengerChat;
+export default MessengerChatMini;

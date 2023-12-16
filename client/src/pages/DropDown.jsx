@@ -142,7 +142,7 @@ function DropdownMenu({ user, handleClickOutside, dropdownRef, setNotification, 
                     <span>Settings</span>
                 </button>
 
-                <div className="h-[1px] relative bg-light-c dark:bg-dark-c w-full"></div>
+                <div className="h-[1px] relative bg-neutral w-full"></div>
             </div>
             <div className="m-3">
                 <span className="cursor-pointer" onClick={handleLogout}>

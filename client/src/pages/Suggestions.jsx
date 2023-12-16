@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import PersonAddIcon from "../icons/person-add.svg?react";
 import MessengerIcon from "../icons/messenger.svg?react";
 
-const Suggestions = ({ friends }) => {
+const Suggestions = ({ setChatRecipient, setShowChat }) => {
     const [eligibleFriends, setEligibleFriends] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -42,6 +42,11 @@ const Suggestions = ({ friends }) => {
             // Update the friend status in the eligibleFriends state
             setEligibleFriends((prevFriends) => prevFriends.map((friend) => (friend.id === toUserId ? { ...friend, friendRequestStatus: "error" } : friend)));
         }
+    };
+
+    const handleOpenChat = (friend) => {
+        setChatRecipient(friend);
+        setShowChat(true);
     };
 
     return (
@@ -98,7 +103,7 @@ const Suggestions = ({ friends }) => {
                                                     <PersonAddIcon className="fill-current w-5 h-5 mr-1" />
                                                     Add Friend
                                                 </button>
-                                                <button className="flex items-center justify-center w-28 sm:w-full bg-light-c dark:bg-neutral text-xs px-3 py-1 rounded-md">
+                                                <button className="flex items-center justify-center w-28 sm:w-full bg-light-c dark:bg-neutral text-xs px-3 py-1 rounded-md" onClick={() => handleOpenChat(friend)}>
                                                     <MessengerIcon className="fill-current w-4 h-4 mr-1" />
                                                     Message
                                                 </button>

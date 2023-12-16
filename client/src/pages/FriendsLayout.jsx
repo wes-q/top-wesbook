@@ -1,6 +1,6 @@
 import { NavLink, Outlet } from "react-router-dom";
 
-const FriendsLayout = ({ currentUser }) => {
+const FriendsLayout = () => {
     return (
         <div className="p-3">
             <div className="flex gap-2 specific mb-3 font-semibold">

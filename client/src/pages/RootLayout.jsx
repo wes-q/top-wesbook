@@ -3,7 +3,6 @@ import Footer from "./Footer";
 import Notification from "./Notification";
 import Navbar from "./Navbar";
 import BottomNavbar from "./BottomNavbar";
-import { useEffect, useState } from "react";
 import MessengerPopup from "./MessengerPopup";
 
 export default function RootLayout({ notification, user, setNotification, showFooter, showStartTimer, setSeconds, seconds, chatRecipient, showChat, setShowChat }) {

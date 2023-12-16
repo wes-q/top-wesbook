@@ -5,8 +5,9 @@ import axios from "axios";
 import Modal from "./Modal";
 import { useNavigate } from "react-router-dom";
 import getUserHeaders from "../helpers/getUserHeaders";
+import Timer from "./Timer";
 
-const Game = ({ setShowFooter, setShowStartTimer, seconds, setSeconds, game }) => {
+const Game = ({ setShowFooter, game }) => {
     const [x, setX] = useState(0);
     const [y, setY] = useState(0);
     const [open, setOpen] = useState(false);
@@ -24,6 +25,8 @@ const Game = ({ setShowFooter, setShowStartTimer, seconds, setSeconds, game }) =
     const totalCharactersFound = useRef(null);
     const totalCharacters = useRef(null);
     const navigate = useNavigate();
+    const [seconds, setSeconds] = useState(0);
+    const [showStartTimer, setShowStartTimer] = useState(false);
 
     const getCharacterLocations = async () => {
         try {
@@ -215,7 +218,7 @@ const Game = ({ setShowFooter, setShowStartTimer, seconds, setSeconds, game }) =
             </div>
 
             {/* Characters to find (bottom bar) */}
-            <div className="fixed h-20 w-full bottom-0 bg-gray-800 p-4 text-xs">
+            <div className="fixed w-full bottom-0 bg-light-c dark:bg-dark-c text-xs p-2 mb-12 md:mb-0">
                 <div className="flex items-center justify-center">
                     {characterLocations.map((character, index) => (
                         <div className="flex gap-1 items-center w-full transition-colors" key={character.id}>
@@ -234,6 +237,9 @@ const Game = ({ setShowFooter, setShowStartTimer, seconds, setSeconds, game }) =
                             </div>
                         </div>
                     ))}
+                    <div className="flex items-center">
+                        <Timer className="h-auto max-h-10" setSeconds={setSeconds} seconds={seconds}></Timer>
+                    </div>
                 </div>
             </div>
         </>

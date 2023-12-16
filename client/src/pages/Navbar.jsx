@@ -1,14 +1,13 @@
 import { NavLink, Link } from "react-router-dom";
 import DropDown from "./DropDown";
 import WesbookLogo from "../icons/wesbooklogo.svg?react";
-import Timer from "./Timer";
 import ProfileIcon from "../icons/account-circle-profile-google.svg?react";
 import MessengerIcon from "../icons/messenger.svg?react";
 import FriendsIcon from "../icons/friends-group-google.svg?react";
 import HomeIcon from "../icons/home-google.svg?react";
 import PlayIcon from "../icons/play-videogame-google.svg?react";
 
-const Navbar = ({ user, showStartTimer, setSeconds, seconds, setNotification }) => {
+const Navbar = ({ user, setNotification }) => {
     const isUserLoaded = user;
 
     function toggleDarkMode() {
@@ -24,8 +23,6 @@ const Navbar = ({ user, showStartTimer, setSeconds, seconds, setNotification }) 
                     <span className="font-handlee text-2xl font-extrabold italic">book</span>
                 </div>
             </Link>
-
-            {showStartTimer && <Timer className="h-auto max-h-10" setSeconds={setSeconds} seconds={seconds}></Timer>}
 
             <div className="hidden md:flex gap-1 pt-3 md:w-[573px]">
                 <NavLink className="group relative flex grow items-center justify-center px-8 hover:bg-light-c dark:hover:bg-dark-a transition-colors rounded-t-lg" to="/">

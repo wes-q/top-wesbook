@@ -9,7 +9,7 @@ import FormData from "form-data";
 import axios from "axios";
 import getUserHeaders from "../helpers/getUserHeaders";
 
-const Profile = ({ userToDisplay, setNotification, setUserToDisplay, setCurrentUser }) => {
+const Profile = ({ userToDisplay, setNotification, setUserToDisplay, setCurrentUser, setChatRecipient, setShowChat }) => {
     const handleAddFriend = async (toUserId) => {
         const url = "/api/friend-requests";
         const headers = getUserHeaders();
@@ -88,6 +88,11 @@ const Profile = ({ userToDisplay, setNotification, setUserToDisplay, setCurrentU
         }
     };
 
+    const handleOpenChat = (friend) => {
+        setChatRecipient(friend);
+        setShowChat(true);
+    };
+
     if (!userToDisplay) {
         return <p>loading...</p>;
     }
@@ -98,7 +103,7 @@ const Profile = ({ userToDisplay, setNotification, setUserToDisplay, setCurrentU
                 <img
                     src={userToDisplay.coverPhoto || defaultCoverPhoto}
                     alt="Cover Photo"
-                    className="w-full h-36 sm:h-80 object-cover sm:rounded-b-lg"
+                    className="w-full h-36 sm:h-80 object-cover sm:rounded-b-lg shadow-lg"
                     referrerPolicy="no-referrer"
                     onError={(e) => {
                         e.target.src = defaultCoverPhoto;
@@ -115,7 +120,7 @@ const Profile = ({ userToDisplay, setNotification, setUserToDisplay, setCurrentU
                         </form>
                     </label>
                 )}
-                <div className="absolute w-32 h-32 sm:w-40 sm:h-40 left-1/2 transform -translate-x-1/2 top-[80px] sm:top-[244px] ring-2 ring-black rounded-full">
+                <div className="absolute w-32 h-32 sm:w-40 sm:h-40 left-1/2 transform -translate-x-1/2 top-[80px] sm:top-[244px] ring-2 ring-black rounded-full shadow-lg">
                     {/* height of box - half of circle = top margin */}
                     <img
                         src={userToDisplay.profilePhoto || noProfilePhoto}
@@ -161,7 +166,7 @@ const Profile = ({ userToDisplay, setNotification, setUserToDisplay, setCurrentU
                             <PersonCheckIcon className="fill-current w-5 h-5 mr-1" />
                             Friends
                         </button>
-                        <button className="flex items-center bg-primary dark:bg-primaryDark text-xs px-3 py-1 rounded-md">
+                        <button className="flex items-center bg-primary dark:bg-primaryDark text-xs px-3 py-1 rounded-md" onClick={() => handleOpenChat(userToDisplay)}>
                             <MessengerIcon className="fill-current w-4 h-4 mr-1" />
                             Message
                         </button>
@@ -173,7 +178,7 @@ const Profile = ({ userToDisplay, setNotification, setUserToDisplay, setCurrentU
                             <PersonAddIcon className="fill-current w-5 h-5 mr-1" />
                             Add Friend
                         </button>
-                        <button className="flex items-center bg-light-b dark:bg-dark-b text-xs px-3 py-1 rounded-md">
+                        <button className="flex items-center bg-light-b dark:bg-dark-b text-xs px-3 py-1 rounded-md" onClick={() => handleOpenChat(userToDisplay)}>
                             <MessengerIcon className="fill-current w-4 h-4 mr-1" />
                             Message
                         </button>
@@ -185,7 +190,7 @@ const Profile = ({ userToDisplay, setNotification, setUserToDisplay, setCurrentU
                             <PersonRemoveIcon className="fill-current w-5 h-5 mr-1" />
                             Request sent
                         </button>
-                        <button className="flex items-center bg-primary dark:bg-primaryDark text-xs px-3 py-1 rounded-md">
+                        <button className="flex items-center bg-primary dark:bg-primaryDark text-xs px-3 py-1 rounded-md" onClick={() => handleOpenChat(userToDisplay)}>
                             <MessengerIcon className="fill-current w-4 h-4 mr-1" />
                             Message
                         </button>

@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import getUserHeaders from "../helpers/getUserHeaders";
-import MessengerChat2 from "./MessengerChat2";
+import MessengerChatMini from "./MessengerChatMini";
 import { socket } from "../socket";
 
 const MessengerPopup = ({ currentUser, chatRecipient, setShowChat }) => {
@@ -28,7 +28,7 @@ const MessengerPopup = ({ currentUser, chatRecipient, setShowChat }) => {
 
         try {
             const conversation = await axios.get(`/api/chats/${userId}`, { headers });
-            console.log(conversation.data);
+            // console.log(conversation.data);
             setMessagesReceived(conversation.data);
         } catch (error) {
             console.log(error);
@@ -68,7 +68,7 @@ const MessengerPopup = ({ currentUser, chatRecipient, setShowChat }) => {
                 Your browser does not support the audio element.
             </audio>
             <div className="w-[270px] rounded-t-lg">
-                <MessengerChat2 currentUser={currentUser} messagesReceived={messagesReceived} room={room} recipient={chatRecipient} setShowChat={setShowChat} />
+                <MessengerChatMini currentUser={currentUser} messagesReceived={messagesReceived} room={room} recipient={chatRecipient} setShowChat={setShowChat} />
             </div>
         </>
     );

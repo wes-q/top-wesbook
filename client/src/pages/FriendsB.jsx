@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import Dotdotdot from "../icons/dotdotdot.svg?react";
 import MessengerIcon from "../icons/messenger.svg?react";
 
-const FriendsB = ({ currentUser }) => {
+const FriendsB = ({ currentUser, setChatRecipient, setShowChat }) => {
     const [friends, setFriends] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -25,6 +25,11 @@ const FriendsB = ({ currentUser }) => {
         } finally {
             setLoading(false);
         }
+    };
+
+    const handleOpenChat = (friend) => {
+        setChatRecipient(friend);
+        setShowChat(true);
     };
 
     return (
@@ -72,7 +77,7 @@ const FriendsB = ({ currentUser }) => {
                                         </div>
                                         <span className="sm:text-xs">0 mutual friends</span>
                                         <div className="flex sm:flex-col sm:gap-1">
-                                            <button className="flex items-center justify-center w-28 sm:w-full bg-primaryDark dark:bg-primaryDark text-xs px-3 py-1 rounded-md">
+                                            <button className="flex items-center justify-center w-28 sm:w-full bg-primaryDark dark:bg-primaryDark text-xs px-3 py-1 rounded-md" onClick={() => handleOpenChat(friend)}>
                                                 <MessengerIcon className="fill-current w-4 h-4 mr-1" />
                                                 Message
                                             </button>

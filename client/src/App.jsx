@@ -30,8 +30,7 @@ function App() {
     const [userToken, setUserToken] = useState("");
     const [isLoadingUser, setIsLoadingUser] = useState(true);
     const [showFooter, setShowFooter] = useState(true);
-    const [showStartTimer, setShowStartTimer] = useState(false);
-    const [seconds, setSeconds] = useState(0);
+
     const [game, setGame] = useState(null);
     const [chatRecipient, setChatRecipient] = useState([]);
     const [showChat, setShowChat] = useState(false);
@@ -82,23 +81,23 @@ function App() {
     const router = createBrowserRouter(
         createRoutesFromElements(
             <>
-                <Route path="/" element={<RootLayout notification={notification} setNotification={setNotification} user={currentUser} showFooter={showFooter} showStartTimer={showStartTimer} setSeconds={setSeconds} seconds={seconds} chatRecipient={chatRecipient} showChat={showChat} setShowChat={setShowChat} />}>
+                <Route path="/" element={<RootLayout notification={notification} setNotification={setNotification} user={currentUser} showFooter={showFooter} chatRecipient={chatRecipient} showChat={showChat} setShowChat={setShowChat} />}>
                     <Route element={<PrivateRoutes user={currentUser} isLoadingUser={isLoadingUser} />}>
                         <Route index element={<Newsfeed currentUser={currentUser} setNotification={setNotification} setChatRecipient={setChatRecipient} setShowChat={setShowChat} />} />
                         <Route path="play" element={<PlayPage setGame={setGame} />} />
                         <Route path="leaderboard" element={<LeaderboardPage />} />
                         <Route path="friends-page" element={<FriendsLayout currentUser={currentUser} />}>
-                            <Route index element={<Suggestions />} />
-                            <Route path="suggestions" element={<Suggestions />} />
-                            <Route path="requests" element={<Requests />} />
-                            <Route path="friends" element={<FriendsB currentUser={currentUser} />} />
+                            <Route index element={<Suggestions setChatRecipient={setChatRecipient} setShowChat={setShowChat} />} />
+                            <Route path="suggestions" element={<Suggestions setChatRecipient={setChatRecipient} setShowChat={setShowChat} />} />
+                            <Route path="requests" element={<Requests setChatRecipient={setChatRecipient} setShowChat={setShowChat} />} />
+                            <Route path="friends" element={<FriendsB currentUser={currentUser} setChatRecipient={setChatRecipient} setShowChat={setShowChat} />} />
                         </Route>
-                        <Route path="game" element={<Game game={game} setShowFooter={setShowFooter} setShowStartTimer={setShowStartTimer} seconds={seconds} setSeconds={setSeconds} />} />
+                        <Route path="game" element={<Game game={game} setShowFooter={setShowFooter} />} />
                         <Route path="about" element={<About />} />
                         <Route path="verification-successful" element={<VerificationSuccessful />} />
                         <Route path="verification-nothing" element={<VerificationNothing />} />
                         <Route path="update-profile" element={<UpdateProfile user={currentUser} setUser={setCurrentUser} setNotification={setNotification} />} />
-                        <Route path="profile/:userId" element={<ProfilePage currentUser={currentUser} setCurrentUser={setCurrentUser} setNotification={setNotification} />} />
+                        <Route path="profile/:userId" element={<ProfilePage currentUser={currentUser} setCurrentUser={setCurrentUser} setNotification={setNotification} setChatRecipient={setChatRecipient} setShowChat={setShowChat} />} />
                         <Route path="messenger" element={<MessengerPage currentUser={currentUser} setShowFooter={setShowFooter} setNotification={setNotification} />} />
                     </Route>
 

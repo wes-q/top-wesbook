@@ -8,7 +8,7 @@ import getUserHeaders from "../helpers/getUserHeaders";
 import Friends from "./Friends";
 import AboutUser from "./AboutUser";
 
-const ProfilePage = ({ setNotification, currentUser, setCurrentUser }) => {
+const ProfilePage = ({ setNotification, currentUser, setCurrentUser, setChatRecipient, setShowChat }) => {
     const [userToDisplay, setUserToDisplay] = useState([]);
     const [usersFriends, setUsersFriends] = useState([]);
     const { userId } = useParams();
@@ -34,7 +34,7 @@ const ProfilePage = ({ setNotification, currentUser, setCurrentUser }) => {
 
     return (
         <div className="flex flex-col max-w-[1000px] mx-auto">
-            <Profile userToDisplay={userToDisplay} setNotification={setNotification} setUserToDisplay={setUserToDisplay} setCurrentUser={setCurrentUser} />
+            <Profile userToDisplay={userToDisplay} setNotification={setNotification} setUserToDisplay={setUserToDisplay} setCurrentUser={setCurrentUser} setChatRecipient={setChatRecipient} setShowChat={setShowChat} />
             <div className="sm:flex sm:gap-4 px-4">
                 <div className="sm:max-w-[40%]">
                     <div className="sm:sticky sm:top-16">
