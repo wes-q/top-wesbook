@@ -32,6 +32,9 @@ const MessengerChat = ({ messagesReceived, room, currentUser, recipient }) => {
         }
         if (message.trim() !== "") {
             // setMessages([...messages, inputValue]);
+            if (recipient.source === "faker") {
+                socket.emit("autoReplyRequest", room, recipient.id);
+            }
             socket.emit("send", message, room, currentUser.id); // Send instant message to related client instance
             saveMessage(message, recipient.id); // Save message to the database
             setMessage(""); // Reset the input field and state

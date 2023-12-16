@@ -110,7 +110,7 @@ usersRouter.post(
 usersRouter.get("/api/users/eligible-friends", userExtractor, async (req, res, next) => {
     try {
         const eligibleUsers = await User.find().where("_id").ne(req.user.id).where("friendRequests.friendId").ne(req.user.id).where("friendRejects.friendId").ne(req.user.id).where("friends.friendId").ne(req.user.id);
-        console.log(eligibleUsers);
+        // console.log(eligibleUsers);
         res.status(200).json(eligibleUsers);
     } catch (error) {
         next(error);

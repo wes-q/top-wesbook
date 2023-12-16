@@ -47,6 +47,11 @@ io.on("connection", (socket) => {
         io.to(userRoom).emit("pm", stringsent, userId);
         console.log(`${userId} sent pm ${stringsent} to ${userRoom}`);
     });
+    socket.on("autoReplyRequest", (room, fakerId) => {
+        setTimeout(() => {
+            io.to(room).emit("pm", "Hello World!", fakerId);
+        }, 2000);
+    });
 });
 
 // io.on("connection", (socket) => {
