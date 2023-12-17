@@ -394,3 +394,12 @@ content-type: application/json
     "recipientId": "6550b43c9738cb8925aeb9da"
 }
 
+###
+PATCH http://localhost:3001/api/chats
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTBiMzFiOTczOGNiODkyNWFlYjk2NiIsImlhdCI6MTcwMjc3NzkxMSwiZXhwIjoxNzAyOTUwNzExfQ.JBjCxZq0xWC_xw9gStm_Ue3xrAfkaaRMHvvabkNmIDE
+
+
+###
+GET http://localhost:3001/api/chats/count-new-chats
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTBiMzFiOTczOGNiODkyNWFlYjk2NiIsImlhdCI6MTcwMjc3NzkxMSwiZXhwIjoxNzAyOTUwNzExfQ.JBjCxZq0xWC_xw9gStm_Ue3xrAfkaaRMHvvabkNmIDE
+

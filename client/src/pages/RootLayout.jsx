@@ -5,12 +5,12 @@ import Navbar from "./Navbar";
 import BottomNavbar from "./BottomNavbar";
 import MessengerPopup from "./MessengerPopup";
 
-export default function RootLayout({ notification, user, setNotification, showFooter, showStartTimer, setSeconds, seconds, chatRecipient, showChat, setShowChat }) {
+export default function RootLayout({ notification, user, setNotification, showFooter, showStartTimer, setSeconds, seconds, chatRecipient, showChat, setShowChat, newChats }) {
     return (
         <div className="flex flex-col min-h-screen h-full bg-light-c dark:bg-dark-c text-sm sm:text-base font-nunito">
             <header>
                 <nav className="fixed top-0 z-30 w-full md:justify-between md:items-center navbar text-base md:text-lg h-auto shadow-md">
-                    <Navbar user={user} showStartTimer={showStartTimer} setSeconds={setSeconds} seconds={seconds} setNotification={setNotification} />
+                    <Navbar user={user} showStartTimer={showStartTimer} setSeconds={setSeconds} seconds={seconds} setNotification={setNotification} newChats={newChats} />
                 </nav>
             </header>
 

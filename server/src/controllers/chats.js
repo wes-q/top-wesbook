@@ -2,6 +2,16 @@ const chatsRouter = require("express").Router();
 const Chat = require("../models/chat");
 const middleware = require("../utils/middleware");
 
+// Get quantity of new chats
+chatsRouter.get("/api/chats/count-new-chats", middleware.userExtractor, async (request, response, next) => {
+    try {
+        const result = await Chat.countDocuments({ read: false });
+        response.status(200).json(result);
+    } catch (error) {
+        next(error);
+    }
+});
+
 // Fetch all chat messages between two users (self and another user) sorted by date
 chatsRouter.get("/api/chats/:userId", middleware.userExtractor, async (request, response, next) => {
     const currentUserId = request.user.id;
@@ -43,6 +53,16 @@ chatsRouter.post("/api/chats", middleware.userExtractor, async (request, respons
 
         const savedChat = await chat.save();
         response.status(200).json(savedChat);
+    } catch (error) {
+        next(error);
+    }
+});
+
+// Set all chats of a certain sender and recipient to read true status
+chatsRouter.patch("/api/chats", middleware.userExtractor, async (request, response, next) => {
+    try {
+        const result = await Chat.updateMany({ read: false }, { read: true });
+        response.status(200).json(result.modifiedCount);
     } catch (error) {
         next(error);
     }

@@ -20,6 +20,10 @@ const chatSchema = new mongoose.Schema({
         type: Date,
         default: Date.now,
     },
+    read: {
+        type: Boolean,
+        default: false,
+    },
 });
 
 chatSchema.set("toJSON", {

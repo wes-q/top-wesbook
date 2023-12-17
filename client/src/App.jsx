@@ -23,6 +23,7 @@ import Suggestions from "./pages/Suggestions";
 import Requests from "./pages/Requests";
 import FriendsB from "./pages/FriendsB";
 import setDarkModeOnPreference from "./helpers/setDarkModeOnPreference";
+import axios from "axios";
 
 function App() {
     const [notification, setNotification] = useState(false);
@@ -35,10 +36,25 @@ function App() {
     const [chatRecipient, setChatRecipient] = useState([]);
     const [showChat, setShowChat] = useState(false);
 
+    const [newChats, setNewChats] = useState(0);
+
+    const getNewChats = async () => {
+        const url = "/api/chats/count-new-chats";
+
+        const headers = getUserHeaders();
+        try {
+            const newChatsCount = await axios.get(url, { headers });
+            console.log(newChatsCount.data);
+            setNewChats(newChatsCount.data);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     useEffect(() => {
         setDarkModeOnPreference();
         const timeoutId = getUserLocal();
-
+        getNewChats();
         return () => {
             clearTimeout(timeoutId);
         };
@@ -81,7 +97,7 @@ function App() {
     const router = createBrowserRouter(
         createRoutesFromElements(
             <>
-                <Route path="/" element={<RootLayout notification={notification} setNotification={setNotification} user={currentUser} showFooter={showFooter} chatRecipient={chatRecipient} showChat={showChat} setShowChat={setShowChat} />}>
+                <Route path="/" element={<RootLayout notification={notification} setNotification={setNotification} user={currentUser} showFooter={showFooter} chatRecipient={chatRecipient} showChat={showChat} setShowChat={setShowChat} newChats={newChats} />}>
                     <Route element={<PrivateRoutes user={currentUser} isLoadingUser={isLoadingUser} />}>
                         <Route index element={<Newsfeed currentUser={currentUser} setNotification={setNotification} setChatRecipient={setChatRecipient} setShowChat={setShowChat} />} />
                         <Route path="play" element={<PlayPage setGame={setGame} />} />

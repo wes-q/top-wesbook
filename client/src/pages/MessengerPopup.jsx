@@ -30,6 +30,8 @@ const MessengerPopup = ({ currentUser, chatRecipient, setShowChat }) => {
             const conversation = await axios.get(`/api/chats/${userId}`, { headers });
             // console.log(conversation.data);
             setMessagesReceived(conversation.data);
+
+            // Set chat status to read
         } catch (error) {
             console.log(error);
         }
