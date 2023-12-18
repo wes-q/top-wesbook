@@ -35,9 +35,11 @@ const Navbar = ({ user, setNotification, newChats }) => {
                 </NavLink>
                 <NavLink className="group relative flex grow items-center justify-center px-8 py-2 hover:bg-light-c dark:hover:bg-dark-a transition-colors rounded-t-lg" to="/messenger">
                     <MessengerIcon className="fill-current w-6 h-6" />
+                    {newChats !== 0 &&
                     <div className="absolute top-2 right-8 flex items-center justify-center rounded-full w-4 h-4 bg-red-500">
                         <span className="text-white text-sm">{newChats}</span>
                     </div>
+                    }
                     <div className="absolute top-14 left-0 right-0 mx-auto w-fit invisible group-hover:visible delay-200 opacity-80 bg-white rounded-md text-sm px-2 py-1 text-black shadow-md">Messenger</div>
                 </NavLink>
                 {isUserLoaded && (

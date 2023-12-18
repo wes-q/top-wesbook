@@ -4,8 +4,9 @@ const middleware = require("../utils/middleware");
 
 // Get quantity of new chats
 chatsRouter.get("/api/chats/count-new-chats", middleware.userExtractor, async (request, response, next) => {
+    const currentUserId = request.user.id;
     try {
-        const result = await Chat.countDocuments({ read: false });
+        const result = await Chat.countDocuments({ read: false, recipient: currentUserId });
         response.status(200).json(result);
     } catch (error) {
         next(error);
@@ -59,9 +60,11 @@ chatsRouter.post("/api/chats", middleware.userExtractor, async (request, respons
 });
 
 // Set all chats of a certain sender and recipient to read true status
-chatsRouter.patch("/api/chats", middleware.userExtractor, async (request, response, next) => {
+chatsRouter.patch("/api/chats/:userId", middleware.userExtractor, async (request, response, next) => {
+    const currentUserId = request.user.id;
+    const senderUserId = request.params.userId;
     try {
-        const result = await Chat.updateMany({ read: false }, { read: true });
+        const result = await Chat.updateMany({ read: false, recipient: currentUserId, sender: senderUserId }, { read: true });
         response.status(200).json(result.modifiedCount);
     } catch (error) {
         next(error);
