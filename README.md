@@ -7,13 +7,21 @@ free hosting service is implementing spindown on inactivity)
 
 ### Tablet Laptop vs Mobile Screenshots
 
-![1a](https://github.com/iamwesofph/top-wesbook/assets/121594156/462cf9cc-d15d-4c44-bf8e-4648cfd83e4b)
-![1b](https://github.com/iamwesofph/top-wesbook/assets/121594156/07c6ece1-9c13-4c82-aaa0-e2d1941346e6)
-![2b](https://github.com/iamwesofph/top-wesbook/assets/121594156/52597ae6-5c7f-46ab-bf04-a0c503b89ede)
-![3a](https://github.com/iamwesofph/top-wesbook/assets/121594156/541bcdb6-815c-4b1b-94af-12537478d04a)
-![3b](https://github.com/iamwesofph/top-wesbook/assets/121594156/9237105d-44c5-4198-9a9a-1104e015fa83)
-![4b](https://github.com/iamwesofph/top-wesbook/assets/121594156/c7553d31-d521-4d34-8335-09af4f947565)
-![5b](https://github.com/iamwesofph/top-wesbook/assets/121594156/4eeb3935-03c2-4b43-b104-10d697b18727)
+![1-Login-Page-Desktop-Light](https://github.com/iamwesofph/top-wesbook/assets/121594156/8200cdc1-a56d-4bc0-b831-a3111cf85a96)
+![1-Login-Page-Mobile-Light](https://github.com/iamwesofph/top-wesbook/assets/121594156/abc29fc1-d88e-4fac-b22e-ee9af8014eea)
+![2-Newsfeed-Mobile-Dark](https://github.com/iamwesofph/top-wesbook/assets/121594156/d6296b0b-bc2a-4a07-af68-513cedd03be3)
+![2-Newsfeed-Mobile-Light](https://github.com/iamwesofph/top-wesbook/assets/121594156/72ccfff1-6527-4032-8a0c-1d8785d66871)
+![3-Newsfeed-Desktop-Dark](https://github.com/iamwesofph/top-wesbook/assets/121594156/0550477d-4273-437c-a5f6-ec5a20900b92)
+![3-Newsfeed-Desktop-Light](https://github.com/iamwesofph/top-wesbook/assets/121594156/749416f1-1134-4385-92a2-43f566c80dca)
+![4-Friends-Desktop-Light](https://github.com/iamwesofph/top-wesbook/assets/121594156/23a109ee-a74f-41d8-a11b-e27071d13901)
+![4-Friends-Mobile-Dark](https://github.com/iamwesofph/top-wesbook/assets/121594156/36e21aae-3c97-469e-a79a-d497078070e4)
+![4-Friends-Mobile-Light](https://github.com/iamwesofph/top-wesbook/assets/121594156/69b28ba3-71a8-4145-9ca4-3ef31e84eea0)
+![5-Profile-Desktop-Dark](https://github.com/iamwesofph/top-wesbook/assets/121594156/95b3e1fd-d208-496d-bba6-56d589c1fac2)
+![5-Profile-Desktop-Light](https://github.com/iamwesofph/top-wesbook/assets/121594156/555f1db6-d64f-42f8-93fd-387297f0a293)
+![5-Profile-Mobile-Dark](https://github.com/iamwesofph/top-wesbook/assets/121594156/f3a2df40-90c0-4366-80ac-5c8cf191bee2)
+![6-Messenger-Desktop-Dark](https://github.com/iamwesofph/top-wesbook/assets/121594156/15dbab28-8efe-4314-b5a0-aa2bfdaa736f)
+![6-Messenger-Desktop-Light](https://github.com/iamwesofph/top-wesbook/assets/121594156/85f7d268-5fef-4697-87db-53ee5f9fe489)
+![6-Messenger-Mobile-Dark](https://github.com/iamwesofph/top-wesbook/assets/121594156/3d74b2ea-9d43-4b12-9b24-4a8c7c531a3b)
 
 
 ## What I learned from this project:
