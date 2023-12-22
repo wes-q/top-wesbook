@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import noProfilePhoto from "../icons/noprofile.jpg";
-import EditPen from "../icons/editPen.svg?react";
+import EditPen from "../icons/editpen.svg?react";
 import axios from "axios";
 import FormData from "form-data";
 import userService from "../services/users";

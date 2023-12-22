@@ -22,6 +22,7 @@ import getUserHeaders from "./helpers/getUserHeaders";
 import Suggestions from "./pages/Suggestions";
 import Requests from "./pages/Requests";
 import FriendsB from "./pages/FriendsB";
+import ChartPage from "./pages/ChartPage";
 import setDarkModeOnPreference from "./helpers/setDarkModeOnPreference";
 import axios from "axios";
 
@@ -41,14 +42,14 @@ function App() {
     const getNewChats = async () => {
         const url = "/api/chats/count-new-chats";
 
-        const headers = getUserHeaders();
-        try {
-            const newChatsCount = await axios.get(url, { headers });
-            console.log(newChatsCount.data);
-            setNewChats(newChatsCount.data);
-        } catch (error) {
-            console.log(error);
-        }
+        // const headers = getUserHeaders();
+        // try {
+        //     const newChatsCount = await axios.get(url, { headers });
+        //     console.log(newChatsCount.data);
+        //     setNewChats(newChatsCount.data);
+        // } catch (error) {
+        //     console.log(error);
+        // }
     };
 
     useEffect(() => {
@@ -115,6 +116,7 @@ function App() {
                         <Route path="update-profile" element={<UpdateProfile user={currentUser} setUser={setCurrentUser} setNotification={setNotification} />} />
                         <Route path="profile/:userId" element={<ProfilePage currentUser={currentUser} setCurrentUser={setCurrentUser} setNotification={setNotification} setChatRecipient={setChatRecipient} setShowChat={setShowChat} />} />
                         <Route path="messenger" element={<MessengerPage currentUser={currentUser} setShowFooter={setShowFooter} setNotification={setNotification} />} />
+                        <Route path="chart-page" element={<ChartPage />} />
                     </Route>
 
                     <Route path="signup" element={<SignupForm setNotification={setNotification} />} />
