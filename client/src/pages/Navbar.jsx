@@ -50,7 +50,7 @@ const Navbar = ({ user, setNotification, newChats }) => {
                         </NavLink>
                     </>
                 )}
-                <NavLink className="group relative flex grow items-center justify-center px-8 py-2 hover:bg-light-c dark:hover:bg-dark-a transition-colors rounded-t-lg" to="/chart-page">
+                <NavLink className="group relative flex grow items-center justify-center px-8 py-2 hover:bg-light-c dark:hover:bg-dark-a transition-colors rounded-t-lg" to="/play">
                     <PlayIcon className="fill-current" />
                     <div className="absolute top-14 left-0 right-0 mx-auto w-fit invisible group-hover:visible delay-200 opacity-80 bg-white rounded-md text-sm px-2 py-1 text-black shadow-md">Play</div>
                 </NavLink>

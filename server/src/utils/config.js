@@ -2,7 +2,6 @@ require("dotenv").config();
 
 const NODE_ENV = process.env.NODE_ENV;
 const PORT = process.env.PORT;
-const IO_PORT = process.env.IO_PORT;
 
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
 const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
@@ -34,6 +33,5 @@ module.exports = {
     MONGODB_URI,
     SESSIONSDB_URI,
     PORT,
-    IO_PORT,
     NODE_ENV,
 };
