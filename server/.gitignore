@@ -25,4 +25,4 @@ yarn.lock
 .yarn
 package-lock.json
 scripts
-*.rest
+request.rest
