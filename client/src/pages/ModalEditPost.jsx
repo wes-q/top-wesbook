@@ -27,7 +27,7 @@ const ModalEditPost = ({ post, setShowEditPost, currentUser, getAllPosts }) => {
         let object;
         // Step 1: Save image to cloud storage if there is new image
         if (files) {
-            const url = "/api/uploadImage";
+            const url = `${import.meta.env.VITE_SERVER_URL}/api/uploadImage`;
             const form = new FormData();
             form.append("image", files[0], "image.jpg");
             try {
@@ -46,7 +46,7 @@ const ModalEditPost = ({ post, setShowEditPost, currentUser, getAllPosts }) => {
             };
         }
 
-        const url = `/api/posts/${post.id}`;
+        const url = `${import.meta.env.VITE_SERVER_URL}/api/posts/${post.id}`;
         // Step 2: Save photo and content to the post collection
 
         const headers = getUserHeaders();

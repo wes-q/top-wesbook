@@ -1,6 +1,6 @@
 import axios from "axios";
-// const baseUrl = `${import.meta.env.VITE_SERVER_URL}/api/anecdotes`;
-const baseUrl = `/api/users`;
+const baseUrl = `${import.meta.env.VITE_SERVER_URL}/api/users`;
+// const baseUrl = `/api/users`; // Use this relative backend URL if backend is accessible using the frontend URL via proxy
 
 const getAll = async () => {
     try {

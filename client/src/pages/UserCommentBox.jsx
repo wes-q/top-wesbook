@@ -36,7 +36,7 @@ const UserCommentBox = ({ currentUser, getAllPosts, postId, isCommentClicked, se
             return;
         }
 
-        const url = `/api/posts/${postId}/comments`;
+        const url = `${import.meta.env.VITE_SERVER_URL}/api/posts/${postId}/comments`;
         const object = { text: commentText };
         const headers = getUserHeaders();
 

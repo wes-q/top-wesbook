@@ -28,7 +28,7 @@ const ModalNewPost = ({ setShowNewPost, currentUser, getAllPosts }) => {
         let postPhoto = "";
         // Step 1: Save image to cloud storage if there is image
         if (files) {
-            const url = "/api/uploadImage";
+            const url = `${import.meta.env.VITE_SERVER_URL}/api/uploadImage`;
             const form = new FormData();
             form.append("image", files[0], "image.jpg");
             try {

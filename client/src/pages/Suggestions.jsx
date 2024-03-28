@@ -17,7 +17,7 @@ const Suggestions = ({ setChatRecipient, setShowChat }) => {
     const fetchData = async () => {
         const headers = getUserHeaders();
         try {
-            const eligibleFriends = await axios.get("/api/users/eligible-friends", { headers });
+            const eligibleFriends = await axios.get(`${import.meta.env.VITE_SERVER_URL}/api/users/eligible-friends`, { headers });
             setEligibleFriends(eligibleFriends.data);
         } catch (error) {
             console.log(error);
@@ -27,7 +27,7 @@ const Suggestions = ({ setChatRecipient, setShowChat }) => {
     };
 
     const handleAddFriend = async (toUserId) => {
-        const url = "/api/friend-requests";
+        const url = `${import.meta.env.VITE_SERVER_URL}/api/friend-requests`;
         const headers = getUserHeaders();
         const userObject = {
             toUserId: toUserId,

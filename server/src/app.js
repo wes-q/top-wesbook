@@ -66,7 +66,8 @@ app.use(
 //     res.sendFile(path.join(__dirname, "dist", "index.html"));
 // });
 
-app.use(express.static("dist"));
+// app.use(express.static("dist"));
+
 // app.use(express.static(path.join(__dirname, "dist")));
 
 // app.set("views", path.join(__dirname, "views"));
@@ -108,14 +109,14 @@ app.use("/", scoresRouter);
 app.use("/", postsRouter);
 app.use("/", chatsRouter);
 
-// Catch-all route to handle client side routing
-app.use("/*", (req, res) => {
-    res.sendFile(path.join(__dirname, "../dist/index.html"), function (err) {
-        if (err) {
-            res.status(500).send(err);
-        }
-    });
-});
+// // Catch-all route to handle client side routing
+// app.use("/*", (req, res) => {
+//     res.sendFile(path.join(__dirname, "../dist/index.html"), function (err) {
+//         if (err) {
+//             res.status(500).send(err);
+//         }
+//     });
+// });
 
 app.use(middleware.errorHandler);
 

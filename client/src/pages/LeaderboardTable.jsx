@@ -7,7 +7,7 @@ const LeaderboardTable = ({ selectedGame }) => {
 
     const getScores = async () => {
         try {
-            const { data } = await axios.get("/api/scores");
+            const { data } = await axios.get(`${import.meta.env.VITE_SERVER_URL}/api/scores`);
             const filteredScores = data.filter((score) => score.puzzle === selectedGame.puzzle);
             console.log(filteredScores);
 

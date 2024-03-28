@@ -51,7 +51,7 @@ const MessengerPage = ({ currentUser, setShowFooter, setNotification }) => {
         const headers = getUserHeaders();
 
         try {
-            const conversation = await axios.get(`/api/chats/${userId}`, { headers });
+            const conversation = await axios.get(`${import.meta.env.VITE_SERVER_URL}/api/chats/${userId}`, { headers });
             console.log(conversation.data);
             setMessagesReceived(conversation.data);
         } catch (error) {

@@ -21,13 +21,13 @@ const ProfilePage = ({ setNotification, currentUser, setCurrentUser, setChatReci
     const headers = getUserHeaders();
 
     const getUser = async () => {
-        const url = `/api/users/${userId}`;
+        const url = `${import.meta.env.VITE_SERVER_URL}/api/users/${userId}`;
         const user = await axios.get(url, { headers });
         setUserToDisplay(user.data);
     };
 
     const getUsersFriends = async () => {
-        const url = `/api/users/${userId}/friends`;
+        const url = `${import.meta.env.VITE_SERVER_URL}/api/users/${userId}/friends`;
         const friends = await axios.get(url, { headers });
         setUsersFriends(friends.data);
     };

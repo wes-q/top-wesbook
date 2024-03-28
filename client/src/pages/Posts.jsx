@@ -21,10 +21,9 @@ const Posts = ({ userToDisplay, postsOf, currentUser, setNotification }) => {
 
         let url;
         if (postsOf === "friends") {
-            url = "/api/posts-of-friends";
+            url = `${import.meta.env.VITE_SERVER_URL}/api/posts-of-friends`;
         } else if (postsOf === "user") {
-            // url = `/api/posts/${id}`;
-            url = `/api/users/${userId}/posts`;
+            url = `${import.meta.env.VITE_SERVER_URL}/api/users/${userId}/posts`;
         }
 
         try {

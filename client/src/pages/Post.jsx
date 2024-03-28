@@ -34,7 +34,7 @@ const Post = ({ post, getAllPosts, currentUser, setNotification, handleLikeChang
 
     const handleLike = async (postId) => {
         const headers = getUserHeaders();
-        const url = `/api/posts/${postId}/likes`;
+        const url = `${import.meta.env.VITE_SERVER_URL}/api/posts/${postId}/likes`;
         const object = {};
         try {
             await axios.patch(url, object, { headers });

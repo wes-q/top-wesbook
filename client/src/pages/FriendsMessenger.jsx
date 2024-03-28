@@ -14,7 +14,7 @@ const FriendsMessenger = ({ currentUser, setRecipient, recipient }) => {
         const headers = getUserHeaders();
 
         try {
-            const friends = await axios.get(`/api/users/${currentUser.id}/friends`, { headers });
+            const friends = await axios.get(`${import.meta.env.VITE_SERVER_URL}/api/users/${currentUser.id}/friends`, { headers });
             setFriends(friends.data);
         } catch (error) {
             console.log(error);

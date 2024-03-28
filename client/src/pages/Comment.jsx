@@ -31,7 +31,7 @@ const Comment = ({ comment, postId, setNotification, getAllPosts, currentUser })
 
     const handleDeleteComment = async (postId, commentId) => {
         if (confirm("Are you sure you want to delete this post?")) {
-            const url = `/api/posts/${postId}/comments/${commentId}`;
+            const url = `${import.meta.env.VITE_SERVER_URL}/api/posts/${postId}/comments/${commentId}`;
             const headers = getUserHeaders();
 
             try {

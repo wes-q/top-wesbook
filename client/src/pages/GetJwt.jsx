@@ -7,7 +7,7 @@ const GetJwt = () => {
 
     const getJwt = async () => {
         try {
-            const token = await axios.get("/auth/getjwt");
+            const token = await axios.get(`${import.meta.env.VITE_SERVER_URL}/auth/getjwt`);
             console.log(token);
             window.localStorage.setItem("loggedUserToken", token.data);
             navigate("/");

@@ -15,13 +15,11 @@ export default function Login({ setNotification, notification }) {
     const navigate = useNavigate();
 
     const googleAuth = () => {
-        // window.open(`${import.meta.env.VITE_SERVER_URL}/auth/google`, "_self");
-        window.open(`/auth/google`, "_self");
+        window.open(`${import.meta.env.VITE_SERVER_URL}/auth/google`, "_self");
     };
 
     const facebookAuth = () => {
         // window.open(`${import.meta.env.VITE_SERVER_URL}/auth/google`, "_self");
-        // window.open(`/auth/facebook`, "_self");
         // alert("Sorry! Currently not working because facebook login requires business verification :(");
         setNotification({ message: "Sorry! Login via Facebook now requires a business verification :(", type: "warning" });
         setTimeout(() => {
@@ -30,8 +28,7 @@ export default function Login({ setNotification, notification }) {
     };
 
     const githubAuth = () => {
-        // window.open(`${import.meta.env.VITE_SERVER_URL}/auth/google`, "_self");
-        window.open(`/auth/github`, "_self");
+        window.open(`${import.meta.env.VITE_SERVER_URL}/auth/google`, "_self");
     };
 
     const handleNextLogin = async () => {

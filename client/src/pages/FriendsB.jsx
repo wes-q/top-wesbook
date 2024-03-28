@@ -18,7 +18,7 @@ const FriendsB = ({ currentUser, setChatRecipient, setShowChat }) => {
         const headers = getUserHeaders();
 
         try {
-            const response = await axios.get(`/api/users/${currentUser.id}/friends`, { headers });
+            const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}/api/users/${currentUser.id}/friends`, { headers });
             setFriends(response.data);
         } catch (error) {
             console.error("Error fetching friends:", error);

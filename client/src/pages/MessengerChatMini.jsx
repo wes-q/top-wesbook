@@ -39,7 +39,7 @@ const MessengerChatMini = ({ messagesReceived, room, currentUser, recipient, set
 
     const saveMessage = async (message, recipient) => {
         const headers = getUserHeaders();
-        const url = `/api/chats/`;
+        const url = `${import.meta.env.VITE_SERVER_URL}/api/chats/`;
         const object = {
             message: message,
             recipient: recipient,

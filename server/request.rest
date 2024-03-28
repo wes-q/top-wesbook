@@ -108,11 +108,11 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MzBlZDhiO
 GET http://localhost:3001/api/verify-email/?token=$2b$10$bGdf1GZ6JfSZrFyRVceWueHYE7qHYAfjsGezPkQuU/I.OFEBdNbf6
 
 ###
-POST http://localhost:3001/api/login-local/
+POST http://localhost:3001/api/login-local
 content-type: application/json
 
 {
-    "email": "vincent@gmail.com",
+    "email": "jace@gmail.com",
     "password": "12345678"
 }
 

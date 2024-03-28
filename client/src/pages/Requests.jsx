@@ -20,10 +20,10 @@ const Requests = ({ setChatRecipient, setShowChat }) => {
     const fetchData = async () => {
         const headers = getUserHeaders();
         try {
-            const incomingFriends = await axios.get("/api/users/incoming-friends", { headers });
+            const incomingFriends = await axios.get(`${import.meta.env.VITE_SERVER_URL}/api/users/incoming-friends`, { headers });
             setIncomingFriends(incomingFriends.data);
 
-            const pendingFriends = await axios.get("/api/users/pending-friends", { headers });
+            const pendingFriends = await axios.get(`${import.meta.env.VITE_SERVER_URL}/api/users/pending-friends`, { headers });
             setPendingFriends(pendingFriends.data);
         } catch (error) {
             console.log(error);
@@ -33,7 +33,7 @@ const Requests = ({ setChatRecipient, setShowChat }) => {
     };
 
     const handleAcceptFriend = async (toUserId) => {
-        const url = `/api/friend-requests/${toUserId}/accept`;
+        const url = `${import.meta.env.VITE_SERVER_URL}/api/friend-requests/${toUserId}/accept`;
         const headers = getUserHeaders();
 
         const object = {};
@@ -47,7 +47,7 @@ const Requests = ({ setChatRecipient, setShowChat }) => {
     };
 
     const handleRejectFriend = async (toUserId) => {
-        const url = `/api/friend-requests/${toUserId}/reject`;
+        const url = `${import.meta.env.VITE_SERVER_URL}/api/friend-requests/${toUserId}/reject`;
         const headers = getUserHeaders();
 
         const object = {};
@@ -61,7 +61,7 @@ const Requests = ({ setChatRecipient, setShowChat }) => {
     };
 
     const handleCancel = async (toUserId) => {
-        const url = `/api/friend-requests/${toUserId}/cancel`;
+        const url = `${import.meta.env.VITE_SERVER_URL}/api/friend-requests/${toUserId}/cancel`;
         const headers = getUserHeaders();
         const userObject = {};
 

@@ -1,5 +1,6 @@
 import axios from "axios";
-const baseUrl = "/api/login-local";
+const baseUrl = `${import.meta.env.VITE_SERVER_URL}/api/login-local`;
+// const baseUrl = `/api/login-local`; // Use this relative backend URL if backend is accessible using the frontend URL via proxy
 
 const login = async (credentials) => {
     try {

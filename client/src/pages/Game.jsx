@@ -30,8 +30,7 @@ const Game = ({ setShowFooter, game }) => {
 
     const getCharacterLocations = async () => {
         try {
-            // const characterLocations = await axios.get("http://localhost:3001/api/characterLocations/");
-            const characterLocations = await axios.get("/api/characterLocations/");
+            const characterLocations = await axios.get(`${import.meta.env.VITE_SERVER_URL}/api/characterLocations/`);
 
             // console.log(characterLocations.data);
 
@@ -113,7 +112,7 @@ const Game = ({ setShowFooter, game }) => {
             }
 
             // Attempt to save score to database if the user is logged in
-            const url = "/api/scores/";
+            const url = `${import.meta.env.VITE_SERVER_URL}/api/scores/`;
             const object = {
                 puzzle: game.puzzle,
                 seconds: seconds,

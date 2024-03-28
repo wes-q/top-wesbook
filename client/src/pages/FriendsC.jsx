@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import noProfilePhoto from "../icons/noprofile.jpg";
 import axios from "axios";
-// import { Link } from "react-router-dom";
 import getUserHeaders from "../helpers/getUserHeaders";
 
 const FriendsC = ({ currentUser, setChatRecipient, setShowChat }) => {
@@ -15,7 +14,7 @@ const FriendsC = ({ currentUser, setChatRecipient, setShowChat }) => {
         const headers = getUserHeaders();
 
         try {
-            const friends = await axios.get(`/api/users/${currentUser.id}/friends`, { headers });
+            const friends = await axios.get(`${import.meta.env.VITE_SERVER_URL}/api/users/${currentUser.id}/friends`, { headers });
             setFriends(friends.data);
         } catch (error) {
             console.log(error);

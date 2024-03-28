@@ -19,13 +19,13 @@
 //     }, []);
 
 //     const getUsersFriends = async () => {
-//         const url = `/api/users/${currentUser.id}/friends`;
+//         const url = `${import.meta.env.VITE_SERVER_URL}/api/users/${currentUser.id}/friends`;
 //         const friends = await axios.get(url, { headers });
 //         setUsersFriends(friends.data);
 //     };
 
 //     const getEligibleFriends = async () => {
-//         const url = `/api/users/eligible-friends`;
+//         const url = `${import.meta.env.VITE_SERVER_URL}/api/users/eligible-friends`;
 //         const eligibleFriends = await axios.get(url, { headers });
 //         setEligibleFriends(eligibleFriends.data);
 //     };

@@ -18,16 +18,16 @@ const Users = ({ user }) => {
         const headers = getUserHeaders();
 
         try {
-            const eligibleFriends = await axios.get("/api/users/eligible-friends", { headers });
+            const eligibleFriends = await axios.get(`${import.meta.env.VITE_SERVER_URL}/api/users/eligible-friends`, { headers });
             setEligibleFriends(eligibleFriends.data);
 
-            const pendingFriends = await axios.get("/api/users/pending-friends", { headers });
+            const pendingFriends = await axios.get(`${import.meta.env.VITE_SERVER_URL}/api/users/pending-friends`, { headers });
             setPendingFriends(pendingFriends.data);
 
-            const friends = await axios.get(`/api/users/${user.id}/friends`, { headers });
+            const friends = await axios.get(`${import.meta.env.VITE_SERVER_URL}/api/users/${user.id}/friends`, { headers });
             setFriends(friends.data);
 
-            const incomingFriends = await axios.get("/api/users/incoming-friends", { headers });
+            const incomingFriends = await axios.get(`${import.meta.env.VITE_SERVER_URL}/api/users/incoming-friends`, { headers });
             setIncomingFriends(incomingFriends.data);
         } catch (error) {
             console.log(error);
@@ -35,7 +35,7 @@ const Users = ({ user }) => {
     };
 
     const handleAddFriend = async (toUserId) => {
-        const url = "/api/friend-requests";
+        const url = `${import.meta.env.VITE_SERVER_URL}/api/friend-requests`;
         const headers = getUserHeaders();
         const userObject = {
             toUserId: toUserId,
@@ -51,7 +51,7 @@ const Users = ({ user }) => {
     };
 
     const handleAcceptFriend = async (toUserId) => {
-        const url = `/api/friend-requests/${toUserId}/accept`;
+        const url = `${import.meta.env.VITE_SERVER_URL}/api/friend-requests/${toUserId}/accept`;
         const headers = getUserHeaders();
 
         const object = {};

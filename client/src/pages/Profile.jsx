@@ -11,7 +11,7 @@ import getUserHeaders from "../helpers/getUserHeaders";
 
 const Profile = ({ userToDisplay, setNotification, setUserToDisplay, setCurrentUser, setChatRecipient, setShowChat }) => {
     const handleAddFriend = async (toUserId) => {
-        const url = "/api/friend-requests";
+        const url = `${import.meta.env.VITE_SERVER_URL}/api/friend-requests`;
         const headers = getUserHeaders();
         const userObject = {
             toUserId: toUserId,
@@ -26,7 +26,7 @@ const Profile = ({ userToDisplay, setNotification, setUserToDisplay, setCurrentU
     };
 
     const handleCancel = async (toUserId) => {
-        const url = `/api/friend-requests/${toUserId}/cancel`;
+        const url = `${import.meta.env.VITE_SERVER_URL}/api/friend-requests/${toUserId}/cancel`;
         const headers = getUserHeaders();
         const userObject = {};
 
@@ -44,8 +44,8 @@ const Profile = ({ userToDisplay, setNotification, setUserToDisplay, setCurrentU
 
     const handleImageUpload = async (event, field) => {
         const headers = getUserHeaders();
-        const url1 = "/api/uploadImage";
-        const url2 = `/api/users/${userToDisplay.id}`;
+        const url1 = `${import.meta.env.VITE_SERVER_URL}/api/uploadImage`;
+        const url2 = `${import.meta.env.VITE_SERVER_URL}/api/users/${userToDisplay.id}`;
 
         // Display uploaded image to the DOM
         const files = event.target.files;
