@@ -3,7 +3,7 @@ const characterLocationsRouter = require("express").Router();
 const CharacterLocation = require("../models/characterLocation");
 // const middleware = require("../utils/middleware");
 
-characterLocationsRouter.get("/api/characterLocations", async (request, response, next) => {
+characterLocationsRouter.get("/characterLocations", async (request, response, next) => {
     try {
         const characterLocations = await CharacterLocation.find({});
         response.json(characterLocations);
@@ -12,7 +12,7 @@ characterLocationsRouter.get("/api/characterLocations", async (request, response
     }
 });
 
-characterLocationsRouter.post("/api/characterLocations", async (request, response, next) => {
+characterLocationsRouter.post("/characterLocations", async (request, response, next) => {
     try {
         const body = request.body;
 
@@ -40,7 +40,7 @@ characterLocationsRouter.post("/api/characterLocations", async (request, respons
     }
 });
 
-// characterLocationsRouter.get("/api/characterLocations/:id", (request, response, next) => {
+// characterLocationsRouter.get("/characterLocations/:id", (request, response, next) => {
 //     Person.findById(request.params.id)
 //         .then((person) => {
 //             if (person) {
@@ -52,7 +52,7 @@ characterLocationsRouter.post("/api/characterLocations", async (request, respons
 //         .catch((error) => next(error));
 // });
 
-// anecdotesRouter.delete("/api/persons/:id", (request, response, next) => {
+// anecdotesRouter.delete("/persons/:id", (request, response, next) => {
 //     Person.findByIdAndRemove(request.params.id)
 //         // eslint-disable-next-line no-unused-vars
 //         .then((result) => {
@@ -61,7 +61,7 @@ characterLocationsRouter.post("/api/characterLocations", async (request, respons
 //         .catch((error) => next(error));
 // });
 
-// anecdotesRouter.put("/api/persons/:id", (request, response, next) => {
+// anecdotesRouter.put("/persons/:id", (request, response, next) => {
 //     const body = request.body;
 
 //     const person = {

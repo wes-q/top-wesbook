@@ -6,7 +6,7 @@ const middleware = require("../utils/middleware");
 const jwtExpiration = process.env.JWT_EXPIRATION || "1h"; // Default to 1 hour
 
 // // This route validates the giver password and email, sends the browser the JWT
-// loginRouter.post("/api/login-local", async (request, response, next) => {
+// loginRouter.post("/login-local", async (request, response, next) => {
 //     const { email, password } = request.body;
 
 //     // Find all users with the given email
@@ -31,7 +31,7 @@ const jwtExpiration = process.env.JWT_EXPIRATION || "1h"; // Default to 1 hour
 //     }
 // });
 
-loginRouter.post("/api/login-local", async (request, response, next) => {
+loginRouter.post("/login-local", async (request, response, next) => {
     const { email, password } = request.body;
     // console.log(`EMAIL ${email}`);
     // console.log(`PASSWORD ${password}`);
@@ -81,7 +81,7 @@ loginRouter.post("/api/login-local", async (request, response, next) => {
 });
 
 // This route uses the JWT sent via header to find the associated user from DB and return the user in response
-loginRouter.get("/api/login-local/success", middleware.userExtractor, function (req, res) {
+loginRouter.get("/login-local/success", middleware.userExtractor, function (req, res) {
     // console.log("LOGIN CONTROLLER");
     // console.log(req.user);
     if (req.user) {

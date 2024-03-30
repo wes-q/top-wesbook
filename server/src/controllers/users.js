@@ -37,14 +37,14 @@ async function handleUpload(file) {
 const upload = multer({ storage: storage });
 
 // Uploads profile photo file to the uploads folder
-// usersRouter.post("/api/profile", upload.single("image"), function (req, res, next) {
+// usersRouter.post("/profile", upload.single("image"), function (req, res, next) {
 //     console.log(`FILE UPLOADED: ${req.file}`);
 //     // res.status(200).json(req.file);
 //     res.status(200).json({ message: "Image uploaded to Cloudinary!", public_id: req.file.public_id });
 // });
 
 // Delete file from server's file storage.  Removed because app is now using Cloudinary to store
-// usersRouter.post("/api/profile-delete", function (req, res, next) {
+// usersRouter.post("/profile-delete", function (req, res, next) {
 //     const filePath = req.body.filePath;
 //     console.log(req.body.filePath);
 //     if (fs.existsSync(filePath)) {
@@ -57,7 +57,7 @@ const upload = multer({ storage: storage });
 //     }
 // });
 
-usersRouter.get("/api/users", async (request, response, next) => {
+usersRouter.get("/users", async (request, response, next) => {
     try {
         const users = await User.find({});
         // const users = await User.find({}).select("email").populate({
@@ -72,7 +72,7 @@ usersRouter.get("/api/users", async (request, response, next) => {
 });
 
 usersRouter.post(
-    "/api/users",
+    "/users",
     body("email").escape().notEmpty().withMessage("Email is required").isEmail().withMessage("Please provide a valid email"),
     body("displayName").escape().trim().notEmpty().withMessage("Display name is required"),
     body("password").escape().notEmpty().withMessage("Password is required").isLength({ min: 8 }).withMessage("Password length minimum of 8 characters"),
@@ -107,7 +107,7 @@ usersRouter.post(
 );
 
 // Exclude self, friends, users with pending requests
-usersRouter.get("/api/users/eligible-friends", userExtractor, async (req, res, next) => {
+usersRouter.get("/users/eligible-friends", userExtractor, async (req, res, next) => {
     try {
         const eligibleUsers = await User.find().where("_id").ne(req.user.id).where("friendRequests.friendId").ne(req.user.id).where("friendRejects.friendId").ne(req.user.id).where("friends.friendId").ne(req.user.id);
         // console.log(eligibleUsers);
@@ -117,7 +117,7 @@ usersRouter.get("/api/users/eligible-friends", userExtractor, async (req, res, n
     }
 });
 
-// usersRouter.get("/api/users/friends", userExtractor, async (req, res, next) => {
+// usersRouter.get("/users/friends", userExtractor, async (req, res, next) => {
 //     const friendIds = req.user.friends.map((friend) => {
 //         return {
 //             friendId: friend.friendId,
@@ -128,7 +128,7 @@ usersRouter.get("/api/users/eligible-friends", userExtractor, async (req, res, n
 
 // Incoming friend requests
 // Check the currentUsers request list for all the ids
-usersRouter.get("/api/users/incoming-friends", userExtractor, async (req, res, next) => {
+usersRouter.get("/users/incoming-friends", userExtractor, async (req, res, next) => {
     try {
         const userWithPopulatedFriends = await User.findById(req.user.id).populate("friendRequests.friendId", "email displayName firstName lastName profilePhoto").exec();
 
@@ -146,7 +146,7 @@ usersRouter.get("/api/users/incoming-friends", userExtractor, async (req, res, n
 
 // Outgoing friend requests
 // Check each user request list in the database if it contains the currentUser's id
-usersRouter.get("/api/users/pending-friends", userExtractor, async (req, res, next) => {
+usersRouter.get("/users/pending-friends", userExtractor, async (req, res, next) => {
     try {
         const pendingFriends = await User.find({
             "friendRequests.friendId": req.user.id,
@@ -164,7 +164,7 @@ usersRouter.get("/api/users/pending-friends", userExtractor, async (req, res, ne
     }
 });
 
-usersRouter.get("/api/users/:id", userExtractor, async (request, response, next) => {
+usersRouter.get("/users/:id", userExtractor, async (request, response, next) => {
     const currentUserId = request.user.id;
     let status;
 
@@ -199,7 +199,7 @@ usersRouter.get("/api/users/:id", userExtractor, async (request, response, next)
 });
 
 // Get all of the users' confirmed friends
-usersRouter.get("/api/users/:userId/friends", userExtractor, async (req, res, next) => {
+usersRouter.get("/users/:userId/friends", userExtractor, async (req, res, next) => {
     try {
         // Use the User model to create a Mongoose query for populating the 'friends' field
         const userWithPopulatedFriends = await User.findById(req.params.userId).populate("friends.friendId").exec();
@@ -220,7 +220,7 @@ usersRouter.get("/api/users/:userId/friends", userExtractor, async (req, res, ne
     }
 });
 
-usersRouter.put("/api/users/:id", userExtractor, async (request, response, next) => {
+usersRouter.put("/users/:id", userExtractor, async (request, response, next) => {
     const currentUserId = request.user.id;
     const userToUpdateId = request.params.id;
 
@@ -255,7 +255,7 @@ usersRouter.put("/api/users/:id", userExtractor, async (request, response, next)
 // Create a friend request
 // Requires JWT inside Authorization Bearer header
 // Requires object with toUserId: String
-usersRouter.post("/api/friend-requests", userExtractor, async (req, res, next) => {
+usersRouter.post("/friend-requests", userExtractor, async (req, res, next) => {
     try {
         const { toUserId } = req.body;
         const fromUserId = req.user.id;
@@ -283,7 +283,7 @@ usersRouter.post("/api/friend-requests", userExtractor, async (req, res, next) =
 });
 
 // Cancel a friend request
-usersRouter.post("/api/friend-requests/:id/cancel", userExtractor, async (req, res, next) => {
+usersRouter.post("/friend-requests/:id/cancel", userExtractor, async (req, res, next) => {
     const currentUserId = req.user.id;
     const userIdToDelete = req.user.id;
     const userToUpdate = await User.findById(req.params.id);
@@ -304,7 +304,7 @@ usersRouter.post("/api/friend-requests/:id/cancel", userExtractor, async (req, r
 });
 
 // Accept a friend request
-usersRouter.put("/api/friend-requests/:id/accept", userExtractor, async (req, res, next) => {
+usersRouter.put("/friend-requests/:id/accept", userExtractor, async (req, res, next) => {
     const friendRequestSenderId = req.params.id;
     const friendRequestRecipient = req.user;
     const friendRequestRecipientId = req.user.id;
@@ -333,7 +333,7 @@ usersRouter.put("/api/friend-requests/:id/accept", userExtractor, async (req, re
 });
 
 // Reject a friend request
-usersRouter.put("/api/friend-requests/:id/reject", userExtractor, async (req, res, next) => {
+usersRouter.put("/friend-requests/:id/reject", userExtractor, async (req, res, next) => {
     const friendRequestSenderId = req.params.id;
     const friendRequestRecipient = req.user;
     const friendRequestRecipientId = req.user.id;
@@ -355,7 +355,7 @@ usersRouter.put("/api/friend-requests/:id/reject", userExtractor, async (req, re
     }
 });
 
-usersRouter.get("/api/verify-email", async (req, res) => {
+usersRouter.get("/verify-email", async (req, res) => {
     const token = req.query.token;
 
     // if the user is already verified, then show a different page
@@ -370,7 +370,7 @@ usersRouter.get("/api/verify-email", async (req, res) => {
     // res.status(200).json(`${user.email} is now verified`);
 });
 
-usersRouter.post("/api/uploadImage", upload.single("image"), async (req, res) => {
+usersRouter.post("/uploadImage", upload.single("image"), async (req, res) => {
     try {
         const b64 = Buffer.from(req.file.buffer).toString("base64");
         let dataURI = "data:" + req.file.mimetype + ";base64," + b64;

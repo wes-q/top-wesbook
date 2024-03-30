@@ -3,7 +3,7 @@ const Post = require("../models/post");
 const User = require("../models/user");
 const middleware = require("../utils/middleware");
 
-postsRouter.post("/api/posts", middleware.userExtractor, async (request, response, next) => {
+postsRouter.post("/posts", middleware.userExtractor, async (request, response, next) => {
     try {
         const body = request.body;
         // const currentDate = new Date().toISOString(); // Generates the current date and time in ISO 8601 format
@@ -23,7 +23,7 @@ postsRouter.post("/api/posts", middleware.userExtractor, async (request, respons
     }
 });
 
-postsRouter.get("/api/posts", middleware.userExtractor, async (request, response, next) => {
+postsRouter.get("/posts", middleware.userExtractor, async (request, response, next) => {
     try {
         const posts = await Post.find({}).populate({ path: "author", select: "firstName displayName profilePhoto" }).populate({ path: "comments.postedBy", select: "firstName displayName profilePhoto" });
         // const posts = await Post.find({}).populate({ path: "author" });
@@ -44,7 +44,7 @@ postsRouter.get("/api/posts", middleware.userExtractor, async (request, response
     }
 });
 
-postsRouter.get("/api/posts-of-friends", middleware.userExtractor, async (request, response, next) => {
+postsRouter.get("/posts-of-friends", middleware.userExtractor, async (request, response, next) => {
     const user = await User.findById(request.user.id).select("friends.friendId");
     const friendIds = user.friends.map((friend) => friend.friendId);
 
@@ -68,7 +68,7 @@ postsRouter.get("/api/posts-of-friends", middleware.userExtractor, async (reques
     response.json(appendedPosts);
 });
 
-postsRouter.get("/api/posts-of-self", middleware.userExtractor, async (request, response, next) => {
+postsRouter.get("/posts-of-self", middleware.userExtractor, async (request, response, next) => {
     const postsOfSelf = await Post.find().where("author").equals(request.user.id).populate({ path: "author", select: "firstName lastName displayName profilePhoto" }).populate({ path: "comments.postedBy", select: "firstName lastName displayName profilePhoto" });
     // const postsOfSelf = await Post.find().where("author").equals(request.user.id).populate("comments.postedBy");
     // const postsOfSelf = await Post.find().populate("comments.postedBy");
@@ -84,7 +84,7 @@ postsRouter.get("/api/posts-of-self", middleware.userExtractor, async (request, 
     response.json(postsWithIsLiked);
 });
 
-postsRouter.get("/api/users/:userId/posts", middleware.userExtractor, async (request, response, next) => {
+postsRouter.get("/users/:userId/posts", middleware.userExtractor, async (request, response, next) => {
     const posts = await Post.find().where("author").equals(request.params.userId).populate({ path: "author", select: "firstName lastName displayName profilePhoto" }).populate({ path: "comments.postedBy", select: "firstName lastName displayName profilePhoto" });
 
     const appendedPosts = posts.map((post) => {
@@ -101,7 +101,7 @@ postsRouter.get("/api/users/:userId/posts", middleware.userExtractor, async (req
     response.json(appendedPosts);
 });
 
-postsRouter.patch("/api/posts/:postId/likes", middleware.userExtractor, async (request, response, next) => {
+postsRouter.patch("/posts/:postId/likes", middleware.userExtractor, async (request, response, next) => {
     try {
         const postToUpdate = await Post.findById(request.params.postId);
         const userIdToDelete = request.user.id;
@@ -122,7 +122,7 @@ postsRouter.patch("/api/posts/:postId/likes", middleware.userExtractor, async (r
     }
 });
 
-postsRouter.patch("/api/posts/:postId/comments", middleware.userExtractor, async (request, response, next) => {
+postsRouter.patch("/posts/:postId/comments", middleware.userExtractor, async (request, response, next) => {
     try {
         const postToUpdate = await Post.findById(request.params.postId);
 
@@ -134,7 +134,7 @@ postsRouter.patch("/api/posts/:postId/comments", middleware.userExtractor, async
     }
 });
 
-postsRouter.delete("/api/posts/:postId", middleware.userExtractor, async (request, response, next) => {
+postsRouter.delete("/posts/:postId", middleware.userExtractor, async (request, response, next) => {
     // request.user.id = string
     // request.user._id = object
     const postId = request.params.postId;
@@ -162,11 +162,11 @@ postsRouter.delete("/api/posts/:postId", middleware.userExtractor, async (reques
     }
 });
 
-// DELETE /api/posts/:postId/comments/:commentId
+// DELETE /posts/:postId/comments/:commentId
 // Requires JWT inside Authorization Bearer header
 // Requires postId and commentId as params
 // Returns message for notification
-postsRouter.delete("/api/posts/:postId/comments/:commentId", middleware.userExtractor, async (request, response, next) => {
+postsRouter.delete("/posts/:postId/comments/:commentId", middleware.userExtractor, async (request, response, next) => {
     //get the comment to delete
     //check if it is found
     //if found then check if the author is the current user
@@ -208,12 +208,12 @@ postsRouter.delete("/api/posts/:postId/comments/:commentId", middleware.userExtr
 });
 
 // Update the posts content and postPhoto
-// PATCH /api/posts/:postId
+// PATCH /posts/:postId
 // Requires JWT inside Authorization Bearer header
 // Requires object containing content and postPhoto
 // Requires postId as params
 // Returns the updated post
-postsRouter.patch("/api/posts/:postId", middleware.userExtractor, async (request, response, next) => {
+postsRouter.patch("/posts/:postId", middleware.userExtractor, async (request, response, next) => {
     const currentUserId = request.user.id;
     const postId = request.params.postId;
     const body = request.body;

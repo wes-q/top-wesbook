@@ -3,7 +3,7 @@ const Chat = require("../models/chat");
 const middleware = require("../utils/middleware");
 
 // Get quantity of new chats
-chatsRouter.get("/api/chats/count-new-chats", middleware.userExtractor, async (request, response, next) => {
+chatsRouter.get("/chats/count-new-chats", middleware.userExtractor, async (request, response, next) => {
     const currentUserId = request.user.id;
     try {
         const result = await Chat.countDocuments({ read: false, recipient: currentUserId });
@@ -14,7 +14,7 @@ chatsRouter.get("/api/chats/count-new-chats", middleware.userExtractor, async (r
 });
 
 // Fetch all chat messages between two users (self and another user) sorted by date
-chatsRouter.get("/api/chats/:userId", middleware.userExtractor, async (request, response, next) => {
+chatsRouter.get("/chats/:userId", middleware.userExtractor, async (request, response, next) => {
     const currentUserId = request.user.id;
     const anotherUserId = request.params.userId;
     // console.log(currentUserId);
@@ -36,7 +36,7 @@ chatsRouter.get("/api/chats/:userId", middleware.userExtractor, async (request, 
 });
 
 // Save a chat document
-chatsRouter.post("/api/chats", middleware.userExtractor, async (request, response, next) => {
+chatsRouter.post("/chats", middleware.userExtractor, async (request, response, next) => {
     // console.log("API CHATS");
     const currentUserId = request.user.id;
     // console.log(currentUserId);
@@ -60,7 +60,7 @@ chatsRouter.post("/api/chats", middleware.userExtractor, async (request, respons
 });
 
 // Set all chats of a certain sender and recipient to read true status
-chatsRouter.patch("/api/chats/:userId", middleware.userExtractor, async (request, response, next) => {
+chatsRouter.patch("/chats/:userId", middleware.userExtractor, async (request, response, next) => {
     const currentUserId = request.user.id;
     const senderUserId = request.params.userId;
     try {
@@ -71,7 +71,7 @@ chatsRouter.patch("/api/chats/:userId", middleware.userExtractor, async (request
     }
 });
 
-// characterLocationsRouter.get("/api/characterLocations/:id", (request, response, next) => {
+// characterLocationsRouter.get("/characterLocations/:id", (request, response, next) => {
 //     Person.findById(request.params.id)
 //         .then((person) => {
 //             if (person) {
@@ -83,7 +83,7 @@ chatsRouter.patch("/api/chats/:userId", middleware.userExtractor, async (request
 //         .catch((error) => next(error));
 // });
 
-// anecdotesRouter.delete("/api/persons/:id", (request, response, next) => {
+// anecdotesRouter.delete("/persons/:id", (request, response, next) => {
 //     Person.findByIdAndRemove(request.params.id)
 //         // eslint-disable-next-line no-unused-vars
 //         .then((result) => {
@@ -92,7 +92,7 @@ chatsRouter.patch("/api/chats/:userId", middleware.userExtractor, async (request
 //         .catch((error) => next(error));
 // });
 
-// anecdotesRouter.put("/api/persons/:id", (request, response, next) => {
+// anecdotesRouter.put("/persons/:id", (request, response, next) => {
 //     const body = request.body;
 
 //     const person = {

@@ -80,7 +80,7 @@ passport.use(
             // callbackURL:
             //     process.env.NODE_ENV === "production" // Need to specify complete URL for production to work because redirect URI is checked by facebook and google.
             //         ? "https://google-facebook-authentication.onrender.com/oauth2/redirect/google" //TODO
-            //         : "/auth/google/callback",
+            //         : "/google/callback",
             // scope: ["profile", "email"],
             // callbackURL: process.env.CALLBACK_URL,
             callbackURL: config.GOOGLE_CALLBACK_URL,
@@ -186,7 +186,7 @@ passport.deserializeUser((user, done) => {
 });
 
 // // This is not official
-// router.get("/auth/login/success", async (req, res) => {
+// router.get("/login/success", async (req, res) => {
 //     // req.user comes from the sessionDB, created by serializeUser
 //     if (req.user) {
 //         try {
@@ -201,14 +201,14 @@ passport.deserializeUser((user, done) => {
 // });
 
 router.get(
-    "/auth/google",
+    "/google",
     passport.authenticate("google", {
         scope: ["profile", "email"],
     })
 );
 
 router.get(
-    "/auth/google/callback",
+    "/google/callback",
     passport.authenticate("google", {
         failureRedirect: `${config.FRONTEND_URL}/login`,
         successRedirect: `${config.FRONTEND_URL}/getjwt`,
@@ -216,7 +216,7 @@ router.get(
     })
 );
 
-router.get("/auth/getjwt", async (req, res) => {
+router.get("/getjwt", async (req, res) => {
     if (req.user) {
         try {
             const userForToken = { id: req.user.id };
@@ -231,10 +231,10 @@ router.get("/auth/getjwt", async (req, res) => {
     }
 });
 
-//router.get("/auth/facebook", passport.authenticate("facebook"));
+//router.get("/facebook", passport.authenticate("facebook"));
 
 // router.get(
-//     "/auth/facebook/callback",
+//     "/facebook/callback",
 //     passport.authenticate("facebook", {
 //         failureRedirect: `${config.FRONTEND_URL}/login`,
 //         successRedirect: config.FRONTEND_URL,
@@ -242,10 +242,10 @@ router.get("/auth/getjwt", async (req, res) => {
 //     })
 // );
 
-router.get("/auth/github", passport.authenticate("github", { scope: ["user:email"] }));
+router.get("/github", passport.authenticate("github", { scope: ["user:email"] }));
 
 router.get(
-    "/auth/github/callback",
+    "/github/callback",
     passport.authenticate("github", {
         failureRedirect: `${config.FRONTEND_URL}/login`,
         successRedirect: `${config.FRONTEND_URL}/getjwt`,
@@ -256,7 +256,7 @@ router.get(
 );
 
 // router.get(
-//     "/auth/local",
+//     "/local",
 //     passport.authenticate("local", {
 //         // failureRedirect: `${config.FRONTEND_URL}/login`,
 //         // successRedirect: config.FRONTEND_URL,
@@ -266,7 +266,7 @@ router.get(
 //     })
 // );
 
-router.get("/auth/logout", (req, res) => {
+router.get("/logout", (req, res) => {
     req.session.destroy((err) => {
         if (err) {
             console.error("Error destroying session:", err);

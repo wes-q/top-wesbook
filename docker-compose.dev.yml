@@ -6,8 +6,8 @@ services:
             dockerfile: dev.Dockerfile # This will simply tell which dockerfile to read
         volumes:
             - ./client/:/usr/src/app # The path can be relative, so ./ is enough to say "the same location as the docker-compose.yml"
-        ports:
-            - 5173:5173
+        # ports:
+        #     - 5173:5173
         container_name: wesbook-front-dev # This will name the container hello-front-dev
 
     server:
@@ -17,8 +17,8 @@ services:
             dockerfile: dev.Dockerfile
         volumes:
             - ./server/:/usr/src/app
-        ports:
-            - 3001:3001
+        # ports:
+        #     - 3001:3001
         container_name: wesbook-back-dev
         env_file:
             - ./server/.env
@@ -27,15 +27,16 @@ services:
         # MONGO_URL: mongodb://the_username:the_password@mongo/the_database
         # depends_on:
         #     - mongo
-    # nginx:
-    #     image: nginx:1.20.1
-    #     volumes:
-    #         - ./nginx.dev.conf:/etc/nginx/nginx.conf:ro
-    #     ports:
-    #         - 8080:80
-    #     container_name: reverse-proxy
-    #     depends_on:
-    #         - app # wait for the frontend container to be started
+    nginx:
+        image: nginx:1.20.1
+        volumes:
+            - ./nginx.dev.conf:/etc/nginx/nginx.conf:ro
+        ports:
+            - 8080:80
+        container_name: reverse-proxy
+        depends_on:
+            - app # wait for the frontend container to be started
+
 
     # mongo:
     #     image: mongo
