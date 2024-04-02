@@ -8,5 +8,5 @@ RUN npm install
 ENV VITE_SERVER_URL="//localhost:8080"
 # ENV VITE_SERVER_URL="//localhost:3001"
 
-# EXPOSE 5173
+EXPOSE 5173
 CMD ["npm", "run", "dev", "--", "--host"]

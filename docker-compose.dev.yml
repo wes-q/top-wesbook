@@ -2,13 +2,13 @@ services:
     app:
         image: wesbook-front-dev
         build:
-            context: ./client # The context will pick this directory as the "build context"
-            dockerfile: dev.Dockerfile # This will simply tell which dockerfile to read
+            context: ./client
+            dockerfile: dev.Dockerfile
         volumes:
-            - ./client/:/usr/src/app # The path can be relative, so ./ is enough to say "the same location as the docker-compose.yml"
+            - ./client/:/usr/src/app
         # ports:
         #     - 5173:5173
-        container_name: wesbook-front-dev # This will name the container hello-front-dev
+        container_name: wesbook-front-dev
 
     server:
         image: wesbook-back-dev
@@ -24,9 +24,9 @@ services:
             - ./server/.env
         # environment:
         # REDIS_URL: //redis
-        # MONGO_URL: mongodb://the_username:the_password@mongo/the_database
-        # depends_on:
-        #     - mongo
+        depends_on:
+            - mongo
+
     nginx:
         image: nginx:1.20.1
         volumes:
@@ -35,19 +35,20 @@ services:
             - 8080:80
         container_name: reverse-proxy
         depends_on:
-            - app # wait for the frontend container to be started
+            - app
 
+    mongo:
+        image: mongo
+        ports:
+            - 3456:27017
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: root
+            MONGO_INITDB_ROOT_PASSWORD: example
+            MONGO_INITDB_DATABASE: wesbookDB
+        volumes:
+            - ./server/mongo/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+            - wesbook_data:/data/db
 
-    # mongo:
-    #     image: mongo
-    #     ports:
-    #         - 3456:27017
-    #     environment:
-    #         MONGO_INITDB_ROOT_USERNAME: root
-    #         MONGO_INITDB_ROOT_PASSWORD: example
-    #         MONGO_INITDB_DATABASE: the_database
-    #     volumes:
-    #         - ./todo-backend/mongo/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
     # redis:
     #     image: redis:latest
     #     restart: always
@@ -56,3 +57,6 @@ services:
     #     command: ["redis-server", "--appendonly", "yes"]
     #     volumes:
     #         - ./todo-backend/redis_data:/data
+
+volumes:
+    wesbook_data:

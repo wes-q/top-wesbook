@@ -6,8 +6,8 @@ services:
             dockerfile: Dockerfile
         # volumes:
         #     - ./wesbook-frontend/:/usr/src/app
-        ports:
-            - 8999:80
+        # ports:
+        #     - 8999:80
         container_name: wesbook-front-prod
 
     server:
@@ -17,36 +17,38 @@ services:
             dockerfile: Dockerfile
         # volumes:
         #     - ./wesbook-backend/:/usr/src/app
-        ports:
-            - 3001:3001
+        # ports:
+        #     - 3001:3001
         container_name: wesbook-back-prod
         env_file:
             - ./server/.env
         # environment:
         #     REDIS_URL: //redis
-        #     MONGO_URL: mongodb://the_username:the_password@mongo/the_database
-        # depends_on:
-        #     - mongo
-    # nginx:
-    #     image: nginx:1.20.1
-    #     volumes:
-    #         - ./nginx.conf:/etc/nginx/nginx.conf:ro
-    #     ports:
-    #         - 8080:80
-    #     container_name: reverse-proxy
-    #     depends_on:
-    #         - app
+        depends_on:
+            - mongo
 
-    # mongo:
-    #     image: mongo
-    #     ports:
-    #         - 3456:27017
-    #     environment:
-    #         MONGO_INITDB_ROOT_USERNAME: root
-    #         MONGO_INITDB_ROOT_PASSWORD: example
-    #         MONGO_INITDB_DATABASE: the_database
-    #     volumes:
-    #         - ./wesbook-backend/mongo/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
+    nginx:
+        image: nginx:1.20.1
+        volumes:
+            - ./nginx.conf:/etc/nginx/nginx.conf:ro
+        ports:
+            - 8080:80
+        container_name: reverse-proxy
+        depends_on:
+            - app
+
+    mongo:
+        image: mongo
+        ports:
+            - 3456:27017
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: root
+            MONGO_INITDB_ROOT_PASSWORD: example
+            MONGO_INITDB_DATABASE: wesbookDB
+        volumes:
+            - ./server/mongo/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+            - wesbook_data:/data/db
+
     # redis:
     #     image: redis:latest
     #     restart: always
@@ -55,3 +57,6 @@ services:
     #     command: ["redis-server", "--appendonly", "yes"]
     #     volumes:
     #         - ./wesbook-backend/redis_data:/data
+
+volumes:
+    wesbook_data:
