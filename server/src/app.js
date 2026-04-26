@@ -50,7 +50,7 @@ app.use(
         Headers: true,
         exposedHeaders: "Set-Cookie",
         allowedHeaders: ["Access-Control-Allow-Origin", "Content-Type", "Authorization"],
-    })
+    }),
 );
 
 // // // Handle all other routes by serving the index.html file
@@ -90,7 +90,7 @@ app.use(
         resave: false,
         saveUninitialized: false,
         store: MongoStore.create({ mongoUrl: config.SESSIONSDB_URI }),
-    })
+    }),
 );
 
 //Authenticate the session
